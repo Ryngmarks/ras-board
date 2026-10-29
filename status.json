@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T20:07:58Z",
+    "updated":  "2026-10-29T20:08:18Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -13,14 +13,6 @@
                         "since":  "2026-10-29T11:28:50Z",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "m10: provspela + ja till merge",
-                        "since":  "2026-10-29T18:50:35Z",
                         "for":  "owner"
                     },
                     {
@@ -42,6 +34,13 @@
                         "agent":  "m13-Stj-rnsmedjan-Solution-Architect-dra",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m12 fiender, m13 Stjärnsmedjan, verify",
+                        "since":  "2026-10-29T20:08:18Z"
                     }
                 ]
 }
