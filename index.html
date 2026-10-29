@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAS – teamet</title>
+<style>
+  :root {
+    --bg: #0f1115; --card: #171a21; --border: #2a2f3a; --fg: #e8eaee; --muted: #8b93a3;
+    --work: #4f8cff; --wait: #f2b84b; --idle: #3a404c; --stale: #6b7280; --radius: 10px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f7f9; --card: #fff; --border: #dde1e7; --fg: #15181e; --muted: #5f6878; --idle: #c9ced6; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 40px; }
+  header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  h1 { font-size: 20px; margin: 0; }
+  h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 28px 0 10px; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .team { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .card.working { border-color: var(--work); }
+  .card.waiting { border-color: var(--wait); }
+  .who { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--idle); flex: none; }
+  .working .dot { background: var(--work); animation: pulse 1.6s infinite; }
+  .waiting .dot { background: var(--wait); }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--work) 55%, transparent); } 100% { box-shadow: 0 0 0 9px transparent; } }
+  .role { color: var(--muted); font-size: 12px; margin: 2px 0 8px 18px; }
+  .job { margin: 6px 0 0 18px; }
+  .job .p { font-weight: 600; }
+  .job .s { font-size: 12px; color: var(--muted); }
+  .job.stale { opacity: .55; }
+  .free { margin-left: 18px; color: var(--muted); }
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .proj h3 { margin: 0 0 6px; font-size: 15px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px 2px 7px; margin: 3px 4px 0 0; font-size: 12px; }
+  .chip .dot { width: 8px; height: 8px; animation: none; }
+  .chip.working .dot { background: var(--work); }
+  .chip.waiting .dot { background: var(--wait); }
+  .empty { color: var(--muted); }
+  .err { color: var(--wait); font-size: 12px; }
+  footer { margin-top: 32px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Ryngmark Agent System · teamet</h1>
+    <span class="meta" id="meta">Laddar…</span>
+  </header>
+
+  <h2>Vem gör vad</h2>
+  <section class="team" id="team"></section>
+
+  <h2>Projekt</h2>
+  <section class="projects" id="projects"></section>
+
+  <footer>
+    Uppdateras av RAS Project Manager med <code>tools/ras-status.ps1</code>. Sidan läser <code>status.json</code> varje minut.
+  </footer>
+</main>
+
+<script>
+const REPO = "Ryngmarks/ras-board";
+const POLL_MS = 60_000;
+const STALE_MS = 12 * 3600_000;
+const ROLES = [
+  ["project-manager", "Project Manager", "Leder, delegerar, pratar med dig"],
+  ["solution-architect", "Solution Architect", "Draft och blueprint"],
+  ["engineering-analyst", "Engineering Analyst", "Prior art och retro"],
+  ["research", "Research", "Externa fakta med källor"],
+  ["implementer", "Implementer", "Bygger work orders"],
+  ["reviewer", "Reviewer", "Granskar kod och design"],
+];
+const STATE_TEXT = { working: "jobbar", waiting: "väntar" };
+
+let etag = null;
+let data = null;
+let error = null;
+
+function ago(iso) {
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (s < 90) return "nyss";
+  if (s < 3600) return Math.round(s / 60) + " min";
+  if (s < 86400) return Math.round(s / 3600) + " h";
+  return Math.round(s / 86400) + " d";
+}
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function isStale(entry) {
+  return Date.now() - Date.parse(entry.since) > STALE_MS;
+}
+
+function render() {
+  const entries = (data && Array.isArray(data.entries)) ? data.entries : [];
+  const meta = document.getElementById("meta");
+  meta.textContent = data && data.updated ? "Senast ändrad för " + ago(data.updated) + " sedan" : "Ingen status ännu";
+  if (error) { meta.append(" · "); meta.append(el("span", "err", error)); }
+
+  const team = document.getElementById("team");
+  team.replaceChildren();
+  const known = new Set(ROLES.map(r => r[0]));
+  const roles = ROLES.concat([...new Set(entries.map(e => e.role))].filter(r => !known.has(r)).map(r => [r, r, ""]));
+  for (const [id, name, desc] of roles) {
+    const jobs = entries.filter(e => e.role === id);
+    const live = jobs.filter(j => !isStale(j));
+    const state = live.some(j => j.state === "working") ? "working" : live.some(j => j.state === "waiting") ? "waiting" : "idle";
+    const card = el("div", "card " + state);
+    const who = el("div", "who");
+    who.append(el("span", "dot"), el("span", null, name));
+    card.append(who, el("div", "role", desc));
+    if (!jobs.length) card.append(el("div", "free", "Ledig"));
+    for (const j of jobs) {
+      const job = el("div", "job" + (isStale(j) ? " stale" : ""));
+      job.append(el("div", "p", j.project));
+      const line = (STATE_TEXT[j.state] || j.state) + (j.note ? " · " + j.note : "") + " · " + ago(j.since);
+      job.append(el("div", "s", line));
+      card.append(job);
+    }
+    team.append(card);
+  }
+
+  const projects = document.getElementById("projects");
+  projects.replaceChildren();
+  const byProject = new Map();
+  for (const e of entries) {
+    if (!byProject.has(e.project)) byProject.set(e.project, []);
+    byProject.get(e.project).push(e);
+  }
+  if (!byProject.size) projects.append(el("div", "empty", "Inget pågår just nu."));
+  const roleName = Object.fromEntries(ROLES.map(r => [r[0], r[1]]));
+  for (const [project, list] of [...byProject].sort((a, b) => a[0].localeCompare(b[0], "sv"))) {
+    const card = el("div", "card proj");
+    card.append(el("h3", null, project));
+    for (const e of list) {
+      const chip = el("span", "chip " + e.state);
+      chip.append(el("span", "dot"), el("span", null, (roleName[e.role] || e.role) + " " + (STATE_TEXT[e.state] || e.state)));
+      card.append(chip);
+    }
+    projects.append(card);
+  }
+}
+
+async function load() {
+  try {
+    const headers = { Accept: "application/vnd.github.raw+json" };
+    if (etag) headers["If-None-Match"] = etag;
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/status.json`, { headers, cache: "no-store" });
+    if (res.status === 304) { error = null; render(); return; }
+    if (!res.ok) throw new Error("GitHub svarade " + res.status);
+    etag = res.headers.get("ETag");
+    data = await res.json();
+    error = null;
+  } catch (e) {
+    if (!data) {
+      try { data = await (await fetch("status.json", { cache: "no-store" })).json(); } catch {}
+    }
+    error = "kunde inte hämta senaste status (" + e.message + ")";
+  }
+  render();
+}
+
+load();
+setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
+setInterval(render, 30_000);
+</script>
+</body>
+</html>
