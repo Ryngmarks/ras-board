@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:35:51Z",
+    "updated":  "2026-10-29T07:35:53Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -20,18 +20,18 @@
                         "since":  "2026-10-29T07:15:48Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras01: väntar på research + analyst",
-                        "since":  "2026-10-29T07:17:49Z"
-                    },
-                    {
                         "role":  "security-auditor",
                         "project":  "Forestry Road",
                         "state":  "working",
                         "note":  "säkerhetsgranskning",
                         "since":  "2026-10-29T07:33:05Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras01: väntar på Johans beslut",
+                        "since":  "2026-10-29T07:17:49Z"
                     }
                 ]
 }
