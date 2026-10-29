@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:28:12Z",
+    "updated":  "2026-10-29T12:28:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -22,15 +22,6 @@
                         "note":  "alver runda 1: bedöm",
                         "since":  "2026-10-29T12:04:59Z",
                         "agent":  "alver",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "Codex-gräns nådd; människor runda 1 klar",
-                        "since":  "2026-10-29T12:14:11Z",
-                        "agent":  "manniskor",
                         "for":  "owner"
                     },
                     {
@@ -60,6 +51,15 @@
                         "note":  "dvärgar runda 2 + Stenväktaren",
                         "since":  "2026-10-29T11:46:13Z",
                         "agent":  "dvargar",
+                        "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "människor runda 2",
+                        "since":  "2026-10-29T12:28:14Z",
+                        "agent":  "manniskor",
                         "model":  "claude/claude-opus-5-5"
                     }
                 ]
