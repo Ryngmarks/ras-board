@@ -1,12 +1,12 @@
 {
-    "updated":  "2026-10-29T06:13:12Z",
+    "updated":  "2026-10-29T06:13:47Z",
     "entries":  [
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "working",
-                        "note":  "bygger teamtavlan",
-                        "since":  "2026-10-29T06:13:12Z"
+                        "state":  "waiting",
+                        "note":  "teamtavlan klar, väntar på Johan",
+                        "since":  "2026-10-29T06:13:47Z"
                     }
                 ]
 }
