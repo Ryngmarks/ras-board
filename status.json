@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:41:54Z",
+    "updated":  "2026-10-29T21:42:04Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,16 +30,6 @@
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-01 Spec + texter (game-designer)",
-                        "since":  "2026-10-29T21:37:54Z",
-                        "agent":  "m13-WO-01-Spec-texter-game-designer-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
