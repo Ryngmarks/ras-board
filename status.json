@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T10:11:22Z",
+    "updated":  "2026-10-29T10:11:47Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -12,16 +12,6 @@
                         "note":  "ras01: väntar på WO-01",
                         "since":  "2026-10-29T07:17:49Z",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras01 WO-04: koppla in kartan i skills",
-                        "since":  "2026-10-29T10:07:48Z",
-                        "agent":  "sonnet-wo04",
-                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     },
                     {
