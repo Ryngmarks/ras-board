@@ -1,13 +1,6 @@
 {
-    "updated":  "2026-10-29T06:11:48Z",
+    "updated":  "2026-10-29T06:11:50Z",
     "entries":  [
-                    {
-                        "role":  "research",
-                        "project":  "Test",
-                        "state":  "working",
-                        "note":  "provkörning åäö",
-                        "since":  "2026-10-29T06:11:46Z"
-                    },
                     {
                         "role":  "project-manager",
                         "project":  "Test",
