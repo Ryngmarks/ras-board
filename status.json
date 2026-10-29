@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T11:28:30Z",
+    "updated":  "2026-10-29T11:28:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -16,11 +16,12 @@
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "working",
-                        "note":  "testar ny token",
-                        "since":  "2026-10-29T11:28:30Z",
+                        "state":  "waiting",
+                        "note":  "tavlans token klar; Supabase-nyckel för C väntar",
+                        "since":  "2026-10-29T11:28:50Z",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
+                        "effort":  "default",
+                        "for":  "owner"
                     }
                 ]
 }
