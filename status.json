@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:28:14Z",
+    "updated":  "2026-10-29T09:28:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -50,6 +50,13 @@
                         "agent":  "haiku-3d-craft",
                         "model":  "claude/claude-haiku-5-5",
                         "effort":  "low"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "TEST-agent",
+                        "state":  "working",
+                        "note":  "test legacy",
+                        "since":  "2026-10-29T09:28:16Z"
                     }
                 ]
 }
