@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T16:48:58Z",
+    "updated":  "2026-10-29T16:49:01Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -13,15 +13,6 @@
                         "since":  "2026-10-29T11:28:50Z",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "människor runda 3: bedöm",
-                        "since":  "2026-10-29T14:51:07Z",
-                        "agent":  "manniskor",
                         "for":  "owner"
                     }
                 ]
