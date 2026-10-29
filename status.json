@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T20:57:12Z",
+    "updated":  "2026-10-29T21:12:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -48,16 +48,6 @@
                         "since":  "2026-10-29T20:37:23Z",
                         "agent":  "fiender",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Köp alla uppgraderingar (Implementer)",
-                        "since":  "2026-10-29T20:57:12Z",
-                        "agent":  "m14-K-p-alla-uppgraderingar-Implementer-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
