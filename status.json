@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:49:53Z",
+    "updated":  "2026-10-29T06:51:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -13,18 +13,18 @@
                         "since":  "2026-10-29T06:32:03Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "väntar på Johan: tavlans utseende",
-                        "since":  "2026-10-29T06:46:18Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Clicker Land",
                         "state":  "working",
                         "note":  "m11 WO-10 final values",
                         "since":  "2026-10-29T06:32:05Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "skissar figurer",
+                        "since":  "2026-10-29T06:51:58Z"
                     }
                 ]
 }
