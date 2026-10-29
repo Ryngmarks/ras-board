@@ -1,18 +1,10 @@
 {
-    "updated":  "2026-10-29T11:38:01Z",
+    "updated":  "2026-10-29T11:39:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "bedöm putsrunda",
-                        "since":  "2026-10-29T10:48:46Z",
-                        "for":  "owner"
-                    },
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
