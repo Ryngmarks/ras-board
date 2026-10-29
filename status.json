@@ -1,19 +1,10 @@
 {
-    "updated":  "2026-10-29T10:11:47Z",
+    "updated":  "2026-10-29T10:12:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras01: väntar på WO-01",
-                        "since":  "2026-10-29T07:17:49Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
@@ -21,6 +12,16 @@
                         "note":  "putsrunda målat ansikte",
                         "since":  "2026-10-29T10:11:22Z",
                         "model":  "codex/gpt-6.1-sol"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras01 klar; beslut om säkerhet (H1) väntar",
+                        "since":  "2026-10-29T07:17:49Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default",
+                        "for":  "owner"
                     }
                 ]
 }
