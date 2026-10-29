@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:34:20Z",
+    "updated":  "2026-10-29T21:34:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -38,6 +38,14 @@
                         "note":  "vargens huvud + kontrast",
                         "since":  "2026-10-29T21:24:21Z",
                         "agent":  "fiender",
+                        "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m13 Stjärnsmedjan: blueprint",
+                        "since":  "2026-10-29T21:34:24Z",
                         "model":  "claude/claude-opus-5-5"
                     }
                 ]
