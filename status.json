@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:52:45Z",
+    "updated":  "2026-10-29T06:59:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -11,13 +11,6 @@
                         "state":  "working",
                         "note":  "m11 run cards: final balance",
                         "since":  "2026-10-29T06:32:03Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m11 WO-10 final values",
-                        "since":  "2026-10-29T06:32:05Z"
                     },
                     {
                         "role":  "project-manager",
