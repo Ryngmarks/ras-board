@@ -1,12 +1,6 @@
 {
-    "updated":  "2026-10-29T06:11:50Z",
+    "updated":  "2026-10-29T06:11:52Z",
     "entries":  [
-                    {
-                        "role":  "project-manager",
-                        "project":  "Test",
-                        "state":  "waiting",
-                        "note":  "väntar på research",
-                        "since":  "2026-10-29T06:11:48Z"
-                    }
+
                 ]
 }
