@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:14:57Z",
+    "updated":  "2026-10-29T09:25:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -15,13 +15,6 @@
                         "effort":  "default"
                     },
                     {
-                        "role":  "research",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "low-poly characters (Codex)",
-                        "since":  "2026-10-29T09:01:15Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "RAS",
                         "state":  "working",
@@ -29,6 +22,14 @@
                         "since":  "2026-10-29T07:54:38Z",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "2 st: 3D-verktyg+polybudget (Codex) / 3D-hantverk (Haiku)",
+                        "since":  "2026-10-29T09:01:15Z",
+                        "model":  "codex/gpt-6.1-sol + claude/claude-haiku-5-5"
                     }
                 ]
 }
