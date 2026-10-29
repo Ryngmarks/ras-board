@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T18:22:58Z",
+    "updated":  "2026-10-29T18:23:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -31,6 +31,15 @@
                         "state":  "working",
                         "note":  "m10: hjältar in i spelet",
                         "since":  "2026-10-29T18:22:58Z"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "WO-11 samlat bygge + export",
+                        "since":  "2026-10-29T18:23:00Z",
+                        "agent":  "export",
+                        "model":  "claude/claude-opus-5-5"
                     }
                 ]
 }
