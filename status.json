@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T10:07:48Z",
+    "updated":  "2026-10-29T10:09:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -21,16 +21,6 @@
                         "note":  "målat ansikte-test Gruvarbetaren",
                         "since":  "2026-10-29T09:36:48Z",
                         "model":  "codex/gpt-6.1-sol"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Coach Helper",
-                        "state":  "working",
-                        "note":  "ras01 WO-03: modulkarta v1",
-                        "since":  "2026-10-29T10:07:46Z",
-                        "agent":  "sonnet-wo03",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
