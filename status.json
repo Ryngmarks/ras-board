@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:04:45Z",
+    "updated":  "2026-10-29T12:04:59Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -46,11 +46,11 @@
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "alver: målat huvud",
-                        "since":  "2026-10-29T11:46:18Z",
+                        "state":  "waiting",
+                        "note":  "alver runda 1: bedöm",
+                        "since":  "2026-10-29T12:04:59Z",
                         "agent":  "alver",
-                        "model":  "claude/claude-opus-5-5"
+                        "for":  "owner"
                     }
                 ]
 }
