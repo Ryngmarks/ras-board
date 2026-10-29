@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:20:56Z",
+    "updated":  "2026-10-29T07:31:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -25,6 +25,13 @@
                         "state":  "waiting",
                         "note":  "Security Auditor på plats, väntar på Johan",
                         "since":  "2026-10-29T07:17:49Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras01: modulkartor för parallella agenter",
+                        "since":  "2026-10-29T07:31:24Z"
                     }
                 ]
 }
