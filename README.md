@@ -14,3 +14,9 @@ Format:
   "entries": [ { "role": "research", "project": "Coach Helper", "state": "working", "note": "Veo export", "since": "<ISO time>" } ] }
 ```
 `state` is `working` or `waiting`. A role with no entry is free.
+
+## Security
+- `status.json` is untrusted: `clean()` keeps only known fields and states, everything is escaped before rendering,
+  and owner alerts come only from `for: "owner"`.
+- A Content-Security-Policy allows only the page's own inline script (by hash) and fetches to GitHub. **After editing
+  the `<script>`, run `node tools/csp.cjs index.html`** or the page will not run.

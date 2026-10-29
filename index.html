@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ZWyilaHYylVCv8rZS6BHfzTYUa0mP2wO5i4cmDQq6DE='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – teamet</title>
 <style>
@@ -250,7 +251,20 @@ const LANES = {
   quality: ["reviewer", "tester", "security-auditor"],
   gaming: ["3d-artist"],
 };
-const forOwner = e => e.state === "waiting" && (e.for === "owner" || /johan/i.test(e.note || ""));
+// Owner alerts come only from the explicit flag, never from note text (security audit ras02 M1).
+const forOwner = e => e.state === "waiting" && e.for === "owner";
+
+// status.json is untrusted input: keep only known shapes and plain strings before anything is rendered.
+const STATES_OK = new Set(["working", "waiting"]);
+function clean(raw) {
+  const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
+  const entries = (Array.isArray(raw?.entries) ? raw.entries : [])
+    .filter(e => e && typeof e === "object" && STATES_OK.has(e.state) && /^[a-z0-9-]{1,40}$/.test(e.role || ""))
+    .map(e => ({ role: e.role, project: str(e.project, 80), state: e.state, note: str(e.note), since: str(e.since, 40),
+      agent: str(e.agent, 40), model: str(e.model, 60), effort: str(e.effort, 20), for: e.for === "owner" ? "owner" : "" }));
+  const projects = (Array.isArray(raw?.projects) ? raw.projects : []).filter(p => typeof p === "string").map(p => p.slice(0, 80));
+  return { updated: str(raw?.updated, 40), projects, entries };
+}
 const PROVIDERS = { claude: "Claude", codex: "Codex" };
 function modelTag(j) {
   if (!j.model) return "";
@@ -323,7 +337,7 @@ function render() {
     const s = states[i];
     const liveCount = jobs.filter(j => !isStale(j)).length;
     const body = jobs.length
-      ? `<ul class="jobs">${jobs.map(j => `<li class="job ${j.state}${isStale(j) ? " stale" : ""}">
+      ? `<ul class="jobs">${jobs.map(j => `<li class="job ${esc(j.state)}${isStale(j) ? " stale" : ""}">
           <div class="job-top"><b>${esc(j.project)}${j.agent ? `<span class="agent-id">${esc(j.agent)}</span>` : ""}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
           <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p>${modelTag(j)}</li>`).join("")}</ul>`
       : `<div class="empty">Inget uppdrag just nu</div>`;
@@ -364,7 +378,7 @@ function render() {
 }
 
 async function load() {
-  if (window.RAS_DEMO) { data = window.RAS_DEMO; source = "api"; render(); return; }
+  if (window.RAS_DEMO) { data = clean(window.RAS_DEMO); source = "api"; render(); return; }
   lastFetch = Date.now();
   try {
     const headers = { Accept: "application/vnd.github.raw+json" };
@@ -373,13 +387,13 @@ async function load() {
     if (res.status === 304) { source = "api"; failed = false; return render(); }
     if (!res.ok) throw new Error(String(res.status));
     etag = res.headers.get("ETag");
-    data = await res.json(); source = "api"; failed = false;
+    data = clean(await res.json()); source = "api"; failed = false;
   } catch {
     // Rate limit or network trouble: the raw file has no call limit but is cached for up to 5 minutes.
     try {
       const res = await fetch(RAW_URL, { cache: "no-store" });
       if (!res.ok) throw new Error(String(res.status));
-      data = await res.json(); source = "raw"; failed = false;
+      data = clean(await res.json()); source = "raw"; failed = false;
     } catch { failed = true; }
   }
   render();
