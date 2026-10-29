@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:35:37Z",
+    "updated":  "2026-10-29T12:42:30Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -14,16 +14,6 @@
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "3D Artist (Claude): människor runda 2",
-                        "since":  "2026-10-29T12:28:03Z",
-                        "agent":  "m10-3D-Artist-Claude-m-nniskor-runda-2",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "3d-artist",
