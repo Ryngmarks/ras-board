@@ -1,17 +1,10 @@
 {
-    "updated":  "2026-10-29T06:35:11Z",
+    "updated":  "2026-10-29T06:37:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "steg 1 klart, väntar på Johan",
-                        "since":  "2026-10-29T06:28:31Z"
-                    },
                     {
                         "role":  "project-manager",
                         "project":  "Clicker Land",
@@ -25,6 +18,13 @@
                         "state":  "working",
                         "note":  "m11 WO-09c sim test",
                         "since":  "2026-10-29T06:32:05Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "aktiva appar påkopplade",
+                        "since":  "2026-10-29T06:28:31Z"
                     }
                 ]
 }
