@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:28:20Z",
+    "updated":  "2026-10-29T09:28:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,23 +30,6 @@
                         "note":  "2 st: 3D-verktyg+polybudget (Codex) / 3D-hantverk (Haiku)",
                         "since":  "2026-10-29T09:01:15Z",
                         "model":  "codex/gpt-6.1-sol + claude/claude-haiku-5-5"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "TEST-agent",
-                        "state":  "working",
-                        "note":  "test B",
-                        "since":  "2026-10-29T09:28:14Z",
-                        "agent":  "haiku-3d-craft",
-                        "model":  "claude/claude-haiku-5-5",
-                        "effort":  "low"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "TEST-agent",
-                        "state":  "working",
-                        "note":  "test legacy",
-                        "since":  "2026-10-29T09:28:16Z"
                     }
                 ]
 }
