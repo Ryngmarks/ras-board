@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:37:54Z",
+    "updated":  "2026-10-29T21:38:03Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -55,6 +55,16 @@
                         "note":  "WO-01 Spec + texter (game-designer)",
                         "since":  "2026-10-29T21:37:54Z",
                         "agent":  "m13-WO-01-Spec-texter-game-designer-",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "WO-02 Core A: Stjärnsmedjan, omsmidning, butik, sparformat v6 (game-systems)",
+                        "since":  "2026-10-29T21:38:03Z",
+                        "agent":  "m13-WO-02-Core-A-Stj-rnsmedjan-omsmidnin",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
