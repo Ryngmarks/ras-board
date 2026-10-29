@@ -1,17 +1,10 @@
 {
-    "updated":  "2026-10-29T08:05:12Z",
+    "updated":  "2026-10-29T08:33:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
-                    {
-                        "role":  "project-manager",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m11 run cards: final balance",
-                        "since":  "2026-10-29T06:32:03Z"
-                    },
                     {
                         "role":  "implementer",
                         "project":  "Clicker Land",
