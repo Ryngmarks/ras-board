@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T22:27:25Z",
+    "updated":  "2026-10-29T22:30:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,16 +39,6 @@
                         "since":  "2026-10-29T22:15:05Z",
                         "agent":  "m13-WO-06-UI-Stj-rnsmedjan-ui-ux-",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-08 Filmsekvenser: The Star Falls + omsmidning (vfx-artist)",
-                        "since":  "2026-10-29T22:15:13Z",
-                        "agent":  "m13-WO-08-Filmsekvenser-The-Star-Falls-o",
-                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     },
                     {
