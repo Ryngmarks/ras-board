@@ -4,7 +4,7 @@ Live team board for the Ryngmark Agent System (RAS): which role works on which p
 
 Page: https://ryngmarks.github.io/ras-board/
 
-- `index.html` – the board (static, no build). It reads `status.json` through the GitHub API every minute.
+- `index.html` – the board (static, no build). It reads `status.json` through the GitHub API every 2 minutes (60 unauthenticated calls/h per IP are shared by all open tabs) and falls back to raw.githubusercontent.com (no limit, cached up to 5 min).
 - `status.json` (`projects` = connected projects, `entries` = who works where) on branch **`status`** (so updates do not rebuild Pages) – written only by `tools/ras-status.ps1` in the RAS repo. Keep it short: role, project, state,
   a few words of note. Nothing secret – this repo is public.
 

@@ -6,68 +6,138 @@
 <title>RAS – teamet</title>
 <style>
   :root {
-    --bg: #0f1115; --card: #171a21; --border: #2a2f3a; --fg: #e8eaee; --muted: #8b93a3;
-    --work: #4f8cff; --wait: #f2b84b; --idle: #3a404c; --stale: #6b7280; --radius: 10px;
+    --bg: #0d0f13; --surface: #151820; --surface-2: #1b1f29; --border: #262b36; --fg: #eceef2; --muted: #8a93a5;
+    --work: #5b8cff; --work-soft: rgba(91, 140, 255, .14);
+    --wait: #f0b44c; --wait-soft: rgba(240, 180, 76, .14);
+    --free: #59606e; --free-soft: rgba(138, 147, 165, .10);
+    --radius: 14px;
   }
   @media (prefers-color-scheme: light) {
-    :root { --bg: #f6f7f9; --card: #fff; --border: #dde1e7; --fg: #15181e; --muted: #5f6878; --idle: #c9ced6; }
+    :root {
+      --bg: #f4f5f8; --surface: #ffffff; --surface-2: #f7f8fa; --border: #e2e5eb; --fg: #151820; --muted: #5d6676;
+      --work: #2f6bf0; --work-soft: rgba(47, 107, 240, .10);
+      --wait: #c47f0a; --wait-soft: rgba(224, 150, 20, .14);
+      --free: #9aa1ad; --free-soft: rgba(93, 102, 118, .08);
+    }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 40px; }
-  header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-  h1 { font-size: 20px; margin: 0; }
-  h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 28px 0 10px; }
-  .meta { color: var(--muted); font-size: 12px; }
-  .team { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
-  .card.working { border-color: var(--work); }
-  .card.waiting { border-color: var(--wait); }
-  .who { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--idle); flex: none; }
-  .working .dot { background: var(--work); animation: pulse 1.6s infinite; }
-  .waiting .dot { background: var(--wait); }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--work) 55%, transparent); } 100% { box-shadow: 0 0 0 9px transparent; } }
-  .role { color: var(--muted); font-size: 12px; margin: 2px 0 8px 18px; }
-  .job { margin: 6px 0 0 18px; }
-  .job .p { font-weight: 600; }
-  .job .s { font-size: 12px; color: var(--muted); }
+  main { max-width: 1080px; margin: 0 auto; padding: 28px 18px 48px; }
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* header */
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
+  .live { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+  .live .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3fbf7f; }
+  .live.stale .pulse { background: var(--wait); }
+  .live button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+  .live button:hover { border-color: var(--muted); }
+
+  .summary { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 8px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; }
+  .pill b { font-size: 15px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--free); flex: none; }
+  .working .dot, .dot.working { background: var(--work); }
+  .waiting .dot, .dot.waiting { background: var(--wait); }
+
+  .alert { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 12px 14px; border-radius: var(--radius); background: var(--wait-soft); border: 1px solid color-mix(in srgb, var(--wait) 45%, transparent); }
+  .alert svg { color: var(--wait); margin-top: 1px; }
+  .alert div { display: grid; gap: 2px; }
+
+  h2 { display: flex; align-items: baseline; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 34px 0 12px; }
+  h2 span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+  /* role cards */
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+  .card { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--free); opacity: .5; }
+  .card.working::before { background: var(--work); opacity: 1; }
+  .card.waiting::before { background: var(--wait); opacity: 1; }
+  .card-head { display: flex; align-items: center; gap: 12px; padding: 14px 14px 12px 17px; }
+  .icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--free-soft); color: var(--muted); flex: none; }
+  .working .icon { background: var(--work-soft); color: var(--work); }
+  .waiting .icon { background: var(--wait-soft); color: var(--wait); }
+  .who { min-width: 0; flex: 1; }
+  .who b { display: block; font-size: 15px; }
+  .who small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--free-soft); color: var(--muted); flex: none; }
+  .badge.working { background: var(--work-soft); color: var(--work); }
+  .badge.waiting { background: var(--wait-soft); color: var(--wait); }
+  .badge.working .dot { animation: pulse 1.8s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--work) 60%, transparent); } 100% { box-shadow: 0 0 0 7px transparent; } }
+  @media (prefers-reduced-motion: reduce) { .badge.working .dot { animation: none; } }
+
+  .jobs { list-style: none; margin: 0; padding: 0 14px 14px 17px; display: grid; gap: 8px; }
+  .job { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; }
+  .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .job-top b { font-size: 14px; }
+  .job-top time { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .job p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .job.waiting { border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
   .job.stale { opacity: .55; }
-  .free { margin-left: 18px; color: var(--muted); }
-  .proj .free { margin-left: 0; }
-  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
-  .proj h3 { margin: 0 0 6px; font-size: 15px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px 2px 7px; margin: 3px 4px 0 0; font-size: 12px; }
-  .chip .dot { width: 8px; height: 8px; animation: none; }
-  .chip.working .dot { background: var(--work); }
-  .chip.waiting .dot { background: var(--wait); }
-  .empty { color: var(--muted); }
-  .err { color: var(--wait); font-size: 12px; }
-  footer { margin-top: 32px; color: var(--muted); font-size: 12px; }
+  .empty { margin: 0 14px 14px 17px; padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
+
+  /* projects */
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .proj { padding: 14px 14px 14px 17px; }
+  .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .proj-head b { font-size: 15px; }
+  .proj-head small { color: var(--muted); font-size: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+  .chip svg { width: 13px; height: 13px; }
+  .quiet { margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  footer code { font-size: 11px; }
 </style>
 </head>
 <body>
 <main>
   <header>
-    <h1>Ryngmark Agent System · teamet</h1>
-    <span class="meta" id="meta">Laddar…</span>
+    <div>
+      <div class="eyebrow">Ryngmark Agent System</div>
+      <h1>Teamet just nu</h1>
+    </div>
+    <div class="live" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button">Uppdatera</button></div>
   </header>
 
-  <h2>Vem gör vad</h2>
-  <section class="team" id="team"></section>
+  <div class="summary" id="summary" aria-live="polite"></div>
+  <div id="alerts"></div>
 
-  <h2>Projekt</h2>
+  <h2>Roller <span id="roles-note"></span></h2>
+  <section class="grid" id="team"></section>
+
+  <h2>Projekt <span id="projects-note"></span></h2>
   <section class="projects" id="projects"></section>
 
   <footer>
-    Uppdateras av RAS Project Manager med <code>tools/ras-status.ps1</code>. Sidan läser <code>status.json</code> varje minut.
+    Uppdateras av RAS Project Manager vid varje överlämning (<code>tools/ras-status.ps1</code>). Sidan hämtar ny status
+    varannan minut.
   </footer>
 </main>
 
 <script>
 const REPO = "Ryngmarks/ras-board";
-const POLL_MS = 60_000;
+const API_URL = `https://api.github.com/repos/${REPO}/contents/status.json?ref=status`;
+const RAW_URL = `https://raw.githubusercontent.com/${REPO}/status/status.json`;
+const POLL_MS = 120_000;          // unauthenticated GitHub API: 60 calls/h per IP, shared by every open tab
 const STALE_MS = 12 * 3600_000;
+
+const ICONS = {
+  "project-manager": '<circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.8 5.41a2 2 0 0 1-1.27 1.27L7.76 16.24l1.8-5.41a2 2 0 0 1 1.27-1.27z"/>',
+  "solution-architect": '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+  "engineering-analyst": '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  "research": '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  "implementer": '<path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25a3.2 3.2 0 0 1-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>',
+  "reviewer": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  "other": '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  "alert": '<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+};
 const ROLES = [
   ["project-manager", "Project Manager", "Leder, delegerar, pratar med dig"],
   ["solution-architect", "Solution Architect", "Draft och blueprint"],
@@ -76,107 +146,126 @@ const ROLES = [
   ["implementer", "Implementer", "Bygger work orders"],
   ["reviewer", "Reviewer", "Granskar kod och design"],
 ];
-const STATE_TEXT = { working: "jobbar", waiting: "väntar" };
+const STATE = { working: "Jobbar", waiting: "Väntar", idle: "Ledig" };
 
-let etag = null;
-let data = null;
-let error = null;
+let etag = null, data = null, source = null, lastFetch = null, failed = false;
+
+const icon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[id] || ICONS.other}</svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const isStale = e => Date.now() - Date.parse(e.since) > STALE_MS;
 
 function ago(iso) {
   const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (!isFinite(s)) return "";
   if (s < 90) return "nyss";
   if (s < 3600) return Math.round(s / 60) + " min";
   if (s < 86400) return Math.round(s / 3600) + " h";
   return Math.round(s / 86400) + " d";
 }
 
-function el(tag, cls, text) {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  if (text != null) e.textContent = text;
-  return e;
-}
-
-function isStale(entry) {
-  return Date.now() - Date.parse(entry.since) > STALE_MS;
+function stateOf(jobs) {
+  const live = jobs.filter(j => !isStale(j));
+  if (live.some(j => j.state === "working")) return "working";
+  if (live.some(j => j.state === "waiting")) return "waiting";
+  return "idle";
 }
 
 function render() {
-  const entries = (data && Array.isArray(data.entries)) ? data.entries : [];
-  const meta = document.getElementById("meta");
-  meta.textContent = data && data.updated ? "Senast ändrad för " + ago(data.updated) + " sedan" : "Ingen status ännu";
-  if (error) { meta.append(" · "); meta.append(el("span", "err", error)); }
-
-  const team = document.getElementById("team");
-  team.replaceChildren();
-  const known = new Set(ROLES.map(r => r[0]));
+  const entries = Array.isArray(data?.entries) ? data.entries : [];
+  const known = new Map(ROLES.map(r => [r[0], r]));
   const roles = ROLES.concat([...new Set(entries.map(e => e.role))].filter(r => !known.has(r)).map(r => [r, r, ""]));
-  for (const [id, name, desc] of roles) {
-    const jobs = entries.filter(e => e.role === id);
-    const live = jobs.filter(j => !isStale(j));
-    const state = live.some(j => j.state === "working") ? "working" : live.some(j => j.state === "waiting") ? "waiting" : "idle";
-    const card = el("div", "card " + state);
-    const who = el("div", "who");
-    who.append(el("span", "dot"), el("span", null, name));
-    card.append(who, el("div", "role", desc));
-    if (!jobs.length) card.append(el("div", "free", "Ledig"));
-    for (const j of jobs) {
-      const job = el("div", "job" + (isStale(j) ? " stale" : ""));
-      job.append(el("div", "p", j.project));
-      const line = (STATE_TEXT[j.state] || j.state) + (j.note ? " · " + j.note : "") + " · " + ago(j.since);
-      job.append(el("div", "s", line));
-      card.append(job);
-    }
-    team.append(card);
-  }
+  const roleName = Object.fromEntries(roles.map(r => [r[0], r[1]]));
 
-  const projects = document.getElementById("projects");
-  projects.replaceChildren();
+  // header
+  document.getElementById("updated").textContent = data?.updated
+    ? (ago(data.updated) === "nyss" ? "Ändrad nyss" : `Ändrad för ${ago(data.updated)} sedan`) + (source === "raw" ? " · cache, upp till 5 min gammal" : "")
+    : (failed ? "Kunde inte hämta status" : "Ingen status ännu");
+  document.getElementById("live").classList.toggle("stale", failed || source === "raw");
+
+  // summary
+  const states = roles.map(([id]) => stateOf(entries.filter(e => e.role === id)));
+  const liveEntries = entries.filter(e => !isStale(e));
+  const counts = {
+    working: liveEntries.filter(e => e.state === "working").length,
+    waiting: liveEntries.filter(e => e.state === "waiting").length,
+    idle: states.filter(x => x === "idle").length,
+  };
+  const label = { working: "uppdrag pågår", waiting: "väntar", idle: "lediga roller" };
+  document.getElementById("summary").innerHTML = ["working", "waiting", "idle"].map(s =>
+    `<span class="pill ${s}"><span class="dot"></span><b>${counts[s]}</b> ${label[s]}</span>`).join("");
+
+  // waiting alerts
+  const waiting = entries.filter(e => e.state === "waiting" && !isStale(e));
+  document.getElementById("alerts").innerHTML = waiting.map(e =>
+    `<div class="alert" role="status">${icon("alert")}<div><b>${esc(roleName[e.role] || e.role)} väntar · ${esc(e.project)}</b>` +
+    `<span>${esc(e.note || "väntar på svar")} · ${ago(e.since)}</span></div></div>`).join("");
+  document.title = (waiting.length ? `(${waiting.length}) väntar · ` : "") + "RAS – teamet";
+
+  // role cards
+  const active = states.filter(s => s !== "idle").length;
+  document.getElementById("roles-note").textContent = `${active} av ${roles.length} aktiva`;
+  document.getElementById("team").innerHTML = roles.map(([id, name, desc], i) => {
+    const jobs = entries.filter(e => e.role === id)
+      .sort((a, b) => (a.state === "working" ? 0 : 1) - (b.state === "working" ? 0 : 1) || Date.parse(b.since) - Date.parse(a.since));
+    const s = states[i];
+    const body = jobs.length
+      ? `<ul class="jobs">${jobs.map(j => `<li class="job ${j.state}${isStale(j) ? " stale" : ""}">
+          <div class="job-top"><b>${esc(j.project)}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
+          <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p></li>`).join("")}</ul>`
+      : `<div class="empty">Inget uppdrag just nu</div>`;
+    return `<article class="card ${s}">
+      <div class="card-head"><div class="icon">${icon(id)}</div>
+        <div class="who"><b>${esc(name)}</b><small>${esc(desc)}</small></div>
+        <span class="badge ${s}"><span class="dot"></span>${STATE[s]}</span></div>${body}</article>`;
+  }).join("");
+
+  // projects
   const byProject = new Map();
-  for (const p of (data && Array.isArray(data.projects)) ? data.projects : []) byProject.set(p, []);
-  for (const e of entries) {
-    if (!byProject.has(e.project)) byProject.set(e.project, []);
-    byProject.get(e.project).push(e);
-  }
-  if (!byProject.size) projects.append(el("div", "empty", "Inga projekt ännu."));
-  const roleName = Object.fromEntries(ROLES.map(r => [r[0], r[1]]));
-  const busy = ([, l]) => l.some(e => e.state === "working") ? 0 : l.length ? 1 : 2;
-  for (const [project, list] of [...byProject].sort((a, b) => busy(a) - busy(b) || a[0].localeCompare(b[0], "sv"))) {
-    const card = el("div", "card proj" + (list.some(e => e.state === "working") ? " working" : list.length ? " waiting" : ""));
-    card.append(el("h3", null, project));
-    if (!list.length) card.append(el("div", "free", "Ledigt"));
-    for (const e of list) {
-      const chip = el("span", "chip " + e.state);
-      chip.append(el("span", "dot"), el("span", null, (roleName[e.role] || e.role) + " " + (STATE_TEXT[e.state] || e.state)));
-      card.append(chip);
-    }
-    projects.append(card);
-  }
+  for (const p of Array.isArray(data?.projects) ? data.projects : []) byProject.set(p, []);
+  for (const e of entries) { if (!byProject.has(e.project)) byProject.set(e.project, []); byProject.get(e.project).push(e); }
+  const rank = l => ({ working: 0, waiting: 1, idle: 2 })[stateOf(l)];
+  const list = [...byProject].sort((a, b) => rank(a[1]) - rank(b[1]) || a[0].localeCompare(b[0], "sv"));
+  document.getElementById("projects-note").textContent = `${list.length} st`;
+  document.getElementById("projects").innerHTML = list.length ? list.map(([p, l]) => {
+    const s = stateOf(l);
+    const live = l.filter(e => !isStale(e));
+    return `<article class="card proj ${s}"><div class="proj-head"><b>${esc(p)}</b>
+      <small>${live.length ? live.length + (live.length === 1 ? " roll" : " roller") : "lugnt"}</small></div>
+      ${live.length ? `<div class="chips">${live.map(e =>
+        `<span class="chip">${icon(e.role)}${esc(roleName[e.role] || e.role)}<span class="dot ${e.state}"></span></span>`).join("")}</div>`
+        : `<div class="quiet">Inga aktiva roller</div>`}</article>`;
+  }).join("") : `<div class="empty">Inga projekt ännu</div>`;
 }
 
 async function load() {
+  if (window.RAS_DEMO) { data = window.RAS_DEMO; source = "api"; render(); return; }
+  lastFetch = Date.now();
   try {
     const headers = { Accept: "application/vnd.github.raw+json" };
     if (etag) headers["If-None-Match"] = etag;
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/status.json?ref=status`, { headers, cache: "no-store" });
-    if (res.status === 304) { error = null; render(); return; }
-    if (!res.ok) throw new Error("GitHub svarade " + res.status);
+    const res = await fetch(API_URL, { headers, cache: "no-store" });
+    if (res.status === 304) { source = "api"; failed = false; return render(); }
+    if (!res.ok) throw new Error(String(res.status));
     etag = res.headers.get("ETag");
-    data = await res.json();
-    error = null;
-  } catch (e) {
-    if (!data) {
-      try { data = await (await fetch("status.json", { cache: "no-store" })).json(); } catch {}
-    }
-    error = "kunde inte hämta senaste status (" + e.message + ")";
+    data = await res.json(); source = "api"; failed = false;
+  } catch {
+    // Rate limit or network trouble: the raw file has no call limit but is cached for up to 5 minutes.
+    try {
+      const res = await fetch(RAW_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      data = await res.json(); source = "raw"; failed = false;
+    } catch { failed = true; }
   }
   render();
 }
 
-load();
+document.getElementById("refresh").addEventListener("click", load);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) load();
+});
 setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
-document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
 setInterval(render, 30_000);
+load();
 </script>
 </body>
 </html>
