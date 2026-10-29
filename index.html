@@ -159,6 +159,9 @@
   <h2>Kvalitet och säkerhet <span id="note-quality"></span></h2>
   <section class="grid three" id="lane-quality"></section>
 
+  <h2>Spelutveckling <span id="note-gaming"></span></h2>
+  <section class="grid three" id="lane-gaming"></section>
+
   <h2>Projekt <span id="projects-note"></span></h2>
   <section class="projects" id="projects"></section>
 
@@ -226,6 +229,7 @@ const ICONS = {
   "reviewer": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
   "tester": '<path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>',
   "security-auditor": '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  "3d-artist": '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/>',
   "other": '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
   "alert": '<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
 };
@@ -238,11 +242,13 @@ const ROLES = [
   ["reviewer", "Reviewer", "Granskar kod och design"],
   ["tester", "Tester", "Försöker få det att gå sönder"],
   ["security-auditor", "Security Auditor", "Letar hål i inloggning och behörighet"],
+  ["3d-artist", "3D Artist", "Modellerar och texturerar spelkaraktärer"],
 ];
 const LANES = {
   lead: ["project-manager"],
   create: ["solution-architect", "engineering-analyst", "research", "implementer"],
   quality: ["reviewer", "tester", "security-auditor"],
+  gaming: ["3d-artist"],
 };
 const forOwner = e => e.state === "waiting" && (e.for === "owner" || /johan/i.test(e.note || ""));
 const PROVIDERS = { claude: "Claude", codex: "Codex" };
@@ -328,7 +334,7 @@ function render() {
   };
   const inLane = ids => roles.map((r, i) => [r, i]).filter(([r]) => ids.includes(r[0]));
   const placed = new Set(Object.values(LANES).flat());
-  const lanes = { lead: LANES.lead, create: LANES.create, quality: LANES.quality.concat(roles.map(r => r[0]).filter(id => !placed.has(id))) };
+  const lanes = { lead: LANES.lead, create: LANES.create, gaming: LANES.gaming, quality: LANES.quality.concat(roles.map(r => r[0]).filter(id => !placed.has(id))) };
   for (const [lane, ids] of Object.entries(lanes)) {
     const items = inLane(ids);
     document.getElementById("lane-" + lane).innerHTML = items.map(([r, i]) => card(r, i)).join("");
