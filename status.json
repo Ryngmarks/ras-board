@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:01:15Z",
+    "updated":  "2026-10-29T09:14:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -15,20 +15,20 @@
                         "effort":  "default"
                     },
                     {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras01 WO-01 (omstart efter avbrott)",
-                        "since":  "2026-10-29T07:54:38Z",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
-                    },
-                    {
                         "role":  "research",
                         "project":  "Clicker Land",
                         "state":  "working",
                         "note":  "low-poly characters (Codex)",
                         "since":  "2026-10-29T09:01:15Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras01 WO-02: reservationer, påverkan, avbockning",
+                        "since":  "2026-10-29T07:54:38Z",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
