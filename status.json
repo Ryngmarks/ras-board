@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T18:23:00Z",
+    "updated":  "2026-10-29T18:32:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -14,16 +14,6 @@
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "WO-11 3D Artist: samlat bygge + export av alla 15",
-                        "since":  "2026-10-29T18:22:55Z",
-                        "agent":  "m10-WO-11-3D-Artist-samlat-bygge-export-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "project-manager",
