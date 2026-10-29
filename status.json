@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:58:22Z",
+    "updated":  "2026-10-29T22:13:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,16 +30,6 @@
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-03 Core B: Legendary nr 2, stjärnkort, heta platser (game-systems)",
-                        "since":  "2026-10-29T21:58:17Z",
-                        "agent":  "m13-WO-03-Core-B-Legendary-nr-2-stj-rnko",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
