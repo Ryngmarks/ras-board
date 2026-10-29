@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T11:46:18Z",
+    "updated":  "2026-10-29T12:04:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -23,16 +23,6 @@
                         "since":  "2026-10-29T11:45:58Z",
                         "agent":  "m10-3D-Artist-m-nniskor-m-lat-huvud-",
                         "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "3D Artist: alver (målat huvud)",
-                        "since":  "2026-10-29T11:46:09Z",
-                        "agent":  "m10-3D-Artist-alver-m-lat-huvud-",
-                        "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     },
                     {
