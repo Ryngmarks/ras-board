@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:26:36Z",
+    "updated":  "2026-10-29T06:28:31Z",
     "projects":  [
                      "Coach Helper"
                  ],
@@ -7,9 +7,9 @@
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "working",
-                        "note":  "bygger ras-connect",
-                        "since":  "2026-10-29T06:24:31Z"
+                        "state":  "waiting",
+                        "note":  "steg 1 klart, väntar på Johan",
+                        "since":  "2026-10-29T06:28:31Z"
                     }
                 ]
 }
