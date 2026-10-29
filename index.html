@@ -51,7 +51,6 @@
 
   /* role cards */
   .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  @media (min-width: 901px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
   .card { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
@@ -64,7 +63,7 @@
   .waiting .icon { background: var(--wait-soft); color: var(--wait); }
   .who { min-width: 0; flex: 1; }
   .who b { display: block; font-size: 15px; }
-  .who small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .who small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
   .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--free-soft); color: var(--muted); flex: none; }
   .badge.working { background: var(--work-soft); color: var(--work); }
   .badge.waiting { background: var(--wait-soft); color: var(--wait); }
@@ -81,6 +80,17 @@
   .job.waiting { border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
   .job.stale { opacity: .55; }
   .empty { margin: 0 14px 14px 17px; padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
+
+  .lane-pm .card { }
+  .lane-pm .jobs { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 900px) { .grid.four, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 580px) { .grid.four, .grid.three { grid-template-columns: 1fr; } }
+  .owner { display: grid; gap: 8px; }
+  .owner .calm { padding: 12px 14px; border-radius: var(--radius); border: 1px dashed var(--border); color: var(--muted); }
+  .alert { margin-top: 0; }
+  h2.first { margin-top: 26px; }
 
   /* projects */
   .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
@@ -108,10 +118,18 @@
   </header>
 
   <div class="summary" id="summary" aria-live="polite"></div>
-  <div id="alerts"></div>
 
-  <h2>Roller <span id="roles-note"></span></h2>
-  <section class="grid" id="team"></section>
+  <h2 class="first">Väntar på svar från Johan <span id="owner-note"></span></h2>
+  <section class="owner" id="alerts" aria-live="polite"></section>
+
+  <h2>Ledning</h2>
+  <section class="lane-pm" id="lane-lead"></section>
+
+  <h2>Skapande roller <span id="note-create"></span></h2>
+  <section class="grid four" id="lane-create"></section>
+
+  <h2>Kvalitet och säkerhet <span id="note-quality"></span></h2>
+  <section class="grid three" id="lane-quality"></section>
 
   <h2>Projekt <span id="projects-note"></span></h2>
   <section class="projects" id="projects"></section>
@@ -151,6 +169,12 @@ const ROLES = [
   ["tester", "Tester", "Försöker få det att gå sönder"],
   ["security-auditor", "Security Auditor", "Letar hål i inloggning och behörighet"],
 ];
+const LANES = {
+  lead: ["project-manager"],
+  create: ["solution-architect", "engineering-analyst", "research", "implementer"],
+  quality: ["reviewer", "tester", "security-auditor"],
+};
+const forOwner = e => e.state === "waiting" && (e.for === "owner" || /johan/i.test(e.note || ""));
 const STATE = { working: "Jobbar", waiting: "Väntar", idle: "Ledig" };
 
 let etag = null, data = null, source = null, lastFetch = null, failed = false;
@@ -199,17 +223,17 @@ function render() {
   document.getElementById("summary").innerHTML = ["working", "waiting", "idle"].map(s =>
     `<span class="pill ${s}"><span class="dot"></span><b>${counts[s]}</b> ${label[s]}</span>`).join("");
 
-  // waiting alerts
-  const waiting = entries.filter(e => e.state === "waiting" && !isStale(e));
-  document.getElementById("alerts").innerHTML = waiting.map(e =>
-    `<div class="alert" role="status">${icon("alert")}<div><b>${esc(roleName[e.role] || e.role)} väntar · ${esc(e.project)}</b>` +
-    `<span>${esc(e.note || "väntar på svar")} · ${ago(e.since)}</span></div></div>`).join("");
-  document.title = (waiting.length ? `(${waiting.length}) väntar · ` : "") + "RAS – teamet";
+  // waiting for the owner – first thing on the page
+  const waiting = entries.filter(e => forOwner(e) && !isStale(e));
+  document.getElementById("owner-note").textContent = waiting.length ? `${waiting.length} st` : "";
+  document.getElementById("alerts").innerHTML = waiting.length ? waiting.map(e =>
+    `<div class="alert" role="status">${icon("alert")}<div><b>${esc(e.project)} · ${esc(roleName[e.role] || e.role)}</b>` +
+    `<span>${esc(e.note || "väntar på svar")} · ${ago(e.since)}</span></div></div>`).join("")
+    : `<div class="calm">Inget väntar på dig just nu.</div>`;
+  document.title = (waiting.length ? `(${waiting.length}) väntar på dig · ` : "") + "RAS – teamet";
 
-  // role cards
-  const active = states.filter(s => s !== "idle").length;
-  document.getElementById("roles-note").textContent = `${active} av ${roles.length} aktiva`;
-  document.getElementById("team").innerHTML = roles.map(([id, name, desc], i) => {
+  // role cards, one lane per group
+  const card = ([id, name, desc], i) => {
     const jobs = entries.filter(e => e.role === id)
       .sort((a, b) => (a.state === "working" ? 0 : 1) - (b.state === "working" ? 0 : 1) || Date.parse(b.since) - Date.parse(a.since));
     const s = states[i];
@@ -222,7 +246,16 @@ function render() {
       <div class="card-head"><div class="icon">${icon(id)}</div>
         <div class="who"><b>${esc(name)}</b><small>${esc(desc)}</small></div>
         <span class="badge ${s}"><span class="dot"></span>${STATE[s]}</span></div>${body}</article>`;
-  }).join("");
+  };
+  const inLane = ids => roles.map((r, i) => [r, i]).filter(([r]) => ids.includes(r[0]));
+  const placed = new Set(Object.values(LANES).flat());
+  const lanes = { lead: LANES.lead, create: LANES.create, quality: LANES.quality.concat(roles.map(r => r[0]).filter(id => !placed.has(id))) };
+  for (const [lane, ids] of Object.entries(lanes)) {
+    const items = inLane(ids);
+    document.getElementById("lane-" + lane).innerHTML = items.map(([r, i]) => card(r, i)).join("");
+    const note = document.getElementById("note-" + lane);
+    if (note) note.textContent = `${items.filter(([, i]) => states[i] !== "idle").length} av ${items.length} aktiva`;
+  }
 
   // projects
   const byProject = new Map();
