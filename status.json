@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:53:09Z",
+    "updated":  "2026-10-29T09:53:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -38,6 +38,15 @@
                         "state":  "working",
                         "note":  "",
                         "since":  "2026-10-29T09:53:09Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "TEST-sec",
+                        "state":  "working",
+                        "note":  "vanlig anteckning åäö",
+                        "since":  "2026-10-29T09:53:11Z",
+                        "agent":  "ok-1",
+                        "model":  "claude/claude-haiku-5-5"
                     }
                 ]
 }
