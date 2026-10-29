@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:54:38Z",
+    "updated":  "2026-10-29T07:54:40Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -27,18 +27,18 @@
                         "since":  "2026-10-29T07:33:05Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras01: väntar på Johans beslut",
-                        "since":  "2026-10-29T07:17:49Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "RAS",
                         "state":  "working",
                         "note":  "ras01 WO-01: modulverktygets kärna",
                         "since":  "2026-10-29T07:54:38Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras01: väntar på WO-01",
+                        "since":  "2026-10-29T07:17:49Z"
                     }
                 ]
 }
