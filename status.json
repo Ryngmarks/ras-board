@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:33:40Z",
+    "updated":  "2026-10-29T07:33:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -32,6 +32,13 @@
                         "state":  "working",
                         "note":  "säkerhetsgranskning",
                         "since":  "2026-10-29T07:33:05Z"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras01: mini-blueprint modulkarta",
+                        "since":  "2026-10-29T07:33:42Z"
                     }
                 ]
 }
