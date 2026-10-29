@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:29:50Z",
+    "updated":  "2026-10-29T21:34:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,15 +30,6 @@
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m13: game-designer, ui-ux, sim",
-                        "since":  "2026-10-29T20:30:09Z",
-                        "agent":  "konsult",
-                        "model":  "claude/opus+sonnet"
                     },
                     {
                         "role":  "3d-artist",
