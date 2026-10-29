@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T14:34:58Z",
+    "updated":  "2026-10-29T14:35:01Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -22,6 +22,15 @@
                         "note":  "hammare: tvåhandsslag",
                         "since":  "2026-10-29T14:34:58Z",
                         "agent":  "vapen",
+                        "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "alver runda 3",
+                        "since":  "2026-10-29T14:35:01Z",
+                        "agent":  "alver",
                         "model":  "claude/claude-opus-5-5"
                     }
                 ]
