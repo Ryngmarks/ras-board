@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:31:26Z",
+    "updated":  "2026-10-29T07:31:29Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -20,13 +20,6 @@
                         "since":  "2026-10-29T07:15:48Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "Security Auditor på plats, väntar på Johan",
-                        "since":  "2026-10-29T07:17:49Z"
-                    },
-                    {
                         "role":  "research",
                         "project":  "RAS",
                         "state":  "working",
@@ -39,6 +32,13 @@
                         "state":  "working",
                         "note":  "ras01: hur våra appar håller modulgränser",
                         "since":  "2026-10-29T07:31:26Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras01: väntar på research + analyst",
+                        "since":  "2026-10-29T07:17:49Z"
                     }
                 ]
 }
