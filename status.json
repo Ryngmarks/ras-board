@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:04:59Z",
+    "updated":  "2026-10-29T12:13:44Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -14,16 +14,6 @@
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "3D Artist: människor (målat huvud)",
-                        "since":  "2026-10-29T11:45:58Z",
-                        "agent":  "m10-3D-Artist-m-nniskor-m-lat-huvud-",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "3d-artist",
