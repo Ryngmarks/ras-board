@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:16:24Z",
+    "updated":  "2026-10-29T07:17:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -25,6 +25,13 @@
                         "state":  "working",
                         "note":  "lägger till Tester, Designer, Release",
                         "since":  "2026-10-29T07:16:24Z"
+                    },
+                    {
+                        "role":  "tester",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "test av ny roll",
+                        "since":  "2026-10-29T07:17:45Z"
                     }
                 ]
 }
