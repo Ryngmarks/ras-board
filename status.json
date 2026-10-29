@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T10:09:57Z",
+    "updated":  "2026-10-29T10:11:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -27,10 +27,10 @@
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "bedöm målat ansikte-test",
-                        "since":  "2026-10-29T10:09:57Z",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "putsrunda målat ansikte",
+                        "since":  "2026-10-29T10:11:22Z",
+                        "model":  "codex/gpt-6.1-sol"
                     }
                 ]
 }
