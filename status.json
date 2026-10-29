@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T22:15:19Z",
+    "updated":  "2026-10-29T22:15:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -60,6 +60,15 @@
                         "agent":  "m13-WO-08-Filmsekvenser-The-Star-Falls-o",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "WO-04 tester",
+                        "since":  "2026-10-29T22:15:23Z",
+                        "agent":  "m13-tester",
+                        "model":  "claude/claude-sonnet-5-5"
                     }
                 ]
 }
