@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T20:08:32Z",
+    "updated":  "2026-10-29T20:11:17Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -22,16 +22,6 @@
                         "note":  "3D Artist: målade fiender – pilot",
                         "since":  "2026-10-29T20:07:45Z",
                         "agent":  "m12-3D-Artist-m-lade-fiender-pilot",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Solution Architect: draft",
-                        "since":  "2026-10-29T20:07:58Z",
-                        "agent":  "m13-Stj-rnsmedjan-Solution-Architect-dra",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     },
