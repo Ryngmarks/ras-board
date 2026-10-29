@@ -78,6 +78,8 @@
   .job-top time { color: var(--muted); font-size: 12px; white-space: nowrap; }
   .job p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
   .job .model { display: inline-block; margin-top: 6px; font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  .job .agent-id { display: block; font-size: 11px; font-weight: 500; color: var(--muted); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  .who .count { font-size: 12px; font-weight: 600; color: var(--work); background: var(--work-soft); border-radius: 999px; padding: 1px 7px; margin-left: 4px; }
   .job.waiting { border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
   .job.stale { opacity: .55; }
   .empty { margin: 0 14px 14px 17px; padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
@@ -313,14 +315,15 @@ function render() {
     const jobs = entries.filter(e => e.role === id)
       .sort((a, b) => (a.state === "working" ? 0 : 1) - (b.state === "working" ? 0 : 1) || Date.parse(b.since) - Date.parse(a.since));
     const s = states[i];
+    const liveCount = jobs.filter(j => !isStale(j)).length;
     const body = jobs.length
       ? `<ul class="jobs">${jobs.map(j => `<li class="job ${j.state}${isStale(j) ? " stale" : ""}">
-          <div class="job-top"><b>${esc(j.project)}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
+          <div class="job-top"><b>${esc(j.project)}${j.agent ? `<span class="agent-id">${esc(j.agent)}</span>` : ""}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
           <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p>${modelTag(j)}</li>`).join("")}</ul>`
       : `<div class="empty">Inget uppdrag just nu</div>`;
     return `<article class="card ${s}">
       <div class="card-head"><div class="icon">${icon(id)}</div>
-        <div class="who"><b>${esc(name)}</b><small>${esc(desc)}</small></div>
+        <div class="who"><b>${esc(name)}${liveCount > 1 ? ` <span class="count">×${liveCount}</span>` : ""}</b><small>${esc(desc)}</small></div>
         <span class="badge ${s}"><span class="dot"></span>${STATE[s]}</span></div>${body}</article>`;
   };
   const inLane = ids => roles.map((r, i) => [r, i]).filter(([r]) => ids.includes(r[0]));
@@ -343,10 +346,13 @@ function render() {
   document.getElementById("projects").innerHTML = list.length ? list.map(([p, l]) => {
     const s = stateOf(l);
     const live = l.filter(e => !isStale(e));
+    // one chip per role; several agents in the same role show as "Research ×2"
+    const byRole = new Map();
+    for (const e of live) { if (!byRole.has(e.role)) byRole.set(e.role, []); byRole.get(e.role).push(e); }
     return `<article class="card proj ${s}"><div class="proj-head"><b>${esc(p)}</b>
-      <small>${live.length ? live.length + (live.length === 1 ? " roll" : " roller") : "lugnt"}</small></div>
-      ${live.length ? `<div class="chips">${live.map(e =>
-        `<span class="chip">${icon(e.role)}${esc(roleName[e.role] || e.role)}<span class="dot ${e.state}"></span></span>`).join("")}</div>`
+      <small>${byRole.size ? byRole.size + (byRole.size === 1 ? " roll" : " roller") : "lugnt"}</small></div>
+      ${byRole.size ? `<div class="chips">${[...byRole].map(([role, es]) =>
+        `<span class="chip">${icon(role)}${esc(roleName[role] || role)}${es.length > 1 ? " ×" + es.length : ""}<span class="dot ${stateOf(es)}"></span></span>`).join("")}</div>`
         : `<div class="quiet">Inga aktiva roller</div>`}</article>`;
   }).join("") : `<div class="empty">Inga projekt ännu</div>`;
 }
