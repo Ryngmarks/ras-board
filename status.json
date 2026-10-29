@@ -1,26 +1,26 @@
 {
-    "updated":  "2026-10-29T10:48:46Z",
+    "updated":  "2026-10-29T10:52:41Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras01 klar; beslut om säkerhet (H1) väntar",
-                        "since":  "2026-10-29T07:17:49Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
                         "state":  "waiting",
                         "note":  "bedöm putsrunda",
                         "since":  "2026-10-29T10:48:46Z",
+                        "for":  "owner"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "väntar på token för tavlan",
+                        "since":  "2026-10-29T07:17:49Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default",
                         "for":  "owner"
                     }
                 ]
