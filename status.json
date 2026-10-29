@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:53:27Z",
+    "updated":  "2026-10-29T09:56:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -21,16 +21,6 @@
                         "note":  "målat ansikte-test Gruvarbetaren",
                         "since":  "2026-10-29T09:36:48Z",
                         "model":  "codex/gpt-6.1-sol"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras01 WO-05: rättningar efter granskning",
-                        "since":  "2026-10-29T09:38:02Z",
-                        "agent":  "codex-wo05",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     }
                 ]
 }
