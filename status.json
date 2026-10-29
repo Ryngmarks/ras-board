@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:38:18Z",
+    "updated":  "2026-10-29T21:40:40Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -29,15 +29,6 @@
                         "note":  "verify.ps1 + Playtester",
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
-                        "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "vargens huvud + kontrast",
-                        "since":  "2026-10-29T21:24:21Z",
-                        "agent":  "fiender",
                         "model":  "claude/claude-opus-5-5"
                     },
                     {
@@ -77,6 +68,15 @@
                         "since":  "2026-10-29T21:38:18Z",
                         "agent":  "m13-core",
                         "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "waiting",
+                        "note":  "fiender v2: bedöm",
+                        "since":  "2026-10-29T21:40:40Z",
+                        "agent":  "fiender",
+                        "for":  "owner"
                     }
                 ]
 }
