@@ -77,6 +77,7 @@
   .job-top b { font-size: 14px; }
   .job-top time { color: var(--muted); font-size: 12px; white-space: nowrap; }
   .job p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .job .model { display: inline-block; margin-top: 6px; font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
   .job.waiting { border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
   .job.stale { opacity: .55; }
   .empty { margin: 0 14px 14px 17px; padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
@@ -175,6 +176,14 @@ const LANES = {
   quality: ["reviewer", "tester", "security-auditor"],
 };
 const forOwner = e => e.state === "waiting" && (e.for === "owner" || /johan/i.test(e.note || ""));
+const PROVIDERS = { claude: "Claude", codex: "Codex" };
+function modelTag(j) {
+  if (!j.model) return "";
+  const [p, ...rest] = String(j.model).split("/");
+  const name = rest.length ? `${PROVIDERS[p] || p} · ${rest.join("/").replace(/^claude-/, "")}` : j.model;
+  const effort = j.effort ? ` · ${j.effort === "default" ? "standardnivå" : "nivå " + j.effort}` : "";
+  return `<span class="model">${esc(name + effort)}</span>`;
+}
 const STATE = { working: "Jobbar", waiting: "Väntar", idle: "Ledig" };
 
 let etag = null, data = null, source = null, lastFetch = null, failed = false;
@@ -240,7 +249,7 @@ function render() {
     const body = jobs.length
       ? `<ul class="jobs">${jobs.map(j => `<li class="job ${j.state}${isStale(j) ? " stale" : ""}">
           <div class="job-top"><b>${esc(j.project)}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
-          <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p></li>`).join("")}</ul>`
+          <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p>${modelTag(j)}</li>`).join("")}</ul>`
       : `<div class="empty">Inget uppdrag just nu</div>`;
     return `<article class="card ${s}">
       <div class="card-head"><div class="icon">${icon(id)}</div>
