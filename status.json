@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:31:29Z",
+    "updated":  "2026-10-29T07:33:05Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,6 +39,13 @@
                         "state":  "waiting",
                         "note":  "ras01: väntar på research + analyst",
                         "since":  "2026-10-29T07:17:49Z"
+                    },
+                    {
+                        "role":  "security-auditor",
+                        "project":  "Forestry Road",
+                        "state":  "working",
+                        "note":  "säkerhetsgranskning",
+                        "since":  "2026-10-29T07:33:05Z"
                     }
                 ]
 }
