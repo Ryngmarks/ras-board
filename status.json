@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:13:47Z",
+    "updated":  "2026-10-29T06:16:47Z",
     "entries":  [
                     {
                         "role":  "project-manager",
@@ -7,6 +7,13 @@
                         "state":  "waiting",
                         "note":  "teamtavlan klar, väntar på Johan",
                         "since":  "2026-10-29T06:13:47Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Forestry Road + Visual Platform v2",
+                        "state":  "working",
+                        "note":  "kartlägger arkitekturen",
+                        "since":  "2026-10-29T06:16:47Z"
                     }
                 ]
 }
