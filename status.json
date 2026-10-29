@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:15:48Z",
+    "updated":  "2026-10-29T07:16:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -13,18 +13,18 @@
                         "since":  "2026-10-29T06:32:03Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ny tavla ute, väntar på Johan",
-                        "since":  "2026-10-29T07:12:45Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Clicker Land",
                         "state":  "working",
                         "note":  "m11 review fixes",
                         "since":  "2026-10-29T07:15:48Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "lägger till Tester, Designer, Release",
+                        "since":  "2026-10-29T07:16:24Z"
                     }
                 ]
 }
