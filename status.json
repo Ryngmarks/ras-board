@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T20:08:20Z",
+    "updated":  "2026-10-29T20:08:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -49,6 +49,14 @@
                         "note":  "m12 målade fiender: pilot",
                         "since":  "2026-10-29T20:08:20Z",
                         "agent":  "fiender",
+                        "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m13 Stjärnsmedjan: draft",
+                        "since":  "2026-10-29T20:08:23Z",
                         "model":  "claude/claude-opus-5-5"
                     }
                 ]
