@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:33:16Z",
+    "updated":  "2026-10-29T09:36:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -33,6 +33,14 @@
                         "agent":  "opus-review-ras01",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "målat ansikte-test Gruvarbetaren",
+                        "since":  "2026-10-29T09:36:48Z",
+                        "model":  "codex/gpt-6.1-sol"
                     }
                 ]
 }
