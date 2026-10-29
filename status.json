@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T08:00:10Z",
+    "updated":  "2026-10-29T08:03:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -32,14 +32,6 @@
                         "state":  "waiting",
                         "note":  "ras01: väntar på WO-01",
                         "since":  "2026-10-29T07:17:49Z"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "Forestry Road",
-                        "state":  "waiting",
-                        "note":  "säkerhetsgranskning klar: beslut om åtgärder",
-                        "since":  "2026-10-29T08:00:10Z",
-                        "for":  "owner"
                     }
                 ]
 }
