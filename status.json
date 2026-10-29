@@ -1,17 +1,10 @@
 {
-    "updated":  "2026-10-29T08:33:55Z",
+    "updated":  "2026-10-29T08:33:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
                  ],
     "entries":  [
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m11 review fixes",
-                        "since":  "2026-10-29T07:15:48Z"
-                    },
                     {
                         "role":  "implementer",
                         "project":  "RAS",
