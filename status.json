@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:31:24Z",
+    "updated":  "2026-10-29T07:31:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -32,6 +32,13 @@
                         "state":  "working",
                         "note":  "ras01: modulkartor för parallella agenter",
                         "since":  "2026-10-29T07:31:24Z"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras01: hur våra appar håller modulgränser",
+                        "since":  "2026-10-29T07:31:26Z"
                     }
                 ]
 }
