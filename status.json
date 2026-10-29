@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T11:46:13Z",
+    "updated":  "2026-10-29T11:46:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -42,6 +42,15 @@
                         "note":  "dvärgar runda 2 + Stenväktaren",
                         "since":  "2026-10-29T11:46:13Z",
                         "agent":  "dvargar",
+                        "model":  "codex/gpt-6.1-sol"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "människor: målat huvud",
+                        "since":  "2026-10-29T11:46:16Z",
+                        "agent":  "manniskor",
                         "model":  "codex/gpt-6.1-sol"
                     }
                 ]
