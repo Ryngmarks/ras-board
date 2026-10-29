@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T14:12:18Z",
+    "updated":  "2026-10-29T14:33:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -18,11 +18,11 @@
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "vapengrepp + attacker, alla 15",
-                        "since":  "2026-10-29T13:46:49Z",
+                        "state":  "waiting",
+                        "note":  "hammare: tvåhand eller enhand?",
+                        "since":  "2026-10-29T14:33:00Z",
                         "agent":  "vapen",
-                        "model":  "claude/claude-opus-5-5"
+                        "for":  "owner"
                     }
                 ]
 }
