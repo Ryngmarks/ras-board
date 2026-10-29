@@ -154,7 +154,7 @@ async function load() {
   try {
     const headers = { Accept: "application/vnd.github.raw+json" };
     if (etag) headers["If-None-Match"] = etag;
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/status.json`, { headers, cache: "no-store" });
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/status.json?ref=status`, { headers, cache: "no-store" });
     if (res.status === 304) { error = null; render(); return; }
     if (!res.ok) throw new Error("GitHub svarade " + res.status);
     etag = res.headers.get("ETag");
