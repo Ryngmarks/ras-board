@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:42:36Z",
+    "updated":  "2026-10-29T06:42:44Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -20,18 +20,18 @@
                         "since":  "2026-10-29T06:32:05Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "aktiva appar påkopplade",
-                        "since":  "2026-10-29T06:28:31Z"
-                    },
-                    {
                         "role":  "research",
                         "project":  "RAS",
                         "state":  "working",
                         "note":  "idéer för en roligare tavla",
                         "since":  "2026-10-29T06:42:36Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "väntar på research",
+                        "since":  "2026-10-29T06:28:31Z"
                     }
                 ]
 }
