@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:13:44Z",
+    "updated":  "2026-10-29T12:14:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -27,19 +27,19 @@
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "människor: målat huvud",
-                        "since":  "2026-10-29T11:46:16Z",
-                        "agent":  "manniskor",
-                        "model":  "codex/gpt-6.1-sol"
+                        "state":  "waiting",
+                        "note":  "alver runda 1: bedöm",
+                        "since":  "2026-10-29T12:04:59Z",
+                        "agent":  "alver",
+                        "for":  "owner"
                     },
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
                         "state":  "waiting",
-                        "note":  "alver runda 1: bedöm",
-                        "since":  "2026-10-29T12:04:59Z",
-                        "agent":  "alver",
+                        "note":  "Codex-gräns nådd; människor runda 1 klar",
+                        "since":  "2026-10-29T12:14:11Z",
+                        "agent":  "manniskor",
                         "for":  "owner"
                     }
                 ]
