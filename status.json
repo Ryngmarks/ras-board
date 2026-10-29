@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T22:13:13Z",
+    "updated":  "2026-10-29T22:14:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,6 +39,16 @@
                         "since":  "2026-10-29T21:38:18Z",
                         "agent":  "m13-core",
                         "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "tester",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "WO-04 EditMode-tester (qa-balance)",
+                        "since":  "2026-10-29T22:14:48Z",
+                        "agent":  "m13-WO-04-EditMode-tester-qa-balance-",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
