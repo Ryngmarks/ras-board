@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T21:12:06Z",
+    "updated":  "2026-10-29T21:24:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -43,11 +43,11 @@
                     {
                         "role":  "3d-artist",
                         "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "fiende-pilot: bedöm",
-                        "since":  "2026-10-29T20:37:23Z",
+                        "state":  "working",
+                        "note":  "vargens huvud + kontrast",
+                        "since":  "2026-10-29T21:24:21Z",
                         "agent":  "fiender",
-                        "for":  "owner"
+                        "model":  "claude/claude-opus-5-5"
                     }
                 ]
 }
