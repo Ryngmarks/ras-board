@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T18:50:35Z",
+    "updated":  "2026-10-29T20:07:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -22,6 +22,16 @@
                         "note":  "m10: provspela + ja till merge",
                         "since":  "2026-10-29T18:50:35Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "3D Artist: målade fiender – pilot",
+                        "since":  "2026-10-29T20:07:45Z",
+                        "agent":  "m12-3D-Artist-m-lade-fiender-pilot",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
