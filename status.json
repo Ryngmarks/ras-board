@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:31:59Z",
+    "updated":  "2026-10-29T09:33:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -12,15 +12,6 @@
                         "note":  "ras01: väntar på WO-01",
                         "since":  "2026-10-29T07:17:49Z",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras01 WO-02: reservationer, påverkan, avbockning",
-                        "since":  "2026-10-29T07:54:38Z",
-                        "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     },
                     {
