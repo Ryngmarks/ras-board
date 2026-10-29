@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:42:40Z",
+    "updated":  "2026-10-29T13:36:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -41,6 +41,16 @@
                         "since":  "2026-10-29T12:42:40Z",
                         "agent":  "manniskor",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "Research: vapengrepp och attacker i low-poly-spel",
+                        "since":  "2026-10-29T13:36:16Z",
+                        "agent":  "m10-Research-vapengrepp-och-attacker-i-l",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
