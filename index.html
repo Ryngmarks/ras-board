@@ -34,6 +34,7 @@
   .job .s { font-size: 12px; color: var(--muted); }
   .job.stale { opacity: .55; }
   .free { margin-left: 18px; color: var(--muted); }
+  .proj .free { margin-left: 0; }
   .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
   .proj h3 { margin: 0 0 6px; font-size: 15px; }
   .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px 2px 7px; margin: 3px 4px 0 0; font-size: 12px; }
@@ -132,15 +133,18 @@ function render() {
   const projects = document.getElementById("projects");
   projects.replaceChildren();
   const byProject = new Map();
+  for (const p of (data && Array.isArray(data.projects)) ? data.projects : []) byProject.set(p, []);
   for (const e of entries) {
     if (!byProject.has(e.project)) byProject.set(e.project, []);
     byProject.get(e.project).push(e);
   }
-  if (!byProject.size) projects.append(el("div", "empty", "Inget pågår just nu."));
+  if (!byProject.size) projects.append(el("div", "empty", "Inga projekt ännu."));
   const roleName = Object.fromEntries(ROLES.map(r => [r[0], r[1]]));
-  for (const [project, list] of [...byProject].sort((a, b) => a[0].localeCompare(b[0], "sv"))) {
-    const card = el("div", "card proj");
+  const busy = ([, l]) => l.some(e => e.state === "working") ? 0 : l.length ? 1 : 2;
+  for (const [project, list] of [...byProject].sort((a, b) => busy(a) - busy(b) || a[0].localeCompare(b[0], "sv"))) {
+    const card = el("div", "card proj" + (list.some(e => e.state === "working") ? " working" : list.length ? " waiting" : ""));
     card.append(el("h3", null, project));
+    if (!list.length) card.append(el("div", "free", "Ledigt"));
     for (const e of list) {
       const chip = el("span", "chip " + e.state);
       chip.append(el("span", "dot"), el("span", null, (roleName[e.role] || e.role) + " " + (STATE_TEXT[e.state] || e.state)));

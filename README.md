@@ -5,12 +5,12 @@ Live team board for the Ryngmark Agent System (RAS): which role works on which p
 Page: https://ryngmarks.github.io/ras-board/
 
 - `index.html` – the board (static, no build). It reads `status.json` through the GitHub API every minute.
-- `status.json` on branch **`status`** (so updates do not rebuild Pages) – written only by `tools/ras-status.ps1` in the RAS repo. Keep it short: role, project, state,
+- `status.json` (`projects` = connected projects, `entries` = who works where) on branch **`status`** (so updates do not rebuild Pages) – written only by `tools/ras-status.ps1` in the RAS repo. Keep it short: role, project, state,
   a few words of note. Nothing secret – this repo is public.
 
 Format:
 ```json
-{ "updated": "<ISO time>",
+{ "updated": "<ISO time>", "projects": ["Coach Helper"],
   "entries": [ { "role": "research", "project": "Coach Helper", "state": "working", "note": "Veo export", "since": "<ISO time>" } ] }
 ```
 `state` is `working` or `waiting`. A role with no entry is free.
