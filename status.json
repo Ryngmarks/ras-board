@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:54:40Z",
+    "updated":  "2026-10-29T07:59:54Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -18,13 +18,6 @@
                         "state":  "working",
                         "note":  "m11 review fixes",
                         "since":  "2026-10-29T07:15:48Z"
-                    },
-                    {
-                        "role":  "security-auditor",
-                        "project":  "Forestry Road",
-                        "state":  "working",
-                        "note":  "säkerhetsgranskning",
-                        "since":  "2026-10-29T07:33:05Z"
                     },
                     {
                         "role":  "implementer",
