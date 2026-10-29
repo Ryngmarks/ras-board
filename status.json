@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T13:46:42Z",
+    "updated":  "2026-10-29T13:46:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -31,15 +31,6 @@
                         "note":  "alver runda 2: bedöm",
                         "since":  "2026-10-29T12:35:37Z",
                         "agent":  "alver",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "människor runda 2: bedöm",
-                        "since":  "2026-10-29T12:42:40Z",
-                        "agent":  "manniskor",
                         "for":  "owner"
                     },
                     {
