@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:50:35Z",
+    "updated":  "2026-10-29T09:53:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -31,6 +31,13 @@
                         "agent":  "codex-wo05",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Demo -x -Note x",
+                        "state":  "working",
+                        "note":  "",
+                        "since":  "2026-10-29T09:53:09Z"
                     }
                 ]
 }
