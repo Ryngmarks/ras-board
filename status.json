@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T07:33:38Z",
+    "updated":  "2026-10-29T07:33:40Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -18,13 +18,6 @@
                         "state":  "working",
                         "note":  "m11 review fixes",
                         "since":  "2026-10-29T07:15:48Z"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras01: hur våra appar håller modulgränser",
-                        "since":  "2026-10-29T07:31:26Z"
                     },
                     {
                         "role":  "project-manager",
