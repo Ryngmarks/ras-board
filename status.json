@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T09:33:14Z",
+    "updated":  "2026-10-29T09:33:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -23,6 +23,16 @@
                         "agent":  "opus-self-audit",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "max"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras01: granskar WO-01+02",
+                        "since":  "2026-10-29T09:33:16Z",
+                        "agent":  "opus-review-ras01",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
