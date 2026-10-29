@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T12:27:50Z",
+    "updated":  "2026-10-29T12:28:03Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -49,6 +49,16 @@
                         "note":  "3D Artist (Claude): dvärgar runda 2 + Stenväktaren",
                         "since":  "2026-10-29T12:27:50Z",
                         "agent":  "m10-3D-Artist-Claude-dv-rgar-runda-2-Ste",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "3D Artist (Claude): människor runda 2",
+                        "since":  "2026-10-29T12:28:03Z",
+                        "agent":  "m10-3D-Artist-Claude-m-nniskor-runda-2",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
