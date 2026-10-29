@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T18:49:35Z",
+    "updated":  "2026-10-29T18:50:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -18,9 +18,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m10: hjältar in i spelet",
-                        "since":  "2026-10-29T18:22:58Z"
+                        "state":  "waiting",
+                        "note":  "m10: provspela + ja till merge",
+                        "since":  "2026-10-29T18:50:35Z",
+                        "for":  "owner"
                     }
                 ]
 }
