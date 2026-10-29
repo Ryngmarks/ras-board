@@ -1,12 +1,12 @@
 {
-    "updated":  "2026-10-29T06:18:55Z",
+    "updated":  "2026-10-29T06:19:01Z",
     "entries":  [
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "working",
-                        "note":  "granskar research-rapporten",
-                        "since":  "2026-10-29T06:18:55Z"
+                        "state":  "waiting",
+                        "note":  "väntar på Johan",
+                        "since":  "2026-10-29T06:19:01Z"
                     }
                 ]
 }
