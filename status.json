@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:32:05Z",
+    "updated":  "2026-10-29T06:32:29Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -25,6 +25,13 @@
                         "state":  "working",
                         "note":  "m11 WO-09c sim test",
                         "since":  "2026-10-29T06:32:05Z"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "onboarding prior art",
+                        "since":  "2026-10-29T06:32:29Z"
                     }
                 ]
 }
