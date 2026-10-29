@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:59:44Z",
+    "updated":  "2026-10-29T07:10:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -13,18 +13,18 @@
                         "since":  "2026-10-29T06:32:03Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "väntar på Johan: välj figurer",
-                        "since":  "2026-10-29T06:52:45Z"
-                    },
-                    {
                         "role":  "reviewer",
                         "project":  "Clicker Land",
                         "state":  "working",
                         "note":  "m11 branch review (Codex)",
                         "since":  "2026-10-29T06:59:44Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "snyggar till tavlan",
+                        "since":  "2026-10-29T07:10:14Z"
                     }
                 ]
 }
