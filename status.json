@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T18:44:32Z",
+    "updated":  "2026-10-29T18:49:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -21,15 +21,6 @@
                         "state":  "working",
                         "note":  "m10: hjältar in i spelet",
                         "since":  "2026-10-29T18:22:58Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "WO-12 målade hjältar in i Unity",
-                        "since":  "2026-10-29T18:40:51Z",
-                        "agent":  "ui-ux",
-                        "model":  "claude/claude-opus-5-5"
                     }
                 ]
 }
