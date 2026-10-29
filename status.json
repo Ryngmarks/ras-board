@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T06:42:44Z",
+    "updated":  "2026-10-29T06:45:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -18,13 +18,6 @@
                         "state":  "working",
                         "note":  "m11 WO-09c sim test",
                         "since":  "2026-10-29T06:32:05Z"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "idéer för en roligare tavla",
-                        "since":  "2026-10-29T06:42:36Z"
                     },
                     {
                         "role":  "project-manager",
