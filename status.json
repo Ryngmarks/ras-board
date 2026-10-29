@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T11:42:02Z",
+    "updated":  "2026-10-29T11:42:17Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -14,16 +14,6 @@
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "research",
-                        "since":  "2026-10-29T11:42:02Z",
-                        "agent":  "hooktest-research",
-                        "model":  "claude/claude-haiku-5-5",
-                        "effort":  "low"
                     }
                 ]
 }
