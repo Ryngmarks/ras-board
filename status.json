@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-29T22:33:03Z",
+    "updated":  "2026-10-30T06:04:36Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -66,6 +66,16 @@
                         "since":  "2026-10-29T22:15:36Z",
                         "agent":  "m13-vfx",
                         "model":  "claude/claude-sonnet-5-5"
+                    },
+                    {
+                        "role":  "playtester",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "Playtester: granska Stjärnsmedjans skärmdumpar",
+                        "since":  "2026-10-30T06:04:36Z",
+                        "agent":  "m13-Playtester-granska-Stj-rnsmedjans-sk",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
