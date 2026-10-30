@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T08:47:20Z",
+    "updated":  "2026-10-30T08:47:32Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,14 +30,6 @@
                         "state":  "working",
                         "note":  "m15 Journey",
                         "since":  "2026-10-30T08:35:34Z"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m15 Journey: draft",
-                        "since":  "2026-10-30T08:35:38Z",
-                        "model":  "claude/claude-opus-5-5"
                     },
                     {
                         "role":  "implementer",
