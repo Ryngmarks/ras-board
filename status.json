@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T09:02:28Z",
+    "updated":  "2026-10-30T09:07:04Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -56,6 +56,16 @@
                         "state":  "working",
                         "note":  "lowpoly och AI 3D verktyg",
                         "since":  "2026-10-30T09:01:56Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "research",
+                        "since":  "2026-10-30T09:07:04Z",
+                        "agent":  "VFX-animation-craft-research",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
