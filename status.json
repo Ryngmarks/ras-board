@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T19:51:14Z",
+    "updated":  "2026-10-30T19:51:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -40,13 +40,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "R3a vegetation",
-                        "since":  "2026-10-30T17:16:13Z"
                     },
                     {
                         "role":  "3d-artist",
