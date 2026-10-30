@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:22:27Z",
+    "updated":  "2026-10-30T06:24:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,14 +39,6 @@
                         "since":  "2026-10-29T22:15:27Z",
                         "agent":  "m13-sim",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "playtester",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m13 omgranskning runda 2",
-                        "since":  "2026-10-30T06:22:27Z",
-                        "model":  "claude/claude-sonnet-5-5"
                     }
                 ]
 }
