@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:04:58Z",
+    "updated":  "2026-10-30T06:05:02Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,15 +39,6 @@
                         "since":  "2026-10-29T22:15:27Z",
                         "agent":  "m13-sim",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "WO-08 filmsekvenser",
-                        "since":  "2026-10-29T22:15:36Z",
-                        "agent":  "m13-vfx",
-                        "model":  "claude/claude-sonnet-5-5"
                     },
                     {
                         "role":  "playtester",
