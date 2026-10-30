@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T10:36:35Z",
+    "updated":  "2026-10-30T10:40:18Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -40,13 +40,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "referensanalys skog",
-                        "since":  "2026-10-30T10:33:47Z"
                     }
                 ]
 }
