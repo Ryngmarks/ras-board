@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T08:35:38Z",
+    "updated":  "2026-10-30T08:39:30Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -23,16 +23,6 @@
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Solution Architect: draft",
-                        "since":  "2026-10-30T08:35:29Z",
-                        "agent":  "m15-Journey-Solution-Architect-draft",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "project-manager",
