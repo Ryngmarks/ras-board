@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T08:35:29Z",
+    "updated":  "2026-10-30T08:35:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -25,14 +25,6 @@
                         "model":  "claude/claude-opus-5-5"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Clicker Land",
-                        "state":  "waiting",
-                        "note":  "m13 klar: provspela + ja till merge",
-                        "since":  "2026-10-30T06:45:07Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "solution-architect",
                         "project":  "RAS",
                         "state":  "working",
@@ -41,6 +33,13 @@
                         "agent":  "m15-Journey-Solution-Architect-draft",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m15 Journey",
+                        "since":  "2026-10-30T08:35:34Z"
                     }
                 ]
 }
