@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T09:23:34Z",
+    "updated":  "2026-10-30T09:39:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,16 +30,6 @@
                         "state":  "working",
                         "note":  "m15 Journey",
                         "since":  "2026-10-30T08:35:34Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-02 UI: Journey-panel + spårare (ui-ux)",
-                        "since":  "2026-10-30T09:23:25Z",
-                        "agent":  "m15-WO-02-UI-Journey-panel-sp-rare-ui-ux",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
