@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:05:02Z",
+    "updated":  "2026-10-30T06:05:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -59,6 +59,14 @@
                         "agent":  "m13-WO-07-UI-Seal-l-gor-2-Legendary-niv-",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "playtester",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m13 Stjärnsmedjan: skärmdumpar",
+                        "since":  "2026-10-30T06:05:06Z",
+                        "model":  "claude/claude-sonnet-5-5"
                     }
                 ]
 }
