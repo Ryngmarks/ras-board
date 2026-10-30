@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T09:01:55Z",
+    "updated":  "2026-10-30T09:01:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -59,6 +59,13 @@
                         "agent":  "Low-poly-AI-3D-tools-research",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "lowpoly och AI 3D verktyg",
+                        "since":  "2026-10-30T09:01:56Z"
                     }
                 ]
 }
