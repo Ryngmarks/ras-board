@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:18:17Z",
+    "updated":  "2026-10-30T06:22:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -38,15 +38,6 @@
                         "note":  "WO-05 sim på riktig Core",
                         "since":  "2026-10-29T22:15:27Z",
                         "agent":  "m13-sim",
-                        "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m13 WO-07 Seal-lågor, 2 Legendary",
-                        "since":  "2026-10-30T06:05:11Z",
-                        "agent":  "m13-ui2",
                         "model":  "claude/claude-opus-5-5"
                     }
                 ]
