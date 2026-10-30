@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T12:33:16Z",
+    "updated":  "2026-10-30T12:33:18Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -60,6 +60,13 @@
                         "agent":  "Mossvale-m01-WO-03b-R0-Codex",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "R0 Claude mot Codex",
+                        "since":  "2026-10-30T12:33:18Z"
                     }
                 ]
 }
