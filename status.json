@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T10:53:55Z",
+    "updated":  "2026-10-30T10:53:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -67,6 +67,13 @@
                         "state":  "working",
                         "note":  "WO-01 skarmbilder",
                         "since":  "2026-10-30T10:53:55Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "miljokonst research",
+                        "since":  "2026-10-30T10:53:58Z"
                     }
                 ]
 }
