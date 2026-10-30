@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:07:06Z",
+    "updated":  "2026-10-30T06:18:17Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -39,16 +39,6 @@
                         "since":  "2026-10-29T22:15:27Z",
                         "agent":  "m13-sim",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-07 UI: Seal-lågor, 2 Legendary, nivå VI/VII (ui-ux)",
-                        "since":  "2026-10-30T06:04:44Z",
-                        "agent":  "m13-WO-07-UI-Seal-l-gor-2-Legendary-niv-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
