@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T10:33:45Z",
+    "updated":  "2026-10-30T10:33:47Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,6 +57,13 @@
                         "state":  "working",
                         "note":  "onboarding",
                         "since":  "2026-10-30T10:33:45Z"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "referensanalys skog",
+                        "since":  "2026-10-30T10:33:47Z"
                     }
                 ]
 }
