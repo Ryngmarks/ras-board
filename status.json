@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T11:04:17Z",
+    "updated":  "2026-10-30T11:04:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -50,13 +50,6 @@
                         "agent":  "Mossvale-m01-pro-environment-craft-resea",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01 skarmbilder",
-                        "since":  "2026-10-30T10:53:55Z"
                     },
                     {
                         "role":  "research",
