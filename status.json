@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T11:04:58Z",
+    "updated":  "2026-10-30T11:05:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -40,16 +40,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "pro environment craft research",
-                        "since":  "2026-10-30T10:53:52Z",
-                        "agent":  "Mossvale-m01-pro-environment-craft-resea",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "research",
