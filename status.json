@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T08:47:32Z",
+    "updated":  "2026-10-30T08:47:36Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -40,6 +40,15 @@
                         "agent":  "m15-WO-01-Core-Journey-save-v7-game-syst",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Clicker Land",
+                        "state":  "working",
+                        "note":  "m15 Journey: Core + v7",
+                        "since":  "2026-10-30T08:47:36Z",
+                        "agent":  "m15-core",
+                        "model":  "claude/claude-opus-5-5"
                     }
                 ]
 }
