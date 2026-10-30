@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T06:45:03Z",
+    "updated":  "2026-10-30T06:45:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -16,13 +16,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Clicker Land",
-                        "state":  "working",
-                        "note":  "m12 fiender, m13 Stjärnsmedjan, verify",
-                        "since":  "2026-10-29T20:08:18Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Clicker Land",
                         "state":  "working",
@@ -30,6 +23,14 @@
                         "since":  "2026-10-29T20:08:32Z",
                         "agent":  "verify",
                         "model":  "claude/claude-opus-5-5"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Clicker Land",
+                        "state":  "waiting",
+                        "note":  "m13 klar: provspela + ja till merge",
+                        "since":  "2026-10-30T06:45:07Z",
+                        "for":  "owner"
                     }
                 ]
 }
