@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T20:51:13Z",
+    "updated":  "2026-10-30T21:02:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -40,16 +40,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-02b R0 body Codex",
-                        "since":  "2026-10-30T20:29:18Z",
-                        "agent":  "Mossvale-m02-WO-02b-R0-body-Codex",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
