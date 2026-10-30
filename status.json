@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-30T09:01:56Z",
+    "updated":  "2026-10-30T09:02:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper"
@@ -30,16 +30,6 @@
                         "state":  "working",
                         "note":  "m15 Journey",
                         "since":  "2026-10-30T08:35:34Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-01 Core: Journey + save v7 (game-systems)",
-                        "since":  "2026-10-30T08:47:20Z",
-                        "agent":  "m15-WO-01-Core-Journey-save-v7-game-syst",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
