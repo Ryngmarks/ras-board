@@ -1,6 +1,21 @@
 {
-  "generated_at": "2026-10-31T21:09:08.570Z",
+  "generated_at": "2026-10-31T21:09:20.021Z",
   "missions": [
+    {
+      "id": "m03-t2-archer",
+      "project": "Mossvale",
+      "name": "T2-bågskytt (Game Director-pilot)",
+      "org": "gaming",
+      "director": "Game Director",
+      "input": 96678300,
+      "output": 535137,
+      "total": 97213437,
+      "cache_read": 95109549,
+      "status": "measured",
+      "closed_at": "2026-10-31T21:09:14.546Z",
+      "runs": 8,
+      "runs_missing": 0
+    },
     {
       "id": "m04-world-files",
       "project": "Mossvale",
@@ -134,21 +149,6 @@
       "status": "measured",
       "closed_at": "2026-10-29T10:11:08.087Z",
       "runs": 11,
-      "runs_missing": 0
-    },
-    {
-      "id": "ras02-self-audit",
-      "project": "RAS",
-      "name": "Säkerhetsgranskning av RAS",
-      "org": "core",
-      "director": "Project Manager",
-      "input": 9878639,
-      "output": 120813,
-      "total": 9999452,
-      "cache_read": 9654467,
-      "status": "measured",
-      "closed_at": "2026-10-29T09:50:25.251Z",
-      "runs": 1,
       "runs_missing": 0
     }
   ]
