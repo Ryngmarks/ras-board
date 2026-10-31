@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T17:30:06Z",
+    "updated":  "2026-10-31T17:30:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -46,6 +46,16 @@
                         "since":  "2026-10-31T17:30:06Z",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "engineering-analyst",
+                        "since":  "2026-10-31T17:30:20Z",
+                        "agent":  "ras20-workshop-engineering-analyst",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
