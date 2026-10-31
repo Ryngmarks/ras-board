@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T23:00:45Z",
+    "updated":  "2026-10-31T23:47:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,16 +45,6 @@
                         "note":  "m06 WO-01 klipp i spelet",
                         "since":  "2026-10-31T22:31:06Z",
                         "agent":  "claude-m06-wo01",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01",
-                        "since":  "2026-10-31T22:31:11Z",
-                        "agent":  "m06-clip-tool-WO-01",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
