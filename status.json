@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T12:36:30Z",
+    "updated":  "2026-10-31T12:36:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,6 +45,16 @@
                         "note":  "board: org-träd + tokenhistorik",
                         "since":  "2026-10-31T11:51:43Z",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "WO-05 telemetry fixes",
+                        "since":  "2026-10-31T12:36:56Z",
+                        "agent":  "ras03-board-telemetry-WO-05-telemetry-fi",
+                        "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
                 ]
