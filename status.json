@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T15:03:18Z",
+    "updated":  "2026-10-31T15:03:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -42,7 +42,7 @@
                         "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
-                        "note":  "ras04: granska RAS Gaming, ja till tavla",
+                        "note":  "ras04 klar: ja till tavla + forsta test?",
                         "since":  "2026-10-31T14:50:26Z",
                         "for":  "owner"
                     }
