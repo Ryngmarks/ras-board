@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T09:20:49Z",
+    "updated":  "2026-10-31T09:48:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,16 +47,6 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-06 armour warp pilot",
-                        "since":  "2026-10-31T09:20:49Z",
-                        "agent":  "Mossvale-m02-WO-06-armour-warp-pilot",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
