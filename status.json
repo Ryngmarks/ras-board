@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T21:32:57Z",
+    "updated":  "2026-10-31T21:41:41Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,13 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "waiting",
+                        "note":  "väntar på svärdsklipp",
+                        "since":  "2026-10-31T21:41:41Z"
                     }
                 ]
 }
