@@ -1,21 +1,11 @@
 {
-    "updated":  "2026-10-31T10:28:25Z",
+    "updated":  "2026-10-31T11:22:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
                      "Mossvale"
                  ],
     "entries":  [
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "väntar på token ras-main (push från huvudchatten)",
-                        "since":  "2026-10-29T11:28:50Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default",
-                        "for":  "owner"
-                    },
                     {
                         "role":  "implementer",
                         "project":  "Clicker Land",
@@ -47,6 +37,15 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "RAS 2.0 workshop: granskar nuläget",
+                        "since":  "2026-10-31T11:22:23Z",
+                        "model":  "claude/claude-fable-5-1",
+                        "effort":  "default"
                     }
                 ]
 }
