@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T11:25:52Z",
+    "updated":  "2026-10-31T11:51:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,12 +41,11 @@
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "RAS 2.0: underlag v1 klart, 4 frågor",
-                        "since":  "2026-10-31T11:25:52Z",
-                        "model":  "claude/claude-fable-5-1",
-                        "effort":  "default",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "board: org-träd + tokenhistorik",
+                        "since":  "2026-10-31T11:51:43Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
