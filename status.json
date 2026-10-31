@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T18:49:42Z",
+    "updated":  "2026-10-31T18:49:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -48,16 +48,6 @@
                         "effort":  "default"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Mossvale",
-                        "state":  "waiting",
-                        "note":  "bågskytt: bekräfta problemlista",
-                        "since":  "2026-10-31T18:05:22Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Mossvale",
                         "state":  "working",
@@ -66,6 +56,15 @@
                         "agent":  "m03-t2-archer-WO-02",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "waiting",
+                        "note":  "bågskytt r2 pågår",
+                        "since":  "2026-10-31T18:05:22Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
