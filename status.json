@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T23:55:12Z",
+    "updated":  "2026-10-31T23:56:30Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "working",
                         "note":  "m06 klippverktyg",
                         "since":  "2026-10-31T22:24:49Z"
-                    },
-                    {
-                        "role":  "tester",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "m06 demo med tidtagning",
-                        "since":  "2026-10-31T23:48:06Z",
-                        "agent":  "demo-m06",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "medium"
                     },
                     {
                         "role":  "reviewer",
