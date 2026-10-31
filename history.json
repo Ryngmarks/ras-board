@@ -1,6 +1,21 @@
 {
-  "generated_at": "2026-10-31T21:09:20.021Z",
+  "generated_at": "2026-10-31T21:32:45.350Z",
   "missions": [
+    {
+      "id": "ras06-board-tree",
+      "project": "RAS",
+      "name": "Tavlan som organisationsträd",
+      "org": "core",
+      "director": "Project Manager",
+      "input": 5822681,
+      "output": 62467,
+      "total": 5885148,
+      "cache_read": 5576828,
+      "status": "measured",
+      "closed_at": "2026-10-31T21:32:36.732Z",
+      "runs": 2,
+      "runs_missing": 0
+    },
     {
       "id": "m03-t2-archer",
       "project": "Mossvale",
@@ -134,21 +149,6 @@
       "status": "measured",
       "closed_at": "2026-10-29T18:44:30.914Z",
       "runs": 13,
-      "runs_missing": 0
-    },
-    {
-      "id": "ras01-modules",
-      "project": "RAS",
-      "name": "Modulkarta och claims",
-      "org": "core",
-      "director": "Project Manager",
-      "input": 52059534,
-      "output": 245843,
-      "total": 52305377,
-      "cache_read": 51212538,
-      "status": "measured",
-      "closed_at": "2026-10-29T10:11:08.087Z",
-      "runs": 11,
       "runs_missing": 0
     }
   ]
