@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T17:32:15Z",
+    "updated":  "2026-10-31T17:35:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,6 +54,15 @@
                         "state":  "waiting",
                         "note":  "väntar på analyst och pilot-scan",
                         "since":  "2026-10-31T17:31:09Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "Game Director-pilot: T2-bågskytt",
+                        "since":  "2026-10-31T17:35:46Z",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
