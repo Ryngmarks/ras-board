@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T15:03:45Z",
+    "updated":  "2026-10-31T17:30:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,10 +41,11 @@
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras04 klar: ja till tavla + forsta test?",
-                        "since":  "2026-10-31T14:50:26Z",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "Game Director v1 utkast",
+                        "since":  "2026-10-31T17:30:06Z",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
