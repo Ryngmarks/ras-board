@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:54:45Z",
+    "updated":  "2026-10-31T14:56:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-01",
-                        "since":  "2026-10-31T14:47:44Z",
-                        "agent":  "ras05-context-budget-WO-01",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "project-manager",
