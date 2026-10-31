@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:26:02Z",
+    "updated":  "2026-10-31T14:47:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,13 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras04 bygger RAS Gaming",
+                        "since":  "2026-10-31T14:47:35Z"
                     }
                 ]
 }
