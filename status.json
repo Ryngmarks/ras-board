@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T15:02:28Z",
+    "updated":  "2026-10-31T15:03:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,16 +45,6 @@
                         "note":  "kort retro ras04",
                         "since":  "2026-10-31T15:02:15Z",
                         "agent":  "retro-ras04",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "retro",
-                        "since":  "2026-10-31T15:02:26Z",
-                        "agent":  "ras04-gaming-retro",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     },
