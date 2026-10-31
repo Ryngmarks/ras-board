@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T17:31:09Z",
+    "updated":  "2026-10-31T17:32:15Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "engineering-analyst",
-                        "since":  "2026-10-31T17:30:20Z",
-                        "agent":  "ras20-workshop-engineering-analyst",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "research",
