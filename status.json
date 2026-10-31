@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:50:24Z",
+    "updated":  "2026-10-31T14:50:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,13 +37,6 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras04 bygger RAS Gaming",
-                        "since":  "2026-10-31T14:47:35Z"
                     },
                     {
                         "role":  "implementer",
@@ -94,6 +87,13 @@
                         "agent":  "wo04-ras04",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "vantar pa WO-01..04",
+                        "since":  "2026-10-31T14:50:26Z"
                     }
                 ]
 }
