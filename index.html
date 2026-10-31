@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Aae7/98y6aRER12M0nTLgsLuVCcKR5t57wQMt7cK1GY='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-zQgZLEmmVpJZEPb4p5kbA/fggSPyv5sF2UEVgEk0834='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – teamet</title>
 <style>
@@ -11,6 +11,7 @@
     --work: #5b8cff; --work-soft: rgba(91, 140, 255, .14);
     --wait: #f0b44c; --wait-soft: rgba(240, 180, 76, .14);
     --free: #59606e; --free-soft: rgba(138, 147, 165, .10);
+    --line: #3a414f;
     --radius: 14px;
   }
   @media (prefers-color-scheme: light) {
@@ -19,22 +20,24 @@
       --work: #2f6bf0; --work-soft: rgba(47, 107, 240, .10);
       --wait: #c47f0a; --wait-soft: rgba(224, 150, 20, .14);
       --free: #9aa1ad; --free-soft: rgba(93, 102, 118, .08);
+      --line: #c5cad3;
     }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1080px; margin: 0 auto; padding: 28px 18px 48px; }
+  main { max-width: 1800px; margin: 0 auto; padding: 28px 28px 48px; }
+  @media (max-width: 600px) { main { padding: 20px 14px 40px; } }
   svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
   /* header */
   header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
   .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
-  .live { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
-  .live .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3fbf7f; }
-  .live.stale .pulse { background: var(--wait); }
-  .live button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
-  .live button:hover { border-color: var(--muted); }
+  .live-state { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+  .live-state .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3fbf7f; }
+  .live-state.stale .pulse { background: var(--wait); }
+  .live-state button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+  .live-state button:hover { border-color: var(--muted); }
 
   .summary { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 8px; }
   .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; }
@@ -43,71 +46,41 @@
   .working .dot, .dot.working { background: var(--work); }
   .waiting .dot, .dot.waiting { background: var(--wait); }
 
-  .alert { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 12px 14px; border-radius: var(--radius); background: var(--wait-soft); border: 1px solid color-mix(in srgb, var(--wait) 45%, transparent); }
+  .alert { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: var(--radius); background: var(--wait-soft); border: 1px solid color-mix(in srgb, var(--wait) 45%, transparent); }
   .alert svg { color: var(--wait); margin-top: 1px; }
   .alert div { display: grid; gap: 2px; }
 
   h2 { display: flex; align-items: baseline; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 34px 0 12px; }
   h2 span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+  h2.first { margin-top: 26px; }
+  .owner { display: grid; gap: 8px; }
+  .owner .calm { padding: 12px 14px; border-radius: var(--radius); border: 1px dashed var(--border); color: var(--muted); }
+  .empty { padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
 
-  /* role cards */
-  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
-  .card { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  /* page layout: tree + projects left, token panel right (>= 1200 px); one column below */
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-items: start; margin-top: 26px; }
+  @media (min-width: 1200px) { .layout { grid-template-columns: minmax(0, 1fr) 360px; } }
+  .stack { display: grid; gap: 22px; min-width: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; min-width: 0; }
+  .ptitle { display: flex; align-items: baseline; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  .ptitle span { font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 12px; }
+
+  /* projects (compact, under the tree) */
+  .card { position: relative; display: flex; flex-direction: column; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   .card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--free); opacity: .5; }
   .card.working::before { background: var(--work); opacity: 1; }
   .card.waiting::before { background: var(--wait); opacity: 1; }
-  .card-head { display: flex; align-items: center; gap: 12px; padding: 14px 14px 12px 17px; }
-  .icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--free-soft); color: var(--muted); flex: none; }
-  .working .icon { background: var(--work-soft); color: var(--work); }
-  .waiting .icon { background: var(--wait-soft); color: var(--wait); }
-  .who { min-width: 0; flex: 1; }
-  .who b { display: block; font-size: 15px; }
-  .who small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
-  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--free-soft); color: var(--muted); flex: none; }
-  .badge.working { background: var(--work-soft); color: var(--work); }
-  .badge.waiting { background: var(--wait-soft); color: var(--wait); }
-  .badge.working .dot { animation: pulse 1.8s ease-out infinite; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--work) 60%, transparent); } 100% { box-shadow: 0 0 0 7px transparent; } }
-  @media (prefers-reduced-motion: reduce) { .badge.working .dot { animation: none; } }
-
-  .jobs { list-style: none; margin: 0; padding: 0 14px 14px 17px; display: grid; gap: 8px; }
-  .job { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; }
-  .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .job-top b { font-size: 14px; }
-  .job-top time { color: var(--muted); font-size: 12px; white-space: nowrap; }
-  .job p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
-  .job .model { display: inline-block; margin-top: 6px; font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
-  .job .agent-id { display: block; font-size: 11px; font-weight: 500; color: var(--muted); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
-  .who .count { font-size: 12px; font-weight: 600; color: var(--work); background: var(--work-soft); border-radius: 999px; padding: 1px 7px; margin-left: 4px; }
-  .job.waiting { border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
-  .job.stale { opacity: .55; }
-  .empty { margin: 0 14px 14px 17px; padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
-
-  .lane-pm .card { }
-  .lane-pm .jobs { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  @media (max-width: 900px) { .grid.four, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 580px) { .grid.four, .grid.three { grid-template-columns: 1fr; } }
-  .owner { display: grid; gap: 8px; }
-  .owner .calm { padding: 12px 14px; border-radius: var(--radius); border: 1px dashed var(--border); color: var(--muted); }
-  .alert { margin-top: 0; }
-  h2.first { margin-top: 26px; }
-
-  /* projects */
-  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-  .proj { padding: 14px 14px 14px 17px; }
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+  .proj { padding: 10px 12px 10px 15px; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .proj-head b { font-size: 15px; }
+  .proj-head b { font-size: 14px; }
   .proj-head small { color: var(--muted); font-size: 12px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
   .chip svg { width: 13px; height: 13px; }
-  .quiet { margin-top: 8px; color: var(--muted); font-size: 13px; }
+  .quiet { margin-top: 6px; color: var(--muted); font-size: 12px; }
 
-  /* model guide – deliberately a different look from the role cards */
+  /* model guide – deliberately a different look from the tree */
   .guide { margin-top: 44px; padding: 22px; border-radius: 20px; background:
     radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, #8b5cf6 16%, transparent), transparent 55%),
     radial-gradient(120% 140% at 100% 100%, color-mix(in srgb, #14b8a6 14%, transparent), transparent 55%),
@@ -132,58 +105,99 @@
   .guide-rules { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 12px; }
   .guide-rules li::before { content: "→ "; color: var(--fg); }
 
-  /* organisation – Gaming: copper + moss, Software: slate + teal, shared graphite base */
+  /* organisation tree, variant B – Gaming: copper + moss, Software: slate + teal, shared graphite base */
   :root {
-    --gaming: #d4914f; --gaming-2: #93b36b; --software: #8ba6c2; --software-2: #3fbdb4; --core: #8a93a5;
+    --gaming: #d4914f; --gaming-2: #93b36b; --software: #8ba6c2; --software-2: #3fbdb4; --core: #8a93a5; --core-2: #8a93a5;
   }
   @media (prefers-color-scheme: light) {
-    :root { --gaming: #a45c1c; --gaming-2: #566f38; --software: #46627f; --software-2: #137a73; --core: #5d6676; }
+    :root { --gaming: #a45c1c; --gaming-2: #566f38; --software: #46627f; --software-2: #137a73; --core: #5d6676; --core-2: #5d6676; }
   }
-  .org { display: grid; gap: 14px; }
-  .org-owner { position: relative; justify-self: center; display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-  .org-owner::after { content: ""; position: absolute; left: 50%; top: 100%; height: 14px; width: 1px; background: var(--border); }
-  .org-owner .icon { width: 34px; height: 34px; }
-  .org-owner b { display: block; font-size: 15px; }
-  .org-owner small { color: var(--muted); font-size: 12px; }
-  .org-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .branch { --acc: var(--core); --acc-2: var(--core); display: grid; gap: 12px; align-content: start; padding: 14px; background: var(--surface);
-    border: 1px solid color-mix(in srgb, var(--acc) 28%, var(--border)); border-top: 3px solid var(--acc); border-radius: var(--radius); }
-  .branch.gaming { --acc: var(--gaming); --acc-2: var(--gaming-2); }
-  .branch.software { --acc: var(--software); --acc-2: var(--software-2); }
-  .branch.core { --acc: var(--core); --acc-2: var(--core); border-top-color: var(--core); }
-  .branch-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .branch-head h3 { margin: 0; font-size: 17px; line-height: 1.2; }
+  .htree { display: grid; grid-template-columns: 150px 40px minmax(0, 1fr); align-items: center; }
+  .hroot { display: flex; }
+  .hconn { align-self: stretch; position: relative; }
+  .hconn::before { content: ""; position: absolute; left: 0; top: 50%; width: 20px; height: 2px; margin-top: -1px; background: var(--line); }
+  .hbranches { display: flex; flex-direction: column; gap: 14px; }
+  .hb { --acc: var(--core); --acc-2: var(--core-2); position: relative; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px;
+    border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)); background: color-mix(in srgb, var(--acc) 7%, var(--surface)); }
+  .hb.gaming { --acc: var(--gaming); --acc-2: var(--gaming-2); }
+  .hb.software { --acc: var(--software); --acc-2: var(--software-2); }
+  .hb.core { --acc: var(--core); --acc-2: var(--core-2); }
+  .hb::before { content: ""; position: absolute; left: -20px; top: 50%; width: 20px; height: 2px; margin-top: -1px; background: var(--line); }
+  .hb::after { content: ""; position: absolute; left: -20px; top: 0; bottom: -14px; width: 2px; background: var(--line); }
+  .hb:first-child::after { top: 50%; }
+  .hb:last-child::after { bottom: 50%; }
+  .hb:only-child::after { display: none; }
+  .hb-main { display: grid; gap: 8px; min-width: 0; }
+  .bhead { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .bhead h3 { margin: 0; font-size: 16px; line-height: 1.2; color: var(--acc); }
+  .bhead small { color: var(--muted); font-size: 11px; }
   /* Branch logos (owner, 2026-10-31): white-background PNGs. Light theme: multiply drops the white. Dark theme: invert +
      hue-rotate keeps orange/blue, turns the navy word mark light, and screen drops the (now black) background. */
-  .brand-logo { display: block; height: 40px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  .brand-logo { display: block; height: 30px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
   @media (prefers-color-scheme: dark) { .brand-logo { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; } }
-  .branch-head small { color: var(--acc); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-  .director { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--acc) 9%, var(--surface-2)); border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)); }
-  .director.planned { border-style: dashed; background: transparent; }
-  .director .icon { background: color-mix(in srgb, var(--acc) 16%, transparent); color: var(--acc); }
-  .director b { font-size: 14px; }
-  .director small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
+
+  .node { position: relative; min-width: 0; padding: 8px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); }
+  .node small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
+  .node.owner { padding: 10px 14px; border: 2px solid var(--fg); display: flex; align-items: center; gap: 10px; width: 100%; }
+  .node.owner b { display: block; font-size: 15px; }
+  .icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--free-soft); color: var(--muted); flex: none; }
+  .node.dir { border-width: 2px; border-color: var(--acc); }
+  .node.dir b { font-size: 14px; }
+  .node.dir.planned { border-style: dashed; background: transparent; }
+  .node.rbox { border-left: 3px solid var(--acc); display: grid; gap: 2px; align-content: start; }
+  .node.rbox.planned { background: transparent; border-style: dashed; border-left-color: var(--border); }
+  .rbox-top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .rbox-top b { font-size: 13px; overflow-wrap: anywhere; }
+  .kind { font-size: 11px; color: var(--acc-2); font-weight: 600; white-space: nowrap; }
   .tag { display: inline-block; font-size: 11px; font-weight: 600; line-height: 1.5; padding: 0 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
   .tag.planned { border-style: dashed; }
   .tag.partial { color: var(--wait); border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
-  .org-projects { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
-  .org-projects .label { color: var(--muted); font-size: 12px; margin-right: 2px; }
-  .org-projects .chip { padding: 2px 9px; }
-  .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .role-grid.wide { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .role { display: grid; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); border-left: 3px solid var(--acc); }
-  .role-top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
-  .role-top b { font-size: 13px; }
-  .role .kind { font-size: 11px; color: var(--acc-2); font-weight: 600; white-space: nowrap; }
-  .role p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.3; }
-  .role.planned { background: transparent; border-style: dashed; border-left-style: dashed; border-left-color: var(--border); color: var(--muted); }
-  .role.planned b { font-weight: 500; }
-  .org-note { margin: 0; color: var(--muted); font-size: 12px; }
-  @media (max-width: 900px) { .role-grid.wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 760px) { .org-branches { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .role-grid, .role-grid.wide { grid-template-columns: 1fr; } }
+  .hb .node.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
+  .hb .node.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); }
+  .live { margin-top: 4px; font-size: 11px; font-weight: 600; line-height: 1.3; color: var(--work); overflow-wrap: anywhere; }
+  .live.waiting { color: var(--wait); }
+  .live.more { color: var(--muted); font-weight: 500; }
+  .node.others { border-style: dashed; }
+  .org-projects { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; }
+  .org-projects .chip { padding: 1px 8px; font-size: 11px; color: var(--muted); }
+  .hkids { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; min-width: 0; }
+  @media (max-width: 999px) {
+    .htree { grid-template-columns: minmax(0, 1fr); }
+    .hconn, .hb::before, .hb::after { display: none; }
+    .hroot { margin-bottom: 12px; }
+    .node.owner { width: auto; }
+    .hb { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 420px) { .hkids { grid-template-columns: minmax(0, 1fr); } }
 
-  /* latest missions */
+  /* token side panel */
+  .tokens { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  @media (min-width: 1200px) { .tokens { position: sticky; top: 16px; } }
+  .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+  .sub { color: var(--muted); font-size: 12px; }
+  .split { display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin: 12px 0 6px; background: var(--free-soft); }
+  .split i { display: block; height: 100%; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+  .legend .dot { display: inline-block; margin-right: 5px; }
+  .bars { display: flex; align-items: flex-end; gap: 5px; height: 90px; margin-top: 14px; }
+  .bars div { flex: 1; min-height: 2px; border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--work) 35%, var(--surface-2)); }
+  .bars div.today { background: var(--work); }
+  .days { display: flex; gap: 5px; font-size: 10px; color: var(--muted); margin-top: 3px; }
+  .days span { flex: 1; text-align: center; }
+  .days span.today { color: var(--fg); font-weight: 700; }
+  .mlist { display: flex; flex-direction: column; }
+  .mrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 8px 0; border-top: 1px solid var(--border); }
+  .mrow:first-child { border-top: 0; padding-top: 0; }
+  .mrow .t { font-weight: 600; overflow-wrap: anywhere; }
+  .mrow .n { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .mrow .meta { grid-column: 1 / -1; font-size: 11px; color: var(--muted); }
+  .mbar { grid-column: 1 / -1; height: 4px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+  .mbar i { display: block; height: 100%; }
+  .more-btn { display: block; width: 100%; margin-top: 8px; padding: 6px; font: inherit; font-size: 12px; font-weight: 600; color: var(--work); background: none; border: 0; border-radius: 8px; cursor: pointer; text-align: center; }
+  .more-btn:hover { background: var(--work-soft); }
+  .all-missions { margin-top: 10px; }
+
+  /* mission table (shown on request) */
   .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   table.missions { width: 100%; border-collapse: collapse; font-size: 13px; }
   .missions th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
@@ -220,7 +234,7 @@
       <div class="eyebrow">Ryngmark Agent System</div>
       <h1>Teamet just nu</h1>
     </div>
-    <div class="live" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button">Uppdatera</button></div>
+    <div class="live-state" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button">Uppdatera</button></div>
   </header>
 
   <div class="summary" id="summary" aria-live="polite"></div>
@@ -228,26 +242,26 @@
   <h2 class="first">Väntar på svar från Johan <span id="owner-note"></span></h2>
   <section class="owner" id="alerts" aria-live="polite"></section>
 
-  <h2>Organisation <span id="org-note"></span></h2>
-  <section class="org" id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></section>
+  <div class="layout">
+    <div class="stack">
+      <section class="panel" aria-labelledby="org-title">
+        <p class="ptitle" id="org-title">Organisation <span id="org-note"></span></p>
+        <div id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></div>
+      </section>
 
-  <h2>Ledning</h2>
-  <section class="lane-pm" id="lane-lead"></section>
+      <section class="panel" aria-labelledby="projects-title">
+        <p class="ptitle" id="projects-title">Projekt <span id="projects-note"></span></p>
+        <div class="projects" id="projects"></div>
+      </section>
+    </div>
 
-  <h2>Skapande roller <span id="note-create"></span></h2>
-  <section class="grid four" id="lane-create"></section>
+    <aside class="tokens" id="tokens" aria-label="Tokens"><div class="panel"><div class="empty">Laddar…</div></div></aside>
+  </div>
 
-  <h2>Kvalitet och säkerhet <span id="note-quality"></span></h2>
-  <section class="grid three" id="lane-quality"></section>
-
-  <h2>Spelutveckling <span id="note-gaming"></span></h2>
-  <section class="grid three" id="lane-gaming"></section>
-
-  <h2>Projekt <span id="projects-note"></span></h2>
-  <section class="projects" id="projects"></section>
-
-  <h2>Senaste uppdrag <span id="missions-note"></span></h2>
-  <section id="missions"><div class="empty">Laddar…</div></section>
+  <section id="all-missions" class="all-missions" hidden>
+    <h2>Alla uppdrag <span id="missions-note"></span></h2>
+    <div id="missions"></div>
+  </section>
 
   <section class="guide" aria-labelledby="guide-title">
     <div class="guide-head">
@@ -328,12 +342,6 @@ const ROLES = [
   ["security-auditor", "Security Auditor", "Letar hål i inloggning och behörighet"],
   ["3d-artist", "3D Artist", "Modellerar och texturerar spelkaraktärer"],
 ];
-const LANES = {
-  lead: ["project-manager"],
-  create: ["solution-architect", "engineering-analyst", "research", "implementer"],
-  quality: ["reviewer", "tester", "security-auditor"],
-  gaming: ["3d-artist"],
-};
 // Owner alerts come only from the explicit flag, never from note text (security audit ras02 M1).
 const forOwner = e => e.state === "waiting" && e.for === "owner";
 
@@ -348,17 +356,10 @@ function clean(raw) {
   const projects = (Array.isArray(raw?.projects) ? raw.projects : []).filter(p => typeof p === "string").map(p => p.slice(0, 80));
   return { updated: str(raw?.updated, 40), projects, entries };
 }
-const PROVIDERS = { claude: "Claude", codex: "Codex" };
-function modelTag(j) {
-  if (!j.model) return "";
-  const [p, ...rest] = String(j.model).split("/");
-  const name = rest.length ? `${PROVIDERS[p] || p} · ${rest.join("/").replace(/^claude-/, "")}` : j.model;
-  const effort = j.effort ? ` · ${j.effort === "default" ? "standardnivå" : "nivå " + j.effort}` : "";
-  return `<span class="model">${esc(name + effort)}</span>`;
-}
-const STATE = { working: "Jobbar", waiting: "Väntar", idle: "Ledig" };
 
 let etag = null, data = null, source = null, lastFetch = null, failed = false;
+let ORG = null;        // cleaned org.json, once loaded
+let HIST = null;       // { all: [...missions], where } or { msg } once history has loaded
 
 const icon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[id] || ICONS.other}</svg>`;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -384,7 +385,7 @@ function render() {
   const entries = Array.isArray(data?.entries) ? data.entries : [];
   const known = new Map(ROLES.map(r => [r[0], r]));
   const roles = ROLES.concat([...new Set(entries.map(e => e.role))].filter(r => !known.has(r)).map(r => [r, r, ""]));
-  const roleName = Object.fromEntries(roles.map(r => [r[0], r[1]]));
+  const roleName = roleNames(entries);
 
   // header
   document.getElementById("updated").textContent = data?.updated
@@ -413,31 +414,9 @@ function render() {
     : `<div class="calm">Inget väntar på dig just nu.</div>`;
   document.title = (waiting.length ? `(${waiting.length}) väntar på dig · ` : "") + "RAS – teamet";
 
-  // role cards, one lane per group
-  const card = ([id, name, desc], i) => {
-    const jobs = entries.filter(e => e.role === id)
-      .sort((a, b) => (a.state === "working" ? 0 : 1) - (b.state === "working" ? 0 : 1) || Date.parse(b.since) - Date.parse(a.since));
-    const s = states[i];
-    const liveCount = jobs.filter(j => !isStale(j)).length;
-    const body = jobs.length
-      ? `<ul class="jobs">${jobs.map(j => `<li class="job ${esc(j.state)}${isStale(j) ? " stale" : ""}">
-          <div class="job-top"><b>${esc(j.project)}${j.agent ? `<span class="agent-id">${esc(j.agent)}</span>` : ""}</b><time datetime="${esc(j.since)}">${isStale(j) ? "inaktiv " : ""}${ago(j.since)}</time></div>
-          <p>${j.state === "waiting" ? "Väntar" : "Jobbar"}${j.note ? " – " + esc(j.note) : ""}</p>${modelTag(j)}</li>`).join("")}</ul>`
-      : `<div class="empty">Inget uppdrag just nu</div>`;
-    return `<article class="card ${s}">
-      <div class="card-head"><div class="icon">${icon(id)}</div>
-        <div class="who"><b>${esc(name)}${liveCount > 1 ? ` <span class="count">×${liveCount}</span>` : ""}</b><small>${esc(desc)}</small></div>
-        <span class="badge ${s}"><span class="dot"></span>${STATE[s]}</span></div>${body}</article>`;
-  };
-  const inLane = ids => roles.map((r, i) => [r, i]).filter(([r]) => ids.includes(r[0]));
-  const placed = new Set(Object.values(LANES).flat());
-  const lanes = { lead: LANES.lead, create: LANES.create, gaming: LANES.gaming, quality: LANES.quality.concat(roles.map(r => r[0]).filter(id => !placed.has(id))) };
-  for (const [lane, ids] of Object.entries(lanes)) {
-    const items = inLane(ids);
-    document.getElementById("lane-" + lane).innerHTML = items.map(([r, i]) => card(r, i)).join("");
-    const note = document.getElementById("note-" + lane);
-    if (note) note.textContent = `${items.filter(([, i]) => states[i] !== "idle").length} av ${items.length} aktiva`;
-  }
+  // live status on the org tree and the token panel's day bars
+  paintOrg();
+  paintTokens();
 
   // projects
   const byProject = new Map();
@@ -460,51 +439,100 @@ function render() {
   }).join("") : `<div class="empty">Inga projekt ännu</div>`;
 }
 
+// role id -> display name: the fixed list first, then every box of the org tree
+function roleNames() {
+  const names = Object.fromEntries(ROLES.map(r => [r[0], r[1]]));
+  if (ORG) for (const b of orgBoxes()) if (b.id && !names[b.id]) names[b.id] = b.name;
+  return names;
+}
+
 // ---- Organisation: org.json is same-origin but still untrusted text; keep only known shapes ----
 const BRANCHES = ["gaming", "software"];
 const OK_STATUS = new Set(["active", "planned"]);
 const OK_KIND = new Set(["agent", "profile"]);
+const ID_OK = /^[a-z0-9-]{1,40}$/;
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 function cleanOrg(raw) {
   const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
-  const role = r => ({ name: str(r?.name, 60), kind: OK_KIND.has(r?.kind) ? r.kind : "", status: r?.status === "active" ? "active" : "planned", note: str(r?.note, 120) });
+  const role = r => ({ name: str(r?.name, 60), id: ID_OK.test(r?.id || "") ? r.id : "", kind: OK_KIND.has(r?.kind) ? r.kind : "", status: r?.status === "active" ? "active" : "planned", note: str(r?.note, 120) });
   const roles = a => (Array.isArray(a) ? a : []).filter(r => r && typeof r === "object" && typeof r.name === "string").slice(0, 24).map(role);
   const branches = {};
   for (const k of BRANCHES) {
     const b = raw?.branches?.[k];
     if (!b || typeof b !== "object") continue;
+    const dname = str(b.director?.name, 60);
+    const did = ID_OK.test(b.director?.id || "") ? b.director.id : (ID_OK.test(slug(dname)) ? slug(dname) : "");
     branches[k] = { name: str(b.name, 60), roles: roles(b.roles),
-      director: { name: str(b.director?.name, 60), status: OK_STATUS.has(b.director?.status) ? b.director.status : "planned", today: str(b.director?.today, 120) },
+      director: { name: dname, id: did, status: OK_STATUS.has(b.director?.status) ? b.director.status : "planned", today: str(b.director?.today, 120) },
       projects: (Array.isArray(b.projects) ? b.projects : []).filter(p => typeof p === "string").slice(0, 12).map(p => p.slice(0, 60)) };
   }
-  return { owner: { name: str(raw?.owner?.name, 60), title: str(raw?.owner?.title, 60) }, branches, core: { name: str(raw?.core?.name, 60), roles: roles(raw?.core?.roles) } };
+  // Core's director is the Project Manager, the main session (owner decision ras06, 2026-10-31).
+  return { owner: { name: str(raw?.owner?.name, 60), title: str(raw?.owner?.title, 60) }, branches,
+    core: { name: str(raw?.core?.name, 60) || "RAS Core", roles: roles(raw?.core?.roles), director: { name: "Project Manager", id: "project-manager", status: "active", today: "Huvudsessionen" } } };
+}
+function orgBoxes() {
+  return [...BRANCHES.flatMap(k => ORG.branches[k] ? [ORG.branches[k].director, ...ORG.branches[k].roles] : []), ORG.core.director, ...ORG.core.roles];
 }
 
-function roleHtml(r) {
-  const tag = r.status === "planned" ? `<span class="tag planned">planerad</span>` : r.kind ? `<span class="kind">${r.kind === "agent" ? "agent" : "profil"}</span>` : "";
-  return `<div class="role ${r.status}"><div class="role-top"><b>${esc(r.name)}</b>${tag}</div>${r.note ? `<p>${esc(r.note)}</p>` : ""}</div>`;
+// Live lines for one tree box: the most urgent first (waiting for Johan, then working, then waiting), max 3 + "+N".
+function liveLines(es, who) {
+  if (!es.length) return "";
+  const rank = e => (forOwner(e) ? 0 : e.state === "working" ? 1 : 2);
+  const sorted = es.slice().sort((a, b) => rank(a) - rank(b) || (Date.parse(b.since) || 0) - (Date.parse(a.since) || 0));
+  const lines = sorted.slice(0, 3).map(e => {
+    const txt = e.note || (forOwner(e) ? "väntar på Johan" : "");
+    return `<div class="live ${e.state}">● ${who ? esc(who(e)) + " · " : ""}${esc(e.project)}${txt ? " · " + esc(txt) : ""}</div>`;
+  });
+  if (sorted.length > 3) lines.push(`<div class="live more">+${sorted.length - 3} till</div>`);
+  return lines.join("");
 }
-function directorHtml(d) {
-  const planned = d.status === "planned";
-  return `<div class="director ${planned ? "planned" : ""}"><div class="icon">${icon("project-manager")}</div>
-    <div><b>${esc(d.name)}</b> ${planned ? `<span class="tag planned">planerad</span>` : ""}
-    <small>${planned ? "planerad – leds i dag av PM" : esc(d.today)}</small></div></div>`;
-}
-function renderOrg(org) {
-  const branch = k => {
-    const b = org.branches[k];
-    if (!b) return "";
-    return `<article class="branch ${k}"><div class="branch-head"><h3><img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180"></h3><small>${k === "gaming" ? "Spel" : "Mjukvara"}</small></div>
-      ${directorHtml(b.director)}
-      ${b.projects.length ? `<p class="org-projects"><span class="label">Projekt</span>${b.projects.map(p => `<span class="chip">${esc(p)}</span>`).join("")}</p>` : ""}
-      <div class="role-grid">${b.roles.map(roleHtml).join("")}</div></article>`;
+const boxState = es => (!es.length ? "" : es.some(forOwner) ? "waiting" : es.some(e => e.state === "working") ? "working" : "waiting");
+
+function paintOrg() {
+  if (!ORG) return;
+  const live = (Array.isArray(data?.entries) ? data.entries : []).filter(e => !isStale(e));
+  const byRole = new Map();
+  for (const e of live) { if (!byRole.has(e.role)) byRole.set(e.role, []); byRole.get(e.role).push(e); }
+  const placed = new Set();
+  const esOf = id => { if (!id) return []; placed.add(id); return byRole.get(id) || []; };
+
+  const roleBox = r => {
+    const es = esOf(r.id), st = boxState(es);
+    const tag = r.status === "planned" ? `<span class="tag planned">planerad</span>` : r.kind ? `<span class="kind">${r.kind === "agent" ? "agent" : "profil"}</span>` : "";
+    return `<div class="node rbox ${r.status}${st ? " " + st : ""}"><div class="rbox-top"><b>${esc(r.name)}</b>${tag}</div>${r.note ? `<small>${esc(r.note)}</small>` : ""}${liveLines(es)}</div>`;
   };
-  const all = [...BRANCHES.flatMap(k => org.branches[k]?.roles || []), ...org.core.roles];
+  const dirBox = d => {
+    const es = esOf(d.id), st = boxState(es), planned = d.status === "planned";
+    return `<div class="node dir ${planned ? "planned" : ""}${st ? " " + st : ""}"><b>${esc(d.name)}</b>${planned ? `<small>planerad${d.today ? " · " + esc(d.today) : ""}</small>` : (d.today ? `<small>${esc(d.today)}</small>` : "")}${liveLines(es)}</div>`;
+  };
+  const chips = ps => {
+    const shown = ps.slice(0, 3).map(p => `<span class="chip">${esc(p)}</span>`);
+    if (ps.length > 3) shown.push(`<span class="chip" title="${esc(ps.slice(3).join(", "))}">+${ps.length - 3}</span>`);
+    return shown.length ? `<p class="org-projects">${shown.join("")}</p>` : "";
+  };
+  const row = (k, head, dir, extra, kids) =>
+    `<div class="hb ${k}"><div class="hb-main">${head}${dir}${extra}</div><div class="hkids">${kids}</div></div>`;
+
+  const branchRows = BRANCHES.map(k => {
+    const b = ORG.branches[k];
+    if (!b) return "";
+    const head = `<div class="bhead"><h3><img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180"></h3></div>`;
+    return row(k, head, dirBox(b.director), chips(b.projects), b.roles.map(roleBox).join(""));
+  }).join("");
+
+  // Core goes last so every role of the tree is placed before "Övriga" is worked out.
+  const coreDir = dirBox(ORG.core.director), coreKids = ORG.core.roles.map(roleBox).join("");
+  const others = live.filter(e => !placed.has(e.role));
+  const names = roleNames();
+  const othersBox = others.length ? `<div class="node rbox others ${boxState(others)}"><div class="rbox-top"><b>Övriga</b><span class="kind">ej i trädet</span></div>${liveLines(others, e => names[e.role] || e.role)}</div>` : "";
+  const coreRow = row("core", `<div class="bhead"><h3>${esc(ORG.core.name)}</h3><small>delas av alla</small></div>`, coreDir, "", coreKids + othersBox);
+
+  const all = [...BRANCHES.flatMap(k => ORG.branches[k]?.roles || []), ...ORG.core.roles];
   document.getElementById("org-note").textContent = `${all.filter(r => r.status === "active").length} aktiva · ${all.filter(r => r.status === "planned").length} planerade`;
-  document.getElementById("org").innerHTML = `
-    <div class="org-owner"><div class="icon">${icon("other")}</div><div><b>${esc(org.owner.name)}</b><small>${esc(org.owner.title)}</small></div></div>
-    <div class="org-branches">${BRANCHES.map(branch).join("")}</div>
-    <article class="branch core"><div class="branch-head"><h3>Gemensamt (${esc(org.core.name)})</h3><small>Delas av båda grenarna</small></div>
-      <div class="role-grid wide">${org.core.roles.map(roleHtml).join("")}</div></article>`;
+  document.getElementById("org").innerHTML = `<div class="htree">
+    <div class="hroot"><div class="node owner"><div class="icon">${icon("other")}</div><div><b>${esc(ORG.owner.name)}</b><small>${esc(ORG.owner.title)}</small></div></div></div>
+    <div class="hconn"></div>
+    <div class="hbranches">${branchRows}${coreRow}</div></div>`;
 }
 async function loadOrg() {
   const target = document.getElementById("org");
@@ -516,15 +544,15 @@ async function loadOrg() {
       if (!res.ok) throw new Error(String(res.status));
       return res.json();
     })();
-    renderOrg(cleanOrg(raw));
+    ORG = cleanOrg(raw);
+    render();
   } catch {
     target.innerHTML = `<div class="empty">Organisationen kunde inte läsas.</div>`;
   }
 }
 
-// ---- Senaste uppdrag: local build = embedded #ras-history; public page = history.json on the status branch ----
+// ---- Uppdrag och tokens: local build = embedded #ras-history; public page = history.json on the status branch ----
 const ORG_LABEL = { gaming: "Gaming", software: "Software", core: "Core" };
-const HISTORY_MAX = 10;
 function cleanHistory(raw) {
   const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
   const num = v => (typeof v === "number" && isFinite(v) && v >= 0 ? v : null);
@@ -534,14 +562,19 @@ function cleanHistory(raw) {
       input: num(m.input), output: num(m.output), total: num(m.total), cache_read: num(m.cache_read),
       status: ["measured", "partial", "missing"].includes(m.status) ? m.status : "", closed_at: str(m.closed_at, 40) }));
 }
-const fmtNum = n => (n === null ? `<span class="unk">okänt</span>` : esc(n.toLocaleString("sv-SE")));
-const fmtDate = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE") : `<span class="unk">okänt</span>`; };
+const UNK = `<span class="unk">okänt</span>`;
+const fmtNum = n => (n === null ? UNK : esc(n.toLocaleString("sv-SE")));
+const fmtDate = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE") : UNK; };
+const fmtShort = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE", { day: "numeric", month: "short" }).replace(/\.$/, "") : UNK; };
+const fmtM = n => (n === null ? UNK : esc((n / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M");
+const orgBadge = o => (o ? `<span class="org-badge ${o}">${ORG_LABEL[o]}</span>` : UNK);
+const orgColour = o => (o ? `var(--${o})` : "var(--core)");
 function missionRow(m) {
   const cache = m.input && m.cache_read !== null ? `<small>${Math.round(100 * m.cache_read / m.input)} % cache</small>` : "";
   return `<tr>
     <td class="name" data-label="Uppdrag"><b>${esc(m.name || m.id)}</b>${m.name && m.id && m.name !== m.id ? `<small>${esc(m.id)}</small>` : ""}</td>
-    <td data-label="Organisation">${m.org ? `<span class="org-badge ${m.org}">${ORG_LABEL[m.org]}</span>` : `<span class="unk">okänt</span>`}</td>
-    <td data-label="Ansvarig">${m.director ? esc(m.director) : `<span class="unk">okänt</span>`}</td>
+    <td data-label="Organisation">${orgBadge(m.org)}</td>
+    <td data-label="Ansvarig">${m.director ? esc(m.director) : UNK}</td>
     <td class="num" data-label="Input"><span>${fmtNum(m.input)}${cache}</span></td>
     <td class="num" data-label="Output">${fmtNum(m.output)}</td>
     <td class="num" data-label="Totalt"><span>${m.status === "partial" ? `<span class="tag partial" title="Några körningar saknar mätdata">delvis</span> ` : ""}${fmtNum(m.total)}</span></td>
@@ -551,26 +584,87 @@ function missionRow(m) {
 // mission names, tokens, director and date may be public – nothing else is ever in that file).
 const HISTORY_URL = `https://raw.githubusercontent.com/${REPO}/status/history.json`;
 async function renderHistory() {
-  const target = document.getElementById("missions"), note = document.getElementById("missions-note");
   const embedded = document.getElementById("ras-history");
-  let all, where;
   try {
-    if (embedded) { all = cleanHistory(JSON.parse(embedded.textContent)); where = "lokal vy"; }
+    if (embedded) HIST = { all: cleanHistory(JSON.parse(embedded.textContent)), where: "lokal vy" };
     else {
       const res = await fetch(HISTORY_URL, { cache: "no-store" });
-      if (res.status === 404) { target.innerHTML = `<div class="empty">Inga avslutade uppdrag är publicerade än.</div>`; return; }
-      if (!res.ok) throw new Error(String(res.status));
-      all = cleanHistory(await res.json()); where = "publicerad";
+      if (res.status === 404) HIST = { msg: "Inga avslutade uppdrag är publicerade än." };
+      else {
+        if (!res.ok) throw new Error(String(res.status));
+        HIST = { all: cleanHistory(await res.json()), where: "publicerad" };
+      }
     }
-  } catch { target.innerHTML = `<div class="empty">Uppdragshistoriken kunde inte läsas.</div>`; return; }
-  const when = m => { const t = Date.parse(m.closed_at); return isFinite(t) ? t : -Infinity; };
-  const rows = all.sort((a, b) => when(b) - when(a)).slice(0, HISTORY_MAX);
-  note.textContent = all.length ? `${rows.length} av ${all.length} · ${where}` : where;
-  target.innerHTML = rows.length
-    ? `<div class="table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
-       <tbody>${rows.map(missionRow).join("")}</tbody></table></div>`
-    : `<div class="empty">Inga avslutade uppdrag är mätta än.</div>`;
+  } catch { HIST = { msg: "Uppdragshistoriken kunde inte läsas." }; }
+  paintTokens();
 }
+
+const closedAt = m => { const t = Date.parse(m.closed_at); return isFinite(t) ? t : null; };
+const dayKey = t => new Date(t).toLocaleDateString("sv-SE");
+function paintTokens() {
+  const target = document.getElementById("tokens"), table = document.getElementById("all-missions");
+  if (!HIST) return;
+  const open = !table.hidden;
+  const all = (HIST.all || []).slice().sort((a, b) => (closedAt(b) ?? -Infinity) - (closedAt(a) ?? -Infinity));
+  if (!all.length) {
+    table.hidden = true;
+    target.innerHTML = `<div class="panel"><p class="ptitle">Tokens</p><div class="empty">${esc(HIST.msg || "Inga avslutade uppdrag är mätta än.")}</div></div>`;
+    return;
+  }
+
+  // the last 7 calendar days, today last
+  const start = new Date(); start.setHours(0, 0, 0, 0);
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(start); d.setDate(d.getDate() - i);
+    days.push({ key: dayKey(d), label: d.toLocaleDateString("sv-SE", { weekday: "short" }).replace(/\.$/, ""), total: 0, missing: 0, today: i === 0 });
+  }
+  const byDay = new Map(days.map(d => [d.key, d]));
+  const recent = all.filter(m => { const t = closedAt(m); return t !== null && byDay.has(dayKey(t)); });
+  const known = recent.filter(m => m.total !== null);
+  const sum = xs => xs.reduce((s, x) => s + x, 0);
+  for (const m of recent) { const d = byDay.get(dayKey(closedAt(m))); if (m.total === null) d.missing++; else d.total += m.total; }
+  const total = !recent.length ? 0 : known.length ? sum(known.map(m => m.total)) : null;
+  const cacheBase = recent.filter(m => m.input && m.cache_read !== null);
+  const cachePct = cacheBase.length ? Math.round(100 * sum(cacheBase.map(m => m.cache_read)) / sum(cacheBase.map(m => m.input))) : null;
+  const split = ["gaming", "software", "core"].map(o => ({ o, label: ORG_LABEL[o], colour: orgColour(o), v: sum(known.filter(m => m.org === o).map(m => m.total)) }));
+  const noOrg = sum(known.filter(m => !ORG_LABEL[m.org]).map(m => m.total));
+  if (noOrg > 0) split.push({ o: "", label: "Okänd", colour: "var(--free)", v: noOrg });
+  const splitSum = sum(split.map(s => s.v));
+  const maxDay = Math.max(...days.map(d => d.total));
+
+  const latest = all.slice(0, 6);
+  const maxLatest = Math.max(0, ...latest.map(m => m.total ?? 0));
+  const missed = recent.length - known.length;
+
+  target.innerHTML = `<div class="panel">
+      <p class="ptitle">Tokens <span>senaste 7 dagarna</span></p>
+      <div class="big">${fmtM(total)}</div>
+      <div class="sub">${cachePct === null ? "cache okänt" : cachePct + " % cache"} · ${recent.length} ${recent.length === 1 ? "uppdrag" : "uppdrag"} avslutade${missed ? ` (${missed} utan mätdata)` : ""}</div>
+      ${splitSum > 0 ? `<div class="split" role="img" aria-label="Fördelning per organisation">${split.filter(s => s.v > 0).map(s => `<i style="width:${(100 * s.v / splitSum).toFixed(1)}%;background:${s.colour}"></i>`).join("")}</div>
+      <div class="legend">${split.map(s => `<span><span class="dot" style="background:${s.colour}"></span>${s.label} ${Math.round(100 * s.v / splitSum)} %</span>`).join("")}</div>` : ""}
+      <div class="bars" role="img" aria-label="Tokens per dag">${days.map(d => `<div class="${d.today ? "today" : ""}" style="height:${maxDay > 0 ? (100 * d.total / maxDay).toFixed(1) : 0}%" title="${esc(d.key)}: ${d.missing && !d.total ? "okänt" : esc((d.total / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M" + (d.missing ? " (delvis)" : "")}"></div>`).join("")}</div>
+      <div class="days">${days.map(d => `<span class="${d.today ? "today" : ""}">${esc(d.label)}</span>`).join("")}</div>
+    </div>
+    <div class="panel">
+      <p class="ptitle">Senaste uppdrag <span>${esc(HIST.where || "")}</span></p>
+      <div class="mlist">${latest.map(m => `<div class="mrow"><span class="t">${esc(m.name || m.id)}</span><span class="n">${fmtM(m.total)}</span>
+        <span class="meta">${orgBadge(m.org)} ${m.director ? esc(m.director) : UNK} · ${fmtShort(m.closed_at)}</span>
+        <span class="mbar"><i style="width:${maxLatest > 0 && m.total !== null ? Math.max(2, 100 * m.total / maxLatest).toFixed(1) : 0}%;background:${orgColour(m.org)}"></i></span></div>`).join("")}</div>
+      <button class="more-btn" id="show-all" type="button" aria-expanded="${open}" aria-controls="all-missions">${open ? "Dölj alla uppdrag" : `Visa alla ${all.length} uppdrag →`}</button>
+    </div>`;
+
+  document.getElementById("missions-note").textContent = `${all.length} st · ${HIST.where || ""}`;
+  document.getElementById("missions").innerHTML = `<div class="table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
+       <tbody>${all.map(missionRow).join("")}</tbody></table></div>`;
+}
+document.addEventListener("click", ev => {
+  if (!ev.target.closest?.("#show-all")) return;
+  const table = document.getElementById("all-missions");
+  table.hidden = !table.hidden;
+  paintTokens();
+  if (!table.hidden) table.scrollIntoView({ behavior: "smooth", block: "start" });
+});
 
 async function load() {
   if (window.RAS_DEMO) { data = clean(window.RAS_DEMO); source = "api"; render(); return; }

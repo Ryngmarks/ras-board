@@ -8,8 +8,8 @@
       "name": "RAS Gaming",
       "director": {
         "name": "Game Director",
-        "status": "planned",
-        "today": "PM-rollen (project-manager) leder i dag"
+        "status": "active",
+        "today": "PM-rollen (project-manager) med Game Director-avsnittet"
       },
       "projects": [
         "Clicker Land",
@@ -17,11 +17,11 @@
       ],
       "roles": [
         {
-          "name": "3D Artist",
+          "name": "Artist",
           "kind": "agent",
           "id": "3d-artist",
           "status": "active",
-          "note": "Modellerar och texturerar spelkaraktärer"
+          "note": "Bygger spelkonst med linser: kropp, ansikte, rustning, miljö, ljus"
         },
         {
           "name": "Playtester",
@@ -46,10 +46,45 @@
         },
         {
           "name": "Art Director",
-          "kind": null,
-          "id": null,
-          "status": "planned",
-          "note": "Stil och helhet i spelens uttryck"
+          "kind": "agent",
+          "id": "art-director",
+          "status": "active",
+          "note": "Blind domare, sållar fram en kortlista"
+        },
+        {
+          "name": "Miljö",
+          "kind": "profile",
+          "id": "environment-artist",
+          "status": "active",
+          "note": "Profil: terräng, vegetation, props"
+        },
+        {
+          "name": "Ljus och färg",
+          "kind": "profile",
+          "id": "light-and-colour",
+          "status": "active",
+          "note": "Profil: palett, ljus, stilval per spel"
+        },
+        {
+          "name": "Animator",
+          "kind": "profile",
+          "id": "animator",
+          "status": "active",
+          "note": "Profil: nyckelposer, timing"
+        },
+        {
+          "name": "VFX",
+          "kind": "profile",
+          "id": "vfx-artist",
+          "status": "active",
+          "note": "Profil: träffar och spells per element"
+        },
+        {
+          "name": "Gaming-praxis",
+          "kind": "profile",
+          "id": "gaming-practice",
+          "status": "active",
+          "note": "Profil: stilark, review sheet, look gate"
         }
       ]
     },
