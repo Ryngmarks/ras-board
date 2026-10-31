@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T20:09:47Z",
+    "updated":  "2026-10-31T20:47:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -55,16 +55,6 @@
                         "since":  "2026-10-31T18:05:22Z",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-05",
-                        "since":  "2026-10-31T20:09:47Z",
-                        "agent":  "m03-t2-archer-WO-05",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
