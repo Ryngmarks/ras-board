@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T20:47:46Z",
+    "updated":  "2026-10-31T20:48:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -51,10 +51,11 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "bågskytt r2 pågår",
+                        "note":  "bågskytt klar: väntar på godkännande",
                         "since":  "2026-10-31T18:05:22Z",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
+                        "effort":  "default",
+                        "for":  "owner"
                     }
                 ]
 }
