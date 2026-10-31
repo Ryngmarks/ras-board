@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T22:16:29Z",
+    "updated":  "2026-10-31T22:16:31Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -35,8 +35,9 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "väntar på svärdsklipp",
-                        "since":  "2026-10-31T21:41:41Z"
+                        "note":  "svärdet: två val",
+                        "since":  "2026-10-31T21:41:41Z",
+                        "for":  "owner"
                     }
                 ]
 }
