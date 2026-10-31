@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ZWyilaHYylVCv8rZS6BHfzTYUa0mP2wO5i4cmDQq6DE='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-alOx6wf+GIvUd/iRPL1F/p1d10fU/j5aMwpuK+4ecaY='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – teamet</title>
 <style>
@@ -132,6 +132,79 @@
   .guide-rules { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 12px; }
   .guide-rules li::before { content: "→ "; color: var(--fg); }
 
+  /* organisation – Gaming: copper + moss, Software: slate + teal, shared graphite base */
+  :root {
+    --gaming: #d4914f; --gaming-2: #93b36b; --software: #8ba6c2; --software-2: #3fbdb4; --core: #8a93a5;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --gaming: #a45c1c; --gaming-2: #566f38; --software: #46627f; --software-2: #137a73; --core: #5d6676; }
+  }
+  .org { display: grid; gap: 14px; }
+  .org-owner { position: relative; justify-self: center; display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .org-owner::after { content: ""; position: absolute; left: 50%; top: 100%; height: 14px; width: 1px; background: var(--border); }
+  .org-owner .icon { width: 34px; height: 34px; }
+  .org-owner b { display: block; font-size: 15px; }
+  .org-owner small { color: var(--muted); font-size: 12px; }
+  .org-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .branch { --acc: var(--core); --acc-2: var(--core); display: grid; gap: 12px; align-content: start; padding: 14px; background: var(--surface);
+    border: 1px solid color-mix(in srgb, var(--acc) 28%, var(--border)); border-top: 3px solid var(--acc); border-radius: var(--radius); }
+  .branch.gaming { --acc: var(--gaming); --acc-2: var(--gaming-2); }
+  .branch.software { --acc: var(--software); --acc-2: var(--software-2); }
+  .branch.core { --acc: var(--core); --acc-2: var(--core); border-top-color: var(--core); }
+  .branch-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .branch-head h3 { margin: 0; font-size: 17px; line-height: 1.2; }
+  .branch-head small { color: var(--acc); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .director { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--acc) 9%, var(--surface-2)); border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)); }
+  .director.planned { border-style: dashed; background: transparent; }
+  .director .icon { background: color-mix(in srgb, var(--acc) 16%, transparent); color: var(--acc); }
+  .director b { font-size: 14px; }
+  .director small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; line-height: 1.5; padding: 0 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .tag.planned { border-style: dashed; }
+  .tag.partial { color: var(--wait); border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
+  .org-projects { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
+  .org-projects .label { color: var(--muted); font-size: 12px; margin-right: 2px; }
+  .org-projects .chip { padding: 2px 9px; }
+  .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .role-grid.wide { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .role { display: grid; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); border-left: 3px solid var(--acc); }
+  .role-top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .role-top b { font-size: 13px; }
+  .role .kind { font-size: 11px; color: var(--acc-2); font-weight: 600; white-space: nowrap; }
+  .role p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.3; }
+  .role.planned { background: transparent; border-style: dashed; border-left-style: dashed; border-left-color: var(--border); color: var(--muted); }
+  .role.planned b { font-weight: 500; }
+  .org-note { margin: 0; color: var(--muted); font-size: 12px; }
+  @media (max-width: 900px) { .role-grid.wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .org-branches { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .role-grid, .role-grid.wide { grid-template-columns: 1fr; } }
+
+  /* latest missions */
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  table.missions { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .missions th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .missions td { padding: 10px 12px; vertical-align: top; border-bottom: 1px solid var(--border); }
+  .missions tbody tr:last-child td { border-bottom: 0; }
+  .missions .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .missions .name b { display: block; font-size: 14px; overflow-wrap: anywhere; }
+  .missions .name small, .missions .num small { display: block; color: var(--muted); font-size: 11px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  .missions .num small { font-family: inherit; }
+  .unk { color: var(--muted); font-style: italic; }
+  .org-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; color: var(--core); background: var(--free-soft); }
+  .org-badge.gaming { color: var(--gaming); background: color-mix(in srgb, var(--gaming) 14%, transparent); }
+  .org-badge.software { color: var(--software); background: color-mix(in srgb, var(--software) 16%, transparent); }
+  @media (max-width: 640px) {
+    .missions thead { display: none; }
+    .missions, .missions tbody, .missions tr, .missions td { display: block; }
+    .missions tr { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .missions tbody tr:last-child { border-bottom: 0; }
+    .missions td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; border: 0; }
+    .missions td::before { content: attr(data-label); color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; flex: none; }
+    .missions td.name { display: block; padding-bottom: 6px; }
+    .missions td.name::before { content: none; }
+    .missions .num small { display: inline; margin-left: 8px; }
+  }
+
   footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
   footer code { font-size: 11px; }
 </style>
@@ -151,6 +224,9 @@
   <h2 class="first">Väntar på svar från Johan <span id="owner-note"></span></h2>
   <section class="owner" id="alerts" aria-live="polite"></section>
 
+  <h2>Organisation <span id="org-note"></span></h2>
+  <section class="org" id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></section>
+
   <h2>Ledning</h2>
   <section class="lane-pm" id="lane-lead"></section>
 
@@ -165,6 +241,9 @@
 
   <h2>Projekt <span id="projects-note"></span></h2>
   <section class="projects" id="projects"></section>
+
+  <h2>Senaste uppdrag <span id="missions-note"></span></h2>
+  <section id="missions"><div class="empty">Laddar…</div></section>
 
   <section class="guide" aria-labelledby="guide-title">
     <div class="guide-head">
@@ -377,6 +456,112 @@ function render() {
   }).join("") : `<div class="empty">Inga projekt ännu</div>`;
 }
 
+// ---- Organisation: org.json is same-origin but still untrusted text; keep only known shapes ----
+const BRANCHES = ["gaming", "software"];
+const OK_STATUS = new Set(["active", "planned"]);
+const OK_KIND = new Set(["agent", "profile"]);
+function cleanOrg(raw) {
+  const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
+  const role = r => ({ name: str(r?.name, 60), kind: OK_KIND.has(r?.kind) ? r.kind : "", status: r?.status === "active" ? "active" : "planned", note: str(r?.note, 120) });
+  const roles = a => (Array.isArray(a) ? a : []).filter(r => r && typeof r === "object" && typeof r.name === "string").slice(0, 24).map(role);
+  const branches = {};
+  for (const k of BRANCHES) {
+    const b = raw?.branches?.[k];
+    if (!b || typeof b !== "object") continue;
+    branches[k] = { name: str(b.name, 60), roles: roles(b.roles),
+      director: { name: str(b.director?.name, 60), status: OK_STATUS.has(b.director?.status) ? b.director.status : "planned", today: str(b.director?.today, 120) },
+      projects: (Array.isArray(b.projects) ? b.projects : []).filter(p => typeof p === "string").slice(0, 12).map(p => p.slice(0, 60)) };
+  }
+  return { owner: { name: str(raw?.owner?.name, 60), title: str(raw?.owner?.title, 60) }, branches, core: { name: str(raw?.core?.name, 60), roles: roles(raw?.core?.roles) } };
+}
+
+function roleHtml(r) {
+  const tag = r.status === "planned" ? `<span class="tag planned">planerad</span>` : r.kind ? `<span class="kind">${r.kind === "agent" ? "agent" : "profil"}</span>` : "";
+  return `<div class="role ${r.status}"><div class="role-top"><b>${esc(r.name)}</b>${tag}</div>${r.note ? `<p>${esc(r.note)}</p>` : ""}</div>`;
+}
+function directorHtml(d) {
+  const planned = d.status === "planned";
+  return `<div class="director ${planned ? "planned" : ""}"><div class="icon">${icon("project-manager")}</div>
+    <div><b>${esc(d.name)}</b> ${planned ? `<span class="tag planned">planerad</span>` : ""}
+    <small>${planned ? "planerad – leds i dag av PM" : esc(d.today)}</small></div></div>`;
+}
+function renderOrg(org) {
+  const branch = k => {
+    const b = org.branches[k];
+    if (!b) return "";
+    return `<article class="branch ${k}"><div class="branch-head"><h3>${esc(b.name)}</h3><small>${k === "gaming" ? "Spel" : "Mjukvara"}</small></div>
+      ${directorHtml(b.director)}
+      ${b.projects.length ? `<p class="org-projects"><span class="label">Projekt</span>${b.projects.map(p => `<span class="chip">${esc(p)}</span>`).join("")}</p>` : ""}
+      <div class="role-grid">${b.roles.map(roleHtml).join("")}</div></article>`;
+  };
+  const all = [...BRANCHES.flatMap(k => org.branches[k]?.roles || []), ...org.core.roles];
+  document.getElementById("org-note").textContent = `${all.filter(r => r.status === "active").length} aktiva · ${all.filter(r => r.status === "planned").length} planerade`;
+  document.getElementById("org").innerHTML = `
+    <div class="org-owner"><div class="icon">${icon("other")}</div><div><b>${esc(org.owner.name)}</b><small>${esc(org.owner.title)}</small></div></div>
+    <div class="org-branches">${BRANCHES.map(branch).join("")}</div>
+    <article class="branch core"><div class="branch-head"><h3>Gemensamt (${esc(org.core.name)})</h3><small>Delas av båda grenarna</small></div>
+      <div class="role-grid wide">${org.core.roles.map(roleHtml).join("")}</div></article>`;
+}
+async function loadOrg() {
+  const target = document.getElementById("org");
+  try {
+    // The local build embeds org.json (a page opened from file:// cannot fetch it); the public page fetches it same-origin.
+    const embedded = document.getElementById("ras-org");
+    const raw = embedded ? JSON.parse(embedded.textContent) : await (async () => {
+      const res = await fetch("org.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return res.json();
+    })();
+    renderOrg(cleanOrg(raw));
+  } catch {
+    target.innerHTML = `<div class="empty">Organisationen kunde inte läsas.</div>`;
+  }
+}
+
+// ---- Senaste uppdrag: data only from the local build's embedded #ras-history; the public page never has it ----
+const ORG_LABEL = { gaming: "Gaming", software: "Software", core: "Core" };
+const HISTORY_MAX = 10;
+function cleanHistory(raw) {
+  const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
+  const num = v => (typeof v === "number" && isFinite(v) && v >= 0 ? v : null);
+  return (Array.isArray(raw?.missions) ? raw.missions : [])
+    .filter(m => m && typeof m === "object" && (typeof m.id === "string" || typeof m.name === "string"))
+    .map(m => ({ id: str(m.id, 80), project: str(m.project, 80), name: str(m.name), org: ORG_LABEL[m.org] ? m.org : "", director: str(m.director, 60),
+      input: num(m.input), output: num(m.output), total: num(m.total), cache_read: num(m.cache_read),
+      status: ["measured", "partial", "missing"].includes(m.status) ? m.status : "", closed_at: str(m.closed_at, 40) }));
+}
+const fmtNum = n => (n === null ? `<span class="unk">okänt</span>` : esc(n.toLocaleString("sv-SE")));
+const fmtDate = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE") : `<span class="unk">okänt</span>`; };
+function missionRow(m) {
+  const cache = m.input && m.cache_read !== null ? `<small>${Math.round(100 * m.cache_read / m.input)} % cache</small>` : "";
+  return `<tr>
+    <td class="name" data-label="Uppdrag"><b>${esc(m.name || m.id)}</b>${m.name && m.id && m.name !== m.id ? `<small>${esc(m.id)}</small>` : ""}</td>
+    <td data-label="Organisation">${m.org ? `<span class="org-badge ${m.org}">${ORG_LABEL[m.org]}</span>` : `<span class="unk">okänt</span>`}</td>
+    <td data-label="Ansvarig">${m.director ? esc(m.director) : `<span class="unk">okänt</span>`}</td>
+    <td class="num" data-label="Input"><span>${fmtNum(m.input)}${cache}</span></td>
+    <td class="num" data-label="Output">${fmtNum(m.output)}</td>
+    <td class="num" data-label="Totalt"><span>${m.status === "partial" ? `<span class="tag partial" title="Några körningar saknar mätdata">delvis</span> ` : ""}${fmtNum(m.total)}</span></td>
+    <td class="num" data-label="Avslutat">${fmtDate(m.closed_at)}</td></tr>`;
+}
+function renderHistory() {
+  const target = document.getElementById("missions"), note = document.getElementById("missions-note");
+  const embedded = document.getElementById("ras-history");
+  if (!embedded) {
+    target.innerHTML = `<div class="empty">Uppdragshistoriken finns i den lokala tavlan (publiceras inte utan ägarens beslut).</div>`;
+    return;
+  }
+  let all;
+  try { all = cleanHistory(JSON.parse(embedded.textContent)); }
+  catch { target.innerHTML = `<div class="empty">Uppdragshistoriken kunde inte läsas.</div>`; return; }
+  const when = m => { const t = Date.parse(m.closed_at); return isFinite(t) ? t : -Infinity; };
+  const rows = all.sort((a, b) => when(b) - when(a)).slice(0, HISTORY_MAX);
+  note.textContent = all.length ? `${rows.length} av ${all.length} · lokal vy` : "lokal vy";
+  target.innerHTML = rows.length
+    ? `<div class="table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
+       <tbody>${rows.map(missionRow).join("")}</tbody></table></div>`
+    : `<div class="empty">Inga avslutade uppdrag är mätta än.</div>`;
+}
+
 async function load() {
   if (window.RAS_DEMO) { data = clean(window.RAS_DEMO); source = "api"; render(); return; }
   lastFetch = Date.now();
@@ -406,6 +591,8 @@ document.addEventListener("visibilitychange", () => {
 setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
 setInterval(render, 30_000);
 load();
+loadOrg();
+renderHistory();
 </script>
 </body>
 </html>

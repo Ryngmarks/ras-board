@@ -1,0 +1,170 @@
+{
+  "owner": {
+    "name": "Johan",
+    "title": "Owner / Founder"
+  },
+  "branches": {
+    "gaming": {
+      "name": "RAS Gaming",
+      "director": {
+        "name": "Game Director",
+        "status": "planned",
+        "today": "PM-rollen (project-manager) leder i dag"
+      },
+      "projects": [
+        "Clicker Land",
+        "Mossvale"
+      ],
+      "roles": [
+        {
+          "name": "3D Artist",
+          "kind": "agent",
+          "id": "3d-artist",
+          "status": "active",
+          "note": "Modellerar och texturerar spelkaraktärer"
+        },
+        {
+          "name": "Playtester",
+          "kind": "agent",
+          "id": "playtester",
+          "status": "active",
+          "note": "Granskar bilder och loggar från byggen"
+        },
+        {
+          "name": "Technical Artist",
+          "kind": "profile",
+          "id": "technical-artist-3d",
+          "status": "active",
+          "note": "Profil: pipeline, budgetar, rigg"
+        },
+        {
+          "name": "Game Designer",
+          "kind": "profile",
+          "id": "game-designer",
+          "status": "active",
+          "note": "Profil: system, balans, spelkänsla"
+        },
+        {
+          "name": "Art Director",
+          "kind": null,
+          "id": null,
+          "status": "planned",
+          "note": "Stil och helhet i spelens uttryck"
+        }
+      ]
+    },
+    "software": {
+      "name": "RAS Software",
+      "director": {
+        "name": "Product Director",
+        "status": "planned",
+        "today": "PM-rollen (project-manager) leder i dag"
+      },
+      "projects": [
+        "Coach Helper",
+        "Forestry Road",
+        "Visual Platform",
+        "Ryngmarks Control Center",
+        "Project AI Benja"
+      ],
+      "roles": [
+        {
+          "name": "Release",
+          "kind": "profile",
+          "id": "release",
+          "status": "active",
+          "note": "Profil: bygge, publicering, versioner"
+        },
+        {
+          "name": "Visuell design",
+          "kind": "profile",
+          "id": "visual-design",
+          "status": "active",
+          "note": "Profil: look and feel"
+        },
+        {
+          "name": "UX / UI",
+          "kind": "profile",
+          "id": "ux-ui",
+          "status": "active",
+          "note": "Profil: flöden och användbarhet"
+        },
+        {
+          "name": "Frontend",
+          "kind": "profile",
+          "id": "frontend",
+          "status": "active",
+          "note": "Profil: webbgränssnitt"
+        },
+        {
+          "name": "Backend",
+          "kind": "profile",
+          "id": "backend",
+          "status": "active",
+          "note": "Profil: tjänster och affärslogik"
+        },
+        {
+          "name": "Databas",
+          "kind": "profile",
+          "id": "database",
+          "status": "active",
+          "note": "Profil: schema och lagring"
+        }
+      ]
+    }
+  },
+  "core": {
+    "name": "RAS Core",
+    "roles": [
+      {
+        "name": "Solution Architect",
+        "kind": "agent",
+        "id": "solution-architect",
+        "status": "active",
+        "note": "Draft och blueprint"
+      },
+      {
+        "name": "Engineering Analyst",
+        "kind": "agent",
+        "id": "engineering-analyst",
+        "status": "active",
+        "note": "Prior art och retro"
+      },
+      {
+        "name": "Research",
+        "kind": "agent",
+        "id": "research",
+        "status": "active",
+        "note": "Externa fakta med källor"
+      },
+      {
+        "name": "Implementer",
+        "kind": "agent",
+        "id": "implementer",
+        "status": "active",
+        "note": "Bygger work orders"
+      },
+      {
+        "name": "Reviewer",
+        "kind": "agent",
+        "id": "reviewer",
+        "status": "active",
+        "note": "Granskar kod och design"
+      },
+      {
+        "name": "Tester",
+        "kind": "agent",
+        "id": "tester",
+        "status": "active",
+        "note": "Försöker få det att gå sönder"
+      },
+      {
+        "name": "Security Auditor",
+        "kind": "agent",
+        "id": "security-auditor",
+        "status": "active",
+        "note": "Letar hål i inloggning och behörighet"
+      }
+    ]
+  }
+}
