@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:48:06Z",
+    "updated":  "2026-10-31T14:50:05Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -62,16 +62,6 @@
                         "note":  "miniblueprint RAS Gaming",
                         "since":  "2026-10-31T14:47:47Z",
                         "agent":  "arch-ras04",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "architect",
-                        "since":  "2026-10-31T14:48:06Z",
-                        "agent":  "ras04-gaming-architect",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
