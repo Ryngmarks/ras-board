@@ -34,3 +34,9 @@ Format:
   and owner alerts come only from `for: "owner"`.
 - A Content-Security-Policy allows only the page's own inline script (by hash) and fetches to GitHub. **After editing
   the `<script>`, run `node tools/csp.cjs index.html`** or the page will not run.
+
+## Local board in T3 (with token history)
+`tools/serve-local.cjs` serves the local board on **127.0.0.1:5199 only** (never the network) and refreshes the data
+(`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than 2 minutes.
+Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
+Only `/`, `/index.html` and `/org.json` are served.
