@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T12:52:45Z",
+    "updated":  "2026-10-31T12:58:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,11 +41,12 @@
                     {
                         "role":  "project-manager",
                         "project":  "RAS",
-                        "state":  "working",
-                        "note":  "board: org-träd + tokenhistorik",
-                        "since":  "2026-10-31T11:51:43Z",
+                        "state":  "waiting",
+                        "note":  "board klar: 2 beslut om publicering och åtkomst",
+                        "since":  "2026-10-31T12:58:58Z",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
+                        "effort":  "default",
+                        "for":  "owner"
                     }
                 ]
 }
