@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:54:09Z",
+    "updated":  "2026-10-31T14:54:30Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,6 +54,16 @@
                         "state":  "waiting",
                         "note":  "vantar pa WO-01..04",
                         "since":  "2026-10-31T14:50:26Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "granskar RAS Gaming-filer",
+                        "since":  "2026-10-31T14:54:30Z",
+                        "agent":  "rev-ras04",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "high"
                     }
                 ]
 }
