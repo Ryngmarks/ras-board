@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-alOx6wf+GIvUd/iRPL1F/p1d10fU/j5aMwpuK+4ecaY='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ZcwGYaTmS042XvFbHIx7JtC75Fmk3VfWDmywIWQXkdY='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – teamet</title>
 <style>
@@ -518,7 +518,7 @@ async function loadOrg() {
   }
 }
 
-// ---- Senaste uppdrag: data only from the local build's embedded #ras-history; the public page never has it ----
+// ---- Senaste uppdrag: local build = embedded #ras-history; public page = history.json on the status branch ----
 const ORG_LABEL = { gaming: "Gaming", software: "Software", core: "Core" };
 const HISTORY_MAX = 10;
 function cleanHistory(raw) {
@@ -543,19 +543,25 @@ function missionRow(m) {
     <td class="num" data-label="Totalt"><span>${m.status === "partial" ? `<span class="tag partial" title="Några körningar saknar mätdata">delvis</span> ` : ""}${fmtNum(m.total)}</span></td>
     <td class="num" data-label="Avslutat">${fmtDate(m.closed_at)}</td></tr>`;
 }
-function renderHistory() {
+// Local build: the embedded #ras-history. Public page: history.json on the `status` branch (owner decision 2026-10-31:
+// mission names, tokens, director and date may be public – nothing else is ever in that file).
+const HISTORY_URL = `https://raw.githubusercontent.com/${REPO}/status/history.json`;
+async function renderHistory() {
   const target = document.getElementById("missions"), note = document.getElementById("missions-note");
   const embedded = document.getElementById("ras-history");
-  if (!embedded) {
-    target.innerHTML = `<div class="empty">Uppdragshistoriken finns i den lokala tavlan (publiceras inte utan ägarens beslut).</div>`;
-    return;
-  }
-  let all;
-  try { all = cleanHistory(JSON.parse(embedded.textContent)); }
-  catch { target.innerHTML = `<div class="empty">Uppdragshistoriken kunde inte läsas.</div>`; return; }
+  let all, where;
+  try {
+    if (embedded) { all = cleanHistory(JSON.parse(embedded.textContent)); where = "lokal vy"; }
+    else {
+      const res = await fetch(HISTORY_URL, { cache: "no-store" });
+      if (res.status === 404) { target.innerHTML = `<div class="empty">Inga avslutade uppdrag är publicerade än.</div>`; return; }
+      if (!res.ok) throw new Error(String(res.status));
+      all = cleanHistory(await res.json()); where = "publicerad";
+    }
+  } catch { target.innerHTML = `<div class="empty">Uppdragshistoriken kunde inte läsas.</div>`; return; }
   const when = m => { const t = Date.parse(m.closed_at); return isFinite(t) ? t : -Infinity; };
   const rows = all.sort((a, b) => when(b) - when(a)).slice(0, HISTORY_MAX);
-  note.textContent = all.length ? `${rows.length} av ${all.length} · lokal vy` : "lokal vy";
+  note.textContent = all.length ? `${rows.length} av ${all.length} · ${where}` : where;
   target.innerHTML = rows.length
     ? `<div class="table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
        <tbody>${rows.map(missionRow).join("")}</tbody></table></div>`

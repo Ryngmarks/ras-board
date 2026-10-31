@@ -40,3 +40,9 @@ Format:
 (`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than 2 minutes.
 Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
 Only `/`, `/index.html` and `/org.json` are served.
+
+## Public mission history (owner decision 2026-10-31)
+`tools/publish-history.cjs` writes `history.json` to the `status` branch: per mission only id, project, name, organisation,
+director, input/output/total/cache tokens, run counts, status and close date. Values are rebuilt from a whitelist and
+anything that looks like a path, URL, e-mail address or key stops the publish (`node --test tools/publish-history.test.cjs`).
+No keys, logs, paths or prompts are ever published. `serve-local.cjs` publishes when the history changes.

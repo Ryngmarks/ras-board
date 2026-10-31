@@ -2,7 +2,7 @@
 // Serves the LOCAL RAS board (with mission token history) on this PC only – 127.0.0.1, never the network.
 // Meant to be started from the T3 project script "RAS-tavla" so the owner sees it in T3's preview, also through
 // T3 remote. On a page load the data is refreshed when it is older than REFRESH_MS:
-//   ras-telemetry collect + history  ->  build-local.cjs  ->  ~/.ras/board/index.html
+//   ras-telemetry collect + history  ->  build-local.cjs  ->  ~/.ras/board/index.html  ->  publish-history.cjs
 // Usage: node tools/serve-local.cjs [--port 5199]
 'use strict';
 const http = require('http');
@@ -34,6 +34,8 @@ function refresh() {
     }
     run(path.join(boardRepo, 'tools', 'build-org.cjs'), []);
     run(path.join(boardRepo, 'tools', 'build-local.cjs'), []);
+    // Owner decision 2026-10-31: the mission summaries (name, tokens, director, date) are public; publish when changed.
+    try { run(path.join(boardRepo, 'tools', 'publish-history.cjs'), []); } catch (error) { console.error('publish failed: ' + String(error.stderr || error.message).split(/\r?\n/)[0]); }
     lastError = '';
   } catch (error) {
     // Keep serving the last good build; say what failed in the console only (never in the page).
