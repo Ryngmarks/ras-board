@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T13:34:37Z",
+    "updated":  "2026-10-31T14:26:02Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "working",
                         "note":  "m02 R0 Claude mot Codex",
                         "since":  "2026-10-30T20:07:38Z"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "Game Director utkast: 3 frågor",
-                        "since":  "2026-10-31T13:34:37Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default",
-                        "for":  "owner"
                     }
                 ]
 }
