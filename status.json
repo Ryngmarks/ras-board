@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T22:24:51Z",
+    "updated":  "2026-10-31T22:25:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,6 +45,16 @@
                         "note":  "m06 blueprint",
                         "since":  "2026-10-31T22:24:51Z",
                         "agent":  "architect-m06",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "Solution Architect",
+                        "since":  "2026-10-31T22:25:07Z",
+                        "agent":  "m06-clip-tool-Solution-Architect",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
