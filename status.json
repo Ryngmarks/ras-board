@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T21:29:18Z",
+    "updated":  "2026-10-31T21:30:03Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -42,8 +42,9 @@
                         "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
-                        "note":  "väntar på granskning",
-                        "since":  "2026-10-31T17:31:09Z"
+                        "note":  "tavlan klar, väntar på ja",
+                        "since":  "2026-10-31T17:31:09Z",
+                        "for":  "owner"
                     }
                 ]
 }
