@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T09:52:20Z",
+    "updated":  "2026-10-31T09:52:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,6 +57,13 @@
                         "agent":  "Mossvale-m02-armour-craft-research",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "rustningsresearch",
+                        "since":  "2026-10-31T09:52:26Z"
                     }
                 ]
 }
