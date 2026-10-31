@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T17:30:20Z",
+    "updated":  "2026-10-31T17:30:31Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,6 +56,16 @@
                         "agent":  "ras20-workshop-engineering-analyst",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "research (pilot scan)",
+                        "since":  "2026-10-31T17:30:31Z",
+                        "agent":  "ras20-workshop-research-pilot-scan-",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
