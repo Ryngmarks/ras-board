@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T17:30:31Z",
+    "updated":  "2026-10-31T17:31:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -39,15 +39,6 @@
                         "since":  "2026-10-30T20:07:38Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Game Director v1 utkast",
-                        "since":  "2026-10-31T17:30:06Z",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
                         "role":  "engineering-analyst",
                         "project":  "Mossvale",
                         "state":  "working",
@@ -65,6 +56,15 @@
                         "since":  "2026-10-31T17:30:31Z",
                         "agent":  "ras20-workshop-research-pilot-scan-",
                         "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "väntar på analyst och pilot-scan",
+                        "since":  "2026-10-31T17:31:09Z",
+                        "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
                 ]
