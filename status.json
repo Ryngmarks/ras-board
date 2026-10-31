@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T14:50:26Z",
+    "updated":  "2026-10-31T14:50:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,6 +94,16 @@
                         "state":  "waiting",
                         "note":  "vantar pa WO-01..04",
                         "since":  "2026-10-31T14:50:26Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "WO-01",
+                        "since":  "2026-10-31T14:50:37Z",
+                        "agent":  "ras04-gaming-WO-01",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
