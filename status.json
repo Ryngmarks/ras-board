@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T21:41:51Z",
+    "updated":  "2026-10-31T22:10:38Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -44,16 +44,6 @@
                         "state":  "waiting",
                         "note":  "väntar på svärdsklipp",
                         "since":  "2026-10-31T21:41:41Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01",
-                        "since":  "2026-10-31T21:41:51Z",
-                        "agent":  "m05-sword-WO-01",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
