@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ZcwGYaTmS042XvFbHIx7JtC75Fmk3VfWDmywIWQXkdY='; style-src 'unsafe-inline'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Aae7/98y6aRER12M0nTLgsLuVCcKR5t57wQMt7cK1GY='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – teamet</title>
 <style>
@@ -153,6 +153,10 @@
   .branch.core { --acc: var(--core); --acc-2: var(--core); border-top-color: var(--core); }
   .branch-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .branch-head h3 { margin: 0; font-size: 17px; line-height: 1.2; }
+  /* Branch logos (owner, 2026-10-31): white-background PNGs. Light theme: multiply drops the white. Dark theme: invert +
+     hue-rotate keeps orange/blue, turns the navy word mark light, and screen drops the (now black) background. */
+  .brand-logo { display: block; height: 40px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  @media (prefers-color-scheme: dark) { .brand-logo { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; } }
   .branch-head small { color: var(--acc); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
   .director { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--acc) 9%, var(--surface-2)); border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)); }
   .director.planned { border-style: dashed; background: transparent; }
@@ -489,7 +493,7 @@ function renderOrg(org) {
   const branch = k => {
     const b = org.branches[k];
     if (!b) return "";
-    return `<article class="branch ${k}"><div class="branch-head"><h3>${esc(b.name)}</h3><small>${k === "gaming" ? "Spel" : "Mjukvara"}</small></div>
+    return `<article class="branch ${k}"><div class="branch-head"><h3><img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180"></h3><small>${k === "gaming" ? "Spel" : "Mjukvara"}</small></div>
       ${directorHtml(b.director)}
       ${b.projects.length ? `<p class="org-projects"><span class="label">Projekt</span>${b.projects.map(p => `<span class="chip">${esc(p)}</span>`).join("")}</p>` : ""}
       <div class="role-grid">${b.roles.map(roleHtml).join("")}</div></article>`;

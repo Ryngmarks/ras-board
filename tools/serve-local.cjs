@@ -44,12 +44,14 @@ function refresh() {
   }
 }
 
-const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json; charset=utf-8' };
+const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png' };
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://' + HOST);
-  const name = url.pathname === '/' ? 'index.html' : path.basename(url.pathname);
-  if (!['index.html', 'org.json'].includes(name)) { res.writeHead(404); return res.end('not found'); }
+  const allowed = { '/': 'index.html', '/index.html': 'index.html', '/org.json': 'org.json',
+    '/assets/ras-gaming.png': 'assets/ras-gaming.png', '/assets/ras-software.png': 'assets/ras-software.png' };
+  const name = allowed[url.pathname];
+  if (!name) { res.writeHead(404); return res.end('not found'); }
   if (name === 'index.html') refresh();
   const file = path.join(boardDir, name);
   if (!fs.existsSync(file)) { res.writeHead(503); return res.end('board not built yet'); }

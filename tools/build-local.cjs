@@ -44,4 +44,10 @@ html = html.replace("<script>", () => blocks + "<script>");
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, "index.html"), html);
 if (org) fs.copyFileSync(orgFile, path.join(outDir, "org.json"));
+// Branch logos (owner, 2026-10-31).
+fs.mkdirSync(path.join(outDir, "assets"), { recursive: true });
+for (const logo of ["ras-gaming.png", "ras-software.png"]) {
+  const from = path.join(boardDir, "assets", logo);
+  if (fs.existsSync(from)) fs.copyFileSync(from, path.join(outDir, "assets", logo));
+}
 console.log(`build-local: ${history.missions?.length ?? 0} missions embedded -> ${path.join(outDir, "index.html")}`);

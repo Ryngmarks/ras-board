@@ -16,6 +16,7 @@ const csp = [
   "default-src 'none'",
   `script-src 'sha256-${hash}'`,
   "style-src 'unsafe-inline'",
+  "img-src 'self'",
   "connect-src 'self' https://api.github.com https://raw.githubusercontent.com",
   "base-uri 'none'",
   "form-action 'none'",
