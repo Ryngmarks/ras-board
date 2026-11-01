@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T12:54:22Z",
+    "updated":  "2026-11-01T12:59:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -75,9 +75,8 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "Spelbiblioteket redo att visas",
-                        "since":  "2026-11-01T09:47:41Z",
-                        "for":  "owner"
+                        "note":  "väntar på ras07",
+                        "since":  "2026-11-01T09:47:41Z"
                     }
                 ]
 }
