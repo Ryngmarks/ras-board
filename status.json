@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:58:35Z",
+    "updated":  "2026-11-01T21:00:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -43,7 +43,7 @@
                         "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
-                        "note":  "Project Doom plan klar",
+                        "note":  "ng01: blueprint r2 för godkännande",
                         "since":  "2026-11-01T20:58:35Z",
                         "for":  "owner"
                     }
