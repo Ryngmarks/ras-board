@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:46:49Z",
+    "updated":  "2026-11-01T20:46:53Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -48,16 +48,6 @@
                         "agent":  "ng01-rpg-foundation-architecture-review",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Project Doom plan",
-                        "since":  "2026-11-01T20:41:27Z",
-                        "agent":  "ng01-bp",
-                        "model":  "claudeAgent/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "reviewer",
