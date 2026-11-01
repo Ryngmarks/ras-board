@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:58:32Z",
+    "updated":  "2026-11-01T20:58:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,14 @@
                         "state":  "waiting",
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
+                        "for":  "owner"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "Project Doom plan klar",
+                        "since":  "2026-11-01T20:58:35Z",
                         "for":  "owner"
                     }
                 ]
