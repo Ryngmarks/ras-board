@@ -1,0 +1,187 @@
+{
+  "generated_at": "2026-11-01T13:48:12.714Z",
+  "missions": [
+    {
+      "project": "Clicker Land",
+      "id": "m10-hero-models",
+      "name": "3D hero models",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "m11-run-cards",
+      "name": "Run Cards - Draft and Bind",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "m13-star-forge",
+      "name": "Star Forge",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "m14-buy-all",
+      "name": "Buy all upgrades",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "m15-journey",
+      "name": "The Journey milestones",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "onboarding",
+      "name": "RAS onboarding",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Clicker Land",
+      "id": "tools-verify",
+      "name": "Verification runner",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Coach Helper",
+      "id": "onboarding",
+      "name": "RAS onboarding",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Coach Helper",
+      "id": "sb01-improvement-research",
+      "name": "Playbook improvement research",
+      "phase": "owner",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m01-forest-art-direction",
+      "name": "Forest art direction",
+      "phase": "paused",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m02-human-character",
+      "name": "Human character and armor direction",
+      "phase": "owner",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m03-t2-archer",
+      "name": "T2 archer Game Director pilot",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m04-world-files",
+      "name": "Repair binary world files",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m05-sword",
+      "name": "T2 broadsword assessment",
+      "phase": "paused",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m06-clip-tool",
+      "name": "General animation clip tool",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m07-axe",
+      "name": "Battle axe motion",
+      "phase": "owner",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m08-locomotion",
+      "name": "Player walk and run",
+      "phase": "paused",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "m09-weapon-library",
+      "name": "Weapon standards and Game Library",
+      "phase": "owner",
+      "updated": "2026-11-01T13:03:13.450Z"
+    },
+    {
+      "project": "Mossvale",
+      "id": "onboarding",
+      "name": "RAS onboarding",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras01-modules",
+      "name": "Module maps and claims",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras03-board-telemetry",
+      "name": "Organization board and token history",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras04-gaming",
+      "name": "RAS Gaming",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras05-context-budget",
+      "name": "PM context budget",
+      "phase": "owner",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras06-board-tree",
+      "name": "Organization tree board layout",
+      "phase": "done",
+      "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras07-mission-log",
+      "name": "Cross-project mission log",
+      "phase": "review",
+      "updated": "2026-11-01T13:42:38.477Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras20-workshop",
+      "name": "RAS 2.0 and Game Director workshop",
+      "phase": "paused",
+      "updated": "2026-11-01T12:58:41.357Z"
+    }
+  ]
+}
