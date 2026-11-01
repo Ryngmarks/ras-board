@@ -33,8 +33,8 @@ test('committed library.html carries no data block and a valid CSP hash with sam
   assert.doesNotMatch(html, /<script[^>]*id=["']?ras-library/);
   assert.ok(cspHashOk(html), 'run node tools/csp.cjs library.html');
   assert.match(html, /connect-src 'self';/);
-  // the only URL is the plain link to the same page on the local board (owner ras07 #9); it is never fetched
-  assert.doesNotMatch(html.split('http://127.0.0.1:5199/library.html').join(''), /https?:\/\//);
+  // the only URL is the plain link to the same page on the local board (owner ras07 #9, #11: hostname); it is never fetched
+  assert.doesNotMatch(html.split('http://johansdator:5199/library.html').join(''), /https?:\/\//);
 });
 
 test('index.html and missions.html CSP hashes are still valid and they link to the library tab', () => {
@@ -235,7 +235,8 @@ test('build-local replaces a hardlinked output file instead of writing through i
 test('serve-local serves /library.html (static check – starting it would refresh telemetry and publish)', () => {
   const src = read(path.join(__dirname, 'serve-local.cjs'));
   assert.match(src, /'\/library\.html': 'library\.html'/);
-  assert.match(src, /listen\(port, HOST/);
+  assert.match(src, /listen\(port, bindHost\(lan\)/);
   assert.match(src, /const HOST = '127\.0\.0\.1'/);
+  assert.match(src, /const bindHost = lan => \(lan \? LAN_HOST : HOST\)/);
 });
 
