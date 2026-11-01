@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T11:16:13Z",
+    "updated":  "2026-11-01T11:21:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -30,16 +30,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01 research",
-                        "since":  "2026-11-01T11:15:56Z",
-                        "agent":  "m09-weapon-library-WO-01-research",
-                        "model":  "claude/claude-haiku-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
