@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:29:54Z",
+    "updated":  "2026-11-01T20:30:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -38,16 +38,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Project Doom arkitektur",
-                        "since":  "2026-11-01T20:25:52Z",
-                        "agent":  "ng01-arch",
-                        "model":  "claudeAgent/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
