@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:35:07.687Z",
+  "generated_at": "2026-11-01T21:06:01.596Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -111,7 +111,7 @@
       "id": "m07-axe",
       "name": "Battle axe motion",
       "phase": "build",
-      "updated": "2026-11-01T14:35:01.089Z"
+      "updated": "2026-11-01T20:25:51.398Z"
     },
     {
       "project": "Mossvale",
@@ -133,6 +133,13 @@
       "name": "RAS onboarding",
       "phase": "done",
       "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ng01-rpg-foundation",
+      "name": "Project Doom - new RPG foundation from Mossvale parts",
+      "phase": "build",
+      "updated": "2026-11-01T21:06:01.527Z"
     },
     {
       "project": "RAS",
