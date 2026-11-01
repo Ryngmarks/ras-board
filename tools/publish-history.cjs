@@ -2,7 +2,11 @@
 // Publishes the mission token history to the public board (owner decision 2026-10-31):
 // mission name, project, organisation, director, input/output/total/cache tokens, status and close date – nothing else.
 //
-// Reads  %USERPROFILE%/.ras/telemetry/history.json (env RAS_TELEMETRY_DIR overrides)
+// Reads  %USERPROFILE%/.ras/telemetry/history.json (env RAS_TELEMETRY_DIR overrides) and the RAS mission log
+//        <RAS_MISSIONS_FILE or <RAS_HOME or ../ryngmark-agents>/docs/missions.json>: every mission whose key
+//        <project>/<id> is `public: false` there (security audits) is dropped (ras07 review finding 1). Fail closed: when the
+//        history has missions and the log cannot be read, nothing is published (one warning line, exit 0 – serve-local
+//        runs this as best effort).
 // Writes history.json on branch `status` of Ryngmarks/ras-board through the GitHub API with the board-only token in
 //        %USERPROFILE%/.ras/board-token (fine-grained: ras-board, Contents read/write).
 // Every value is rebuilt from a whitelist and checked: anything that looks like a path, a key or a URL stops the publish.
@@ -18,6 +22,8 @@ const FILE = 'history.json';
 const dryRun = process.argv.includes('--dry-run');
 const telemetryDir = process.env.RAS_TELEMETRY_DIR || path.join(os.homedir(), '.ras', 'telemetry');
 const tokenFile = path.join(os.homedir(), '.ras', 'board-token');
+const rasHome = process.env.RAS_HOME || path.resolve(__dirname, '..', '..', 'ryngmark-agents');
+const missionsFile = process.env.RAS_MISSIONS_FILE || path.join(rasHome, 'docs', 'missions.json');
 
 const ORGS = ['gaming', 'software', 'core'];
 const STATUSES = ['measured', 'partial', 'missing'];
@@ -37,11 +43,31 @@ function count(value, field) {
   return value;
 }
 
-function sanitize(history) {
+// Normalised so case, padding or inner whitespace can never make a private key miss (ras07 fix check F1).
+const norm = v => String(v ?? '').normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase();
+const missionKey = (project, id) => `${norm(project)}/${norm(id)}`;
+
+// The keys (lower case) of every mission marked `public: false` in RAS docs/missions.json. Throws when the file is
+// missing, unreadable or not a version 1 list – the caller then publishes nothing.
+function privateKeys(file) {
+  const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!doc || doc.version !== 1 || !Array.isArray(doc.missions)) throw new Error('not a version 1 mission list');
+  const keys = new Set();
+  for (const m of doc.missions) {
+    if (!m || typeof m !== 'object' || m.public !== false) continue;
+    if (typeof m.key === 'string' && m.key.includes('/')) { const [proj, ...rest] = m.key.split('/'); keys.add(missionKey(proj, rest.join('/'))); }
+    if (typeof m.project === 'string' && typeof m.id === 'string') keys.add(missionKey(m.project, m.id));
+  }
+  return keys;
+}
+
+// `hidden` = privateKeys(); private missions are dropped before the list is cut to 10.
+function sanitize(history, hidden = new Set()) {
   if (!history || !Array.isArray(history.missions)) throw new Error('history.json has no missions list');
+  const visible = history.missions.filter(m => !(m && typeof m === 'object' && hidden.has(missionKey(m.project, m.id))));
   return {
     generated_at: new Date().toISOString(),
-    missions: history.missions.slice(0, 10).map((m, i) => {
+    missions: visible.slice(0, 10).map((m, i) => {
       const at = `missions[${i}]`;
       if (m.closed_at && Number.isNaN(Date.parse(m.closed_at))) throw new Error(`${at}.closed_at is not a date`);
       return {
@@ -59,7 +85,15 @@ function sanitize(history) {
 async function main() {
   const source = path.join(telemetryDir, 'history.json');
   if (!fs.existsSync(source)) throw new Error('no history.json – run ras-telemetry collect + history first');
-  const published = sanitize(JSON.parse(fs.readFileSync(source, 'utf8')));
+  const history = JSON.parse(fs.readFileSync(source, 'utf8'));
+  let hidden = new Set();
+  if (Array.isArray(history?.missions) && history.missions.length) {
+    try { hidden = privateKeys(missionsFile); } catch (error) {
+      console.warn(`publish-history: mission log unreadable (${String(error.message).split(/\r?\n/)[0].slice(0, 80)}) – publishing nothing`);
+      return;
+    }
+  }
+  const published = sanitize(history, hidden);
   const body = JSON.stringify(published, null, 2) + '\n';
   if (dryRun) { process.stdout.write(body); return; }
   if (!fs.existsSync(tokenFile)) throw new Error('no board token in ~/.ras/board-token');
@@ -82,4 +116,5 @@ async function main() {
 }
 
 if (require.main === module) main().catch(error => { console.error('publish-history: ' + error.message); process.exit(1); });
-module.exports = { sanitize };
+// FORBIDDEN and text() are the guard every public board file shares (publish-missions.cjs reuses them).
+module.exports = { sanitize, privateKeys, FORBIDDEN, text };

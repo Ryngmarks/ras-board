@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-y8dljoe5kKgPao70nb5bpPQTchpVsjMFJrCsrRCkZ68='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAS – uppdrag</title>
+<style>
+  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-01) ---- */
+  :root {
+    color-scheme: light;
+    --bg: #f6f5f2; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #676d7a;
+    --shadow: 0 1px 2px rgba(31, 27, 20, .04), 0 8px 24px rgba(31, 27, 20, .06);
+    --gaming: #e07b2e; --gaming-soft: #fdf1e6; --software: #3b7ff0; --software-soft: #ebf2fe; --core: #9a84df; --core-soft: #f3effc;
+    --work: #1f9d6b; --work-soft: rgba(31, 157, 107, .12);
+    --wait: #d4731b; --wait-soft: rgba(224, 123, 46, .12);
+    --free: #a3a8b3; --free-soft: rgba(106, 112, 125, .08);
+    --line: #d3cec5;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+  .topbar { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
+  .topbar-in { max-width: 1480px; margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex: none; color: var(--fg); text-decoration: none; padding-right: 28px; border-right: 1px solid var(--border); }
+  .brand b { font-size: 19px; font-weight: 900; font-style: italic; letter-spacing: .02em; }
+  .brand span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .tabs { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 8px 15px; border-radius: 10px; color: var(--fg); text-decoration: none; font-size: 14px; font-weight: 500; border: 1px solid transparent; }
+  .tabs a svg { width: 17px; height: 17px; color: var(--muted); }
+  .tabs a:hover { background: var(--surface-2); border-color: var(--border); }
+  .tabs a:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
+  .tabs a[aria-current="page"] { background: #f6ebde; border-color: #ecd9c3; font-weight: 650; }
+  .tabs a[aria-current="page"] svg { color: var(--gaming); }
+  main { max-width: 1480px; margin: 0 auto; padding: 28px 28px 56px; }
+  .phead { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 20px; flex-wrap: wrap; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 6px 0 4px; }
+  .lede { margin: 0; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
+  .chead { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+  .chead h2 { margin: 0; font-size: 17px; font-weight: 700; }
+  .chead p { margin: 0; color: var(--muted); font-size: 13px; }
+  .chead .sp { flex: 1; }
+  .ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--fg); flex: none; }
+  .ic.gaming { color: var(--gaming); background: var(--gaming-soft); border-color: transparent; }
+  .ic.software { color: var(--software); background: var(--software-soft); border-color: transparent; }
+  .ic.core { color: var(--core); background: var(--core-soft); border-color: transparent; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--free-soft); }
+  .badge.wait { color: #a4520c; background: #fbe6d2; }
+  .badge.work { color: #12704b; background: #dcf2e8; }
+  .phase { display: inline-block; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; }
+  .p-owner { color: #a4520c; background: #fbe6d2; }
+  .p-analysis { color: #6a55b8; background: #efeafc; }
+  .p-plan { color: #5048a8; background: #e9e8fb; }
+  .p-build { color: #1f5fcf; background: #e5eefd; }
+  .p-review { color: #0f7a74; background: #dcf3f1; }
+  .p-paused { color: #646a76; background: #eeeff1; }
+  .p-done { color: #1d7a4c; background: #e0f3e8; }
+  .bdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--core); flex: none; }
+  .bdot.gaming { background: var(--gaming); } .bdot.software { background: var(--software); }
+  .empty { padding: 10px 12px; border: 1px dashed var(--border-2); border-radius: 10px; color: var(--muted); font-size: 13px; }
+  .unk { color: var(--muted); font-style: italic; }
+  .localnote { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; margin: 16px 0 0; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--border-2); color: var(--muted); font-size: 13px; }
+  .localnote a { color: var(--software); font-weight: 650; text-decoration: none; }
+  .localnote a:hover { text-decoration: underline; }
+  .localnote small { flex-basis: 100%; font-size: 12px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  footer code { font-size: 11px; }
+  @media (max-width: 699px) {
+    /* phones: wordmark on one row, the three tabs as equal buttons on their own row – always all visible */
+    .topbar-in { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 6px; }
+    .brand { border-right: 0; padding-right: 0; }
+    .tabs { width: 100%; gap: 4px; }
+    .tabs a { flex: 1 1 0; justify-content: center; padding: 7px 6px; gap: 5px; font-size: 13px; border-color: var(--border); }
+    main { padding: 20px 14px 44px; }
+    h1 { font-size: 26px; }
+    .card { padding: 16px; }
+  }
+  @media (max-width: 380px) { .tabs a { font-size: 12px; padding: 7px 4px; gap: 4px; } .tabs a svg { width: 15px; height: 15px; } }
+  /* ---- end shared look ---- */
+
+  .meta { color: var(--muted); font-size: 13px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 18px; }
+  .fchip { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-size: 13px; font-weight: 600; color: var(--fg); padding: 6px 13px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border-2); cursor: pointer; }
+  .fchip small { color: var(--muted); font-weight: 500; }
+  .fchip:hover { border-color: var(--muted); }
+  .fchip[aria-pressed="true"] { background: #1d2027; border-color: #1d2027; color: #fff; }
+  .fchip[aria-pressed="true"] small { color: #c9ccd3; }
+  .fchip:focus-visible, .mrow:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
+
+  .groups { display: grid; gap: 18px; }
+  .group.g-owner { border-color: #f0c08f; background: linear-gradient(180deg, #fff8f1, #fff 80px); }
+  .count { font-size: 13px; color: var(--muted); font-weight: 600; }
+  details.group > summary { list-style: none; cursor: pointer; }
+  details.group > summary::-webkit-details-marker { display: none; }
+  details.group > summary .chead { margin: 0; }
+  details.group[open] > summary .chead { margin-bottom: 14px; }
+  details.group .tw { transition: transform .15s; color: var(--muted); }
+  details.group[open] .tw { transform: rotate(90deg); }
+
+  /* mission rows: a grid table; every local row is a button that opens its log */
+  .mtable { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .mhead, .mrow { display: grid; grid-template-columns: 130px minmax(0, 2fr) 128px minmax(0, 2fr) 110px minmax(0, 1.2fr) 76px 14px; gap: 12px; align-items: center; padding: 10px 14px; }
+  .pub .mhead, .pub .mrow { grid-template-columns: 160px minmax(0, 1fr) 140px; }
+  .mhead { color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .mitem + .mitem { border-top: 1px solid var(--border); }
+  .mrow { width: 100%; font: inherit; color: var(--fg); text-align: left; background: #fff; border: 0; }
+  button.mrow { cursor: pointer; }
+  button.mrow:hover, .mitem.open .mrow { background: var(--surface-2); }
+  .mitem.hit .mrow { box-shadow: inset 3px 0 0 var(--software); }
+  .c-proj { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .c-title { min-width: 0; display: grid; }
+  .c-title b { overflow-wrap: anywhere; }
+  .c-title code { color: var(--muted); font-size: 11px; }
+  .c-next { min-width: 0; color: #3a3f4a; overflow-wrap: anywhere; }
+  .c-upd { color: var(--muted); font-size: 13px; }
+  .c-branch { min-width: 0; display: grid; }
+  .c-branch code { font-size: 11px; }
+  .c-branch small { color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+  .c-tok { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .chev { color: var(--muted); transition: transform .15s; }
+  .mitem.open .chev { transform: rotate(90deg); }
+  .mdetail { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; padding: 6px 14px 16px 156px; background: var(--surface-2); }
+  .mdetail h3 { margin: 6px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .log { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .log li { display: grid; grid-template-columns: 112px auto minmax(0, 1fr); gap: 10px; align-items: baseline; }
+  .log time { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .log span.n { overflow-wrap: anywhere; }
+  .mdetail dl { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 5px 12px; margin: 0; }
+  .mdetail dt { color: var(--muted); font-size: 12px; font-weight: 600; }
+  .mdetail dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+
+  @media (max-width: 1099px) {
+    .mhead { display: none; }
+    .mrow, .pub .mrow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "proj phase" "title title" "next next" "meta meta"; gap: 4px 10px; padding: 12px 14px; }
+    .c-proj { grid-area: proj; }
+    .c-phase { grid-area: phase; }
+    .c-title { grid-area: title; }
+    .c-next { grid-area: next; color: var(--muted); font-size: 13px; }
+    .c-meta { grid-area: meta; display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--muted); font-size: 12px; }
+    .c-meta > span { display: inline-flex; gap: 6px; text-align: left; }
+    .c-tok { font-weight: 600; }
+    .chev { display: none; }
+    .mdetail { grid-template-columns: minmax(0, 1fr); padding: 4px 14px 14px; }
+    .log li { grid-template-columns: auto minmax(0, 1fr); }
+    .log li span.n { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1100px) { .c-meta { display: contents; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><b>RYNGMARK</b><span>Agent System</span></a>
+    <nav class="tabs" aria-label="Sidor">
+      <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg><span>Översikt</span></a>
+      <a href="missions.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Uppdrag</span></a>
+      <a href="library.html" data-local-href="http://127.0.0.1:5199/library.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5"/></svg><span>Spelbibliotek</span></a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="phead">
+    <div>
+      <div class="eyebrow">Ryngmark Agent System</div>
+      <h1>Uppdrag</h1>
+      <p class="lede">Var varje uppdrag står – i alla spel och appar.</p>
+    </div>
+    <div class="meta" id="meta">Laddar…</div>
+  </div>
+
+  <p class="localnote" id="localnote" hidden>Det här är kortversionen: projekt, uppdrag och fas. Nästa steg, logg, grenar och tokens finns bara på den lokala tavlan.
+    <a href="http://127.0.0.1:5199/missions.html" rel="noopener">Öppna lokalt →</a>
+    <small>Fungerar bara på Johans dator medan den lokala tavlan körs (knappen RAS-tavla i T3).</small></p>
+
+  <div class="filters" id="filters" role="toolbar" aria-label="Filtrera på projekt" hidden></div>
+  <div class="groups" id="groups" aria-live="polite"><div class="empty">Laddar uppdragen…</div></div>
+
+  <footer>
+    Källa: <code>docs/missions.json</code> i RAS, ändras bara med <code>node tools/ras-missions.mjs set …</code>. Den publika sidan
+    visar bara projekt, uppdragets namn och fas; säkerhetsgranskningar visas aldrig publikt.
+  </footer>
+</main>
+
+<script>
+const REPO = "Ryngmarks/ras-board";
+const MISSIONS_URL = `https://raw.githubusercontent.com/${REPO}/status/missions.json`;
+const PHASES = { owner: "Väntar på dig", analysis: "Analys", plan: "Plan", build: "Utförande", review: "Granskning", paused: "Pausad", done: "Klar" };
+// Groups in page order (blueprint): Väntar på dig → Analys/Plan → Utförande/Granskning → Pausad → Klar (collapsed).
+const GROUPS = [
+  { id: "owner", phases: ["owner"], title: "Väntar på dig", icon: "user" },
+  { id: "plan", phases: ["analysis", "plan"], title: "Analys och plan", icon: "search" },
+  { id: "build", phases: ["build", "review"], title: "Utförande och granskning", icon: "play" },
+  { id: "paused", phases: ["paused"], title: "Pausad", icon: "pause" },
+  { id: "done", phases: ["done"], title: "Klar", icon: "check" },
+];
+const ICONS = {
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  play: '<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/>',
+  pause: '<circle cx="12" cy="12" r="9"/><path d="M10 9v6"/><path d="M14 9v6"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  chev: '<path d="m9 6 6 6-6 6"/>',
+};
+const icon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[id]}</svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function ago(iso) {
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (!isFinite(s)) return "";
+  if (s < 90) return "nyss";
+  if (s < 3600) return Math.round(s / 60) + " min";
+  if (s < 86400) return Math.round(s / 3600) + " h";
+  return Math.round(s / 86400) + " d";
+}
+const sinceText = iso => { const a = ago(iso); return !a ? "" : a === "nyss" ? "nyss" : `för ${a} sedan`; };
+const fmtM = n => (n === null ? "–" : esc((n / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M");
+const fmtWhen = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) : "–"; };
+
+// ---- Missions (ras07). Two shapes, one cleaner each; both return the same rows. Keep identical in index.html. ----
+// Local: RAS docs/missions.json embedded by build-local (+ `tokens` per mission). Public: publish-missions.cjs output.
+const relPath = p => (typeof p === "string" && p.length <= 200 && !/[\u0000-\u001f]/.test(p) && !/^[a-z][a-z0-9+.-]*:|^[\\/]/i.test(p) && !p.replace(/\\/g, "/").split("/").includes("..") ? p : "");
+// Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
+// cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
+function cleanMissions(raw) {
+  if (!raw || typeof raw !== "object" || raw.version !== 1 || !Array.isArray(raw.missions)) return null;
+  const str = (v, n = 160) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project) && str(m.id))
+    .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.title, 80) || str(m.id, 60),
+      phase: m.phase, next: str(m.next, 160), updated: when(m.updated), opened: when(m.opened), closed: when(m.closed),
+      branch: str(m.branch, 80), worktree: str(m.worktree, 80), brief: relPath(m.brief), status: relPath(m.status), public: m.public !== false,
+      tokens: typeof m.tokens === "number" && isFinite(m.tokens) && m.tokens >= 0 ? m.tokens : null,
+      log: (Array.isArray(m.log) ? m.log : []).filter(e => e && typeof e === "object" && Object.hasOwn(PHASES, e.phase)).slice(-30)
+        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })) }));
+}
+function cleanPublicMissions(raw) {
+  if (!raw || typeof raw !== "object" || !Array.isArray(raw.missions)) return null;
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project, 80) && str(m.id, 60))
+    .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.name, 80) || str(m.id, 60),
+      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [] }));
+}
+// The ONLY code that knows where mission data comes from.
+async function loadMissions(doc, fetchFn) {
+  const block = doc.getElementById("ras-missions");
+  if (block) {
+    let raw;
+    try { raw = JSON.parse(block.textContent); } catch { return { state: "invalid" }; }
+    if (raw === null) return { state: "none", local: true };
+    const list = cleanMissions(raw);
+    return list ? { state: "ok", local: true, list } : { state: "invalid", local: true };
+  }
+  try {
+    const res = await fetchFn(MISSIONS_URL, { cache: "no-store" });
+    if (res.status === 404) return { state: "none", local: false };
+    if (!res.ok) return { state: "failed", local: false };
+    const list = cleanPublicMissions(await res.json());
+    return list ? { state: "ok", local: false, list } : { state: "invalid", local: false };
+  } catch { return { state: "failed", local: false }; }
+}
+const MISSION_MSG = {
+  none: "Ingen uppdragslogg ännu – den skapas med node tools/ras-missions.mjs i RAS.",
+  invalid: "Uppdragsloggen kunde inte läsas (okänt format).",
+  failed: "Uppdragsloggen kunde inte hämtas.",
+};
+
+// project -> branch (org.json): Gaming orange, Software blue, everything else Core lilac
+const BRANCHES = ["gaming", "software"];
+function branchMap(rawOrg) {
+  const map = {};
+  for (const k of BRANCHES) {
+    const ps = rawOrg?.branches?.[k]?.projects;
+    if (Array.isArray(ps)) for (const p of ps.slice(0, 12)) if (typeof p === "string") map[p.slice(0, 60)] = k;
+  }
+  return map;
+}
+
+// ---- rendering: every data value through esc() ----
+const byNewest = f => (a, b) => (Date.parse(f(b)) || 0) - (Date.parse(f(a)) || 0);
+function sortGroup(g, list) {
+  if (g.id === "done") return list.slice().sort(byNewest(m => m.closed || m.updated));
+  return list.slice().sort((a, b) => byNewest(m => m.updated)(a, b) || a.key.localeCompare(b.key, "sv"));
+}
+
+function renderRow(m, view, branches) {
+  const k = branches[m.project] || "core";
+  const proj = `<span class="c-proj"><span class="bdot ${k}"></span>${esc(m.project)}</span>`;
+  const phase = `<span class="c-phase"><span class="phase p-${m.phase}">${PHASES[m.phase]}</span></span>`;
+  if (!view.local) {
+    return `<div class="mitem"><div class="mrow">${proj}<span class="c-title"><b>${esc(m.title)}</b></span>${phase}</div></div>`;
+  }
+  const open = view.open.has(m.key);
+  const title = `<span class="c-title"><b>${esc(m.title)}</b>${m.title !== m.id ? `<code>${esc(m.id)}</code>` : ""}</span>`;
+  const meta = `<span class="c-meta"><span class="c-upd">${m.updated ? esc(sinceText(m.updated)) : "–"}</span>` +
+    `<span class="c-branch">${m.branch ? `<code>${esc(m.branch)}</code>` : `<span class="unk">ingen gren</span>`}${m.worktree ? `<small>worktree ${esc(m.worktree)}</small>` : ""}</span>` +
+    `<span class="c-tok">${fmtM(m.tokens)}</span></span>`;
+  return `<div class="mitem${open ? " open" : ""}${view.hit === m.key ? " hit" : ""}" id="m-${esc(encodeURIComponent(m.key))}">` +
+    `<button type="button" class="mrow" data-key="${esc(m.key)}" aria-expanded="${open}">${proj}${title}${phase}` +
+    `<span class="c-next">${m.next ? esc(m.next) : `<span class="unk">–</span>`}</span>${meta}<span class="chev">${icon("chev")}</span></button>` +
+    `${open ? renderDetail(m) : ""}</div>`;
+}
+
+function renderDetail(m) {
+  const log = m.log.slice().reverse();
+  const path = p => (p ? `<code>${esc(p)}</code>` : `<span class="unk">–</span>`);
+  return `<div class="mdetail"><div><h3>Logg</h3>${log.length ? `<ol class="log">${log.map(e =>
+      `<li><time>${esc(fmtWhen(e.at))}</time><span class="phase p-${e.phase}">${PHASES[e.phase]}</span><span class="n">${esc(e.note)}</span></li>`).join("")}</ol>`
+      : `<div class="empty">Ingen logg ännu.</div>`}</div>
+    <div><h3>Var det finns</h3><dl>
+      <dt>Brief</dt><dd>${path(m.brief)}</dd>
+      <dt>STATUS</dt><dd>${path(m.status)}</dd>
+      <dt>Gren</dt><dd>${path(m.branch)}</dd>
+      <dt>Worktree</dt><dd>${path(m.worktree)}</dd>
+      <dt>Öppnad</dt><dd>${esc(fmtWhen(m.opened))}</dd>
+      ${m.closed ? `<dt>Klar</dt><dd>${esc(fmtWhen(m.closed))}</dd>` : ""}
+      <dt>Publik</dt><dd>${m.public ? "ja (projekt, namn, fas)" : "nej – visas bara här"}</dd>
+      <dt>Nyckel</dt><dd><code>${esc(m.key)}</code></dd>
+    </dl></div></div>`;
+}
+
+function renderGroup(g, list, view, branches) {
+  const rows = sortGroup(g, list.filter(m => g.phases.includes(m.phase)));
+  if (!rows.length && g.id !== "owner") return "";
+  const head = view.local
+    ? `<div class="mhead" aria-hidden="true"><span>Projekt</span><span>Uppdrag</span><span>Fas</span><span>Nästa steg</span><span>Ändrad</span><span>Gren / worktree</span><span style="text-align:right">Tokens</span><span></span></div>`
+    : `<div class="mhead" aria-hidden="true"><span>Projekt</span><span>Uppdrag</span><span>Fas</span></div>`;
+  const table = rows.length ? `<div class="mtable${view.local ? "" : " pub"}">${head}${rows.map(m => renderRow(m, view, branches)).join("")}</div>`
+    : `<div class="empty">Inget väntar på dig just nu.</div>`;
+  const chead = `<div class="chead"><span class="ic">${icon(g.icon)}</span><h2>${g.title}</h2><span class="count">${rows.length}</span><span class="sp"></span>${g.id === "done" ? `<span class="tw">${icon("chev")}</span>` : ""}</div>`;
+  if (g.id === "done") return `<details class="card group g-done" id="g-done"${view.doneOpen ? " open" : ""}><summary>${chead}</summary>${table}</details>`;
+  return `<section class="card group g-${g.id}" aria-label="${esc(g.title)}">${chead}${table}</section>`;
+}
+
+function renderFilters(list, view) {
+  const projects = [...new Set(list.map(m => m.project))].sort((a, b) => a.localeCompare(b, "sv"));
+  const chip = (i, label, n, on) => `<button type="button" class="fchip" data-filter="${i}" aria-pressed="${on}">${esc(label)} <small>${n}</small></button>`;
+  return { projects, html: chip(-1, "Alla", list.length, !view.project) + projects.map((p, i) => chip(i, p, list.filter(m => m.project === p).length, view.project === p)).join("") };
+}
+
+function renderPage(list, view, branches) {
+  const shown = view.project ? list.filter(m => m.project === view.project) : list;
+  return GROUPS.map(g => renderGroup(g, shown, view, branches)).join("");
+}
+
+// Public page (no embedded data): the local-only note shows, and the library tab points at the local server (owner #9).
+function markPublic(doc, isPublic) {
+  if (!isPublic) return;
+  const note = doc.getElementById("localnote");
+  if (note) note.hidden = false;
+  for (const a of doc.querySelectorAll("a[data-local-href]")) a.setAttribute("href", a.dataset.localHref);
+}
+
+// ---- page wiring ----
+function boot() {
+  const $ = id => document.getElementById(id);
+  const view = { local: false, project: "", open: new Set(), doneOpen: false, hit: "" };
+  let list = [], projects = [], branches = {};
+  const embeddedOrg = $("ras-org");
+  try { if (embeddedOrg) branches = branchMap(JSON.parse(embeddedOrg.textContent)); } catch { /* colours fall back to Core */ }
+  markPublic(document, !$("ras-missions"));
+
+  const paint = focus => {
+    const f = renderFilters(list, view);
+    projects = f.projects;
+    $("filters").innerHTML = f.html;
+    $("filters").hidden = projects.length < 2;
+    $("groups").innerHTML = renderPage(list, view, branches);
+    if (focus) document.querySelector(focus)?.focus({ preventScroll: true });
+  };
+  // #<Project>/<id> (from the overview) opens that mission
+  const fromHash = () => {
+    let key = "";
+    try { key = decodeURIComponent(location.hash.slice(1)); } catch { /* bad hash: ignore */ }
+    const m = list.find(x => x.key === key);
+    if (!m) return;
+    view.hit = m.key; view.project = "";
+    if (view.local) view.open.add(m.key);
+    if (m.phase === "done") view.doneOpen = true;
+    paint();
+    document.getElementById("m-" + encodeURIComponent(m.key))?.scrollIntoView({ block: "center" });
+  };
+
+  loadMissions(document, (url, opts) => fetch(url, opts)).then(r => {
+    if (r.state !== "ok") { $("meta").textContent = ""; $("groups").innerHTML = `<div class="empty">${esc(MISSION_MSG[r.state])}</div>`; return; }
+    list = r.list; view.local = r.local;
+    const open = list.filter(m => m.phase !== "done").length;
+    $("meta").textContent = `${r.local ? "Lokal vy" : "Publik kortversion"} · ${open} pågående · ${list.length - open} klara`;
+    if (!r.local && !embeddedOrg) fetch("org.json", { cache: "no-store" }).then(x => (x.ok ? x.json() : null)).then(o => { if (o) { branches = branchMap(o); paint(); } }).catch(() => {});
+    paint();
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+  });
+
+  document.addEventListener("click", ev => {
+    const chip = ev.target.closest?.("[data-filter]");
+    if (chip) {
+      const i = Number(chip.dataset.filter);
+      view.project = i >= 0 && projects[i] ? projects[i] : "";
+      paint(`[data-filter="${i}"]`);
+      return;
+    }
+    const row = ev.target.closest?.("button[data-key]");
+    if (row) {
+      const key = row.dataset.key;
+      if (view.open.has(key)) view.open.delete(key); else view.open.add(key);
+      paint(`button[data-key="${CSS.escape(key)}"]`);
+    }
+  });
+  document.addEventListener("toggle", ev => { if (ev.target.id === "g-done") view.doneOpen = ev.target.open; }, true);
+}
+if (typeof document !== "undefined") boot();
+</script>
+</body>
+</html>
