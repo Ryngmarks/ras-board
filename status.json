@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T19:33:10Z",
+    "updated":  "2026-11-01T19:34:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,16 @@
                         "state":  "waiting",
                         "note":  "vantar pa WO-04",
                         "since":  "2026-11-01T09:47:41Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "WO-04 review",
+                        "since":  "2026-11-01T19:34:22Z",
+                        "agent":  "m07-axe-WO-04-review",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
