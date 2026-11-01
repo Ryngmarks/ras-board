@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:50:44Z",
+    "updated":  "2026-11-01T20:50:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -38,16 +38,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "arkitekturgranskning",
-                        "since":  "2026-11-01T20:41:29Z",
-                        "agent":  "ng01-rev",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "solution-architect",
