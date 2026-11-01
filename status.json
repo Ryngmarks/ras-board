@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T18:22:44Z",
+    "updated":  "2026-11-01T18:22:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -32,14 +32,6 @@
                         "model":  "claude/claude-opus-5-5"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Mossvale",
-                        "state":  "waiting",
-                        "note":  "beslut: traffpose och rackvidd",
-                        "since":  "2026-11-01T09:47:41Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Mossvale",
                         "state":  "working",
@@ -48,6 +40,13 @@
                         "agent":  "m07-axe-WO-04",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "waiting",
+                        "note":  "vantar pa WO-04",
+                        "since":  "2026-11-01T09:47:41Z"
                     }
                 ]
 }
