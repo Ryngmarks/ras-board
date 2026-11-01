@@ -1,6 +1,36 @@
 {
-  "generated_at": "2026-11-01T12:26:25.935Z",
+  "generated_at": "2026-11-01T14:33:29.806Z",
   "missions": [
+    {
+      "id": "ras07-mission-log",
+      "project": "RAS",
+      "name": "Uppdragslogg, ny tavla och hemnätsläge",
+      "org": "core",
+      "director": "Project Manager",
+      "input": 48638947,
+      "output": 415561,
+      "total": 49054508,
+      "cache_read": 47427302,
+      "status": "measured",
+      "closed_at": "2026-11-01T14:32:45.769Z",
+      "runs": 11,
+      "runs_missing": 0
+    },
+    {
+      "id": "m09-weapon-library",
+      "project": "Mossvale",
+      "name": "Vapeninventering och Spelbibliotek v1",
+      "org": "gaming",
+      "director": "Game Director",
+      "input": 46125574,
+      "output": 487679,
+      "total": 46613253,
+      "cache_read": 44749502,
+      "status": "partial",
+      "closed_at": "2026-11-01T14:32:39.088Z",
+      "runs": 10,
+      "runs_missing": 1
+    },
     {
       "id": "m06-clip-tool",
       "project": "Mossvale",
@@ -119,36 +149,6 @@
       "status": "measured",
       "closed_at": "2026-10-30T06:31:27.050Z",
       "runs": 19,
-      "runs_missing": 0
-    },
-    {
-      "id": "m13-star-forge",
-      "project": "Clicker Land",
-      "name": "Star Forge",
-      "org": "gaming",
-      "director": "Game Director",
-      "input": 175476060,
-      "output": 734376,
-      "total": 176210436,
-      "cache_read": 172542033,
-      "status": "measured",
-      "closed_at": "2026-10-30T06:27:44.655Z",
-      "runs": 11,
-      "runs_missing": 0
-    },
-    {
-      "id": "m14-buy-all",
-      "project": "Clicker Land",
-      "name": "Köp alla uppgraderingar",
-      "org": "gaming",
-      "director": "Game Director",
-      "input": 6607240,
-      "output": 33835,
-      "total": 6641075,
-      "cache_read": 6503529,
-      "status": "measured",
-      "closed_at": "2026-10-29T21:11:27.166Z",
-      "runs": 1,
       "runs_missing": 0
     }
   ]
