@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T14:21:55Z",
+    "updated":  "2026-11-01T14:22:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,16 +45,6 @@
                         "note":  "nya tavlan klar att titta på",
                         "since":  "2026-11-01T13:48:38Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "security-auditor",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "granskning",
-                        "since":  "2026-11-01T14:16:38Z",
-                        "agent":  "opus-ras07-reaudit",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
