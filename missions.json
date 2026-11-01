@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T13:48:12.714Z",
+  "generated_at": "2026-11-01T13:48:33.274Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -173,8 +173,8 @@
       "project": "RAS",
       "id": "ras07-mission-log",
       "name": "Cross-project mission log",
-      "phase": "review",
-      "updated": "2026-11-01T13:42:38.477Z"
+      "phase": "owner",
+      "updated": "2026-11-01T13:48:33.203Z"
     },
     {
       "project": "RAS",
