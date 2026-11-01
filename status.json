@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T22:47:58Z",
+    "updated":  "2026-11-01T23:21:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,16 +54,6 @@
                         "note":  "WO-04 dela upp animation",
                         "since":  "2026-11-01T22:47:52Z",
                         "agent":  "claude-wo04",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-04",
-                        "since":  "2026-11-01T22:47:58Z",
-                        "agent":  "ng01-rpg-foundation-WO-04",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
