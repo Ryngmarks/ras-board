@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "missions": [
+    {
+      "key": "Clicker Land/m20-test-cards",
+      "project": "Clicker Land",
+      "id": "m20-test-cards",
+      "title": "Test Cards",
+      "phase": "build",
+      "next": "WO-02 bygger kortlek",
+      "updated": "2026-11-01T09:00:00.000Z",
+      "opened": "2026-10-30T09:00:00.000Z",
+      "closed": null,
+      "branch": "m20-test-cards",
+      "worktree": "cl-m20",
+      "brief": "docs/ras/m20-test-cards/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-30T09:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-11-01T09:00:00.000Z",
+          "phase": "build",
+          "note": "WO-01 klar"
+        }
+      ]
+    },
+    {
+      "key": "Coach Helper/ch01-test-login",
+      "project": "Coach Helper",
+      "id": "ch01-test-login",
+      "title": "Test Login",
+      "phase": "analysis",
+      "next": "Analyst skriver prior art",
+      "updated": "2026-10-31T06:00:00.000Z",
+      "opened": "2026-10-29T06:00:00.000Z",
+      "closed": null,
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/ch01-test-login/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-29T06:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-10-31T06:00:00.000Z",
+          "phase": "analysis",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "Coach Helper/ch02-test-audit",
+      "project": "Coach Helper",
+      "id": "ch02-test-audit",
+      "title": "Test säkerhetsgranskning",
+      "phase": "review",
+      "next": "Auditor läser auth",
+      "updated": "2026-11-01T07:00:00.000Z",
+      "opened": "2026-10-30T07:00:00.000Z",
+      "closed": null,
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/ch02-test-audit/brief.md",
+      "status": "",
+      "public": false,
+      "log": [
+        {
+          "at": "2026-10-30T07:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-11-01T07:00:00.000Z",
+          "phase": "review",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "Mossvale/m30-test-style",
+      "project": "Mossvale",
+      "id": "m30-test-style",
+      "title": "Visuell stil (test)",
+      "phase": "owner",
+      "next": "Välj en av tre stilar",
+      "updated": "2026-11-01T11:00:00.000Z",
+      "opened": "2026-10-30T11:00:00.000Z",
+      "closed": null,
+      "branch": "m30-test-style",
+      "worktree": "",
+      "brief": "docs/ras/m30-test-style/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-30T11:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-11-01T11:00:00.000Z",
+          "phase": "owner",
+          "note": "Art Director levererade 3 förslag"
+        }
+      ]
+    },
+    {
+      "key": "Mossvale/m31-test-paused",
+      "project": "Mossvale",
+      "id": "m31-test-paused",
+      "title": "Pausad testfunktion",
+      "phase": "paused",
+      "next": "Väntar på m30",
+      "updated": "2026-10-24T04:00:00.000Z",
+      "opened": "2026-10-22T04:00:00.000Z",
+      "closed": null,
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/m31-test-paused/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-22T04:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-10-24T04:00:00.000Z",
+          "phase": "paused",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "RAS/ras90-test-done",
+      "project": "RAS",
+      "id": "ras90-test-done",
+      "title": "Testuppdrag klart",
+      "phase": "done",
+      "next": "",
+      "updated": "2026-10-31T16:00:00.000Z",
+      "opened": "2026-10-29T16:00:00.000Z",
+      "closed": "2026-10-31T16:00:00.000Z",
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/ras90-test-done/brief.md",
+      "status": "docs/missions/ras90-test-done/STATUS.md",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-29T16:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-10-31T16:00:00.000Z",
+          "phase": "done",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "RAS/ras91-test-old",
+      "project": "RAS",
+      "id": "ras91-test-old",
+      "title": "Gammalt testuppdrag",
+      "phase": "done",
+      "next": "",
+      "updated": "2026-09-02T12:00:00.000Z",
+      "opened": "2026-08-31T12:00:00.000Z",
+      "closed": "2026-09-02T12:00:00.000Z",
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/ras91-test-old/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-08-31T12:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-09-02T12:00:00.000Z",
+          "phase": "done",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "RAS/ras92-test-plan",
+      "project": "RAS",
+      "id": "ras92-test-plan",
+      "title": "Testplan",
+      "phase": "plan",
+      "next": "Architect skriver blueprint-mini",
+      "updated": "2026-11-01T04:00:00.000Z",
+      "opened": "2026-10-30T04:00:00.000Z",
+      "closed": null,
+      "branch": "",
+      "worktree": "",
+      "brief": "docs/ras/ras92-test-plan/brief.md",
+      "status": "",
+      "public": true,
+      "log": [
+        {
+          "at": "2026-10-30T04:00:00.000Z",
+          "phase": "analysis",
+          "note": "Brief skriven"
+        },
+        {
+          "at": "2026-11-01T04:00:00.000Z",
+          "phase": "plan",
+          "note": ""
+        }
+      ]
+    }
+  ]
+}

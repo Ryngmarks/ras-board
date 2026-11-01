@@ -2,51 +2,95 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-erlmuqPzEU0whGFo6su9XZBa7X+O2JkSiXz7Fk/R/T4='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cKefCoRTv8Gyad75gVgoSETzFVJufYVaqokEn7q9MBY='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Library contract §4: repo-relative media/link paths become URLs only when a base is set here (a future private host).
      Empty = paths are shown as text and every media slot is a placeholder. -->
 <meta name="ras-media-base" content="">
 <title>RAS – Spelbibliotek</title>
 <style>
+  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-01) ---- */
   :root {
-    --bg: #0d0f13; --surface: #151820; --surface-2: #1b1f29; --border: #262b36; --fg: #eceef2; --muted: #8a93a5;
-    --work: #5b8cff; --work-soft: rgba(91, 140, 255, .14);
-    --wait: #f0b44c; --wait-soft: rgba(240, 180, 76, .14);
-    --ok: #3fbf7f; --ok-soft: rgba(63, 191, 127, .14);
-    --free: #59606e; --free-soft: rgba(138, 147, 165, .10);
-    --gaming: #d4914f;
-    --radius: 14px;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f4f5f8; --surface: #ffffff; --surface-2: #f7f8fa; --border: #e2e5eb; --fg: #151820; --muted: #5d6676;
-      --work: #2f6bf0; --work-soft: rgba(47, 107, 240, .10);
-      --wait: #c47f0a; --wait-soft: rgba(224, 150, 20, .14);
-      --ok: #1f8a57; --ok-soft: rgba(31, 138, 87, .12);
-      --free: #9aa1ad; --free-soft: rgba(93, 102, 118, .08);
-      --gaming: #a45c1c;
-    }
+    color-scheme: light;
+    --bg: #f6f5f2; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #676d7a;
+    --shadow: 0 1px 2px rgba(31, 27, 20, .04), 0 8px 24px rgba(31, 27, 20, .06);
+    --gaming: #e07b2e; --gaming-soft: #fdf1e6; --software: #3b7ff0; --software-soft: #ebf2fe; --core: #9a84df; --core-soft: #f3effc;
+    --work: #1f9d6b; --work-soft: rgba(31, 157, 107, .12);
+    --wait: #d4731b; --wait-soft: rgba(224, 123, 46, .12);
+    --free: #a3a8b3; --free-soft: rgba(106, 112, 125, .08);
+    --line: #d3cec5;
+    --radius: 16px;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1500px; margin: 0 auto; padding: 28px 28px 48px; }
-  @media (max-width: 600px) { main { padding: 18px 12px 40px; } }
-  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
   code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+  .topbar { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
+  .topbar-in { max-width: 1480px; margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex: none; color: var(--fg); text-decoration: none; padding-right: 28px; border-right: 1px solid var(--border); }
+  .brand b { font-size: 19px; font-weight: 900; font-style: italic; letter-spacing: .02em; }
+  .brand span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .tabs { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 8px 15px; border-radius: 10px; color: var(--fg); text-decoration: none; font-size: 14px; font-weight: 500; border: 1px solid transparent; }
+  .tabs a svg { width: 17px; height: 17px; color: var(--muted); }
+  .tabs a:hover { background: var(--surface-2); border-color: var(--border); }
+  .tabs a:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
+  .tabs a[aria-current="page"] { background: #f6ebde; border-color: #ecd9c3; font-weight: 650; }
+  .tabs a[aria-current="page"] svg { color: var(--gaming); }
+  main { max-width: 1480px; margin: 0 auto; padding: 28px 28px 56px; }
+  .phead { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 20px; flex-wrap: wrap; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 6px 0 4px; }
+  .lede { margin: 0; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
+  .chead { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+  .chead h2 { margin: 0; font-size: 17px; font-weight: 700; }
+  .chead p { margin: 0; color: var(--muted); font-size: 13px; }
+  .chead .sp { flex: 1; }
+  .ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--fg); flex: none; }
+  .ic.gaming { color: var(--gaming); background: var(--gaming-soft); border-color: transparent; }
+  .ic.software { color: var(--software); background: var(--software-soft); border-color: transparent; }
+  .ic.core { color: var(--core); background: var(--core-soft); border-color: transparent; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--free-soft); }
+  .badge.wait { color: #a4520c; background: #fbe6d2; }
+  .badge.work { color: #12704b; background: #dcf2e8; }
+  .phase { display: inline-block; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; }
+  .p-owner { color: #a4520c; background: #fbe6d2; }
+  .p-analysis { color: #6a55b8; background: #efeafc; }
+  .p-plan { color: #5048a8; background: #e9e8fb; }
+  .p-build { color: #1f5fcf; background: #e5eefd; }
+  .p-review { color: #0f7a74; background: #dcf3f1; }
+  .p-paused { color: #646a76; background: #eeeff1; }
+  .p-done { color: #1d7a4c; background: #e0f3e8; }
+  .bdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--core); flex: none; }
+  .bdot.gaming { background: var(--gaming); } .bdot.software { background: var(--software); }
+  .empty { padding: 10px 12px; border: 1px dashed var(--border-2); border-radius: 10px; color: var(--muted); font-size: 13px; }
   .unk { color: var(--muted); font-style: italic; }
-  .empty { padding: 12px 14px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); }
+  .localnote { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; margin: 16px 0 0; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--border-2); color: var(--muted); font-size: 13px; }
+  .localnote a { color: var(--software); font-weight: 650; text-decoration: none; }
+  .localnote a:hover { text-decoration: underline; }
+  .localnote small { flex-basis: 100%; font-size: 12px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  footer code { font-size: 11px; }
+  @media (max-width: 699px) {
+    /* phones: wordmark on one row, the three tabs as equal buttons on their own row – always all visible */
+    .topbar-in { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 6px; }
+    .brand { border-right: 0; padding-right: 0; }
+    .tabs { width: 100%; gap: 4px; }
+    .tabs a { flex: 1 1 0; justify-content: center; padding: 7px 6px; gap: 5px; font-size: 13px; border-color: var(--border); }
+    main { padding: 20px 14px 44px; }
+    h1 { font-size: 26px; }
+    .card { padding: 16px; }
+  }
+  @media (max-width: 380px) { .tabs a { font-size: 12px; padding: 7px 4px; gap: 4px; } .tabs a svg { width: 15px; height: 15px; } }
+  /* ---- end shared look ---- */
 
-  /* header + tabs (same look as the board) */
-  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 16px; flex-wrap: wrap; }
-  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
-  .tabs a { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; color: var(--muted); text-decoration: none; background: var(--surface); border: 1px solid var(--border); }
-  .tabs a:hover { border-color: var(--muted); }
-  .tabs a[aria-current="page"] { color: var(--fg); border-color: var(--fg); }
-  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
-  .meta { color: var(--muted); font-size: 12px; }
+  /* library-only colours */
+  :root { --ok: #1f8a57; --ok-soft: rgba(31, 138, 87, .12); --prog: #1f5fcf; --prog-soft: #e5eefd; }
   .meta .dirty { color: var(--wait); font-weight: 600; }
+  .meta { color: var(--muted); font-size: 13px; }
   .crumb { margin: 18px 0 0; font-weight: 600; }
   .crumb span { color: var(--muted); font-weight: 400; }
 
@@ -63,7 +107,7 @@
 
   /* family cards */
   .fcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-  .fcard { --c: var(--gaming); display: grid; gap: 6px; text-align: left; font: inherit; color: var(--fg); cursor: pointer; padding: 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
+  .fcard { --c: var(--gaming); display: grid; gap: 6px; text-align: left; font: inherit; color: var(--fg); cursor: pointer; padding: 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
   .fcard:hover { border-color: var(--muted); }
   .fcard.on { border-color: var(--c); box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 35%, transparent); }
   .fcard.dim { opacity: .45; }
@@ -77,7 +121,7 @@
   .warn { color: var(--wait); font-weight: 600; white-space: nowrap; }
 
   /* family section */
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-top: 18px; min-width: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; margin-top: 18px; min-width: 0; }
   .fam-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .fam-head h2 { margin: 0; font-size: 20px; }
   .sub { color: var(--muted); font-size: 12px; }
@@ -96,16 +140,16 @@
   .st { display: inline-block; font-size: 11px; font-weight: 600; line-height: 1.6; padding: 0 8px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--free-soft); }
   .st.ok { color: var(--ok); background: var(--ok-soft); }
   .st.needs-work { color: var(--wait); background: var(--wait-soft); }
-  .st.in-progress { color: var(--work); background: var(--work-soft); }
+  .st.in-progress { color: var(--prog); background: var(--prog-soft); }
 
   /* ability table: every row is a button that opens its panel inline (tap = hover on phones) */
-  .atable { border: 1px solid var(--border); border-radius: 12px; }
+  .atable { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
   .ahead, .abtn { display: grid; grid-template-columns: 40px minmax(0, 2fr) 60px 60px 80px minmax(0, 1.2fr) 124px 14px; gap: 10px; align-items: center; padding: 8px 12px; }
-  .ahead { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .ahead { background: var(--surface-2); border-radius: 12px 12px 0 0; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
   .arow + .arow { border-top: 1px solid var(--border); }
   .abtn { width: 100%; font: inherit; color: var(--fg); text-align: left; background: none; border: 0; cursor: pointer; }
   .abtn:hover, .arow.open .abtn { background: var(--surface-2); }
-  .abtn:focus-visible, .fcard:focus-visible { outline: 2px solid var(--work); outline-offset: -2px; }
+  .abtn:focus-visible, .fcard:focus-visible { outline: 2px solid var(--software); outline-offset: -2px; }
   .abtn .slot { font-weight: 700; }
   .abtn .nm { position: relative; min-width: 0; overflow-wrap: anywhere; }
   .abtn .row-meta { display: contents; }
@@ -126,7 +170,7 @@
   .apanel dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
   .apanel ul { margin: 0; padding-left: 18px; }
   .apanel li.fixed { color: var(--muted); text-decoration: line-through; }
-  .apanel a { color: var(--work); }
+  .apanel a { color: var(--software); }
   .media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start; }
   .mbox { margin: 0; min-height: 76px; display: grid; place-content: center; gap: 2px; text-align: center; padding: 8px; border-radius: 10px; border: 1px dashed var(--border); color: var(--muted); font-size: 12px; }
   .mbox span { font-weight: 600; color: var(--fg); }
@@ -149,21 +193,32 @@
     .apanel dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .apanel dt { margin-top: 8px; }
   }
-
-  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
-  footer code { font-size: 11px; }
 </style>
 </head>
 <body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><b>RYNGMARK</b><span>Agent System</span></a>
+    <nav class="tabs" aria-label="Sidor">
+      <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg><span>Översikt</span></a>
+      <a href="missions.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Uppdrag</span></a>
+      <a href="library.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5"/></svg><span>Spelbibliotek</span></a>
+    </nav>
+  </div>
+</header>
 <main>
-  <header>
+  <div class="phead">
     <div>
-      <nav class="tabs" aria-label="Sidor"><a href="index.html">Tavlan</a><a href="library.html" aria-current="page">Spelbibliotek</a></nav>
       <div class="eyebrow">Ryngmark Agent System</div>
       <h1>Spelbibliotek</h1>
+      <p class="lede">Vapenfamiljer, varianter och förmågor – med speltext, rigg, anteckningar och kända fel.</p>
     </div>
     <div class="meta" id="meta">Laddar…</div>
-  </header>
+  </div>
+
+  <p class="localnote" id="localnote" hidden>Spelbiblioteket finns bara på den lokala tavlan.
+    <a href="http://127.0.0.1:5199/library.html" rel="noopener">Öppna lokalt →</a>
+    <small>Fungerar bara på Johans dator medan den lokala tavlan körs (knappen RAS-tavla i T3).</small></p>
 
   <p class="crumb" id="crumb" hidden></p>
   <div id="orphans"></div>
@@ -435,6 +490,7 @@ function boot() {
   };
 
   loadLibrary(document, (url, opts) => fetch(url, opts)).then(r => {
+    if (r.state === "elsewhere") { $("meta").textContent = ""; $("cards").innerHTML = ""; $("localnote").hidden = false; return; }
     if (r.state !== "ok") { $("meta").textContent = ""; $("cards").innerHTML = `<div class="empty">${esc(MESSAGES[r.state])}</div>`; return; }
     lib = r.lib;
     $("meta").innerHTML = renderMeta(lib);

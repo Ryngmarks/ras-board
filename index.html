@@ -2,223 +2,232 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-zQgZLEmmVpJZEPb4p5kbA/fggSPyv5sF2UEVgEk0834='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-6FlONP/z0iNfxim0xUjeTqUc65D2lnfcyCEugXf28fE='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RAS – teamet</title>
+<title>RAS – översikt</title>
 <style>
+  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-01) ---- */
   :root {
-    --bg: #0d0f13; --surface: #151820; --surface-2: #1b1f29; --border: #262b36; --fg: #eceef2; --muted: #8a93a5;
-    --work: #5b8cff; --work-soft: rgba(91, 140, 255, .14);
-    --wait: #f0b44c; --wait-soft: rgba(240, 180, 76, .14);
-    --free: #59606e; --free-soft: rgba(138, 147, 165, .10);
-    --line: #3a414f;
-    --radius: 14px;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f4f5f8; --surface: #ffffff; --surface-2: #f7f8fa; --border: #e2e5eb; --fg: #151820; --muted: #5d6676;
-      --work: #2f6bf0; --work-soft: rgba(47, 107, 240, .10);
-      --wait: #c47f0a; --wait-soft: rgba(224, 150, 20, .14);
-      --free: #9aa1ad; --free-soft: rgba(93, 102, 118, .08);
-      --line: #c5cad3;
-    }
+    color-scheme: light;
+    --bg: #f6f5f2; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #676d7a;
+    --shadow: 0 1px 2px rgba(31, 27, 20, .04), 0 8px 24px rgba(31, 27, 20, .06);
+    --gaming: #e07b2e; --gaming-soft: #fdf1e6; --software: #3b7ff0; --software-soft: #ebf2fe; --core: #9a84df; --core-soft: #f3effc;
+    --work: #1f9d6b; --work-soft: rgba(31, 157, 107, .12);
+    --wait: #d4731b; --wait-soft: rgba(224, 123, 46, .12);
+    --free: #a3a8b3; --free-soft: rgba(106, 112, 125, .08);
+    --line: #d3cec5;
+    --radius: 16px;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1800px; margin: 0 auto; padding: 28px 28px 48px; }
-  @media (max-width: 600px) { main { padding: 20px 14px 40px; } }
-  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+  .topbar { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
+  .topbar-in { max-width: 1480px; margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex: none; color: var(--fg); text-decoration: none; padding-right: 28px; border-right: 1px solid var(--border); }
+  .brand b { font-size: 19px; font-weight: 900; font-style: italic; letter-spacing: .02em; }
+  .brand span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .tabs { display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 8px 15px; border-radius: 10px; color: var(--fg); text-decoration: none; font-size: 14px; font-weight: 500; border: 1px solid transparent; }
+  .tabs a svg { width: 17px; height: 17px; color: var(--muted); }
+  .tabs a:hover { background: var(--surface-2); border-color: var(--border); }
+  .tabs a:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
+  .tabs a[aria-current="page"] { background: #f6ebde; border-color: #ecd9c3; font-weight: 650; }
+  .tabs a[aria-current="page"] svg { color: var(--gaming); }
+  main { max-width: 1480px; margin: 0 auto; padding: 28px 28px 56px; }
+  .phead { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 20px; flex-wrap: wrap; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 6px 0 4px; }
+  .lede { margin: 0; color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
+  .chead { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+  .chead h2 { margin: 0; font-size: 17px; font-weight: 700; }
+  .chead p { margin: 0; color: var(--muted); font-size: 13px; }
+  .chead .sp { flex: 1; }
+  .ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--fg); flex: none; }
+  .ic.gaming { color: var(--gaming); background: var(--gaming-soft); border-color: transparent; }
+  .ic.software { color: var(--software); background: var(--software-soft); border-color: transparent; }
+  .ic.core { color: var(--core); background: var(--core-soft); border-color: transparent; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--free-soft); }
+  .badge.wait { color: #a4520c; background: #fbe6d2; }
+  .badge.work { color: #12704b; background: #dcf2e8; }
+  .phase { display: inline-block; font-size: 12px; font-weight: 650; line-height: 1.6; padding: 1px 10px; border-radius: 999px; white-space: nowrap; }
+  .p-owner { color: #a4520c; background: #fbe6d2; }
+  .p-analysis { color: #6a55b8; background: #efeafc; }
+  .p-plan { color: #5048a8; background: #e9e8fb; }
+  .p-build { color: #1f5fcf; background: #e5eefd; }
+  .p-review { color: #0f7a74; background: #dcf3f1; }
+  .p-paused { color: #646a76; background: #eeeff1; }
+  .p-done { color: #1d7a4c; background: #e0f3e8; }
+  .bdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--core); flex: none; }
+  .bdot.gaming { background: var(--gaming); } .bdot.software { background: var(--software); }
+  .empty { padding: 10px 12px; border: 1px dashed var(--border-2); border-radius: 10px; color: var(--muted); font-size: 13px; }
+  .unk { color: var(--muted); font-style: italic; }
+  .localnote { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; margin: 16px 0 0; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--border-2); color: var(--muted); font-size: 13px; }
+  .localnote a { color: var(--software); font-weight: 650; text-decoration: none; }
+  .localnote a:hover { text-decoration: underline; }
+  .localnote small { flex-basis: 100%; font-size: 12px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  footer code { font-size: 11px; }
+  @media (max-width: 699px) {
+    /* phones: wordmark on one row, the three tabs as equal buttons on their own row – always all visible */
+    .topbar-in { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 6px; }
+    .brand { border-right: 0; padding-right: 0; }
+    .tabs { width: 100%; gap: 4px; }
+    .tabs a { flex: 1 1 0; justify-content: center; padding: 7px 6px; gap: 5px; font-size: 13px; border-color: var(--border); }
+    main { padding: 20px 14px 44px; }
+    h1 { font-size: 26px; }
+    .card { padding: 16px; }
+  }
+  @media (max-width: 380px) { .tabs a { font-size: 12px; padding: 7px 4px; gap: 4px; } .tabs a svg { width: 15px; height: 15px; } }
+  /* ---- end shared look ---- */
 
-  /* header */
-  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
-  .tabs a { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; color: var(--muted); text-decoration: none; background: var(--surface); border: 1px solid var(--border); }
-  .tabs a:hover { border-color: var(--muted); }
-  .tabs a[aria-current="page"] { color: var(--fg); border-color: var(--fg); }
-  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
-  .live-state { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+  .live-state { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
   .live-state .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3fbf7f; }
   .live-state.stale .pulse { background: var(--wait); }
-  .live-state button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+  .live-state button { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-weight: 600; color: var(--fg); background: var(--surface); border: 1px solid var(--border-2); border-radius: 10px; padding: 7px 14px; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }
+  .live-state button svg { width: 16px; height: 16px; }
   .live-state button:hover { border-color: var(--muted); }
 
-  .summary { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 8px; }
-  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; }
-  .pill b { font-size: 15px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--free); flex: none; }
-  .working .dot, .dot.working { background: var(--work); }
-  .waiting .dot, .dot.waiting { background: var(--wait); }
-
-  .alert { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: var(--radius); background: var(--wait-soft); border: 1px solid color-mix(in srgb, var(--wait) 45%, transparent); }
-  .alert svg { color: var(--wait); margin-top: 1px; }
-  .alert div { display: grid; gap: 2px; }
-
-  h2 { display: flex; align-items: baseline; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 34px 0 12px; }
-  h2 span { font-weight: 400; letter-spacing: 0; text-transform: none; }
-  h2.first { margin-top: 26px; }
-  .owner { display: grid; gap: 8px; }
-  .owner .calm { padding: 12px 14px; border-radius: var(--radius); border: 1px dashed var(--border); color: var(--muted); }
-  .empty { padding: 9px 11px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
-
-  /* page layout: tree + projects left, token panel right (>= 1200 px); one column below */
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-items: start; margin-top: 26px; }
-  @media (min-width: 1200px) { .layout { grid-template-columns: minmax(0, 1fr) 360px; } }
-  .stack { display: grid; gap: 22px; min-width: 0; }
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; min-width: 0; }
-  .ptitle { display: flex; align-items: baseline; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
-  .ptitle span { font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 12px; }
-
-  /* projects (compact, under the tree) */
-  .card { position: relative; display: flex; flex-direction: column; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--free); opacity: .5; }
-  .card.working::before { background: var(--work); opacity: 1; }
-  .card.waiting::before { background: var(--wait); opacity: 1; }
-  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
-  .proj { padding: 10px 12px 10px 15px; }
-  .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .proj-head b { font-size: 14px; }
-  .proj-head small { color: var(--muted); font-size: 12px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
-  .chip svg { width: 13px; height: 13px; }
-  .quiet { margin-top: 6px; color: var(--muted); font-size: 12px; }
-
-  /* model guide – deliberately a different look from the tree */
-  .guide { margin-top: 44px; padding: 22px; border-radius: 20px; background:
-    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, #8b5cf6 16%, transparent), transparent 55%),
-    radial-gradient(120% 140% at 100% 100%, color-mix(in srgb, #14b8a6 14%, transparent), transparent 55%),
-    var(--surface-2); border: 1px solid var(--border); }
-  .guide-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-  .guide-head h2 { margin: 0; color: var(--fg); font-size: 18px; letter-spacing: 0; text-transform: none; }
-  .guide-head p { margin: 0; color: var(--muted); font-size: 13px; }
-  .models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-  @media (max-width: 900px) { .models { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 580px) { .models { grid-template-columns: 1fr; } }
-  .model-tile { --m: #8b5cf6; position: relative; padding: 16px; border-radius: 16px; background: var(--surface);
-    border: 1px solid color-mix(in srgb, var(--m) 35%, var(--border)); box-shadow: 0 1px 0 color-mix(in srgb, var(--m) 25%, transparent) inset; }
-  .model-tile::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; border-radius: 16px 16px 0 0; background: var(--m); }
-  .model-tile.opus { --m: #8b5cf6; } .model-tile.sonnet { --m: #3b82f6; } .model-tile.haiku { --m: #10b981; } .model-tile.codex { --m: #f59e0b; }
-  .model-tile .maker { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--m); }
-  .model-tile h3 { margin: 2px 0 4px; font-size: 20px; line-height: 1.2; }
-  .model-tile .use { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-  .model-tile ul { margin: 0 0 12px; padding-left: 18px; color: var(--muted); font-size: 13px; display: grid; gap: 3px; }
-  .model-tile .who { display: flex; flex-wrap: wrap; gap: 5px; }
-  .model-tile .who span { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--m) 14%, transparent); color: var(--fg); }
-  .model-tile .lvl { margin-top: 10px; font-size: 12px; color: var(--muted); }
-  .guide-rules { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 12px; }
-  .guide-rules li::before { content: "→ "; color: var(--fg); }
-
-  /* organisation tree, variant B – Gaming: copper + moss, Software: slate + teal, shared graphite base */
-  :root {
-    --gaming: #d4914f; --gaming-2: #93b36b; --software: #8ba6c2; --software-2: #3fbdb4; --core: #8a93a5; --core-2: #8a93a5;
-  }
-  @media (prefers-color-scheme: light) {
-    :root { --gaming: #a45c1c; --gaming-2: #566f38; --software: #46627f; --software-2: #137a73; --core: #5d6676; --core-2: #5d6676; }
-  }
-  .htree { display: grid; grid-template-columns: 150px 40px minmax(0, 1fr); align-items: center; }
-  .hroot { display: flex; }
-  .hconn { align-self: stretch; position: relative; }
-  .hconn::before { content: ""; position: absolute; left: 0; top: 50%; width: 20px; height: 2px; margin-top: -1px; background: var(--line); }
-  .hbranches { display: flex; flex-direction: column; gap: 14px; }
-  .hb { --acc: var(--core); --acc-2: var(--core-2); position: relative; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px;
-    border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)); background: color-mix(in srgb, var(--acc) 7%, var(--surface)); }
-  .hb.gaming { --acc: var(--gaming); --acc-2: var(--gaming-2); }
-  .hb.software { --acc: var(--software); --acc-2: var(--software-2); }
-  .hb.core { --acc: var(--core); --acc-2: var(--core-2); }
-  .hb::before { content: ""; position: absolute; left: -20px; top: 50%; width: 20px; height: 2px; margin-top: -1px; background: var(--line); }
-  .hb::after { content: ""; position: absolute; left: -20px; top: 0; bottom: -14px; width: 2px; background: var(--line); }
-  .hb:first-child::after { top: 50%; }
-  .hb:last-child::after { bottom: 50%; }
-  .hb:only-child::after { display: none; }
-  .hb-main { display: grid; gap: 8px; min-width: 0; }
-  .bhead { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-  .bhead h3 { margin: 0; font-size: 16px; line-height: 1.2; color: var(--acc); }
-  .bhead small { color: var(--muted); font-size: 11px; }
-  /* Branch logos (owner, 2026-10-31): white-background PNGs. Light theme: multiply drops the white. Dark theme: invert +
-     hue-rotate keeps orange/blue, turns the navy word mark light, and screen drops the (now black) background. */
-  .brand-logo { display: block; height: 30px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
-  @media (prefers-color-scheme: dark) { .brand-logo { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; } }
-
-  .node { position: relative; min-width: 0; padding: 8px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); }
-  .node small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
-  .node.owner { padding: 10px 14px; border: 2px solid var(--fg); display: flex; align-items: center; gap: 10px; width: 100%; }
-  .node.owner b { display: block; font-size: 15px; }
-  .icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--free-soft); color: var(--muted); flex: none; }
-  .node.dir { border-width: 2px; border-color: var(--acc); }
-  .node.dir b { font-size: 14px; }
-  .node.dir.planned { border-style: dashed; background: transparent; }
-  .node.rbox { border-left: 3px solid var(--acc); display: grid; gap: 2px; align-content: start; }
-  .node.rbox.planned { background: transparent; border-style: dashed; border-left-color: var(--border); }
-  .rbox-top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
-  .rbox-top b { font-size: 13px; overflow-wrap: anywhere; }
-  .kind { font-size: 11px; color: var(--acc-2); font-weight: 600; white-space: nowrap; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 600; line-height: 1.5; padding: 0 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
-  .tag.planned { border-style: dashed; }
-  .tag.partial { color: var(--wait); border-color: color-mix(in srgb, var(--wait) 50%, var(--border)); }
-  .hb .node.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
-  .hb .node.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); }
-  .live { margin-top: 4px; font-size: 11px; font-weight: 600; line-height: 1.3; color: var(--work); overflow-wrap: anywhere; }
-  .live.waiting { color: var(--wait); }
-  .live.more { color: var(--muted); font-weight: 500; }
-  .node.others { border-style: dashed; }
-  .org-projects { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; }
-  .org-projects .chip { padding: 1px 8px; font-size: 11px; color: var(--muted); }
-  .hkids { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; min-width: 0; }
-  @media (max-width: 999px) {
-    .htree { grid-template-columns: minmax(0, 1fr); }
-    .hconn, .hb::before, .hb::after { display: none; }
-    .hroot { margin-bottom: 12px; }
-    .node.owner { width: auto; }
-    .hb { grid-template-columns: minmax(0, 1fr); }
-  }
-  @media (max-width: 420px) { .hkids { grid-template-columns: minmax(0, 1fr); } }
-
-  /* token side panel */
-  .tokens { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-  @media (min-width: 1200px) { .tokens { position: sticky; top: 16px; } }
-  .big { font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
-  .sub { color: var(--muted); font-size: 12px; }
-  .split { display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin: 12px 0 6px; background: var(--free-soft); }
+  /* overview row */
+  .kpis { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin-top: 24px; align-items: stretch; }
+  @media (max-width: 1099px) { .kpis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .kpis .owner-kpi { grid-column: 1 / -1; } }
+  @media (max-width: 699px) { .kpis { grid-template-columns: minmax(0, 1fr); } }
+  .owner-kpi.hot { border-color: #f0c08f; background: linear-gradient(180deg, #fff8f1, #fff 70%); }
+  .owner-kpi.hot .ic { color: var(--gaming); background: var(--gaming-soft); border-color: transparent; }
+  .olist { display: grid; gap: 8px; }
+  .oitem { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: inherit; text-decoration: none; min-width: 0; }
+  a.oitem:hover { border-color: #ecc79f; }
+  .oitem div { display: grid; min-width: 0; flex: 1; }
+  .oitem b { overflow-wrap: anywhere; }
+  .oitem span.sub { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+  .oitem .chev { color: var(--muted); }
+  .calm { color: var(--muted); }
+  .big { font-size: 34px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .bigrow { display: flex; align-items: baseline; gap: 10px; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .split { display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin: 16px 0 10px; background: var(--free-soft); gap: 2px; }
   .split i { display: block; height: 100%; }
-  .legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
-  .legend .dot { display: inline-block; margin-right: 5px; }
-  .bars { display: flex; align-items: flex-end; gap: 5px; height: 90px; margin-top: 14px; }
-  .bars div { flex: 1; min-height: 2px; border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--work) 35%, var(--surface-2)); }
-  .bars div.today { background: var(--work); }
-  .days { display: flex; gap: 5px; font-size: 10px; color: var(--muted); margin-top: 3px; }
-  .days span { flex: 1; text-align: center; }
-  .days span.today { color: var(--fg); font-weight: 700; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend b { color: var(--fg); font-weight: 650; }
+
+  /* organisation: owner on top, three branch panels */
+  .section { margin-top: 34px; }
+  .shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .shead h2 { margin: 0; font-size: 22px; font-weight: 800; }
+  .shead p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .oroot { display: flex; justify-content: center; }
+  .owner-node { display: flex; align-items: center; gap: 14px; min-width: 260px; padding: 12px 20px 12px 14px; border-radius: 14px; background: var(--surface); border: 1.5px solid #2b2f38; box-shadow: var(--shadow); }
+  .owner-node .ic { width: 44px; height: 44px; }
+  .owner-node b { display: block; font-size: 17px; }
+  .owner-node small { color: var(--muted); font-size: 13px; }
+  .olines { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; height: 48px; }
+  .olines::before { content: ""; position: absolute; left: 50%; top: 0; height: 24px; width: 2px; margin-left: -1px; background: var(--line); }
+  .olines::after { content: ""; position: absolute; top: 23px; height: 2px; left: calc((100% - 36px) / 6); right: calc((100% - 36px) / 6); background: var(--line); }
+  .olines span { position: relative; }
+  .olines span::before { content: ""; position: absolute; left: 50%; top: 23px; bottom: 0; width: 2px; margin-left: -1px; background: var(--line); }
+  .olines span.waiting::before { background: var(--gaming); }
+  .olines em { position: absolute; z-index: 1; left: 50%; top: 12px; transform: translateX(-50%); font-style: normal; white-space: nowrap; font-size: 12px; font-weight: 650; color: #a4520c; background: #fff7ef; border: 1px solid #f0c08f; border-radius: 999px; padding: 1px 10px; }
+  .obranches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+  .ob { --acc: var(--core); --soft: var(--core-soft); display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 18px 16px 16px; border-radius: 18px;
+    border: 1px solid color-mix(in srgb, var(--acc) 28%, var(--border)); background: linear-gradient(180deg, var(--soft), #fff 62%); box-shadow: var(--shadow); }
+  .ob.gaming { --acc: var(--gaming); --soft: var(--gaming-soft); }
+  .ob.software { --acc: var(--software); --soft: var(--software-soft); }
+  .ob-logo { display: flex; justify-content: center; align-items: center; height: 36px; }
+  .brand-logo { display: block; height: 34px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  .core-mark { font-size: 27px; font-weight: 900; font-style: italic; letter-spacing: -.02em; color: #1f2a44; line-height: 1; }
+  .core-mark span { font-size: 15px; letter-spacing: .02em; color: var(--core); margin-left: 2px; }
+  .dir { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0, 0, 0, .03); }
+  .dir .ic { color: var(--acc); background: var(--soft); border-color: transparent; width: 42px; height: 42px; }
+  .dir div { min-width: 0; }
+  .dir b { display: block; font-size: 15px; }
+  .dir small { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; }
+  .dir.planned { border-style: dashed; background: transparent; box-shadow: none; }
+  .fork { height: 16px; margin: -6px 14% -4px; border: 2px solid var(--line); border-bottom: 0; border-radius: 10px 10px 0 0; position: relative; }
+  .fork::before { content: ""; position: absolute; left: 50%; top: -10px; height: 10px; width: 2px; margin-left: -1px; background: var(--line); }
+  .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; }
+  .role { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 84px; padding: 10px 8px; text-align: center; border-radius: 12px; background: #fff; border: 1px solid var(--border); }
+  .role svg { width: 21px; height: 21px; color: #3a3f4a; }
+  .role b { font-size: 13px; line-height: 1.25; overflow-wrap: anywhere; }
+  .role.planned { background: transparent; border-style: dashed; }
+  .role.planned svg, .role.planned b { color: var(--muted); }
+  .role.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
+  .role.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); background: #fffaf5; }
+  .dir.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
+  .dir.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); }
+  .tag { font-size: 11px; color: var(--muted); border: 1px dashed var(--border-2); border-radius: 999px; padding: 0 7px; }
+  .live { font-size: 11px; font-weight: 650; line-height: 1.3; color: var(--work); overflow-wrap: anywhere; }
+  .live.waiting { color: #a4520c; }
+  .live.more { color: var(--muted); font-weight: 500; }
+  .bprojects { color: var(--muted); font-size: 12px; text-align: center; margin: -4px 0 0; }
+  @media (max-width: 1099px) {
+    .olines { display: none; }
+    .oroot { justify-content: flex-start; margin: 14px 0; }
+    .obranches { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 699px) { .owner-node { min-width: 0; width: 100%; } .roles { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); } }
+
+  /* lower cards */
+  .duo { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; margin-top: 22px; align-items: start; }
+  @media (max-width: 1099px) { .duo { grid-template-columns: minmax(0, 1fr); } }
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .proj { --acc: var(--core); display: flex; align-items: flex-start; gap: 12px; padding: 14px; border-radius: 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--acc); min-width: 0; }
+  .proj.gaming { --acc: var(--gaming); } .proj.software { --acc: var(--software); }
+  .proj > div { flex: 1; min-width: 0; display: grid; gap: 2px; }
+  .proj-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .proj-top b { font-size: 15px; overflow-wrap: anywhere; }
+  .proj .sub { font-size: 12px; }
+  .proj .ownerflag { color: #a4520c; font-weight: 650; font-size: 12px; }
+  .link { display: inline-flex; align-items: center; gap: 4px; color: var(--software); font-weight: 600; font-size: 13px; text-decoration: none; }
+  .link:hover { text-decoration: underline; }
+  .link svg { width: 15px; height: 15px; }
+  .acts { list-style: none; margin: 0; padding: 0; display: grid; }
+  .acts li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; padding: 9px 0; border-top: 1px solid var(--border); }
+  .acts li:first-child { border-top: 0; padding-top: 0; }
+  .acts .bdot { align-self: center; }
+  .acts .what { overflow-wrap: anywhere; }
+  .acts .what small { color: var(--muted); }
+  .acts .when { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+  /* token history */
   .mlist { display: flex; flex-direction: column; }
-  .mrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 8px 0; border-top: 1px solid var(--border); }
+  .mrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 9px 0; border-top: 1px solid var(--border); }
   .mrow:first-child { border-top: 0; padding-top: 0; }
   .mrow .t { font-weight: 600; overflow-wrap: anywhere; }
   .mrow .n { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .mrow .meta { grid-column: 1 / -1; font-size: 11px; color: var(--muted); }
+  .mrow .meta { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
   .mbar { grid-column: 1 / -1; height: 4px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
   .mbar i { display: block; height: 100%; }
-  .more-btn { display: block; width: 100%; margin-top: 8px; padding: 6px; font: inherit; font-size: 12px; font-weight: 600; color: var(--work); background: none; border: 0; border-radius: 8px; cursor: pointer; text-align: center; }
-  .more-btn:hover { background: var(--work-soft); }
-  .all-missions { margin-top: 10px; }
+  .more-btn { display: block; width: 100%; margin-top: 8px; padding: 7px; font: inherit; font-size: 13px; font-weight: 600; color: var(--software); background: none; border: 0; border-radius: 8px; cursor: pointer; text-align: center; }
+  .more-btn:hover { background: var(--software-soft); }
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; margin-top: 6px; }
+  .bars div { flex: 1; min-height: 2px; border-radius: 5px 5px 0 0; background: #e3dcf7; }
+  .bars div.today { background: var(--core); }
+  .days { display: flex; gap: 6px; font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .days span { flex: 1; text-align: center; }
+  .days span.today { color: var(--fg); font-weight: 700; }
+  .org-badge { display: inline-block; font-size: 11px; font-weight: 650; padding: 0 8px; border-radius: 999px; color: #6a55b8; background: var(--core-soft); }
+  .org-badge.gaming { color: #a4520c; background: var(--gaming-soft); }
+  .org-badge.software { color: #1f5fcf; background: var(--software-soft); }
 
   /* mission table (shown on request) */
-  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .all-missions { margin-top: 22px; }
+  .table-wrap { overflow: hidden; padding: 0; }
   table.missions { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .missions th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
-  .missions td { padding: 10px 12px; vertical-align: top; border-bottom: 1px solid var(--border); }
+  .missions th { text-align: left; padding: 11px 14px; color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .missions td { padding: 11px 14px; vertical-align: top; border-bottom: 1px solid var(--border); }
   .missions tbody tr:last-child td { border-bottom: 0; }
   .missions .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .missions .name b { display: block; font-size: 14px; overflow-wrap: anywhere; }
-  .missions .name small, .missions .num small { display: block; color: var(--muted); font-size: 11px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
-  .missions .num small { font-family: inherit; }
-  .unk { color: var(--muted); font-style: italic; }
-  .org-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; color: var(--core); background: var(--free-soft); }
-  .org-badge.gaming { color: var(--gaming); background: color-mix(in srgb, var(--gaming) 14%, transparent); }
-  .org-badge.software { color: var(--software); background: color-mix(in srgb, var(--software) 16%, transparent); }
-  @media (max-width: 640px) {
+  .missions .name small, .missions .num small { display: block; color: var(--muted); font-size: 11px; }
+  .ptag { display: inline-block; font-size: 11px; font-weight: 600; padding: 0 7px; border-radius: 999px; color: var(--wait); border: 1px solid #f0c08f; }
+  @media (max-width: 699px) {
     .missions thead { display: none; }
     .missions, .missions tbody, .missions tr, .missions td { display: block; }
-    .missions tr { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .missions tr { padding: 10px 14px; border-bottom: 1px solid var(--border); }
     .missions tbody tr:last-child { border-bottom: 0; }
     .missions td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; border: 0; }
     .missions td::before { content: attr(data-label); color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; flex: none; }
@@ -227,45 +236,98 @@
     .missions .num small { display: inline; margin-left: 8px; }
   }
 
-  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
-  footer code { font-size: 11px; }
+  /* model guide */
+  .guide { margin-top: 34px; }
+  .guide-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .guide-head h2 { margin: 0; font-size: 22px; font-weight: 800; }
+  .guide-head p { margin: 0; color: var(--muted); font-size: 13px; }
+  .models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  @media (max-width: 1099px) { .models { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 599px) { .models { grid-template-columns: minmax(0, 1fr); } }
+  .model-tile { --m: #8b5cf6; position: relative; overflow: hidden; padding-top: 22px; }
+  .model-tile::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--m); }
+  .model-tile.opus { --m: #8b5cf6; } .model-tile.sonnet { --m: #3b82f6; } .model-tile.haiku { --m: #10b981; } .model-tile.codex { --m: #f59e0b; }
+  .model-tile .maker { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--m); }
+  .model-tile h3 { margin: 2px 0 4px; font-size: 19px; line-height: 1.2; }
+  .model-tile .use { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+  .model-tile ul { margin: 0 0 12px; padding-left: 18px; color: var(--muted); font-size: 13px; display: grid; gap: 3px; }
+  .model-tile .who { display: flex; flex-wrap: wrap; gap: 5px; }
+  .model-tile .who span { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--m) 12%, transparent); }
+  .model-tile .lvl { margin-top: 10px; font-size: 12px; color: var(--muted); }
+  .guide-rules { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 12px; }
+  .guide-rules li::before { content: "→ "; color: var(--fg); }
 </style>
 </head>
 <body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><b>RYNGMARK</b><span>Agent System</span></a>
+    <nav class="tabs" aria-label="Sidor">
+      <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg><span>Översikt</span></a>
+      <a href="missions.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Uppdrag</span></a>
+      <a href="library.html" data-local-href="http://127.0.0.1:5199/library.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5"/></svg><span>Spelbibliotek</span></a>
+    </nav>
+  </div>
+</header>
 <main>
-  <header>
+  <div class="phead">
     <div>
-      <nav class="tabs" aria-label="Sidor"><a href="index.html" aria-current="page">Tavlan</a><a href="library.html">Spelbibliotek</a></nav>
       <div class="eyebrow">Ryngmark Agent System</div>
-      <h1>Teamet just nu</h1>
+      <h1>Översikt</h1>
+      <p class="lede">Ditt team, dina uppdrag och det som kräver ditt beslut – samlat.</p>
     </div>
-    <div class="live-state" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button">Uppdatera</button></div>
-  </header>
+    <div class="live-state" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Uppdatera</button></div>
+  </div>
 
-  <div class="summary" id="summary" aria-live="polite"></div>
+  <p class="localnote" id="localnote" hidden>Token per uppdrag, anteckningar och uppdragsloggen finns bara på den lokala tavlan.
+    <a href="http://127.0.0.1:5199/" rel="noopener">Öppna lokalt →</a>
+    <small>Fungerar bara på Johans dator medan den lokala tavlan körs (knappen RAS-tavla i T3).</small></p>
 
-  <h2 class="first">Väntar på svar från Johan <span id="owner-note"></span></h2>
-  <section class="owner" id="alerts" aria-live="polite"></section>
+  <section class="kpis" aria-label="Läget just nu">
+    <article class="card kpi owner-kpi" id="owner-card">
+      <div class="chead"><span class="ic" id="owner-ic"></span><h2>Väntar på Johan</h2><span class="sp"></span><span id="owner-count"></span></div>
+      <div class="olist" id="alerts" aria-live="polite"><div class="calm">Laddar…</div></div>
+    </article>
+    <article class="card kpi">
+      <div class="chead"><span class="ic" id="run-ic"></span><h2>Pågår nu</h2></div>
+      <div id="running"><div class="calm">Laddar…</div></div>
+    </article>
+    <article class="card kpi">
+      <div class="chead"><span class="ic" id="tok-ic"></span><h2>Tokens</h2><span class="sp"></span><span class="sub">senaste 7 dagarna</span></div>
+      <div id="tokens-kpi"><div class="calm">Laddar…</div></div>
+    </article>
+  </section>
 
-  <div class="layout">
-    <div class="stack">
-      <section class="panel" aria-labelledby="org-title">
-        <p class="ptitle" id="org-title">Organisation <span id="org-note"></span></p>
-        <div id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></div>
-      </section>
+  <section class="section" aria-labelledby="org-title">
+    <div class="shead"><div><h2 id="org-title">Organisation</h2><p>Ditt team och ansvarsfördelning. <span id="org-note"></span></p></div></div>
+    <div id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></div>
+  </section>
 
-      <section class="panel" aria-labelledby="projects-title">
-        <p class="ptitle" id="projects-title">Projekt <span id="projects-note"></span></p>
-        <div class="projects" id="projects"></div>
-      </section>
-    </div>
+  <div class="duo">
+    <section class="card" aria-labelledby="projects-title">
+      <div class="chead"><span class="ic" id="proj-ic"></span><div><h2 id="projects-title">Projekt</h2><p>Anslutna projekt och deras status. <span id="projects-note"></span></p></div></div>
+      <div class="projects" id="projects"></div>
+    </section>
+    <section class="card" aria-labelledby="activity-title">
+      <div class="chead"><span class="ic" id="act-ic"></span><h2 id="activity-title">Senaste aktivitet</h2><span class="sp"></span><a class="link" href="missions.html">Alla uppdrag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></div>
+      <ul class="acts" id="activity"><li><span></span><span class="calm">Laddar…</span><span></span></li></ul>
+    </section>
+  </div>
 
-    <aside class="tokens" id="tokens" aria-label="Tokens"><div class="panel"><div class="empty">Laddar…</div></div></aside>
+  <div class="duo">
+    <section class="card" aria-labelledby="latest-title">
+      <div class="chead"><span class="ic" id="hist-ic"></span><h2 id="latest-title">Senaste uppdrag</h2><span class="sp"></span><span class="sub" id="latest-where"></span></div>
+      <div id="latest"><div class="calm">Laddar…</div></div>
+    </section>
+    <section class="card" aria-labelledby="days-title">
+      <div class="chead"><h2 id="days-title">Tokens per dag</h2><span class="sp"></span><span class="sub">avslutade uppdrag</span></div>
+      <div id="days"><div class="calm">Laddar…</div></div>
+    </section>
   </div>
 
   <section id="all-missions" class="all-missions" hidden>
-    <h2>Alla uppdrag <span id="missions-note"></span></h2>
-    <div id="missions"></div>
+    <div class="shead"><h2>Alla avslutade uppdrag <span class="sub" id="missions-note"></span></h2></div>
+    <div id="missions" style="margin-top:12px"></div>
   </section>
 
   <section class="guide" aria-labelledby="guide-title">
@@ -274,28 +336,28 @@
       <p>Så väljer PM – du kan alltid be om en annan.</p>
     </div>
     <div class="models">
-      <article class="model-tile opus">
+      <article class="card model-tile opus">
         <div class="maker">Claude</div><h3>Opus 5.5</h3>
         <div class="use">Stora och svåra uppgifter</div>
         <ul><li>Planera och dela upp arbete</li><li>Arkitektur, draft och blueprint</li><li>Granska kod som Codex skrev</li><li>Säkerhetsgranskning</li></ul>
         <div class="who"><span>Project Manager</span><span>Solution Architect</span><span>Reviewer</span><span>Security Auditor</span></div>
         <div class="lvl">Nivå: hög · Security Auditor alltid max</div>
       </article>
-      <article class="model-tile sonnet">
+      <article class="card model-tile sonnet">
         <div class="maker">Claude</div><h3>Sonnet 5.5</h3>
         <div class="use">Vardagsarbetet</div>
         <ul><li>Research med källor</li><li>Prior art och retro</li><li>Bygga när projektets helhet behövs</li><li>Testa och försöka knäcka</li></ul>
         <div class="who"><span>Research</span><span>Engineering Analyst</span><span>Implementer</span><span>Tester</span></div>
         <div class="lvl">Nivå: medel</div>
       </article>
-      <article class="model-tile haiku">
+      <article class="card model-tile haiku">
         <div class="maker">Claude</div><h3>Haiku 5.5</h3>
         <div class="use">Snabbt och billigt</div>
         <ul><li>Uppslag och snabba kartläggningar</li><li>Formatering och sammanfattningar</li><li>Små mekaniska ändringar</li></ul>
         <div class="who"><span>Lätta jobb för alla roller</span></div>
         <div class="lvl">Nivå: låg</div>
       </article>
-      <article class="model-tile codex">
+      <article class="card model-tile codex">
         <div class="maker">OpenAI</div><h3>Codex · gpt-6.1-sol</h3>
         <div class="use">Väldefinierade byggjobb</div>
         <ul><li>Work orders med tydliga tester</li><li>Körs i egen worktree, parallellt</li><li>Oberoende andra åsikt</li><li>Granskar kod som Claude skrev</li></ul>
@@ -305,14 +367,14 @@
     </div>
     <ul class="guide-rules">
       <li>Granskning görs av den andra leverantören än den som skrev koden</li>
-      <li>Modell och nivå står på varje uppdrag ovan och i git</li>
+      <li>Modell och nivå står på varje uppdrag och i git</li>
       <li>Källa: <code>integrations/models.yaml</code></li>
     </ul>
   </section>
 
   <footer>
-    Uppdateras av RAS Project Manager vid varje överlämning (<code>tools/ras-status.ps1</code>). Sidan hämtar ny status
-    varannan minut.
+    Vem som arbetar: RAS Project Manager vid varje överlämning (<code>tools/ras-status.ps1</code>), hämtas varannan minut.
+    Var uppdragen står: <code>tools/ras-missions.mjs</code>.
   </footer>
 </main>
 
@@ -320,37 +382,74 @@
 const REPO = "Ryngmarks/ras-board";
 const API_URL = `https://api.github.com/repos/${REPO}/contents/status.json?ref=status`;
 const RAW_URL = `https://raw.githubusercontent.com/${REPO}/status/status.json`;
+const MISSIONS_URL = `https://raw.githubusercontent.com/${REPO}/status/missions.json`;
+const HISTORY_URL = `https://raw.githubusercontent.com/${REPO}/status/history.json`;
 const POLL_MS = 120_000;          // unauthenticated GitHub API: 60 calls/h per IP, shared by every open tab
 const STALE_MS = 12 * 3600_000;
 
+// Line icons (inline SVG, no icon library – CSP).
 const ICONS = {
-  "project-manager": '<circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.8 5.41a2 2 0 0 1-1.27 1.27L7.76 16.24l1.8-5.41a2 2 0 0 1 1.27-1.27z"/>',
-  "solution-architect": '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
-  "engineering-analyst": '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
-  "research": '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-  "implementer": '<path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25a3.2 3.2 0 0 1-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>',
-  "reviewer": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
-  "tester": '<path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>',
-  "security-auditor": '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-  "3d-artist": '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/>',
-  "other": '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-  "alert": '<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+  home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  play: '<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/>',
+  database: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+  layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  chart: '<path d="M3 21h18"/><path d="M7 17v-4"/><path d="M12 17V7"/><path d="M17 17v-8"/>',
+  chev: '<path d="m9 6 6 6-6 6"/>',
+  gamepad: '<path d="M6 11h4"/><path d="M8 9v4"/><path d="M15 12h.01"/><path d="M18 10h.01"/><path d="M17.3 5H6.7a4 4 0 0 0-4 3.6l-.7 6.6A3 3 0 0 0 5 18.5c1 0 2-.5 2.6-1.4L9 15h6l1.4 2.1a3.1 3.1 0 0 0 2.6 1.4 3 3 0 0 0 3-3.3l-.7-6.6A4 4 0 0 0 17.3 5z"/>',
+  network: '<rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M5 16v-3h14v3"/><path d="M12 8v5"/>',
+  image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+  cube: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/>',
+  pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  sparkles: '<path d="m12 3 1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="m19 15 .8 2.2 2.2.8-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.9 19.1 1.4-1.4"/><path d="m17.7 6.3 1.4-1.4"/>',
+  mountain: '<path d="m8 3 4 8 5-5 5 15H2z"/>',
+  book: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  rocket: '<path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0"/><path d="M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/>',
+  monitor: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>',
+  code: '<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>',
+  server: '<rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M7 7h.01"/><path d="M7 17h.01"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  flask: '<path d="M9 3h6"/><path d="M10 3v6L4.5 19A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  dots: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
 };
+// role / director id -> icon
+const ROLE_ICON = {
+  "project-manager": "network", "solution-architect": "network", "engineering-analyst": "chart", research: "search", implementer: "wrench",
+  reviewer: "check", tester: "flask", "security-auditor": "shield", "3d-artist": "image", playtester: "gamepad", "technical-artist-3d": "cube",
+  "game-designer": "layers", "art-director": "pen", "environment-artist": "mountain", "light-and-colour": "sun", animator: "play",
+  "vfx-artist": "sparkles", "gaming-practice": "book", release: "rocket", "visual-design": "image", "ux-ui": "monitor", frontend: "code",
+  backend: "server", database: "database", "game-director": "gamepad", "product-director": "layers",
+};
+const BRANCH_ICON = { gaming: "gamepad", software: "layers", core: "network" };
 const ROLES = [
-  ["project-manager", "Project Manager", "Leder, delegerar, pratar med dig"],
-  ["solution-architect", "Solution Architect", "Draft och blueprint"],
-  ["engineering-analyst", "Engineering Analyst", "Prior art och retro"],
-  ["research", "Research", "Externa fakta med källor"],
-  ["implementer", "Implementer", "Bygger work orders"],
-  ["reviewer", "Reviewer", "Granskar kod och design"],
-  ["tester", "Tester", "Försöker få det att gå sönder"],
-  ["security-auditor", "Security Auditor", "Letar hål i inloggning och behörighet"],
-  ["3d-artist", "3D Artist", "Modellerar och texturerar spelkaraktärer"],
+  ["project-manager", "Project Manager"], ["solution-architect", "Solution Architect"], ["engineering-analyst", "Engineering Analyst"],
+  ["research", "Research"], ["implementer", "Implementer"], ["reviewer", "Reviewer"], ["tester", "Tester"],
+  ["security-auditor", "Security Auditor"], ["3d-artist", "Artist"], ["playtester", "Playtester"],
 ];
+const PHASES = { owner: "Väntar på dig", analysis: "Analys", plan: "Plan", build: "Utförande", review: "Granskning", paused: "Pausad", done: "Klar" };
+const BRANCH_LABEL = { gaming: "Gaming", software: "Software", core: "Core" };
+
+const icon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[id] || ICONS[ROLE_ICON[id]] || ICONS.user}</svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 // Owner alerts come only from the explicit flag, never from note text (security audit ras02 M1).
 const forOwner = e => e.state === "waiting" && e.for === "owner";
 
-// status.json is untrusted input: keep only known shapes and plain strings before anything is rendered.
+function ago(iso) {
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (!isFinite(s)) return "";
+  if (s < 90) return "nyss";
+  if (s < 3600) return Math.round(s / 60) + " min";
+  if (s < 86400) return Math.round(s / 3600) + " h";
+  return Math.round(s / 86400) + " d";
+}
+const sinceText = iso => { const a = ago(iso); return !a ? "" : a === "nyss" ? "nyss" : `för ${a} sedan`; };
+
+// ---- status.json is untrusted input: keep only known shapes and plain strings before anything is rendered ----
 const STATES_OK = new Set(["working", "waiting"]);
 function clean(raw) {
   const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
@@ -362,94 +461,50 @@ function clean(raw) {
   return { updated: str(raw?.updated, 40), projects, entries };
 }
 
-let etag = null, data = null, source = null, lastFetch = null, failed = false;
-let ORG = null;        // cleaned org.json, once loaded
-let HIST = null;       // { all: [...missions], where } or { msg } once history has loaded
-
-const icon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[id] || ICONS.other}</svg>`;
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const isStale = e => Date.now() - Date.parse(e.since) > STALE_MS;
-
-function ago(iso) {
-  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
-  if (!isFinite(s)) return "";
-  if (s < 90) return "nyss";
-  if (s < 3600) return Math.round(s / 60) + " min";
-  if (s < 86400) return Math.round(s / 3600) + " h";
-  return Math.round(s / 86400) + " d";
+// ---- Missions (ras07). Two shapes, one cleaner each; both return the same rows. Keep identical in missions.html. ----
+// Local: RAS docs/missions.json embedded by build-local (+ `tokens` per mission). Public: publish-missions.cjs output.
+const relPath = p => (typeof p === "string" && p.length <= 200 && !/[\u0000-\u001f]/.test(p) && !/^[a-z][a-z0-9+.-]*:|^[\\/]/i.test(p) && !p.replace(/\\/g, "/").split("/").includes("..") ? p : "");
+// Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
+// cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
+function cleanMissions(raw) {
+  if (!raw || typeof raw !== "object" || raw.version !== 1 || !Array.isArray(raw.missions)) return null;
+  const str = (v, n = 160) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project) && str(m.id))
+    .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.title, 80) || str(m.id, 60),
+      phase: m.phase, next: str(m.next, 160), updated: when(m.updated), opened: when(m.opened), closed: when(m.closed),
+      branch: str(m.branch, 80), worktree: str(m.worktree, 80), brief: relPath(m.brief), status: relPath(m.status), public: m.public !== false,
+      tokens: typeof m.tokens === "number" && isFinite(m.tokens) && m.tokens >= 0 ? m.tokens : null,
+      log: (Array.isArray(m.log) ? m.log : []).filter(e => e && typeof e === "object" && Object.hasOwn(PHASES, e.phase)).slice(-30)
+        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })) }));
 }
-
-function stateOf(jobs) {
-  const live = jobs.filter(j => !isStale(j));
-  if (live.some(j => j.state === "working")) return "working";
-  if (live.some(j => j.state === "waiting")) return "waiting";
-  return "idle";
+function cleanPublicMissions(raw) {
+  if (!raw || typeof raw !== "object" || !Array.isArray(raw.missions)) return null;
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project, 80) && str(m.id, 60))
+    .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.name, 80) || str(m.id, 60),
+      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [] }));
 }
-
-function render() {
-  const entries = Array.isArray(data?.entries) ? data.entries : [];
-  const known = new Map(ROLES.map(r => [r[0], r]));
-  const roles = ROLES.concat([...new Set(entries.map(e => e.role))].filter(r => !known.has(r)).map(r => [r, r, ""]));
-  const roleName = roleNames(entries);
-
-  // header
-  document.getElementById("updated").textContent = data?.updated
-    ? (ago(data.updated) === "nyss" ? "Ändrad nyss" : `Ändrad för ${ago(data.updated)} sedan`) + (source === "raw" ? " · cache, upp till 5 min gammal" : "")
-    : (failed ? "Kunde inte hämta status" : "Ingen status ännu");
-  document.getElementById("live").classList.toggle("stale", failed || source === "raw");
-
-  // summary
-  const states = roles.map(([id]) => stateOf(entries.filter(e => e.role === id)));
-  const liveEntries = entries.filter(e => !isStale(e));
-  const counts = {
-    working: liveEntries.filter(e => e.state === "working").length,
-    waiting: liveEntries.filter(e => e.state === "waiting").length,
-    idle: states.filter(x => x === "idle").length,
-  };
-  const label = { working: "uppdrag pågår", waiting: "väntar", idle: "lediga roller" };
-  document.getElementById("summary").innerHTML = ["working", "waiting", "idle"].map(s =>
-    `<span class="pill ${s}"><span class="dot"></span><b>${counts[s]}</b> ${label[s]}</span>`).join("");
-
-  // waiting for the owner – first thing on the page
-  const waiting = entries.filter(e => forOwner(e) && !isStale(e));
-  document.getElementById("owner-note").textContent = waiting.length ? `${waiting.length} st` : "";
-  document.getElementById("alerts").innerHTML = waiting.length ? waiting.map(e =>
-    `<div class="alert" role="status">${icon("alert")}<div><b>${esc(e.project)} · ${esc(roleName[e.role] || e.role)}</b>` +
-    `<span>${esc(e.note || "väntar på svar")} · ${ago(e.since)}</span></div></div>`).join("")
-    : `<div class="calm">Inget väntar på dig just nu.</div>`;
-  document.title = (waiting.length ? `(${waiting.length}) väntar på dig · ` : "") + "RAS – teamet";
-
-  // live status on the org tree and the token panel's day bars
-  paintOrg();
-  paintTokens();
-
-  // projects
-  const byProject = new Map();
-  for (const p of Array.isArray(data?.projects) ? data.projects : []) byProject.set(p, []);
-  for (const e of entries) { if (!byProject.has(e.project)) byProject.set(e.project, []); byProject.get(e.project).push(e); }
-  const rank = l => ({ working: 0, waiting: 1, idle: 2 })[stateOf(l)];
-  const list = [...byProject].sort((a, b) => rank(a[1]) - rank(b[1]) || a[0].localeCompare(b[0], "sv"));
-  document.getElementById("projects-note").textContent = `${list.length} st`;
-  document.getElementById("projects").innerHTML = list.length ? list.map(([p, l]) => {
-    const s = stateOf(l);
-    const live = l.filter(e => !isStale(e));
-    // one chip per role; several agents in the same role show as "Research ×2"
-    const byRole = new Map();
-    for (const e of live) { if (!byRole.has(e.role)) byRole.set(e.role, []); byRole.get(e.role).push(e); }
-    return `<article class="card proj ${s}"><div class="proj-head"><b>${esc(p)}</b>
-      <small>${byRole.size ? byRole.size + (byRole.size === 1 ? " roll" : " roller") : "lugnt"}</small></div>
-      ${byRole.size ? `<div class="chips">${[...byRole].map(([role, es]) =>
-        `<span class="chip">${icon(role)}${esc(roleName[role] || role)}${es.length > 1 ? " ×" + es.length : ""}<span class="dot ${stateOf(es)}"></span></span>`).join("")}</div>`
-        : `<div class="quiet">Inga aktiva roller</div>`}</article>`;
-  }).join("") : `<div class="empty">Inga projekt ännu</div>`;
+// The ONLY code that knows where mission data comes from.
+async function loadMissions(doc, fetchFn) {
+  const block = doc.getElementById("ras-missions");
+  if (block) {
+    let raw;
+    try { raw = JSON.parse(block.textContent); } catch { return { state: "invalid" }; }
+    if (raw === null) return { state: "none", local: true };
+    const list = cleanMissions(raw);
+    return list ? { state: "ok", local: true, list } : { state: "invalid", local: true };
+  }
+  try {
+    const res = await fetchFn(MISSIONS_URL, { cache: "no-store" });
+    if (res.status === 404) return { state: "none", local: false };
+    if (!res.ok) return { state: "failed", local: false };
+    const list = cleanPublicMissions(await res.json());
+    return list ? { state: "ok", local: false, list } : { state: "invalid", local: false };
+  } catch { return { state: "failed", local: false }; }
 }
-
-// role id -> display name: the fixed list first, then every box of the org tree
-function roleNames() {
-  const names = Object.fromEntries(ROLES.map(r => [r[0], r[1]]));
-  if (ORG) for (const b of orgBoxes()) if (b.id && !names[b.id]) names[b.id] = b.name;
-  return names;
-}
+const MISSION_MSG = { none: "Ingen uppdragslogg ännu.", invalid: "Uppdragsloggen kunde inte läsas.", failed: "Uppdragsloggen kunde inte hämtas." };
 
 // ---- Organisation: org.json is same-origin but still untrusted text; keep only known shapes ----
 const BRANCHES = ["gaming", "software"];
@@ -473,29 +528,164 @@ function cleanOrg(raw) {
   }
   // Core's director is the Project Manager, the main session (owner decision ras06, 2026-10-31).
   return { owner: { name: str(raw?.owner?.name, 60), title: str(raw?.owner?.title, 60) }, branches,
-    core: { name: str(raw?.core?.name, 60) || "RAS Core", roles: roles(raw?.core?.roles), director: { name: "Project Manager", id: "project-manager", status: "active", today: "Huvudsessionen" } } };
+    core: { name: str(raw?.core?.name, 60) || "RAS Core", roles: roles(raw?.core?.roles), director: { name: "Project Manager", id: "project-manager", status: "active", today: "Huvudsessionen – leder och delegerar" } } };
+}
+
+// ---- History (tokens): local build = embedded #ras-history; public page = history.json on the status branch ----
+function cleanHistory(raw) {
+  const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
+  const num = v => (typeof v === "number" && isFinite(v) && v >= 0 ? v : null);
+  return (Array.isArray(raw?.missions) ? raw.missions : [])
+    .filter(m => m && typeof m === "object" && (typeof m.id === "string" || typeof m.name === "string"))
+    .map(m => ({ id: str(m.id, 80), project: str(m.project, 80), name: str(m.name), org: BRANCH_LABEL[m.org] ? m.org : "", director: str(m.director, 60),
+      input: num(m.input), output: num(m.output), total: num(m.total), cache_read: num(m.cache_read),
+      status: ["measured", "partial", "missing"].includes(m.status) ? m.status : "", closed_at: str(m.closed_at, 40) }));
+}
+
+// ---- page state ----
+let etag = null, data = null, source = null, lastFetch = null, failed = false;
+let ORG = null;        // cleaned org.json, once loaded
+let HIST = null;       // { all, where } or { msg } once history has loaded
+let MISS = null;       // loadMissions() result
+
+const isStale = e => Date.now() - Date.parse(e.since) > STALE_MS;
+const liveEntries = () => (Array.isArray(data?.entries) ? data.entries : []).filter(e => !isStale(e));
+// project -> branch from org.json; everything else (RAS itself, unknown) belongs to Core
+function branchOf(project) {
+  if (ORG) for (const k of BRANCHES) if (ORG.branches[k]?.projects.includes(project)) return k;
+  return "core";
+}
+function roleNames() {
+  const names = Object.fromEntries(ROLES);
+  if (ORG) for (const b of orgBoxes()) if (b.id && !names[b.id]) names[b.id] = b.name;
+  return names;
 }
 function orgBoxes() {
   return [...BRANCHES.flatMap(k => ORG.branches[k] ? [ORG.branches[k].director, ...ORG.branches[k].roles] : []), ORG.core.director, ...ORG.core.roles];
 }
 
-// Live lines for one tree box: the most urgent first (waiting for Johan, then working, then waiting), max 3 + "+N".
+// ---- Väntar på Johan: missions in phase "owner" + status.json entries with for: "owner" ----
+function ownerItems() {
+  const items = [];
+  for (const m of MISS?.list || []) if (m.phase === "owner")
+    items.push(`<a class="oitem" href="missions.html#${esc(encodeURIComponent(m.key))}"><span class="ic ${branchOf(m.project)}">${icon(BRANCH_ICON[branchOf(m.project)])}</span>` +
+      `<div><b>${esc(m.title)} – ${esc(m.project)}</b><span class="sub">${esc(m.next || "Väntar på ditt beslut")}${m.updated ? " · " + esc(sinceText(m.updated)) : ""}</span></div>${icon("chev")}</a>`);
+  const names = roleNames();
+  for (const e of liveEntries().filter(forOwner))
+    items.push(`<div class="oitem"><span class="ic ${branchOf(e.project)}">${icon(e.role)}</span>` +
+      `<div><b>${esc(e.project)} · ${esc(names[e.role] || e.role)}</b><span class="sub">${esc(e.note || "väntar på svar")} · ${esc(sinceText(e.since))}</span></div></div>`);
+  return items;
+}
+
+function splitBar(parts, label) {
+  const sum = parts.reduce((s, p) => s + p.v, 0);
+  if (!sum) return "";
+  return `<div class="split" role="img" aria-label="${esc(label)}">${parts.filter(p => p.v > 0).map(p => `<i style="width:${(100 * p.v / sum).toFixed(1)}%;background:var(--${p.k})"></i>`).join("")}</div>`;
+}
+
+function paintRunning() {
+  const target = document.getElementById("running");
+  if (!MISS) return;
+  if (MISS.state !== "ok") { target.innerHTML = `<div class="empty">${esc(MISSION_MSG[MISS.state])}</div>`; return; }
+  const active = MISS.list.filter(m => m.phase !== "done" && m.phase !== "paused");
+  const paused = MISS.list.filter(m => m.phase === "paused").length;
+  const parts = ["gaming", "software", "core"].map(k => ({ k, v: active.filter(m => branchOf(m.project) === k).length }));
+  target.innerHTML = `<div class="bigrow"><span class="big">${active.length}</span><span>aktiva uppdrag</span></div>
+    <div class="sub">${paused ? `+ ${paused} pausade · ` : ""}<a class="link" href="missions.html">Visa uppdrag</a></div>
+    ${splitBar(parts, "Aktiva uppdrag per gren") || `<div class="split"></div>`}
+    <div class="legend">${parts.map(p => `<span><span class="bdot ${p.k}"></span>${BRANCH_LABEL[p.k]} <b>${p.v}</b></span>`).join("")}</div>`;
+}
+
+function render() {
+  const entries = Array.isArray(data?.entries) ? data.entries : [];
+  document.getElementById("updated").textContent = data?.updated
+    ? (ago(data.updated) === "nyss" ? "Ändrad nyss" : `Ändrad för ${ago(data.updated)} sedan`) + (source === "raw" ? " · cache, upp till 5 min gammal" : "")
+    : (failed ? "Kunde inte hämta status" : "Ingen status ännu");
+  document.getElementById("live").classList.toggle("stale", failed || source === "raw");
+
+  const items = ownerItems();
+  document.getElementById("owner-card").classList.toggle("hot", items.length > 0);
+  document.getElementById("owner-count").innerHTML = items.length ? `<span class="badge wait">${items.length} ${items.length === 1 ? "beslut" : "beslut"}</span>` : "";
+  // at most 4 in the card; the rest are one click away on the Uppdrag tab
+  document.getElementById("alerts").innerHTML = !items.length ? `<div class="calm">Inget väntar på dig just nu.</div>`
+    : items.slice(0, 4).join("") + (items.length > 4 ? `<a class="link" href="missions.html">+${items.length - 4} till under Uppdrag ${icon("chev")}</a>` : "");
+  document.title = (items.length ? `(${items.length}) väntar på dig · ` : "") + "RAS – översikt";
+
+  paintRunning();
+  paintOrg();
+  paintActivity();
+
+  // projects: connected projects (status.json) + where roles work now
+  const byProject = new Map();
+  for (const p of Array.isArray(data?.projects) ? data.projects : []) byProject.set(p, []);
+  for (const e of entries) { if (!byProject.has(e.project)) byProject.set(e.project, []); byProject.get(e.project).push(e); }
+  const names = roleNames();
+  const stateOf = l => (l.some(e => e.state === "working") ? "working" : l.length ? "waiting" : "idle");
+  const rank = l => ({ working: 0, waiting: 1, idle: 2 })[stateOf(l.filter(e => !isStale(e)))];
+  const list = [...byProject].sort((a, b) => rank(a[1]) - rank(b[1]) || a[0].localeCompare(b[0], "sv"));
+  document.getElementById("projects-note").textContent = list.length ? `${list.length} st` : "";
+  document.getElementById("projects").innerHTML = list.length ? list.map(([p, l]) => {
+    const live = l.filter(e => !isStale(e));
+    const roles = [...new Set(live.map(e => names[e.role] || e.role))];
+    const owner = live.some(forOwner) || (MISS?.list || []).some(m => m.project === p && m.phase === "owner");
+    const open = (MISS?.list || []).filter(m => m.project === p && m.phase !== "done" && m.phase !== "paused").length;
+    const s = stateOf(live), k = branchOf(p);
+    const pill = s === "working" ? `<span class="badge work">Arbetar</span>` : owner || s === "waiting" ? `<span class="badge wait">Väntar</span>` : `<span class="badge">Lugnt</span>`;
+    const bits = [roles.length ? `${roles.length} ${roles.length === 1 ? "aktiv roll" : "aktiva roller"}` : "Inga aktiva roller", open ? `${open} ${open === 1 ? "uppdrag" : "uppdrag"} pågår` : ""].filter(Boolean);
+    return `<article class="proj ${k}"><span class="ic ${k}">${icon(BRANCH_ICON[k])}</span><div>
+      <div class="proj-top"><b>${esc(p)}</b>${pill}</div>
+      <span class="sub">${esc(bits.join(" · "))}</span>
+      ${roles.length ? `<span class="sub">${esc(roles.slice(0, 4).join(", "))}${roles.length > 4 ? " …" : ""}</span>` : ""}
+      ${owner ? `<span class="ownerflag">Väntar på ditt beslut</span>` : ""}</div></article>`;
+  }).join("") : `<div class="empty">Inga projekt ännu</div>`;
+}
+
+// ---- Senaste aktivitet. Local: mission log entries (with notes) + who started working/waiting. Public (owner #10): the
+// newest phase changes only – project · name → phase at the published `updated` time, no notes; who works now stays in
+// Pågår nu and the organisation tree. ----
+function activityItems() {
+  const items = [], names = roleNames(), local = Boolean(MISS?.local);
+  if (!local) {
+    for (const m of MISS?.list || []) if (m.updated)
+      items.push({ t: Date.parse(m.updated), k: branchOf(m.project),
+        html: `<b>${esc(m.project)} · ${esc(m.title)}</b> → <span class="phase p-${m.phase}">${PHASES[m.phase]}</span>` });
+    return items.sort((a, b) => b.t - a.t).slice(0, 7);
+  }
+  for (const m of MISS.list || []) for (const e of m.log) if (e.at)
+    items.push({ t: Date.parse(e.at), k: branchOf(m.project),
+      html: `<b>${esc(m.title)}</b> → <span class="phase p-${e.phase}">${PHASES[e.phase]}</span>${e.note ? ` ${esc(e.note)}` : ""} <small>· ${esc(m.project)}</small>` });
+  for (const e of liveEntries()) {
+    const t = Date.parse(e.since);
+    if (!isFinite(t)) continue;
+    const verb = e.state === "working" ? "arbetar i" : forOwner(e) ? "väntar på Johan i" : "väntar i";
+    items.push({ t, k: branchOf(e.project), html: `<b>${esc(names[e.role] || e.role)}</b> ${verb} ${esc(e.project)}${e.note ? ` <small>· ${esc(e.note)}</small>` : ""}` });
+  }
+  return items.sort((a, b) => b.t - a.t).slice(0, 7);
+}
+function paintActivity() {
+  const items = activityItems();
+  document.getElementById("activity").innerHTML = items.length
+    ? items.map(i => `<li><span class="bdot ${i.k}"></span><span class="what">${i.html}</span><span class="when">${esc(sinceText(new Date(i.t).toISOString()))}</span></li>`).join("")
+    : `<li><span></span><span class="calm">Ingen aktivitet ännu.</span><span></span></li>`;
+}
+
+// ---- organisation tree ----
 function liveLines(es, who) {
   if (!es.length) return "";
   const rank = e => (forOwner(e) ? 0 : e.state === "working" ? 1 : 2);
   const sorted = es.slice().sort((a, b) => rank(a) - rank(b) || (Date.parse(b.since) || 0) - (Date.parse(a.since) || 0));
-  const lines = sorted.slice(0, 3).map(e => {
-    const txt = e.note || (forOwner(e) ? "väntar på Johan" : "");
-    return `<div class="live ${e.state}">● ${who ? esc(who(e)) + " · " : ""}${esc(e.project)}${txt ? " · " + esc(txt) : ""}</div>`;
+  const lines = sorted.slice(0, 2).map(e => {
+    const txt = forOwner(e) ? "Väntar på Johan" : e.note;
+    return `<span class="live ${e.state}">● ${who ? esc(who(e)) + " · " : ""}${esc(e.project)}${txt ? " · " + esc(txt) : ""}</span>`;
   });
-  if (sorted.length > 3) lines.push(`<div class="live more">+${sorted.length - 3} till</div>`);
+  if (sorted.length > 2) lines.push(`<span class="live more">+${sorted.length - 2} till</span>`);
   return lines.join("");
 }
 const boxState = es => (!es.length ? "" : es.some(forOwner) ? "waiting" : es.some(e => e.state === "working") ? "working" : "waiting");
 
 function paintOrg() {
   if (!ORG) return;
-  const live = (Array.isArray(data?.entries) ? data.entries : []).filter(e => !isStale(e));
+  const live = liveEntries();
   const byRole = new Map();
   for (const e of live) { if (!byRole.has(e.role)) byRole.set(e.role, []); byRole.get(e.role).push(e); }
   const placed = new Set();
@@ -503,44 +693,47 @@ function paintOrg() {
 
   const roleBox = r => {
     const es = esOf(r.id), st = boxState(es);
-    const tag = r.status === "planned" ? `<span class="tag planned">planerad</span>` : r.kind ? `<span class="kind">${r.kind === "agent" ? "agent" : "profil"}</span>` : "";
-    return `<div class="node rbox ${r.status}${st ? " " + st : ""}"><div class="rbox-top"><b>${esc(r.name)}</b>${tag}</div>${r.note ? `<small>${esc(r.note)}</small>` : ""}${liveLines(es)}</div>`;
+    return `<div class="role ${r.status}${st ? " " + st : ""}"${r.note ? ` title="${esc(r.note)}"` : ""}>${icon(r.id)}<b>${esc(r.name)}</b>` +
+      `${r.status === "planned" ? `<span class="tag">planerad</span>` : ""}${liveLines(es)}</div>`;
   };
   const dirBox = d => {
     const es = esOf(d.id), st = boxState(es), planned = d.status === "planned";
-    return `<div class="node dir ${planned ? "planned" : ""}${st ? " " + st : ""}"><b>${esc(d.name)}</b>${planned ? `<small>planerad${d.today ? " · " + esc(d.today) : ""}</small>` : (d.today ? `<small>${esc(d.today)}</small>` : "")}${liveLines(es)}</div>`;
+    return `<div class="dir${planned ? " planned" : ""}${st ? " " + st : ""}"><span class="ic">${icon(d.id)}</span><div><b>${esc(d.name)}</b>` +
+      `<small>${planned ? "planerad" + (d.today ? " · " : "") : ""}${esc(d.today)}</small>${liveLines(es)}</div></div>`;
   };
-  const chips = ps => {
-    const shown = ps.slice(0, 3).map(p => `<span class="chip">${esc(p)}</span>`);
-    if (ps.length > 3) shown.push(`<span class="chip" title="${esc(ps.slice(3).join(", "))}">+${ps.length - 3}</span>`);
-    return shown.length ? `<p class="org-projects">${shown.join("")}</p>` : "";
-  };
-  const row = (k, head, dir, extra, kids) =>
-    `<div class="hb ${k}"><div class="hb-main">${head}${dir}${extra}</div><div class="hkids">${kids}</div></div>`;
+  // A branch waits for Johan when one of its projects has a mission in phase "owner" or a for-owner entry.
+  const waitsFor = k => (MISS?.list || []).some(m => m.phase === "owner" && branchOf(m.project) === k) || live.some(e => forOwner(e) && branchOf(e.project) === k);
+  const panel = (k, logo, d, roles, projects) => `<section class="ob ${k}" aria-label="${esc(BRANCH_LABEL[k])}">
+    <div class="ob-logo">${logo}</div>${dirBox(d)}
+    ${projects.length ? `<p class="bprojects">${projects.map(esc).join(" · ")}</p>` : ""}
+    <div class="fork" aria-hidden="true"></div><div class="roles">${roles}</div></section>`;
 
-  const branchRows = BRANCHES.map(k => {
+  const panels = BRANCHES.map(k => {
     const b = ORG.branches[k];
     if (!b) return "";
-    const head = `<div class="bhead"><h3><img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180"></h3></div>`;
-    return row(k, head, dirBox(b.director), chips(b.projects), b.roles.map(roleBox).join(""));
-  }).join("");
-
+    return panel(k, `<img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180">`, b.director, b.roles.map(roleBox).join(""), b.projects);
+  });
   // Core goes last so every role of the tree is placed before "Övriga" is worked out.
-  const coreDir = dirBox(ORG.core.director), coreKids = ORG.core.roles.map(roleBox).join("");
-  const others = live.filter(e => !placed.has(e.role));
-  const names = roleNames();
-  const othersBox = others.length ? `<div class="node rbox others ${boxState(others)}"><div class="rbox-top"><b>Övriga</b><span class="kind">ej i trädet</span></div>${liveLines(others, e => names[e.role] || e.role)}</div>` : "";
-  const coreRow = row("core", `<div class="bhead"><h3>${esc(ORG.core.name)}</h3><small>delas av alla</small></div>`, coreDir, "", coreKids + othersBox);
+  const coreRoles = ORG.core.roles.map(roleBox).join("");
+  const coreDir = ORG.core.director;
+  const coreHtml = (() => {
+    const html = panel("core", `<span class="core-mark" role="img" aria-label="${esc(ORG.core.name)}">RAS<span>CORE</span></span>`, coreDir, coreRoles, []);
+    const others = live.filter(e => !placed.has(e.role));
+    if (!others.length) return html;
+    const names = roleNames();
+    const box = `<div class="role ${boxState(others)}">${icon("dots")}<b>Övriga</b>${liveLines(others, e => names[e.role] || e.role)}</div>`;
+    return html.replace(/<\/div><\/section>$/, box + "</div></section>");
+  })();
 
   const all = [...BRANCHES.flatMap(k => ORG.branches[k]?.roles || []), ...ORG.core.roles];
   document.getElementById("org-note").textContent = `${all.filter(r => r.status === "active").length} aktiva · ${all.filter(r => r.status === "planned").length} planerade`;
-  document.getElementById("org").innerHTML = `<div class="htree">
-    <div class="hroot"><div class="node owner"><div class="icon">${icon("other")}</div><div><b>${esc(ORG.owner.name)}</b><small>${esc(ORG.owner.title)}</small></div></div></div>
-    <div class="hconn"></div>
-    <div class="hbranches">${branchRows}${coreRow}</div></div>`;
+  const lines = ["gaming", "software", "core"].map(k => waitsFor(k) ? `<span class="waiting"><em>Väntar på beslut</em></span>` : `<span></span>`).join("");
+  document.getElementById("org").innerHTML = `
+    <div class="oroot"><div class="owner-node"><span class="ic">${icon("user")}</span><div><b>${esc(ORG.owner.name)}</b><small>${esc(ORG.owner.title)}</small></div></div></div>
+    <div class="olines" aria-hidden="true">${lines}</div>
+    <div class="obranches">${panels.join("")}${coreHtml}</div>`;
 }
 async function loadOrg() {
-  const target = document.getElementById("org");
   try {
     // The local build embeds org.json (a page opened from file:// cannot fetch it); the public page fetches it same-origin.
     const embedded = document.getElementById("ras-org");
@@ -552,28 +745,17 @@ async function loadOrg() {
     ORG = cleanOrg(raw);
     render();
   } catch {
-    target.innerHTML = `<div class="empty">Organisationen kunde inte läsas.</div>`;
+    document.getElementById("org").innerHTML = `<div class="empty">Organisationen kunde inte läsas.</div>`;
   }
 }
 
-// ---- Uppdrag och tokens: local build = embedded #ras-history; public page = history.json on the status branch ----
-const ORG_LABEL = { gaming: "Gaming", software: "Software", core: "Core" };
-function cleanHistory(raw) {
-  const str = (v, n = 120) => (typeof v === "string" ? v.slice(0, n) : "");
-  const num = v => (typeof v === "number" && isFinite(v) && v >= 0 ? v : null);
-  return (Array.isArray(raw?.missions) ? raw.missions : [])
-    .filter(m => m && typeof m === "object" && (typeof m.id === "string" || typeof m.name === "string"))
-    .map(m => ({ id: str(m.id, 80), project: str(m.project, 80), name: str(m.name), org: ORG_LABEL[m.org] ? m.org : "", director: str(m.director, 60),
-      input: num(m.input), output: num(m.output), total: num(m.total), cache_read: num(m.cache_read),
-      status: ["measured", "partial", "missing"].includes(m.status) ? m.status : "", closed_at: str(m.closed_at, 40) }));
-}
+// ---- tokens ----
 const UNK = `<span class="unk">okänt</span>`;
 const fmtNum = n => (n === null ? UNK : esc(n.toLocaleString("sv-SE")));
 const fmtDate = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE") : UNK; };
 const fmtShort = iso => { const t = Date.parse(iso); return isFinite(t) ? new Date(t).toLocaleDateString("sv-SE", { day: "numeric", month: "short" }).replace(/\.$/, "") : UNK; };
 const fmtM = n => (n === null ? UNK : esc((n / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M");
-const orgBadge = o => (o ? `<span class="org-badge ${o}">${ORG_LABEL[o]}</span>` : UNK);
-const orgColour = o => (o ? `var(--${o})` : "var(--core)");
+const orgBadge = o => (o ? `<span class="org-badge ${o}">${BRANCH_LABEL[o]}</span>` : UNK);
 function missionRow(m) {
   const cache = m.input && m.cache_read !== null ? `<small>${Math.round(100 * m.cache_read / m.input)} % cache</small>` : "";
   return `<tr>
@@ -582,17 +764,15 @@ function missionRow(m) {
     <td data-label="Ansvarig">${m.director ? esc(m.director) : UNK}</td>
     <td class="num" data-label="Input"><span>${fmtNum(m.input)}${cache}</span></td>
     <td class="num" data-label="Output">${fmtNum(m.output)}</td>
-    <td class="num" data-label="Totalt"><span>${m.status === "partial" ? `<span class="tag partial" title="Några körningar saknar mätdata">delvis</span> ` : ""}${fmtNum(m.total)}</span></td>
+    <td class="num" data-label="Totalt"><span>${m.status === "partial" ? `<span class="ptag" title="Några körningar saknar mätdata">delvis</span> ` : ""}${fmtNum(m.total)}</span></td>
     <td class="num" data-label="Avslutat">${fmtDate(m.closed_at)}</td></tr>`;
 }
-// Local build: the embedded #ras-history. Public page: history.json on the `status` branch (owner decision 2026-10-31:
-// mission names, tokens, director and date may be public – nothing else is ever in that file).
-const HISTORY_URL = `https://raw.githubusercontent.com/${REPO}/status/history.json`;
 async function renderHistory() {
   const embedded = document.getElementById("ras-history");
   try {
     if (embedded) HIST = { all: cleanHistory(JSON.parse(embedded.textContent)), where: "lokal vy" };
     else {
+      // Owner decision 2026-10-31: mission names, tokens, director and date may be public – nothing else is in that file.
       const res = await fetch(HISTORY_URL, { cache: "no-store" });
       if (res.status === 404) HIST = { msg: "Inga avslutade uppdrag är publicerade än." };
       else {
@@ -603,20 +783,19 @@ async function renderHistory() {
   } catch { HIST = { msg: "Uppdragshistoriken kunde inte läsas." }; }
   paintTokens();
 }
-
 const closedAt = m => { const t = Date.parse(m.closed_at); return isFinite(t) ? t : null; };
 const dayKey = t => new Date(t).toLocaleDateString("sv-SE");
 function paintTokens() {
-  const target = document.getElementById("tokens"), table = document.getElementById("all-missions");
   if (!HIST) return;
-  const open = !table.hidden;
+  const $ = id => document.getElementById(id);
+  const table = $("all-missions"), open = !table.hidden;
   const all = (HIST.all || []).slice().sort((a, b) => (closedAt(b) ?? -Infinity) - (closedAt(a) ?? -Infinity));
   if (!all.length) {
     table.hidden = true;
-    target.innerHTML = `<div class="panel"><p class="ptitle">Tokens</p><div class="empty">${esc(HIST.msg || "Inga avslutade uppdrag är mätta än.")}</div></div>`;
+    const msg = `<div class="empty">${esc(HIST.msg || "Inga avslutade uppdrag är mätta än.")}</div>`;
+    $("tokens-kpi").innerHTML = msg; $("latest").innerHTML = msg; $("days").innerHTML = msg;
     return;
   }
-
   // the last 7 calendar days, today last
   const start = new Date(); start.setHours(0, 0, 0, 0);
   const days = [];
@@ -632,44 +811,31 @@ function paintTokens() {
   const total = !recent.length ? 0 : known.length ? sum(known.map(m => m.total)) : null;
   const cacheBase = recent.filter(m => m.input && m.cache_read !== null);
   const cachePct = cacheBase.length ? Math.round(100 * sum(cacheBase.map(m => m.cache_read)) / sum(cacheBase.map(m => m.input))) : null;
-  const split = ["gaming", "software", "core"].map(o => ({ o, label: ORG_LABEL[o], colour: orgColour(o), v: sum(known.filter(m => m.org === o).map(m => m.total)) }));
-  const noOrg = sum(known.filter(m => !ORG_LABEL[m.org]).map(m => m.total));
-  if (noOrg > 0) split.push({ o: "", label: "Okänd", colour: "var(--free)", v: noOrg });
+  const split = ["gaming", "software", "core"].map(k => ({ k, v: sum(known.filter(m => (m.org || "core") === k).map(m => m.total)) }));
   const splitSum = sum(split.map(s => s.v));
   const maxDay = Math.max(...days.map(d => d.total));
+  const missed = recent.length - known.length;
+
+  $("tokens-kpi").innerHTML = `<div class="big">${fmtM(total)}</div>
+    <div class="sub">${cachePct === null ? "cache okänt" : cachePct + " % cache"} · ${recent.length} uppdrag avslutade${missed ? ` (${missed} utan mätdata)` : ""}</div>
+    ${splitBar(split, "Tokens per gren") || `<div class="split"></div>`}
+    <div class="legend">${split.map(s => `<span><span class="bdot ${s.k}"></span>${BRANCH_LABEL[s.k]} <b>${splitSum ? Math.round(100 * s.v / splitSum) : 0} %</b></span>`).join("")}</div>`;
+
+  $("days").innerHTML = `<div class="bars" role="img" aria-label="Tokens per dag">${days.map(d => `<div class="${d.today ? "today" : ""}" style="height:${maxDay > 0 ? (100 * d.total / maxDay).toFixed(1) : 0}%" title="${esc(d.key)}: ${d.missing && !d.total ? "okänt" : esc((d.total / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M" + (d.missing ? " (delvis)" : "")}"></div>`).join("")}</div>
+    <div class="days">${days.map(d => `<span class="${d.today ? "today" : ""}">${esc(d.label)}</span>`).join("")}</div>`;
 
   const latest = all.slice(0, 6);
   const maxLatest = Math.max(0, ...latest.map(m => m.total ?? 0));
-  const missed = recent.length - known.length;
+  $("latest-where").textContent = HIST.where || "";
+  $("latest").innerHTML = `<div class="mlist">${latest.map(m => `<div class="mrow"><span class="t">${esc(m.name || m.id)}</span><span class="n">${fmtM(m.total)}</span>
+      <span class="meta">${orgBadge(m.org)} ${m.director ? esc(m.director) : UNK} · ${fmtShort(m.closed_at)}</span>
+      <span class="mbar"><i style="width:${maxLatest > 0 && m.total !== null ? Math.max(2, 100 * m.total / maxLatest).toFixed(1) : 0}%;background:var(--${m.org || "core"})"></i></span></div>`).join("")}</div>
+    <button class="more-btn" id="show-all" type="button" aria-expanded="${open}" aria-controls="all-missions">${open ? "Dölj alla uppdrag" : `Visa alla ${all.length} uppdrag →`}</button>`;
 
-  target.innerHTML = `<div class="panel">
-      <p class="ptitle">Tokens <span>senaste 7 dagarna</span></p>
-      <div class="big">${fmtM(total)}</div>
-      <div class="sub">${cachePct === null ? "cache okänt" : cachePct + " % cache"} · ${recent.length} ${recent.length === 1 ? "uppdrag" : "uppdrag"} avslutade${missed ? ` (${missed} utan mätdata)` : ""}</div>
-      ${splitSum > 0 ? `<div class="split" role="img" aria-label="Fördelning per organisation">${split.filter(s => s.v > 0).map(s => `<i style="width:${(100 * s.v / splitSum).toFixed(1)}%;background:${s.colour}"></i>`).join("")}</div>
-      <div class="legend">${split.map(s => `<span><span class="dot" style="background:${s.colour}"></span>${s.label} ${Math.round(100 * s.v / splitSum)} %</span>`).join("")}</div>` : ""}
-      <div class="bars" role="img" aria-label="Tokens per dag">${days.map(d => `<div class="${d.today ? "today" : ""}" style="height:${maxDay > 0 ? (100 * d.total / maxDay).toFixed(1) : 0}%" title="${esc(d.key)}: ${d.missing && !d.total ? "okänt" : esc((d.total / 1e6).toLocaleString("sv-SE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + " M" + (d.missing ? " (delvis)" : "")}"></div>`).join("")}</div>
-      <div class="days">${days.map(d => `<span class="${d.today ? "today" : ""}">${esc(d.label)}</span>`).join("")}</div>
-    </div>
-    <div class="panel">
-      <p class="ptitle">Senaste uppdrag <span>${esc(HIST.where || "")}</span></p>
-      <div class="mlist">${latest.map(m => `<div class="mrow"><span class="t">${esc(m.name || m.id)}</span><span class="n">${fmtM(m.total)}</span>
-        <span class="meta">${orgBadge(m.org)} ${m.director ? esc(m.director) : UNK} · ${fmtShort(m.closed_at)}</span>
-        <span class="mbar"><i style="width:${maxLatest > 0 && m.total !== null ? Math.max(2, 100 * m.total / maxLatest).toFixed(1) : 0}%;background:${orgColour(m.org)}"></i></span></div>`).join("")}</div>
-      <button class="more-btn" id="show-all" type="button" aria-expanded="${open}" aria-controls="all-missions">${open ? "Dölj alla uppdrag" : `Visa alla ${all.length} uppdrag →`}</button>
-    </div>`;
-
-  document.getElementById("missions-note").textContent = `${all.length} st · ${HIST.where || ""}`;
-  document.getElementById("missions").innerHTML = `<div class="table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
-       <tbody>${all.map(missionRow).join("")}</tbody></table></div>`;
+  $("missions-note").textContent = `${all.length} st · ${HIST.where || ""}`;
+  $("missions").innerHTML = `<div class="card table-wrap"><table class="missions"><thead><tr><th>Uppdrag</th><th>Organisation</th><th>Ansvarig</th><th class="num">Input</th><th class="num">Output</th><th class="num">Totalt</th><th class="num">Avslutat</th></tr></thead>
+     <tbody>${all.map(missionRow).join("")}</tbody></table></div>`;
 }
-document.addEventListener("click", ev => {
-  if (!ev.target.closest?.("#show-all")) return;
-  const table = document.getElementById("all-missions");
-  table.hidden = !table.hidden;
-  paintTokens();
-  if (!table.hidden) table.scrollIntoView({ behavior: "smooth", block: "start" });
-});
 
 async function load() {
   if (window.RAS_DEMO) { data = clean(window.RAS_DEMO); source = "api"; render(); return; }
@@ -693,15 +859,35 @@ async function load() {
   render();
 }
 
-document.getElementById("refresh").addEventListener("click", load);
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) load();
-});
-setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
-setInterval(render, 30_000);
-load();
-loadOrg();
-renderHistory();
+// Public page (no embedded data): the local-only note shows, and the library tab points at the local server (owner #9).
+function markPublic(doc, isPublic) {
+  if (!isPublic) return;
+  const note = doc.getElementById("localnote");
+  if (note) note.hidden = false;
+  for (const a of doc.querySelectorAll("a[data-local-href]")) a.setAttribute("href", a.dataset.localHref);
+}
+
+function boot() {
+  for (const [id, ic] of [["owner-ic", "user"], ["run-ic", "play"], ["tok-ic", "database"], ["proj-ic", "layers"], ["act-ic", "clock"], ["hist-ic", "chart"]])
+    document.getElementById(id).innerHTML = icon(ic);
+  markPublic(document, !document.getElementById("ras-history"));
+  document.addEventListener("click", ev => {
+    if (!ev.target.closest?.("#show-all")) return;
+    const table = document.getElementById("all-missions");
+    table.hidden = !table.hidden;
+    paintTokens();
+    if (!table.hidden) table.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.getElementById("refresh").addEventListener("click", load);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) load(); });
+  setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
+  setInterval(render, 30_000);
+  load();
+  loadOrg();
+  renderHistory();
+  loadMissions(document, (url, opts) => fetch(url, opts)).then(r => { MISS = r; render(); });
+}
+if (typeof document !== "undefined") boot();
 </script>
 </body>
 </html>

@@ -33,13 +33,16 @@ test('committed library.html carries no data block and a valid CSP hash with sam
   assert.doesNotMatch(html, /<script[^>]*id=["']?ras-library/);
   assert.ok(cspHashOk(html), 'run node tools/csp.cjs library.html');
   assert.match(html, /connect-src 'self';/);
-  assert.doesNotMatch(html, /https?:\/\//);
+  // the only URL is the plain link to the same page on the local board (owner ras07 #9); it is never fetched
+  assert.doesNotMatch(html.split('http://127.0.0.1:5199/library.html').join(''), /https?:\/\//);
 });
 
-test('index.html CSP hash is still valid and it links to the library tab', () => {
-  const html = read(path.join(repo, 'index.html'));
-  assert.ok(cspHashOk(html), 'run node tools/csp.cjs index.html');
-  assert.match(html, /href="library\.html"/);
+test('index.html and missions.html CSP hashes are still valid and they link to the library tab', () => {
+  for (const name of ['index.html', 'missions.html']) {
+    const html = read(path.join(repo, name));
+    assert.ok(cspHashOk(html), `run node tools/csp.cjs ${name}`);
+    assert.match(html, /href="library\.html"/);
+  }
 });
 
 test('loader: embedded export is read, extra fields ignored, missing notes get defaults', async () => {
@@ -173,6 +176,60 @@ test('build-local still refuses to write inside a git work tree', () => {
   assert.equal(r.status, 1);
   assert.match(r.stderr, /refusing to write inside a git work tree/);
   assert.equal(fs.existsSync(path.join(repo, 'tmp-should-not-exist')), false);
+});
+
+// ras07 review finding 2: a junction outside git that points into a git tree must not carry the private pages there –
+// neither as --out (or an ancestor of it) nor as an output folder (assets/) inside a normal --out.
+function junction(target, link, t) {
+  try { fs.symlinkSync(target, link, 'junction'); return true; } catch (e) {
+    t.skip(`junction creation not permitted here (${e.code || e.message}) – junction guard untested`);
+    return false;
+  }
+}
+test('build-local refuses --out through a junction into a git tree (also a missing folder below it)', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ras-junc-'));
+  const tree = path.join(root, 'fake-repo'), inside = path.join(tree, 'sub');
+  fs.mkdirSync(path.join(tree, '.git'), { recursive: true });
+  fs.mkdirSync(inside);
+  const link = path.join(root, 'outside-link');
+  if (junction(inside, link, t)) {
+    for (const out of [link, path.join(link, 'board', 'deeper')]) {
+      const r = buildLocal({ RAS_LIBRARY_DIR: path.dirname(fixture) }, out);
+      assert.equal(r.status, 1, out);
+      assert.match(r.stderr, /refusing to write inside a git work tree/);
+    }
+    assert.deepEqual(fs.readdirSync(inside), [], 'nothing written inside the git tree');
+  }
+  fs.rmSync(root, { recursive: true, force: true });
+});
+test('build-local refuses an output folder (assets/) that is a junction into a git tree', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ras-junc-'));
+  const tree = path.join(root, 'fake-repo'), inside = path.join(tree, 'sub'), out = path.join(root, 'board');
+  fs.mkdirSync(path.join(tree, '.git'), { recursive: true });
+  fs.mkdirSync(inside);
+  fs.mkdirSync(out);
+  if (junction(inside, path.join(out, 'assets'), t)) {
+    const r = buildLocal({ RAS_LIBRARY_DIR: path.dirname(fixture) }, out);
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /refusing to write inside a git work tree/);
+    assert.deepEqual(fs.readdirSync(inside), [], 'no logo copied into the git tree');
+  }
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('build-local replaces a hardlinked output file instead of writing through it into a git tree', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ras-hard-'));
+  const tree = path.join(root, 'fake-repo'), out = path.join(root, 'board');
+  fs.mkdirSync(path.join(tree, '.git'), { recursive: true });
+  fs.mkdirSync(out);
+  const victim = path.join(tree, 'index.html');
+  fs.writeFileSync(victim, 'original');
+  fs.linkSync(victim, path.join(out, 'index.html'));
+  const r = buildLocal({ RAS_LIBRARY_DIR: path.dirname(fixture) }, out);
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(read(victim), 'original', 'git-tree file untouched');
+  assert.notEqual(read(path.join(out, 'index.html')), 'original', 'board page written');
+  fs.rmSync(root, { recursive: true, force: true });
 });
 
 test('serve-local serves /library.html (static check – starting it would refresh telemetry and publish)', () => {
