@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:35:01.154Z",
+  "generated_at": "2026-11-01T14:35:07.687Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -124,8 +124,8 @@
       "project": "Mossvale",
       "id": "m09-weapon-library",
       "name": "Weapon standards and Game Library",
-      "phase": "owner",
-      "updated": "2026-11-01T13:03:13.450Z"
+      "phase": "done",
+      "updated": "2026-11-01T14:35:07.624Z"
     },
     {
       "project": "Mossvale",
