@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:25:39Z",
+    "updated":  "2026-11-01T20:25:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,6 +47,16 @@
                         "since":  "2026-11-01T20:25:39Z",
                         "agent":  "ng01-rpg-foundation-architect-draft",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "Project Doom arkitektur",
+                        "since":  "2026-11-01T20:25:52Z",
+                        "agent":  "ng01-arch",
+                        "model":  "claudeAgent/claude-opus-5-5",
                         "effort":  "high"
                     }
                 ]
