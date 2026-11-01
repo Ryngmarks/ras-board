@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T14:33:13Z",
+    "updated":  "2026-11-01T14:35:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "retro (ras07 + m09)",
-                        "since":  "2026-11-01T14:33:13Z",
-                        "agent":  "ras07-mission-log-retro-ras07-m09-",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
