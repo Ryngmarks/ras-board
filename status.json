@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:50:35Z",
+    "updated":  "2026-11-01T20:50:44Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -48,6 +48,16 @@
                         "agent":  "ng01-rev",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "blueprint r2",
+                        "since":  "2026-11-01T20:50:44Z",
+                        "agent":  "ng01-rpg-foundation-blueprint-r2",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
