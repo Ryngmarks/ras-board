@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T10:33:43Z",
+    "updated":  "2026-11-01T10:43:10Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-01",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01b",
-                        "since":  "2026-11-01T10:25:31Z",
-                        "agent":  "m07-axe-WO-01b",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
