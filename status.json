@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T21:23:29Z",
+    "updated":  "2026-11-01T21:29:59Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,6 +47,16 @@
                         "note":  "go för WO-02?",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-02 kopiera grafik",
+                        "since":  "2026-11-01T21:29:59Z",
+                        "agent":  "codex-wo02",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
