@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T23:43:44Z",
+    "updated":  "2026-11-01T23:43:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -46,6 +46,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-02",
                         "since":  "2026-11-01T21:06:10Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-06 Combat Lab",
+                        "since":  "2026-11-01T23:43:46Z",
+                        "agent":  "claude-wo06",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
