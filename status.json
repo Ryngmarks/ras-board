@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T21:04:41Z",
+    "updated":  "2026-11-01T21:06:08Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,6 +47,16 @@
                         "note":  "ng01: blueprint r2 för godkännande",
                         "since":  "2026-11-01T20:58:35Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-01 tomt Unity-projekt",
+                        "since":  "2026-11-01T21:06:08Z",
+                        "agent":  "impl-wo01",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "medium"
                     }
                 ]
 }
