@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T22:15:54Z",
+    "updated":  "2026-11-01T22:15:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,6 +54,16 @@
                         "note":  "WO-03 animation baseline",
                         "since":  "2026-11-01T22:15:54Z",
                         "agent":  "codex-wo03",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "WO-03",
+                        "since":  "2026-11-01T22:15:58Z",
+                        "agent":  "ng01-rpg-foundation-WO-03",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
