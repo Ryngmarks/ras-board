@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T11:28:51Z",
+    "updated":  "2026-11-01T11:32:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "m09 research, m07 beslut",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "Architect – Game Library",
-                        "since":  "2026-11-01T11:28:51Z",
-                        "agent":  "m09-weapon-library-Architect-Game-Librar",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
