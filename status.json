@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T13:28:00Z",
+    "updated":  "2026-11-01T13:33:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-02b fixes",
-                        "since":  "2026-11-01T13:27:54Z",
-                        "agent":  "ras07-mission-log-WO-02b-fixes",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
