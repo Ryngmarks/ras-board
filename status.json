@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T10:27:36Z",
+    "updated":  "2026-11-01T10:33:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,16 +45,6 @@
                         "note":  "WO-01b",
                         "since":  "2026-11-01T10:25:31Z",
                         "agent":  "m07-axe-WO-01b",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "Analyst – owner animation preferences",
-                        "since":  "2026-11-01T10:27:36Z",
-                        "agent":  "ras20-workshop-Analyst-owner-animation-p",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
