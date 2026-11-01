@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T21:06:01.596Z",
+  "generated_at": "2026-11-01T21:23:20.817Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -138,8 +138,8 @@
       "project": "RAS",
       "id": "ng01-rpg-foundation",
       "name": "Project Doom - new RPG foundation from Mossvale parts",
-      "phase": "build",
-      "updated": "2026-11-01T21:06:01.527Z"
+      "phase": "owner",
+      "updated": "2026-11-01T21:23:20.738Z"
     },
     {
       "project": "RAS",
