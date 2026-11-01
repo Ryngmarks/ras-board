@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T11:15:56Z",
+    "updated":  "2026-11-01T11:16:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -46,6 +46,16 @@
                         "note":  "WO-01 research",
                         "since":  "2026-11-01T11:15:56Z",
                         "agent":  "m09-weapon-library-WO-01-research",
+                        "model":  "claude/claude-haiku-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "WO-02 inventory",
+                        "since":  "2026-11-01T11:16:00Z",
+                        "agent":  "m09-weapon-library-WO-02-inventory",
                         "model":  "claude/claude-haiku-5-5",
                         "effort":  "high"
                     }
