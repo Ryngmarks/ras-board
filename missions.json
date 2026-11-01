@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:31:33.910Z",
+  "generated_at": "2026-11-01T14:35:01.154Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -110,8 +110,8 @@
       "project": "Mossvale",
       "id": "m07-axe",
       "name": "Battle axe motion",
-      "phase": "owner",
-      "updated": "2026-11-01T12:58:41.357Z"
+      "phase": "build",
+      "updated": "2026-11-01T14:35:01.089Z"
     },
     {
       "project": "Mossvale",
