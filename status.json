@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T21:06:23Z",
+    "updated":  "2026-11-01T21:22:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,16 +56,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-01",
                         "since":  "2026-11-01T21:06:10Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-01",
-                        "since":  "2026-11-01T21:06:23Z",
-                        "agent":  "ng01-rpg-foundation-WO-01",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "medium"
                     }
                 ]
 }
