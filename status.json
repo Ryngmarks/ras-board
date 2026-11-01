@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T13:16:18Z",
+    "updated":  "2026-11-01T13:16:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -30,16 +30,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "tavlans nya utseende",
-                        "since":  "2026-11-01T12:54:20Z",
-                        "agent":  "opus-ras07-wo02",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
