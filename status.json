@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T23:23:41Z",
+    "updated":  "2026-11-01T23:42:02Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,16 +54,6 @@
                         "note":  "WO-05 klipplager",
                         "since":  "2026-11-01T23:23:37Z",
                         "agent":  "codex-wo05",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-05",
-                        "since":  "2026-11-01T23:23:41Z",
-                        "agent":  "ng01-rpg-foundation-WO-05",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
