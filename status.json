@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T14:22:52Z",
+    "updated":  "2026-11-01T14:31:36Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,14 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "kör lan-setup",
-                        "since":  "2026-11-01T13:48:38Z",
-                        "for":  "owner"
                     }
                 ]
 }
