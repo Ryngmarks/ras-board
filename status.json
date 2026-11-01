@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T11:54:25Z",
+    "updated":  "2026-11-01T12:29:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,16 @@
                         "state":  "waiting",
                         "note":  "Game Library v1: 3 WO",
                         "since":  "2026-11-01T09:47:41Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "granskar Game Library v1",
+                        "since":  "2026-11-01T12:29:58Z",
+                        "agent":  "codex-m09-review",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
