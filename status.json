@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T12:45:22Z",
+    "updated":  "2026-11-01T12:45:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,6 +57,16 @@
                         "agent":  "opus-ras07-arch",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "kontrollerar rättningar",
+                        "since":  "2026-11-01T12:45:24Z",
+                        "agent":  "codex-m09-fixcheck",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
