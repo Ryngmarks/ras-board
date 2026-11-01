@@ -1,6 +1,21 @@
 {
-  "generated_at": "2026-10-31T21:32:45.350Z",
+  "generated_at": "2026-11-01T12:26:25.935Z",
   "missions": [
+    {
+      "id": "m06-clip-tool",
+      "project": "Mossvale",
+      "name": "Klippverktyg",
+      "org": "gaming",
+      "director": "Game Director",
+      "input": 231799236,
+      "output": 1342060,
+      "total": 233141296,
+      "cache_read": 227328186,
+      "status": "measured",
+      "closed_at": "2026-11-01T12:26:11.138Z",
+      "runs": 25,
+      "runs_missing": 0
+    },
     {
       "id": "ras06-board-tree",
       "project": "RAS",
@@ -134,21 +149,6 @@
       "status": "measured",
       "closed_at": "2026-10-29T21:11:27.166Z",
       "runs": 1,
-      "runs_missing": 0
-    },
-    {
-      "id": "m10-hero-models",
-      "project": "Clicker Land",
-      "name": "Hjältemodeller i 3D",
-      "org": "gaming",
-      "director": "Game Director",
-      "input": 289688367,
-      "output": 1260557,
-      "total": 290948924,
-      "cache_read": 283932172,
-      "status": "measured",
-      "closed_at": "2026-10-29T18:44:30.914Z",
-      "runs": 13,
       "runs_missing": 0
     }
   ]
