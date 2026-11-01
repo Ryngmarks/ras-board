@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T18:16:52Z",
+    "updated":  "2026-11-01T18:16:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -35,8 +35,9 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "väntar på ras07",
-                        "since":  "2026-11-01T09:47:41Z"
+                        "note":  "beslut: traffpose och rackvidd",
+                        "since":  "2026-11-01T09:47:41Z",
+                        "for":  "owner"
                     }
                 ]
 }
