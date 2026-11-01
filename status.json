@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T22:14:21Z",
+    "updated":  "2026-11-01T22:15:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -39,16 +39,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-02 kopiera grafik",
-                        "since":  "2026-11-01T21:29:59Z",
-                        "agent":  "codex-wo02",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "project-manager",
