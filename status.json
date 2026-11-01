@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T00:03:00Z",
+    "updated":  "2026-11-01T00:31:36Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,16 +47,6 @@
                         "agent":  "m06-clip-tool-WO-03",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-04",
-                        "since":  "2026-11-01T00:03:00Z",
-                        "agent":  "m06-clip-tool-WO-04",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     }
                 ]
 }
