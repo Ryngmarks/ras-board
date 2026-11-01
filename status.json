@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T15:15:05Z",
+    "updated":  "2026-11-01T15:16:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,6 +37,16 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Mossvale",
+                        "state":  "working",
+                        "note":  "WO-02 review",
+                        "since":  "2026-11-01T15:16:46Z",
+                        "agent":  "m07-axe-WO-02-review",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
