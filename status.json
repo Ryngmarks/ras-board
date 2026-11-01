@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T18:02:17Z",
+    "updated":  "2026-11-01T18:02:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -45,7 +45,7 @@
                         "note":  "WO-02e",
                         "since":  "2026-11-01T18:02:17Z",
                         "agent":  "m07-axe-WO-02e",
-                        "model":  "claude/claude-sonnet-5-5",
+                        "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
                 ]
