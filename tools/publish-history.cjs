@@ -43,8 +43,9 @@ function count(value, field) {
   return value;
 }
 
-// Normalised so case, padding or inner whitespace can never make a private key miss (ras07 fix check F1).
-const norm = v => String(v ?? '').normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase();
+// Normalised so case, padding, whitespace, control or invisible format characters can never make a private key miss
+// (ras07 fix checks F1): every such character is removed, not just trimmed. Over-matching only hides more – safe.
+const norm = v => String(v ?? '').normalize('NFKC').replace(/[\p{C}\p{Z}\s]+/gu, '').toLowerCase();
 const missionKey = (project, id) => `${norm(project)}/${norm(id)}`;
 
 // The keys (lower case) of every mission marked `public: false` in RAS docs/missions.json. Throws when the file is

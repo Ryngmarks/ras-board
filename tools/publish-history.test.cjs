@@ -61,7 +61,8 @@ test('sanitize drops hidden keys (any case) before the cut to 10', () => {
 
 test('private keys match whatever the case, padding or inner whitespace of the history entry', () => {
   const hidden = new Set(['ras/ras02-self-audit']);
-  const cases = [[' RAS ', 'ras02-self-audit'], ['\tRAS', 'ras02-self-audit '], ['ras', ' RAS02-SELF-AUDIT'], ['RAS', 'ras02-self-audit\n'], ['\u00a0RAS', 'ras02-self-audit']];
+  const cases = [[' RAS ', 'ras02-self-audit'], ['\tRAS', 'ras02-self-audit '], ['ras', ' RAS02-SELF-AUDIT'], ['RAS', 'ras02-self-audit\n'], ['\u00a0RAS', 'ras02-self-audit'],
+    ['\u0000RAS\u0000', 'ras02-self-audit'], ['R\u0000AS', 'ras02-\u200bself-audit'], ['RAS', 'ras02-self-audit\u0007'], ['\uff32\uff21\uff33', 'ras02-self-audit']];
   for (const [project, id] of cases) {
     const out = sanitize({ missions: [{ ...base, project, id }] }, hidden);
     assert.equal(out.missions.length, 0, JSON.stringify([project, id]));
