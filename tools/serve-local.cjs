@@ -2,7 +2,7 @@
 // Serves the LOCAL RAS board (with mission token history) on this PC only – 127.0.0.1, never the network.
 // Meant to be started from the T3 project script "RAS-tavla" so the owner sees it in T3's preview, also through
 // T3 remote. On a page load the data is refreshed when it is older than REFRESH_MS:
-//   ras-telemetry collect + history  ->  build-local.cjs  ->  ~/.ras/board/index.html  ->  publish-history.cjs
+//   ras-telemetry collect + history  ->  build-local.cjs  ->  ~/.ras/board/index.html + library.html  ->  publish-history.cjs
 // Usage: node tools/serve-local.cjs [--port 5199]
 'use strict';
 const http = require('http');
@@ -48,11 +48,11 @@ const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json;
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://' + HOST);
-  const allowed = { '/': 'index.html', '/index.html': 'index.html', '/org.json': 'org.json',
+  const allowed = { '/': 'index.html', '/index.html': 'index.html', '/library.html': 'library.html', '/org.json': 'org.json',
     '/assets/ras-gaming.png': 'assets/ras-gaming.png', '/assets/ras-software.png': 'assets/ras-software.png' };
   const name = allowed[url.pathname];
   if (!name) { res.writeHead(404); return res.end('not found'); }
-  if (name === 'index.html') refresh();
+  if (name.endsWith('.html')) refresh();
   const file = path.join(boardDir, name);
   if (!fs.existsSync(file)) { res.writeHead(503); return res.end('board not built yet'); }
   res.writeHead(200, { 'Content-Type': types[path.extname(name)], 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });

@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "project": "Mossvale",
+  "exported": "2026-11-01T14:02:00Z",
+  "build": { "commit": "b94a6e5c0ffee00", "dirty": true, "written": "2026-11-01T13:58:00Z" },
+  "_fixture": "Invented test data for ras-board tests and screenshots (library contract §3). Not real game text.",
+  "families": [
+    {
+      "id": "sword", "name": "Swords", "hit": "Melee", "range": 2.4, "attacks": ["attack", "attack2"], "glyph": "S", "color": "#c9a24a",
+      "passives": [
+        { "id": "keen_edge", "name": "Keen Edge", "desc": "Fixture: auto attacks deal a little extra damage." },
+        { "id": "steady_guard", "name": "Steady Guard", "desc": "Fixture: take slightly less damage while standing still." }
+      ],
+      "variants": [
+        { "code": "BROADSWORD", "name": "Broadsword", "grip": "OneHand", "twoHanded": false, "signature": "test_blow", "form": null, "note": {} },
+        { "code": "CLAYMORE", "name": "Claymore", "grip": "TwoHand", "twoHanded": true, "signature": "test_charge", "form": null, "note": { "status": "ok" } },
+        { "code": "DUALSWORDS", "name": "Dual Swords", "grip": "Dual", "twoHanded": true, "signature": "test_spin", "form": null }
+      ],
+      "abilities": [
+        { "id": "test_strike", "slot": "Q", "name": "Test Strike", "desc": "Fixture: lunge at the target and hit it for weapon damage.", "cooldown": 3, "energy": 5, "range": 3.5, "radius": 0,
+          "mode": "Enemy", "role": "", "listed": true, "rig": { "action": "attack2", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 54 },
+          "note": { "identity": "The quick opener: a short forward lunge.", "direction": "forward thrust, low to mid", "status": "needs-work",
+            "knownIssues": [ { "text": "Damage lands before the visible strike.", "source": "docs/ras/m05-sword/diagnosis.md#s02" } ],
+            "proposal": "Move the damage frame to the blade contact.", "links": [ { "label": "m05 diagnosis", "href": "docs/ras/m05-sword/diagnosis.md" } ],
+            "media": { "icon": "", "reference": "", "clip": "docs/ras/m05-sword/final-clips/test_strike.webp", "before": "", "after": "" } } },
+        { "id": "test_cleave", "slot": "Q", "name": "Test Cleave", "desc": "Fixture: a wide swing that hits everything in front.", "cooldown": 3, "energy": 7, "range": 0, "radius": 3.4,
+          "mode": "Self", "role": "", "listed": true, "rig": { "action": "spin", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 88 },
+          "note": { "status": "ok", "identity": "Wide arc, readable from the top camera." } },
+        { "id": "test_hamstring", "slot": "W", "name": "Test Hamstring", "desc": "Fixture: slow the target for a short time.", "cooldown": 8, "energy": 6, "range": 3,
+          "mode": "Enemy", "role": "control", "listed": true, "rig": { "action": "", "source": "unknown", "file": "Units/Spells/Sword.cs", "line": 120 } },
+        { "id": "war_stomp", "slot": "W", "name": "War Stomp", "desc": "Fixture: stomp the ground and stun nearby enemies.", "cooldown": 12, "energy": 10, "range": 0, "radius": 4,
+          "mode": "Self", "role": "control", "listed": true, "rig": { "action": "slam", "source": "scan", "file": "Units/Spells/Shared.cs", "line": 33 },
+          "note": { "status": "in-progress", "knownIssues": [ { "text": "Stun ring is drawn one frame late.", "source": "docs/ras/m07-axe/STATUS.md", "state": "fixed" } ] } },
+        { "id": "test_parry", "slot": "D", "name": "Test Parry", "desc": "Fixture: block the next hit.", "cooldown": 15, "energy": 4, "range": 0, "radius": 0,
+          "mode": "Self", "role": "defence", "listed": true, "rig": { "action": "block", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 140 } },
+        { "id": "test_blow", "slot": "E", "name": "Test Blow", "desc": "Fixture: a heavy overhead blow.", "cooldown": 20, "energy": 15, "range": 3, "radius": 0,
+          "mode": "Enemy", "role": "", "listed": true, "rig": { "action": "attack", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 160 } },
+        { "id": "test_charge", "slot": "E", "name": "Test Charge", "desc": "Fixture: charge to the target.", "cooldown": 20, "energy": 15, "range": 10, "radius": 0,
+          "mode": "Enemy", "role": "", "listed": true, "rig": { "action": "run", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 180 } },
+        { "id": "test_spin", "slot": "E", "name": "Test Spin", "desc": "Fixture: spin with both blades.", "cooldown": 20, "energy": 15, "range": 0, "radius": 3,
+          "mode": "Self", "role": "", "listed": true, "rig": { "action": "spin", "source": "scan", "file": "Units/Spells/Sword.cs", "line": 200 } }
+      ],
+      "note": { "identity": "Fast and precise; the reference family for melee timing.", "status": "needs-work" }
+    },
+    {
+      "id": "axe", "name": "Axes", "hit": "Melee", "range": 2.6, "attacks": ["attack"], "glyph": "A", "color": "#b5603a",
+      "passives": [ { "id": "deep_cuts", "name": "Deep Cuts", "desc": "Fixture: hits make the target bleed." } ],
+      "variants": [
+        { "code": "BATTLEAXE", "name": "Battleaxe", "grip": "OneHand", "twoHanded": false, "signature": "test_chop" },
+        { "code": "GREATAXE", "name": "Greataxe", "grip": "TwoHand", "twoHanded": true, "signature": "test_whirl" }
+      ],
+      "abilities": [
+        { "id": "test_chop", "slot": "Q", "name": "Test Chop", "desc": "Fixture: a diagonal chop.", "cooldown": 4, "energy": 6, "range": 3, "radius": 0, "mode": "Enemy", "role": "", "listed": true,
+          "rig": { "action": "attack", "source": "scan", "file": "Units/Spells/Axe.cs", "line": 202 },
+          "note": { "identity": "", "direction": "overhead diagonal down", "status": "needs-work",
+            "knownIssues": [ { "text": "Damage before the visible strike.", "source": "docs/ras/m06-clip-tool/axe-analysis.md#1" }, { "text": "Swing reads as a push from the top camera." } ] } },
+        { "id": "war_stomp", "slot": "W", "name": "War Stomp", "desc": "Fixture: stomp the ground and stun nearby enemies.", "cooldown": 12, "energy": 10, "range": 0, "radius": 4,
+          "mode": "Self", "role": "control", "listed": true, "rig": { "action": "slam", "source": "scan", "file": "Units/Spells/Shared.cs", "line": 33 }, "note": { "status": "in-progress" } },
+        { "id": "test_whirl", "slot": "E", "name": "Test Whirl", "desc": "Fixture: whirl around and pull enemies in.", "cooldown": 18, "energy": 14, "range": 0, "radius": 4.5, "mode": "Self", "role": "", "listed": true,
+          "rig": { "action": "", "source": "unknown" }, "futureField": { "ignored": true } }
+      ]
+    },
+    {
+      "id": "bow", "name": "Bows", "hit": "Ranged", "range": 11, "attacks": ["shoot"], "glyph": "B", "color": "#6f9e5a",
+      "passives": [],
+      "variants": [ { "code": "BOW", "name": "Bow", "grip": "TwoHand", "twoHanded": true, "signature": "test_volley" } ],
+      "abilities": [
+        { "id": "test_shot", "slot": "Q", "name": "Test Shot", "desc": "Fixture: a quick aimed shot.", "cooldown": 2, "energy": 4, "range": 11, "mode": "Enemy", "listed": true,
+          "rig": { "action": "shoot", "source": "scan", "file": "Units/Spells/Bow.cs", "line": 20 } },
+        { "id": "test_volley", "slot": "E", "name": "Test Volley", "desc": "Fixture: rain arrows on an area.", "cooldown": 20, "energy": 16, "range": 11, "radius": 3.5, "mode": "Ground", "listed": true,
+          "rig": { "action": "shoot", "source": "scan", "file": "Units/Spells/Bow.cs", "line": 60 } }
+      ]
+    }
+  ],
+  "unlisted": [
+    { "id": "old_test_slash", "slot": "", "name": "Old Test Slash", "desc": "Fixture: an ability defined in the game but in no weapon list.", "cooldown": 5, "energy": 5, "range": 3,
+      "mode": "Enemy", "role": "", "listed": false, "rig": { "action": "attack", "source": "scan", "file": "Units/Spells/Legacy.cs", "line": 12 } },
+    { "id": "mob_test_bite", "slot": "", "name": "Mob Test Bite", "desc": "Fixture: a monster-only bite.", "cooldown": 3, "energy": 0, "range": 2, "mode": "Enemy", "listed": false,
+      "rig": { "action": "", "source": "unknown" } },
+    { "id": "debug_test_nova", "name": "Debug Test Nova", "desc": "", "cooldown": 0, "energy": 0, "range": 0, "radius": 6, "mode": "Self", "listed": false }
+  ],
+  "orphans": [ { "kind": "ability", "id": "old_cleave", "hint": "test_cleave" } ],
+  "counts": { "families": 3, "variants": 6, "abilities": 13, "unlisted": 3, "notes": 7, "orphans": 1 }
+}

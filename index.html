@@ -31,6 +31,10 @@
 
   /* header */
   header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .tabs a { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; color: var(--muted); text-decoration: none; background: var(--surface); border: 1px solid var(--border); }
+  .tabs a:hover { border-color: var(--muted); }
+  .tabs a[aria-current="page"] { color: var(--fg); border-color: var(--fg); }
   .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
   .live-state { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
@@ -231,6 +235,7 @@
 <main>
   <header>
     <div>
+      <nav class="tabs" aria-label="Sidor"><a href="index.html" aria-current="page">Tavlan</a><a href="library.html">Spelbibliotek</a></nav>
       <div class="eyebrow">Ryngmark Agent System</div>
       <h1>Teamet just nu</h1>
     </div>

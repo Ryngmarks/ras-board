@@ -12,12 +12,14 @@ const match = html.match(/<script>([\s\S]*?)<\/script>/);
 if (!match) throw new Error("no inline <script> found");
 const hash = crypto.createHash("sha256").update(match[1].replace(/\r\n?/g, "\n"), "utf8").digest("base64");
 
+// The library page only ever fetches same-origin (library contract §4); the board also reads GitHub.
+const connect = /library\.html$/i.test(file) ? "'self'" : "'self' https://api.github.com https://raw.githubusercontent.com";
 const csp = [
   "default-src 'none'",
   `script-src 'sha256-${hash}'`,
   "style-src 'unsafe-inline'",
   "img-src 'self'",
-  "connect-src 'self' https://api.github.com https://raw.githubusercontent.com",
+  `connect-src ${connect}`,
   "base-uri 'none'",
   "form-action 'none'",
 ].join("; ");
