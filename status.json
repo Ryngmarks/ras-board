@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T00:38:36Z",
+    "updated":  "2026-11-01T00:38:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "m06 fix WO-03/04 running",
                         "since":  "2026-10-31T23:57:17Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-04 review",
-                        "since":  "2026-11-01T00:32:01Z",
-                        "agent":  "m06-clip-tool-WO-04-review",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "reviewer",
