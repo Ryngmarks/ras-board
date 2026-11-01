@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:50:51Z",
+    "updated":  "2026-11-01T20:58:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -38,16 +38,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "blueprint r2",
-                        "since":  "2026-11-01T20:50:44Z",
-                        "agent":  "ng01-rpg-foundation-blueprint-r2",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "solution-architect",
