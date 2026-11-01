@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T11:40:58Z",
+    "updated":  "2026-11-01T11:41:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -32,14 +32,6 @@
                         "model":  "claude/claude-opus-5-5"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Mossvale",
-                        "state":  "waiting",
-                        "note":  "m09 plan + m07 beslut",
-                        "since":  "2026-11-01T09:47:41Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Mossvale",
                         "state":  "working",
@@ -68,6 +60,13 @@
                         "agent":  "m09-weapon-library-WO-05",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "waiting",
+                        "note":  "Game Library v1: 3 WO",
+                        "since":  "2026-11-01T09:47:41Z"
                     }
                 ]
 }
