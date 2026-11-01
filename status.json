@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T12:43:50Z",
+    "updated":  "2026-11-01T12:45:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "Game Library v1: 3 WO",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "granskar Game Library v1",
-                        "since":  "2026-11-01T12:31:48Z",
-                        "agent":  "fable-m09-review",
-                        "model":  "claude/claude-fable-5-1",
-                        "effort":  "high"
                     },
                     {
                         "role":  "solution-architect",
