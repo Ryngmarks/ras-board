@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T09:36:25Z",
+    "updated":  "2026-11-01T09:37:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -35,7 +35,7 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "m06 clip tool ready for owner test",
+                        "note":  "m06 merged; next: axe fixes",
                         "since":  "2026-10-31T23:57:17Z",
                         "for":  "owner"
                     }
