@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T18:11:55Z",
+    "updated":  "2026-11-01T18:16:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "traffpose alla vapen",
-                        "since":  "2026-11-01T18:10:45Z",
-                        "agent":  "survey",
-                        "model":  "claudeAgent/claude-sonnet-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
