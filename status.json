@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T12:54:20Z",
+    "updated":  "2026-11-01T12:54:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -30,13 +30,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "Mossvale",
-                        "state":  "waiting",
-                        "note":  "Game Library v1: 3 WO",
-                        "since":  "2026-11-01T09:47:41Z"
                     },
                     {
                         "role":  "implementer",
@@ -77,6 +70,14 @@
                         "agent":  "opus-ras07-wo02",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Mossvale",
+                        "state":  "waiting",
+                        "note":  "Spelbiblioteket redo att visas",
+                        "since":  "2026-11-01T09:47:41Z",
+                        "for":  "owner"
                     }
                 ]
 }
