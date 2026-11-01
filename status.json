@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T13:16:24Z",
+    "updated":  "2026-11-01T13:26:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "väntar på ras07",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "review (Codex)",
-                        "since":  "2026-11-01T13:16:18Z",
-                        "agent":  "ras07-mission-log-review-Codex-",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
