@@ -251,7 +251,8 @@ test('build-local with no mission log embeds null; a broken one embeds an unknow
 });
 
 // ---- the three pages: top bar + local links (owner #9) ----
-const LOCAL = { 'index.html': 'http://127.0.0.1:5199/', 'missions.html': 'http://127.0.0.1:5199/missions.html', 'library.html': 'http://127.0.0.1:5199/library.html' };
+// Owner #11: the local board's hostname on the home network (never the DHCP IP, never a key).
+const LOCAL = { 'index.html': 'http://johansdator:5199/', 'missions.html': 'http://johansdator:5199/missions.html', 'library.html': 'http://johansdator:5199/library.html' };
 const ALLOWED_LOCAL = new Set(Object.values(LOCAL));
 
 test('every page has the same top bar: Översikt, Uppdrag, Spelbibliotek, the current one marked', () => {
@@ -265,18 +266,20 @@ test('every page has the same top bar: Översikt, Uppdrag, Spelbibliotek, the cu
   }
 });
 
-test('public pages link to the same page on the local board, and to nothing else on 127.0.0.1', () => {
+test('public pages link to the same page on the local board (johansdator), and to nothing else local or keyed', () => {
   for (const [name, url] of Object.entries(LOCAL)) {
     const html = read(path.join(repo, name));
     assert.ok(html.includes(`<a href="${url}" rel="noopener">Öppna lokalt →</a>`), name);
-    assert.match(html, /Fungerar bara på Johans dator medan den lokala tavlan körs \(knappen RAS-tavla i T3\)/);
-    for (const m of html.matchAll(/(?:https?:\/\/)?(?:127\.0\.0\.1|localhost)[^"'\s<]*/g)) assert.ok(ALLOWED_LOCAL.has(m[0]), `${name}: ${m[0]}`);
+    assert.ok(html.includes('<small>Fungerar i Johans hemnätverk när tavlan är igång.</small>'), name);
+    for (const m of html.matchAll(/(?:https?:\/\/)?(?:127\.0\.0\.1|localhost|johansdator|192\.168\.\d+\.\d+)[^"'\s<]*/gi)) assert.ok(ALLOWED_LOCAL.has(m[0]), `${name}: ${m[0]}`);
+    assert.doesNotMatch(html, /[?&]key=/, name);
+    if (name !== 'library.html') assert.ok(html.includes('data-local-href="http://johansdator:5199/library.html"'), name);
   }
 });
 
-test('serve-local serves /missions.html and still binds to 127.0.0.1 only (static check – starting it publishes)', () => {
-  const src = read(path.join(__dirname, 'serve-local.cjs'));
-  assert.match(src, /'\/missions\.html': 'missions\.html'/);
-  assert.match(src, /const HOST = '127\.0\.0\.1'/);
-  assert.match(src, /listen\(port, HOST/);
+test('serve-local serves /missions.html and binds to 127.0.0.1 unless LAN mode is asked for (no server is started)', () => {
+  const serve = require('./serve-local.cjs');
+  assert.equal(serve.ROUTES['/missions.html'], 'missions.html');
+  assert.equal(serve.bindHost(false), '127.0.0.1');
+  assert.equal(serve.bindHost(undefined), '127.0.0.1');
 });

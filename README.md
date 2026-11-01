@@ -40,12 +40,53 @@ Format:
   the `<script>`, run `node tools/csp.cjs index.html`** or the page will not run.
 
 ## Local board in T3 (with token history)
-`tools/serve-local.cjs` serves the local board on **127.0.0.1:5199 only** (never the network) and refreshes the data
-(`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than 2 minutes.
-Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
+`tools/serve-local.cjs` serves the local board on **127.0.0.1:5199 only** by default (home network: see below) and
+refreshes the data (`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than
+2 minutes. Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
 Only `/`, `/index.html`, `/missions.html`, `/library.html`, `/org.json` and the two logos are served.
-On the public Pages site (no embedded data) every "local only" note links to the same page here
-(`http://127.0.0.1:5199/…`, plain links, nothing is fetched) and the Spelbibliotek tab points at the local server.
+On the public Pages site (no embedded data) every "local only" note links to the same page on the local board
+(`http://johansdator:5199/…`, the host name, never an IP or a key; plain links, nothing is fetched) and the Spelbibliotek
+tab points at the local server. Locally served pages keep relative links.
+
+## Hemnätverket (local board from another computer at home – ras07 #11, audit fixes WO-03b)
+Opt-in: `node tools/serve-local.cjs --lan` (or env `RAS_BOARD_LAN=1`). Without it nothing changes: 127.0.0.1 only.
+- **Every request, both modes:** the `Host` header must name this server (`127.0.0.1`, `localhost` or `[::1]` with the
+  port; in LAN mode also the computer name `johansdator` and its current LAN IPv4) – anything else gets 421 and no data,
+  which stops DNS rebinding. Other sites may link to the board but not embed or fetch it (`Sec-Fetch-Site` cross/same-site
+  subresources → 403), and only a page load (navigation) refreshes the data.
+- **What LAN mode does:** listens on all IPv4 addresses and answers only addresses in this computer's **own connected
+  subnets** (read from the network adapters every 30 s; virtual, VPN and hotspot adapters are left out). Everything else
+  gets 403. Every other device needs the **key** once; this computer (127.0.0.1) never does.
+- **Start checks:** `--lan` refuses to start (Swedish message) unless the key file is readable by your Windows user only and
+  the firewall rule "RAS board 5199 (block Public)" from `lan-setup.ps1` exists.
+- **The key:** 256 random bits in `%USERPROFILE%/.ras/board-key` (env `RAS_BOARD_KEY_FILE`), never in git and **never in a
+  URL**. `--show-key` prints the address and the key in groups of four to type; `--rotate-key` makes a new key and logs
+  every device out.
+- **First visit on the other computer:** open `http://johansdator:5199/`, type the key in the "Nyckel krävs" form (spaces
+  and case do not matter). The form only works from the board's own page (same-origin `Origin` check). The server checks
+  the key in constant time and gives that browser its **own random session** (cookie `ras_board_5199`, `HttpOnly;
+  SameSite=Strict`). Only a hash of it is stored, in `%USERPROFILE%/.ras/board-sessions.json`; it expires after 180 days
+  on the server. `--revoke-sessions` logs every device out. 10 wrong keys per minute from one address → 429.
+- **Setup, once, as administrator:** `powershell -ExecutionPolicy Bypass -File toolslan-setup.ps1`. If the Wi-Fi is
+  *Public* it explains what *Private* means (Windows then trusts that network: file and printer sharing, discovery and other
+  apps with Private rules open up too) and asks before changing it; the change is remembered. It adds an Allow rule
+  "RAS board 5199" (TCP 5199, Private profile and local subnet only, this `node.exe`) and a Block rule
+  "RAS board 5199 (block Public)" (TCP 5199, Public profile, any program – Block wins over the broad
+  "Node.js JavaScript Runtime" Allow rules that exist for Public). Then it prints the key. `-Autostart` also starts the LAN
+  server hidden at logon (log: `%USERPROFILE%/.ras/board-lan.log`). `-Remove` removes both rules and that task, stops a
+  running `serve-local.cjs --lan`, and offers to set a network it made Private back to Public. Running it again is safe.
+- **Risk in plain words:** a device on the home Wi-Fi reaches the port but sees only the key page without the key; with the
+  key (or a stolen session cookie) it sees everything the local board shows – token counts, mission notes, the game library.
+  Use it only on your own network and run `--rotate-key` if a device is lost or the key leaks. On a Public network the
+  Block rule keeps the port closed, and the server itself answers only its own subnet.
+- **KNOWN ISSUE – plain HTTP:** the traffic is not encrypted. Someone who knows the Wi-Fi password and listens on the home
+  network, or redirects `johansdator` to another machine (name spoofing), can read pages and lift a session cookie. Cookies
+  are not tied to a port, so other servers reached as `johansdator:<port>` also receive `ras_board_5199`. Not fixed (no TLS);
+  the owner decides whether this is accepted.
+- On this computer `http://johansdator:5199/` resolves to the Wi-Fi address, not 127.0.0.1: in LAN mode it asks for the
+  key once here too; in default mode use `http://127.0.0.1:5199/` (or the RAS-tavla button).
+- Tests: `node --test tools/serve-local.test.cjs` (calls the request handler directly; no port, no refresh, no publish; the
+  firewall and `icacls` checks are mocked).
 
 ## Spelbibliotek (game library, local only – m09)
 `library.html` is a sibling page shown as a tab ("Tavlan | Spelbibliotek"): weapon families → variants → abilities with
