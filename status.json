@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:17:09Z",
+    "updated":  "2026-11-01T20:19:04Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -30,16 +30,6 @@
                         "since":  "2026-10-30T09:23:34Z",
                         "agent":  "m15-ui",
                         "model":  "claude/claude-opus-5-5"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "kartlaggning nytt spel",
-                        "since":  "2026-11-01T20:10:04Z",
-                        "agent":  "ng01-inv",
-                        "model":  "claudeAgent/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
