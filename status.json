@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T01:25:05Z",
+    "updated":  "2026-11-01T01:39:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "m06 fix WO-03/04 running",
                         "since":  "2026-10-31T23:57:17Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-03b review",
-                        "since":  "2026-11-01T01:25:05Z",
-                        "agent":  "m06-clip-tool-WO-03b-review",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     }
                 ]
 }
