@@ -59,13 +59,13 @@ Opt-in: `node tools/serve-local.cjs --lan` (or env `RAS_BOARD_LAN=1`). Without i
   gets 403. Every other device needs the **key** once; this computer (127.0.0.1) never does.
 - **Start checks:** `--lan` refuses to start (Swedish message) unless the key file is readable by your Windows user only and
   the firewall rule "RAS board 5199 (block Public)" from `lan-setup.ps1` exists.
-- **The key:** 256 random bits in `%USERPROFILE%.rasoard-key` (env `RAS_BOARD_KEY_FILE`), never in git and **never in a
+- **The key:** 256 random bits in `%USERPROFILE%/.ras/board-key` (env `RAS_BOARD_KEY_FILE`), never in git and **never in a
   URL**. `--show-key` prints the address and the key in groups of four to type; `--rotate-key` makes a new key and logs
   every device out.
 - **First visit on the other computer:** open `http://johansdator:5199/`, type the key in the "Nyckel krävs" form (spaces
   and case do not matter). The form only works from the board's own page (same-origin `Origin` check). The server checks
   the key in constant time and gives that browser its **own random session** (cookie `ras_board_5199`, `HttpOnly;
-  SameSite=Strict`). Only a hash of it is stored, in `%USERPROFILE%.rasoard-sessions.json`; it expires after 180 days
+  SameSite=Strict`). Only a hash of it is stored, in `%USERPROFILE%/.ras/board-sessions.json`; it expires after 180 days
   on the server. `--revoke-sessions` logs every device out. 10 wrong keys per minute from one address → 429.
 - **Setup, once, as administrator:** `powershell -ExecutionPolicy Bypass -File toolslan-setup.ps1`. If the Wi-Fi is
   *Public* it explains what *Private* means (Windows then trusts that network: file and printer sharing, discovery and other
@@ -73,7 +73,7 @@ Opt-in: `node tools/serve-local.cjs --lan` (or env `RAS_BOARD_LAN=1`). Without i
   "RAS board 5199" (TCP 5199, Private profile and local subnet only, this `node.exe`) and a Block rule
   "RAS board 5199 (block Public)" (TCP 5199, Public profile, any program – Block wins over the broad
   "Node.js JavaScript Runtime" Allow rules that exist for Public). Then it prints the key. `-Autostart` also starts the LAN
-  server hidden at logon (log: `%USERPROFILE%.rasoard-lan.log`). `-Remove` removes both rules and that task, stops a
+  server hidden at logon (log: `%USERPROFILE%/.ras/board-lan.log`). `-Remove` removes both rules and that task, stops a
   running `serve-local.cjs --lan`, and offers to set a network it made Private back to Public. Running it again is safe.
 - **Risk in plain words:** a device on the home Wi-Fi reaches the port but sees only the key page without the key; with the
   key (or a stolen session cookie) it sees everything the local board shows – token counts, mission notes, the game library.
