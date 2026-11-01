@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T09:18:45Z",
+    "updated":  "2026-11-01T09:36:25Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -38,16 +38,6 @@
                         "note":  "m06 clip tool ready for owner test",
                         "since":  "2026-10-31T23:57:17Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-05",
-                        "since":  "2026-11-01T09:18:45Z",
-                        "agent":  "m06-clip-tool-WO-05",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
