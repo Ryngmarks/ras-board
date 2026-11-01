@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T20:46:53Z",
+    "updated":  "2026-11-01T20:50:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -38,16 +38,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "architecture review",
-                        "since":  "2026-11-01T20:41:09Z",
-                        "agent":  "ng01-rpg-foundation-architecture-review",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
