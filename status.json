@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-31T23:57:17Z",
+    "updated":  "2026-11-01T00:02:44Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -35,9 +35,8 @@
                         "role":  "project-manager",
                         "project":  "Mossvale",
                         "state":  "waiting",
-                        "note":  "m06 ny chatt för rättningsrunda",
-                        "since":  "2026-10-31T23:57:17Z",
-                        "for":  "owner"
+                        "note":  "m06 fix WO-03/04 running",
+                        "since":  "2026-10-31T23:57:17Z"
                     }
                 ]
 }
