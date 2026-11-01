@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T09:37:12Z",
+    "updated":  "2026-11-01T09:47:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -34,10 +34,9 @@
                     {
                         "role":  "project-manager",
                         "project":  "Mossvale",
-                        "state":  "waiting",
-                        "note":  "m06 merged; next: axe fixes",
-                        "since":  "2026-10-31T23:57:17Z",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "m07-axe steg 1",
+                        "since":  "2026-11-01T09:47:28Z"
                     }
                 ]
 }
