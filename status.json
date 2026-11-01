@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T12:45:24Z",
+    "updated":  "2026-11-01T12:45:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -37,16 +37,6 @@
                         "state":  "waiting",
                         "note":  "Game Library v1: 3 WO",
                         "since":  "2026-11-01T09:47:41Z"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Architect",
-                        "since":  "2026-11-01T12:43:37Z",
-                        "agent":  "ras07-mission-log-Architect",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "solution-architect",
