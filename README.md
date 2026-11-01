@@ -39,7 +39,21 @@ Format:
 `tools/serve-local.cjs` serves the local board on **127.0.0.1:5199 only** (never the network) and refreshes the data
 (`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than 2 minutes.
 Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
-Only `/`, `/index.html` and `/org.json` are served.
+Only `/`, `/index.html`, `/library.html`, `/org.json` and the two logos are served.
+
+## Spelbibliotek (game library, local only – m09)
+`library.html` is a sibling page shown as a tab ("Tavlan | Spelbibliotek"): weapon families → variants → abilities with
+game text, rig action from the code scan, notes, known issues and media placeholders. Abilities in no weapon list are
+hidden until "Visa förmågor utan vapen" is ticked.
+- **Data never in git.** `build-local.cjs` embeds `<RAS_LIBRARY_DIR or %USERPROFILE%/.ras/library>/mossvale.json`
+  (written by `tools/library/export.mjs` in the Mossvale repo) as `<script type="application/json" id="ras-library">`;
+  no file → the page says "Ingen export ännu". The committed page has no data and on Pages says it is local only.
+- **One loader** (`loadLibrary`): the embedded block, else same-origin `library.json` (a future private host).
+  `cleanLibrary()` is the only code that knows the data shape (contract: `docs/ras/m09-weapon-library/wo/library-contract.md`
+  in Mossvale); unknown fields are dropped and everything is escaped. Media/links become URLs only when
+  `<meta name="ras-media-base">` is set; repo-relative paths only.
+- After editing its script: `node tools/csp.cjs library.html` (its CSP allows `connect-src 'self'` only).
+- Tests: `node --test tools/*.test.cjs` (fixture: `tools/fixtures/mossvale.json`, invented data).
 
 ## Public mission history (owner decision 2026-10-31)
 `tools/publish-history.cjs` writes `history.json` to the `status` branch: per mission only id, project, name, organisation,

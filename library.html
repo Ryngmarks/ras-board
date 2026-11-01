@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-erlmuqPzEU0whGFo6su9XZBa7X+O2JkSiXz7Fk/R/T4='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Library contract §4: repo-relative media/link paths become URLs only when a base is set here (a future private host).
+     Empty = paths are shown as text and every media slot is a placeholder. -->
+<meta name="ras-media-base" content="">
+<title>RAS – Spelbibliotek</title>
+<style>
+  :root {
+    --bg: #0d0f13; --surface: #151820; --surface-2: #1b1f29; --border: #262b36; --fg: #eceef2; --muted: #8a93a5;
+    --work: #5b8cff; --work-soft: rgba(91, 140, 255, .14);
+    --wait: #f0b44c; --wait-soft: rgba(240, 180, 76, .14);
+    --ok: #3fbf7f; --ok-soft: rgba(63, 191, 127, .14);
+    --free: #59606e; --free-soft: rgba(138, 147, 165, .10);
+    --gaming: #d4914f;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f5f8; --surface: #ffffff; --surface-2: #f7f8fa; --border: #e2e5eb; --fg: #151820; --muted: #5d6676;
+      --work: #2f6bf0; --work-soft: rgba(47, 107, 240, .10);
+      --wait: #c47f0a; --wait-soft: rgba(224, 150, 20, .14);
+      --ok: #1f8a57; --ok-soft: rgba(31, 138, 87, .12);
+      --free: #9aa1ad; --free-soft: rgba(93, 102, 118, .08);
+      --gaming: #a45c1c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1500px; margin: 0 auto; padding: 28px 28px 48px; }
+  @media (max-width: 600px) { main { padding: 18px 12px 40px; } }
+  svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+  .unk { color: var(--muted); font-style: italic; }
+  .empty { padding: 12px 14px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); }
+
+  /* header + tabs (same look as the board) */
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 16px; flex-wrap: wrap; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .tabs a { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; color: var(--muted); text-decoration: none; background: var(--surface); border: 1px solid var(--border); }
+  .tabs a:hover { border-color: var(--muted); }
+  .tabs a[aria-current="page"] { color: var(--fg); border-color: var(--fg); }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 26px; line-height: 1.2; margin: 4px 0 0; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .meta .dirty { color: var(--wait); font-weight: 600; }
+  .crumb { margin: 18px 0 0; font-weight: 600; }
+  .crumb span { color: var(--muted); font-weight: 400; }
+
+  .alert { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; padding: 12px 14px; border-radius: var(--radius); background: var(--wait-soft); border: 1px solid color-mix(in srgb, var(--wait) 45%, transparent); }
+  .alert svg { color: var(--wait); margin-top: 1px; }
+  .alert div { display: grid; gap: 2px; min-width: 0; }
+
+  /* filters */
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 16px 0 14px; }
+  .controls input[type="search"], .controls select { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 7px 10px; }
+  .controls input[type="search"] { flex: 1 1 240px; min-width: 0; max-width: 420px; }
+  .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; }
+  .toggle input { width: 16px; height: 16px; margin: 0; }
+
+  /* family cards */
+  .fcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .fcard { --c: var(--gaming); display: grid; gap: 6px; text-align: left; font: inherit; color: var(--fg); cursor: pointer; padding: 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
+  .fcard:hover { border-color: var(--muted); }
+  .fcard.on { border-color: var(--c); box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 35%, transparent); }
+  .fcard.dim { opacity: .45; }
+  .fcard small { color: var(--muted); font-size: 12px; }
+  .fname { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .fname b { overflow-wrap: anywhere; }
+  .glyph { --c: var(--gaming); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; flex: none; font-size: 12px; font-weight: 700;
+    color: var(--fg); background: color-mix(in srgb, var(--c) 30%, var(--surface-2)); border: 1px solid color-mix(in srgb, var(--c) 60%, transparent); }
+  .thumb { height: 54px; border-radius: 8px; border: 1px dashed var(--border); display: grid; place-items: center; color: var(--muted); font-size: 11px; }
+  img.thumb { width: 100%; object-fit: cover; }
+  .warn { color: var(--wait); font-weight: 600; white-space: nowrap; }
+
+  /* family section */
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-top: 18px; min-width: 0; }
+  .fam-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .fam-head h2 { margin: 0; font-size: 20px; }
+  .sub { color: var(--muted); font-size: 12px; }
+  .facts { margin: 6px 0 0; color: var(--muted); }
+  .ident { margin: 6px 0 0; }
+  h3 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+  h3 span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+  details.passives { margin-top: 10px; }
+  details.passives summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  details.passives ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+  .vchips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .vchip { display: grid; gap: 1px; padding: 6px 12px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); min-width: 0; }
+  .vchip small { color: var(--muted); font-size: 12px; }
+
+  /* status tags */
+  .st { display: inline-block; font-size: 11px; font-weight: 600; line-height: 1.6; padding: 0 8px; border-radius: 999px; white-space: nowrap; color: var(--muted); background: var(--free-soft); }
+  .st.ok { color: var(--ok); background: var(--ok-soft); }
+  .st.needs-work { color: var(--wait); background: var(--wait-soft); }
+  .st.in-progress { color: var(--work); background: var(--work-soft); }
+
+  /* ability table: every row is a button that opens its panel inline (tap = hover on phones) */
+  .atable { border: 1px solid var(--border); border-radius: 12px; }
+  .ahead, .abtn { display: grid; grid-template-columns: 40px minmax(0, 2fr) 60px 60px 80px minmax(0, 1.2fr) 124px 14px; gap: 10px; align-items: center; padding: 8px 12px; }
+  .ahead { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .arow + .arow { border-top: 1px solid var(--border); }
+  .abtn { width: 100%; font: inherit; color: var(--fg); text-align: left; background: none; border: 0; cursor: pointer; }
+  .abtn:hover, .arow.open .abtn { background: var(--surface-2); }
+  .abtn:focus-visible, .fcard:focus-visible { outline: 2px solid var(--work); outline-offset: -2px; }
+  .abtn .slot { font-weight: 700; }
+  .abtn .nm { position: relative; min-width: 0; overflow-wrap: anywhere; }
+  .abtn .row-meta { display: contents; }
+  .abtn .n { font-variant-numeric: tabular-nums; }
+  .abtn .rig { min-width: 0; overflow-wrap: anywhere; }
+  .abtn small { color: var(--muted); }
+  .chev { color: var(--muted); transition: transform .15s; }
+  .arow.open .chev { transform: rotate(90deg); }
+  @media (hover: hover) {
+    .abtn .nm[data-tip]:hover::after { content: attr(data-tip); position: absolute; left: 0; top: 100%; z-index: 5; width: min(420px, 60vw); margin-top: 6px; padding: 8px 10px;
+      border-radius: 10px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0, 0, 0, .25); color: var(--fg); font-size: 12px; font-weight: 400; }
+    .arow.open .abtn .nm::after { display: none; }
+  }
+  .apanel { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; padding: 4px 12px 16px 62px; background: var(--surface-2); }
+  .apanel .game { margin: 0 0 10px; font-size: 15px; }
+  .apanel dl { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+  .apanel dt { color: var(--muted); font-size: 12px; font-weight: 600; padding-top: 1px; }
+  .apanel dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .apanel ul { margin: 0; padding-left: 18px; }
+  .apanel li.fixed { color: var(--muted); text-decoration: line-through; }
+  .apanel a { color: var(--work); }
+  .media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start; }
+  .mbox { margin: 0; min-height: 76px; display: grid; place-content: center; gap: 2px; text-align: center; padding: 8px; border-radius: 10px; border: 1px dashed var(--border); color: var(--muted); font-size: 12px; }
+  .mbox span { font-weight: 600; color: var(--fg); }
+  .mbox small { overflow-wrap: anywhere; }
+  .mbox img { max-width: 100%; border-radius: 6px; }
+
+  @media (max-width: 699px) {
+    .fcards { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .fcard { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+    .fcard .thumb { display: none; }
+    .ahead { display: none; }
+    .abtn { grid-template-columns: 26px minmax(0, 1fr) auto; grid-template-areas: "slot nm st" "slot meta meta"; gap: 4px 8px; padding: 10px; }
+    .abtn .slot { grid-area: slot; align-self: start; }
+    .abtn .nm { grid-area: nm; }
+    .abtn .stc { grid-area: st; }
+    .abtn .row-meta { grid-area: meta; display: flex; flex-wrap: wrap; gap: 2px 12px; color: var(--muted); font-size: 12px; }
+    .abtn .row-meta [data-l]::before { content: attr(data-l) " "; font-weight: 600; }
+    .chev { display: none; }
+    .apanel { grid-template-columns: minmax(0, 1fr); padding: 4px 10px 14px; }
+    .apanel dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .apanel dt { margin-top: 8px; }
+  }
+
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  footer code { font-size: 11px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <nav class="tabs" aria-label="Sidor"><a href="index.html">Tavlan</a><a href="library.html" aria-current="page">Spelbibliotek</a></nav>
+      <div class="eyebrow">Ryngmark Agent System</div>
+      <h1>Spelbibliotek</h1>
+    </div>
+    <div class="meta" id="meta">Laddar…</div>
+  </header>
+
+  <p class="crumb" id="crumb" hidden></p>
+  <div id="orphans"></div>
+
+  <div class="controls" id="controls" hidden>
+    <input type="search" id="q" placeholder="Sök förmåga, id eller text" aria-label="Sök förmåga">
+    <select id="status" aria-label="Filtrera på status">
+      <option value="">Alla statusar</option>
+      <option value="unreviewed">Ogranskad</option>
+      <option value="ok">OK</option>
+      <option value="needs-work">Behöver arbete</option>
+      <option value="in-progress">Pågår</option>
+    </select>
+    <label class="toggle"><input type="checkbox" id="show-unlisted"><span>Visa förmågor utan vapen (<span id="unlisted-count">0</span>)</span></label>
+  </div>
+
+  <div id="cards" aria-live="polite"><div class="empty">Laddar biblioteket…</div></div>
+  <div id="family"></div>
+  <div id="unlisted"></div>
+
+  <footer>
+    Data: spelets export via <code>tools/library/export.mjs</code>, inbäddad bara i den lokala tavlan
+    (<code>tools/build-local.cjs</code>). Inget härifrån publiceras.
+  </footer>
+</main>
+
+<script>
+// Spelbibliotek (m09). ONE data loader (library contract §4): the embedded #ras-library block of the local build, else
+// same-origin library.json (a future private host). The data shape is known only by cleanLibrary(); renderers get its output.
+const STATUS = { unreviewed: "Ogranskad", ok: "OK", "needs-work": "Behöver arbete", "in-progress": "Pågår" };
+const MEDIA_SLOTS = { weaponImage: "Vapenbild", icon: "Ikon", reference: "Referens", clip: "Klipp (WebP)", before: "Före", after: "Efter" };
+const ABILITY_MEDIA = ["icon", "reference", "clip", "before", "after"];
+const GRIP = { OneHand: "1H", TwoHand: "2H", Dual: "Dual" };
+const MESSAGES = {
+  noexport: "Ingen export ännu – kör tools/library/export.mjs i Mossvale.",
+  elsewhere: "Spelbiblioteket finns bara på den lokala tavlan.",
+  invalid: "Exporten kunde inte läsas (okänt format eller version).",
+};
+const ALERT_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>';
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// A path relative to the game repo root, or "" – never a URL, an absolute path or a step out of the repo (contract §2, §4).
+function relPath(p) {
+  if (typeof p !== "string" || !p || p.length > 300 || /[\u0000-\u001f]/.test(p)) return "";
+  const s = p.replace(/\\/g, "/");
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s) || s.startsWith("/") || s.split("/").includes("..")) return "";
+  return s;
+}
+
+// Media/link base (contract §4: configurable base + repo-relative path). Empty = no URLs at all.
+let mediaBase = "";
+function setMediaBase(b) {
+  mediaBase = typeof b === "string" && b.trim() && !/^[a-z][a-z0-9+.-]*:|^\/\//i.test(b.trim()) ? b.trim().replace(/\/?$/, "/") : "";
+}
+function mediaUrl(p) { return mediaBase && p ? mediaBase + encodeURI(p) : ""; }
+
+// ---- the data shape (contract §3) lives here and nowhere else; unknown fields are dropped, missing ones get defaults ----
+function cleanLibrary(raw) {
+  if (!raw || typeof raw !== "object" || raw.version !== 1) return null;
+  const str = (v, n = 200) => (typeof v === "string" ? v.slice(0, n) : "");
+  const num = v => (typeof v === "number" && isFinite(v) ? v : null);
+  const ident = v => (typeof v === "string" && /^[A-Za-z0-9_.:-]{1,80}$/.test(v) ? v : "");
+  const list = (v, n) => (Array.isArray(v) ? v.filter(x => x && typeof x === "object").slice(0, n) : []);
+  const colour = v => (typeof v === "string" && /^#[0-9a-f]{3,8}$/i.test(v) ? v : "");
+  const media = m => Object.fromEntries(Object.keys(MEDIA_SLOTS).map(k => [k, relPath(typeof m?.[k] === "string" ? m[k] : m?.[k]?.path)]));
+  const note = n => {
+    n = n && typeof n === "object" ? n : {};
+    return { identity: str(n.identity, 300), direction: str(n.direction, 300), howItWorks: str(n.howItWorks, 600),
+      status: Object.hasOwn(STATUS, n.status) ? n.status : "unreviewed",
+      knownIssues: list(n.knownIssues, 20).map(k => ({ text: str(k.text, 300), source: relPath(k.source), state: k.state === "fixed" ? "fixed" : "open" })).filter(k => k.text),
+      proposal: str(n.proposal, 600),
+      links: list(n.links, 12).map(l => ({ label: str(l.label, 80), path: relPath(l.href ?? l.path) })).filter(l => l.label || l.path),
+      media: media(n.media && typeof n.media === "object" ? n.media : {}) };
+  };
+  const ability = a => ({ id: ident(a.id), slot: typeof a.slot === "string" && /^[A-Z0-9]{1,3}$/.test(a.slot) ? a.slot : "",
+    name: str(a.name, 80), desc: str(a.desc, 1000), cooldown: num(a.cooldown), energy: num(a.energy), range: num(a.range), radius: num(a.radius),
+    mode: str(a.mode, 40), role: str(a.role, 40), listed: a.listed !== false,
+    // rig.source "unknown" (a variable name) never shows a guessed action
+    rig: { action: a.rig?.source === "scan" ? str(a.rig.action, 40) : "", file: relPath(a.rig?.file),
+      line: Number.isInteger(a.rig?.line) && a.rig.line > 0 ? a.rig.line : null },
+    note: note(a.note) });
+  const family = (f, i) => ({ key: ident(f.id) || "f" + i, id: ident(f.id), name: str(f.name, 60), hit: str(f.hit, 40), range: num(f.range),
+    attacks: (Array.isArray(f.attacks) ? f.attacks : []).filter(x => typeof x === "string").slice(0, 8).map(x => x.slice(0, 30)),
+    glyph: [...str(f.glyph, 8)].length <= 2 ? str(f.glyph, 8) : "", colour: colour(f.color), // export glyphs are icon ids ("hammer"); only 1–2 chars fit the chip
+    passives: list(f.passives, 12).map(p => ({ id: ident(p.id), name: str(p.name, 80), desc: str(p.desc, 400) })),
+    variants: list(f.variants, 24).map(v => ({ code: ident(v.code), name: str(v.name, 60), grip: str(v.grip, 20), twoHanded: v.twoHanded === true,
+      signature: ident(v.signature), form: v.form && typeof v.form === "object" ? str(v.form.name, 60) || ident(v.form.id) : "", note: note(v.note) })),
+    abilities: list(f.abilities, 200).map(ability), note: note(f.note) });
+  const b = raw.build && typeof raw.build === "object" ? raw.build : {};
+  return {
+    project: str(raw.project, 60) || "Projekt", exported: str(raw.exported, 40),
+    build: { commit: typeof b.commit === "string" && /^[0-9a-f]{4,40}$/i.test(b.commit) ? b.commit : "", dirty: b.dirty === true },
+    families: list(raw.families, 64).map(family),
+    unlisted: list(raw.unlisted, 600).map(ability),
+    orphans: list(raw.orphans, 200).map(o => ({ kind: typeof o.kind === "string" && /^[a-z]{1,20}$/.test(o.kind) ? o.kind : "?", id: str(o.id, 80), hint: str(o.hint, 80) })),
+  };
+}
+
+// ---- the ONLY code that knows where data comes from ----
+async function loadLibrary(doc, fetchFn) {
+  const block = doc.getElementById("ras-library");
+  let raw;
+  if (block) {
+    try { raw = JSON.parse(block.textContent); } catch { return { state: "invalid" }; }
+    if (raw === null) return { state: "noexport" };     // local build without an export file
+  } else {
+    try {
+      const res = await fetchFn("library.json", { cache: "no-store", credentials: "same-origin" });
+      if (!res.ok) return { state: "elsewhere" };
+      raw = await res.json();
+    } catch { return { state: "elsewhere" }; }       // file:// or no private host: the public page has no data
+  }
+  const lib = cleanLibrary(raw);
+  return lib ? { state: "ok", lib } : { state: "invalid" };
+}
+
+// ---- rendering: small functions per level, every data value through esc() ----
+const fmt = n => n.toLocaleString("sv-SE", { maximumFractionDigits: 2 });
+const secs = n => (n === null ? "–" : fmt(n) + " s");
+const reach = a => (a.range ? fmt(a.range) + " m" : a.radius ? "r " + fmt(a.radius) + " m" : "–");
+const statusTag = s => `<span class="st ${s}">${STATUS[s]}</span>`;
+const glyphChip = f => `<span class="glyph"${f.colour ? ` style="--c:${f.colour}"` : ""} aria-hidden="true">${esc(f.glyph || (f.name || "?").slice(0, 1))}</span>`;
+const openIssues = a => a.note.knownIssues.filter(k => k.state === "open").length;
+const textOr = (s, none = "Inte beskrivet ännu") => (s ? esc(s) : `<span class="unk">${none}</span>`);
+
+function pathRef(p) {
+  const u = mediaUrl(p);
+  return u ? `<a href="${esc(u)}">${esc(p)}</a>` : `<code>${esc(p)}</code>`;
+}
+function linkRef(l) {
+  const u = mediaUrl(l.path);
+  if (u) return `<a href="${esc(u)}">${esc(l.label || l.path)}</a>`;
+  return `${esc(l.label)}${l.path ? ` <code>${esc(l.path)}</code>` : ""}`;
+}
+function mediaBox(slot, p) {
+  const label = MEDIA_SLOTS[slot], u = mediaUrl(p);
+  if (u && /\.(webp|png|jpe?g)$/i.test(p)) return `<figure class="mbox"><img src="${esc(u)}" alt="${label}" loading="lazy"><figcaption>${label}</figcaption></figure>`;
+  const none = ["clip", "before", "after"].includes(slot) ? "Inget klipp ännu" : "Ingen bild ännu";
+  return `<figure class="mbox"><span>${label}</span><small>${p ? esc(p) : none}</small></figure>`;
+}
+
+function matches(a, view) {
+  if (view.status && a.note.status !== view.status) return false;
+  return !view.q || [a.name, a.id, a.desc, a.note.identity].some(s => s.toLowerCase().includes(view.q));
+}
+
+function renderMeta(lib) {
+  const t = Date.parse(lib.exported);
+  const when = isFinite(t) ? new Date(t).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) : "okänt datum";
+  return `Export ${esc(when)}${lib.build.commit ? ` · bygge <code>${esc(lib.build.commit.slice(0, 7))}</code>` : ""}` +
+    (lib.build.dirty ? ` <span class="dirty" title="Bygget hade ändringar som inte var incheckade">* ej incheckat</span>` : "");
+}
+
+function renderOrphans(lib) {
+  if (!lib.orphans.length) return "";
+  return `<div class="alert" role="status">${ALERT_ICON}<div><b>Anteckningar utan spelpost (${lib.orphans.length})</b>` +
+    lib.orphans.map(o => `<span><code>${esc(o.kind)}:${esc(o.id)}</code>${o.hint ? ` → ${esc(o.hint)}` : ""}</span>`).join("") + `</div></div>`;
+}
+
+function renderCards(lib, view) {
+  const filtering = Boolean(view.q || view.status);
+  return `<div class="fcards">${lib.families.map((f, i) => {
+    const on = f.key === view.family;
+    const hits = filtering ? f.abilities.filter(a => matches(a, view)).length : null;
+    const warn = f.abilities.filter(a => openIssues(a)).length;
+    const img = /\.(webp|png|jpe?g)$/i.test(f.note.media.weaponImage) ? mediaUrl(f.note.media.weaponImage) : "";
+    return `<button type="button" class="fcard${on ? " on" : ""}${hits === 0 ? " dim" : ""}" data-family="${i}" aria-pressed="${on}"${f.colour ? ` style="--c:${f.colour}"` : ""}>` +
+      (img ? `<img class="thumb" src="${esc(img)}" alt="">` : `<span class="thumb">${MEDIA_SLOTS.weaponImage} saknas</span>`) +
+      `<span class="fname">${glyphChip(f)}<b>${esc(f.name || f.id)}</b></span>` +
+      `<small>${f.variants.length} var · ${f.abilities.length} förm${warn ? ` · <span class="warn">${warn} ⚠</span>` : ""}${hits !== null ? ` · ${hits} träffar` : ""}</small></button>`;
+  }).join("")}</div>`;
+}
+
+function renderVariant(v, f) {
+  const sig = f.abilities.find(a => a.id && a.id === v.signature);
+  const bits = [GRIP[v.grip] || v.grip || (v.twoHanded ? "2H" : ""), sig ? `${sig.slot || "sig"} ${sig.name || sig.id}` : v.signature ? `sig ${v.signature}` : "", v.form ? `form ${v.form}` : ""];
+  return `<span class="vchip"><b>${esc(v.name || v.code)}</b><small>${bits.filter(Boolean).map(esc).join(" · ") || "–"}` +
+    `${v.note.status !== "unreviewed" ? " " + statusTag(v.note.status) : ""}</small></span>`;
+}
+
+function renderAbilityPanel(a, key) {
+  const n = a.note;
+  const how = [a.mode, a.range ? fmt(a.range) + " m" : "", a.radius ? "radie " + fmt(a.radius) + " m" : "", a.cooldown !== null ? "CD " + secs(a.cooldown) : "",
+    a.energy !== null ? fmt(a.energy) + " energi" : "", a.role ? "roll " + a.role : ""].filter(Boolean);
+  const where = a.rig.file ? `, ${esc(a.rig.file)}${a.rig.line ? ":" + a.rig.line : ""}` : "";
+  const rig = a.rig.action ? `${esc(a.rig.action)} <small>(kodskanning${where})</small>` : `<span class="unk">okänd (variabel eller inte hittad – gissas aldrig)</span>`;
+  const issues = n.knownIssues.length ? `<ul>${n.knownIssues.map(k => `<li${k.state === "fixed" ? ' class="fixed"' : ""}>${esc(k.text)}` +
+    `${k.source ? ` <small>källa: ${pathRef(k.source)}</small>` : ""}</li>`).join("")}</ul>` : "Inga kända";
+  return `<div class="apanel" id="panel-${esc(key)}"><div>
+    <p class="game">${textOr(a.desc, "Ingen speltext")}</p>
+    <dl>
+      <dt>Hur den fungerar</dt><dd>${how.map(esc).join(" · ") || "–"}${n.howItWorks ? `<br>${esc(n.howItWorks)}` : ""}</dd>
+      <dt>Rig idag</dt><dd>${rig}</dd>
+      <dt>Identitet</dt><dd>${textOr(n.identity)}</dd>
+      <dt>Riktning</dt><dd>${textOr(n.direction)}</dd>
+      <dt>Kända fel</dt><dd>${issues}</dd>
+      <dt>Förslag</dt><dd>${textOr(n.proposal, "Inget förslag")}</dd>
+      <dt>Status</dt><dd>${statusTag(n.status)}</dd>
+      <dt>Länkar</dt><dd>${n.links.length ? n.links.map(linkRef).join(" · ") : "–"}</dd>
+      <dt>Id</dt><dd><code>${esc(a.id || "–")}</code></dd>
+    </dl></div>
+    <div class="media">${ABILITY_MEDIA.map(k => mediaBox(k, n.media[k])).join("")}</div></div>`;
+}
+
+function renderAbilityRow(a, key, open) {
+  const issues = openIssues(a);
+  return `<div class="arow${open ? " open" : ""}"><button type="button" class="abtn" data-row="${esc(key)}" aria-expanded="${open}"${open ? ` aria-controls="panel-${esc(key)}"` : ""}>` +
+    `<span class="slot">${esc(a.slot) || "–"}</span>` +
+    `<span class="nm"${a.desc ? ` data-tip="${esc(a.desc)}"` : ""}><b>${esc(a.name || a.id || "?")}</b>${issues ? ` <span class="warn" title="Öppna kända fel">${issues} ⚠</span>` : ""}</span>` +
+    `<span class="row-meta"><span class="n" data-l="CD">${secs(a.cooldown)}</span><span class="n" data-l="Energi">${a.energy === null ? "–" : fmt(a.energy)}</span>` +
+    `<span class="n" data-l="Räckv.">${reach(a)}</span><span class="rig" data-l="Rig">${a.rig.action ? `${esc(a.rig.action)} <small>(scan)</small>` : `<span class="unk">okänd</span>`}</span></span>` +
+    `<span class="stc">${statusTag(a.note.status)}</span><span class="chev" aria-hidden="true">▸</span></button>` +
+    `${open ? renderAbilityPanel(a, key) : ""}</div>`;
+}
+
+// prefix makes row keys unique per table (an ability used in two slots is two rows)
+function renderAbilities(rows, view, prefix) {
+  const shown = rows.map((a, i) => [a, `${prefix}-${i}`]).filter(([a]) => matches(a, view));
+  if (!shown.length) return `<div class="empty">${rows.length ? "Inga förmågor matchar filtret." : "Inga förmågor."}</div>`;
+  return `<div class="atable"><div class="ahead" aria-hidden="true"><span>Slot</span><span>Förmåga</span><span>CD</span><span>Energi</span><span>Räckv.</span>` +
+    `<span>Rig (idag)</span><span>Status</span><span></span></div>${shown.map(([a, key]) => renderAbilityRow(a, key, view.open.has(key))).join("")}</div>`;
+}
+
+function renderFamily(f, view) {
+  const facts = [f.hit, f.range !== null ? "räckvidd " + fmt(f.range) + " m" : "", f.attacks.length ? "auto: " + f.attacks.join(", ") : ""].filter(Boolean);
+  const passives = f.passives.length ? `<details class="passives"><summary>Passiver (${f.passives.length})</summary><ul>` +
+    f.passives.map(p => `<li><b>${esc(p.name || p.id)}</b>${p.desc ? " – " + esc(p.desc) : ""}</li>`).join("") + `</ul></details>` : "";
+  const issues = f.note.knownIssues.filter(k => k.state === "open");
+  return `<section class="panel" aria-labelledby="fam-title"><div class="fam-head">${glyphChip(f)}<h2 id="fam-title">${esc(f.name || f.id)}</h2>${statusTag(f.note.status)}</div>
+    <p class="facts">${facts.map(esc).join(" · ") || "–"}</p>
+    ${f.note.identity ? `<p class="ident">${esc(f.note.identity)}</p>` : ""}
+    ${issues.length ? `<p class="ident"><span class="warn">⚠</span> ${issues.map(k => esc(k.text)).join(" · ")}</p>` : ""}
+    ${passives}
+    <h3>Varianter <span>${f.variants.length}</span></h3><div class="vchips">${f.variants.map(v => renderVariant(v, f)).join("") || `<span class="unk">Inga varianter</span>`}</div>
+    <h3>Förmågor <span>${f.abilities.length}</span></h3>${renderAbilities(f.abilities, view, f.key)}</section>`;
+}
+
+function renderUnlisted(lib, view) {
+  if (!view.unlisted) return "";
+  return `<section class="panel" aria-labelledby="unl-title"><div class="fam-head"><h2 id="unl-title">Förmågor utan vapen</h2>` +
+    `<span class="sub">${lib.unlisted.length} st · finns i spelet men i ingen vapenlista</span></div><h3>Förmågor</h3>${renderAbilities(lib.unlisted, view, "u")}</section>`;
+}
+
+// ---- page wiring ----
+function boot() {
+  const $ = id => document.getElementById(id);
+  setMediaBase(document.querySelector('meta[name="ras-media-base"]')?.content);
+  const view = { family: "", open: new Set(), q: "", status: "", unlisted: false };
+  let lib = null;
+
+  const paint = focus => {
+    $("cards").innerHTML = renderCards(lib, view);
+    const f = lib.families.find(x => x.key === view.family);
+    $("family").innerHTML = f ? renderFamily(f, view) : "";
+    $("unlisted").innerHTML = renderUnlisted(lib, view);
+    if (focus) document.querySelector(focus)?.focus({ preventScroll: true });
+  };
+  // #<family> or #<family>/<ability id> (opens that ability)
+  const fromHash = () => {
+    let fam = "", ab = "";
+    try { [fam = "", ab = ""] = decodeURIComponent(location.hash.slice(1)).split("/"); } catch { /* bad hash: ignore */ }
+    const f = lib.families.find(x => x.key === fam) || lib.families[0];
+    view.family = f ? f.key : "";
+    const i = f && ab ? f.abilities.findIndex(a => a.id === ab) : -1;
+    if (i > -1) view.open.add(`${f.key}-${i}`);
+  };
+
+  loadLibrary(document, (url, opts) => fetch(url, opts)).then(r => {
+    if (r.state !== "ok") { $("meta").textContent = ""; $("cards").innerHTML = `<div class="empty">${esc(MESSAGES[r.state])}</div>`; return; }
+    lib = r.lib;
+    $("meta").innerHTML = renderMeta(lib);
+    $("crumb").innerHTML = `${esc(lib.project)} <span>›</span> Vapen <span>· ${lib.families.length} familjer</span>`;
+    $("crumb").hidden = false;
+    $("orphans").innerHTML = renderOrphans(lib);
+    $("unlisted-count").textContent = String(lib.unlisted.length);
+    $("controls").hidden = false;
+    fromHash();
+    paint();
+    window.addEventListener("hashchange", () => { fromHash(); paint(); });
+  });
+
+  document.addEventListener("click", ev => {
+    if (!lib) return;
+    const card = ev.target.closest?.("[data-family]");
+    if (card) {
+      const f = lib.families[Number(card.dataset.family)];
+      if (!f) return;
+      view.family = f.key;
+      history.replaceState(null, "", "#" + encodeURIComponent(f.key));
+      paint(`[data-family="${card.dataset.family}"]`);
+      if (matchMedia("(max-width: 699px)").matches) $("family").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const row = ev.target.closest?.("[data-row]");
+    if (row) {
+      const key = row.dataset.row;
+      if (view.open.has(key)) view.open.delete(key); else view.open.add(key);
+      paint(`[data-row="${CSS.escape(key)}"]`);
+    }
+  });
+  $("q").addEventListener("input", ev => { view.q = ev.target.value.trim().toLowerCase(); if (lib) paint(); });
+  $("status").addEventListener("change", ev => { view.status = Object.hasOwn(STATUS, ev.target.value) ? ev.target.value : ""; if (lib) paint(); });
+  $("show-unlisted").addEventListener("change", ev => { view.unlisted = ev.target.checked; if (lib) paint(); });
+}
+if (typeof document !== "undefined") boot();
+</script>
+</body>
+</html>
