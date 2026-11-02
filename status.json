@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T01:01:11Z",
+    "updated":  "2026-11-02T06:58:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,6 +47,16 @@
                         "note":  "Combat Lab att prova",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-06c klipp",
+                        "since":  "2026-11-02T06:58:22Z",
+                        "agent":  "codex-wo06c",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
