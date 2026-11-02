@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T12:15:16Z",
+    "updated":  "2026-11-02T12:26:10Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,16 +56,6 @@
                         "agent":  "claude-wo07b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-07 review",
-                        "since":  "2026-11-02T12:15:06Z",
-                        "agent":  "ng01-rpg-foundation-WO-07-review",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
