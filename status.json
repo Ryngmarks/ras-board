@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T08:08:32Z",
+    "updated":  "2026-11-02T08:10:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -39,16 +39,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-06d vapengrepp",
-                        "since":  "2026-11-02T07:29:35Z",
-                        "agent":  "claude-wo06d",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
