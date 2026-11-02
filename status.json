@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T14:48:21Z",
+    "updated":  "2026-11-02T14:48:25Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -66,16 +66,6 @@
                         "agent":  "codex-wo08",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "tester",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-08 test",
-                        "since":  "2026-11-02T14:40:13Z",
-                        "agent":  "wo08-tester",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "medium"
                     }
                 ]
 }
