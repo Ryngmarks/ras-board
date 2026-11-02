@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T20:06:38Z",
+    "updated":  "2026-11-02T20:07:25Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,16 +47,6 @@
                         "note":  "WO-09 recept + spår",
                         "since":  "2026-11-02T15:56:47Z",
                         "agent":  "wo09-recipes",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-13b gång/löp",
-                        "since":  "2026-11-02T19:50:05Z",
-                        "agent":  "claude-wo13b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     },
