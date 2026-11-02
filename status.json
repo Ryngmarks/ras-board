@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T00:32:41Z",
+    "updated":  "2026-11-02T00:33:10Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -39,16 +39,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "granskning P3",
-                        "since":  "2026-11-02T00:18:31Z",
-                        "agent":  "codex-review-p3",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
