@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T14:49:13Z",
+    "updated":  "2026-11-02T14:49:17Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,6 +54,16 @@
                         "note":  "WO-08b fixar",
                         "since":  "2026-11-02T14:49:13Z",
                         "agent":  "wo08b-fixes",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-08b",
+                        "since":  "2026-11-02T14:49:17Z",
+                        "agent":  "ng01-rpg-foundation-WO-08b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
