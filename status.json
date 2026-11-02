@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T14:04:17Z",
+    "updated":  "2026-11-02T14:04:19Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,14 +41,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "Claymore-grepp, sköld, WO-08",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -57,6 +49,13 @@
                         "agent":  "wo08-designer",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-08",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
