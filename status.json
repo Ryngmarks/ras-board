@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T07:29:35Z",
+    "updated":  "2026-11-02T07:29:38Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,14 +41,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "Combat Lab att prova",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -57,6 +49,13 @@
                         "agent":  "claude-wo06d",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-06d",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
