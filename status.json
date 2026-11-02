@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T17:32:03Z",
+    "updated":  "2026-11-02T17:32:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -76,6 +76,16 @@
                         "agent":  "sonnet-p4r-a",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "medium"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-09 review",
+                        "since":  "2026-11-02T17:32:21Z",
+                        "agent":  "ng01-rpg-foundation-WO-09-review",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
