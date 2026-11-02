@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T00:18:38Z",
+    "updated":  "2026-11-02T00:18:47Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,13 +41,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "väntar på WO-02",
-                        "since":  "2026-11-01T21:06:10Z"
-                    },
-                    {
                         "role":  "reviewer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -66,6 +59,14 @@
                         "agent":  "ng01-rpg-foundation-review-P3",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "Combat Lab att prova",
+                        "since":  "2026-11-01T21:06:10Z",
+                        "for":  "owner"
                     }
                 ]
 }
