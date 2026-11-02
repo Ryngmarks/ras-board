@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T14:37:53Z",
+    "updated":  "2026-11-02T14:39:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,6 +56,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-08",
                         "since":  "2026-11-01T21:06:10Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-08 review",
+                        "since":  "2026-11-02T14:39:52Z",
+                        "agent":  "ng01-rpg-foundation-WO-08-review",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
