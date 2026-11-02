@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T08:10:13Z",
+    "updated":  "2026-11-02T09:33:51Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -47,6 +47,16 @@
                         "note":  "P3 + 4 frågor",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "vapengrepp i attacker",
+                        "since":  "2026-11-02T09:33:51Z",
+                        "agent":  "claude-wo06e",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
