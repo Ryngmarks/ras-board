@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T17:07:05Z",
+    "updated":  "2026-11-02T17:07:08Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -41,13 +41,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "väntar på WO-08",
-                        "since":  "2026-11-01T21:06:10Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -66,6 +59,13 @@
                         "agent":  "codex-wo09-finish",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-09 finish",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
