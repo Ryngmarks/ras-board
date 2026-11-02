@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T13:47:16Z",
+    "updated":  "2026-11-02T13:47:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,6 +54,16 @@
                         "note":  "omgranskning WO-07d",
                         "since":  "2026-11-02T13:47:16Z",
                         "agent":  "codex-rev07d",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-07d re-review",
+                        "since":  "2026-11-02T13:47:28Z",
+                        "agent":  "ng01-rpg-foundation-WO-07d-re-review",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
