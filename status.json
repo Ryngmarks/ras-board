@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T17:40:08Z",
+    "updated":  "2026-11-02T17:40:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,16 +56,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-09 finish",
                         "since":  "2026-11-01T21:06:10Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-09 granskning",
-                        "since":  "2026-11-02T17:32:01Z",
-                        "agent":  "claude-review-wo09",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
