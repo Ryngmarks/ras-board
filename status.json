@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T00:33:17Z",
+    "updated":  "2026-11-02T00:59:53Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -55,16 +55,6 @@
                         "note":  "WO-06b granskningsfixar",
                         "since":  "2026-11-02T00:33:12Z",
                         "agent":  "claude-wo06b",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-06b",
-                        "since":  "2026-11-02T00:33:17Z",
-                        "agent":  "ng01-rpg-foundation-WO-06b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
