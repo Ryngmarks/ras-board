@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T13:12:46Z",
+    "updated":  "2026-11-02T13:12:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -46,6 +46,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-07",
                         "since":  "2026-11-01T21:06:10Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "omgranskning WO-07c",
+                        "since":  "2026-11-02T13:12:48Z",
+                        "agent":  "codex-rev07c",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
