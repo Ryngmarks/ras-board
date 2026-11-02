@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-01T23:43:52Z",
+    "updated":  "2026-11-02T00:16:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,16 +54,6 @@
                         "note":  "WO-06 Combat Lab",
                         "since":  "2026-11-01T23:43:46Z",
                         "agent":  "claude-wo06",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Mossvale",
-                        "state":  "working",
-                        "note":  "WO-06",
-                        "since":  "2026-11-01T23:43:52Z",
-                        "agent":  "ng01-rpg-foundation-WO-06",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
