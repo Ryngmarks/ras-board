@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T12:15:11Z",
+    "updated":  "2026-11-02T12:15:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -61,16 +61,6 @@
                         "role":  "reviewer",
                         "project":  "Project Doom",
                         "state":  "working",
-                        "note":  "granskar WO-07",
-                        "since":  "2026-11-02T12:14:56Z",
-                        "agent":  "codex-rev07",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
                         "note":  "WO-07 review",
                         "since":  "2026-11-02T12:15:06Z",
                         "agent":  "ng01-rpg-foundation-WO-07-review",
@@ -86,6 +76,16 @@
                         "agent":  "ng01-rpg-foundation-WO-07b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "granskar WO-07",
+                        "since":  "2026-11-02T12:14:56Z",
+                        "agent":  "codex-rev07",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
