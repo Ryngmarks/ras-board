@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T08:10:11Z",
+    "updated":  "2026-11-02T08:10:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -44,8 +44,9 @@
                         "role":  "project-manager",
                         "project":  "Project Doom",
                         "state":  "waiting",
-                        "note":  "väntar på WO-06d",
-                        "since":  "2026-11-01T21:06:10Z"
+                        "note":  "P3 + 4 frågor",
+                        "since":  "2026-11-01T21:06:10Z",
+                        "for":  "owner"
                     }
                 ]
 }
