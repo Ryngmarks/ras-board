@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-02T13:54:27Z",
+    "updated":  "2026-11-02T13:54:29Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -44,8 +44,9 @@
                         "role":  "project-manager",
                         "project":  "Project Doom",
                         "state":  "waiting",
-                        "note":  "väntar på WO-07",
-                        "since":  "2026-11-01T21:06:10Z"
+                        "note":  "Claymore-grepp, sköld, WO-08",
+                        "since":  "2026-11-01T21:06:10Z",
+                        "for":  "owner"
                     }
                 ]
 }
