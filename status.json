@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T04:55:01Z",
+    "updated":  "2026-11-03T05:15:47Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,16 +57,6 @@
                         "note":  "spela WO-13b-bygget",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "POL-01 avstånd + kollision",
-                        "since":  "2026-11-03T04:55:01Z",
-                        "agent":  "claude-pol01",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
