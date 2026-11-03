@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T13:25:18Z",
+    "updated":  "2026-11-03T13:25:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -51,14 +51,6 @@
                         "effort":  "high"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "spela ny gång POL-02",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -77,6 +69,13 @@
                         "agent":  "codex-pol04",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på POL-03/04",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
