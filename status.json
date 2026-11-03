@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T19:06:52Z",
+    "updated":  "2026-11-03T19:11:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,6 +57,16 @@
                         "note":  "spela FIX-01/02",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "holistic review Fable r2",
+                        "since":  "2026-11-03T19:11:43Z",
+                        "agent":  "ng01-rpg-foundation-holistic-review-Fabl",
+                        "model":  "claude/claude-fable-5-1",
+                        "effort":  "high"
                     }
                 ]
 }
