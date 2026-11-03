@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T13:25:20Z",
+    "updated":  "2026-11-03T13:25:59Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -49,16 +49,6 @@
                         "agent":  "wo09-recipes",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "POL-03 ljud",
-                        "since":  "2026-11-03T13:25:15Z",
-                        "agent":  "codex-pol03",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
