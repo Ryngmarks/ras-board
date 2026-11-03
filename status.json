@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T14:49:53Z",
+    "updated":  "2026-11-03T14:49:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,6 +56,16 @@
                         "state":  "waiting",
                         "note":  "väntar på POL-03/04",
                         "since":  "2026-11-01T21:06:10Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "POL-05 läsbarhet",
+                        "since":  "2026-11-03T14:49:56Z",
+                        "agent":  "codex-pol05",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
