@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T17:21:09Z",
+    "updated":  "2026-11-03T17:21:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -87,6 +87,16 @@
                         "agent":  "codex-holistic",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "helhetsgranskning",
+                        "since":  "2026-11-03T17:21:12Z",
+                        "agent":  "fable-holistic",
+                        "model":  "claude/claude-fable-5-1",
+                        "effort":  "high"
                     }
                 ]
 }
