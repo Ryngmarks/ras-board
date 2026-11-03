@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T17:21:14Z",
+    "updated":  "2026-11-03T17:30:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -49,16 +49,6 @@
                         "agent":  "wo09-recipes",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "holistic review GPT",
-                        "since":  "2026-11-03T17:20:59Z",
-                        "agent":  "ng01-rpg-foundation-holistic-review-GPT",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
