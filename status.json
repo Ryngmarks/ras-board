@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T18:12:44Z",
+    "updated":  "2026-11-03T18:12:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -51,14 +51,6 @@
                         "effort":  "high"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "beslut: FIX-01 + prov",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -67,6 +59,13 @@
                         "agent":  "claude-fix01",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på FIX-01",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
