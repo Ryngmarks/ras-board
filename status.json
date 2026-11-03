@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T17:46:22Z",
+    "updated":  "2026-11-03T17:46:25Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,8 +54,9 @@
                         "role":  "project-manager",
                         "project":  "Project Doom",
                         "state":  "waiting",
-                        "note":  "väntar på granskningar",
-                        "since":  "2026-11-01T21:06:10Z"
+                        "note":  "beslut: FIX-01 + prov",
+                        "since":  "2026-11-01T21:06:10Z",
+                        "for":  "owner"
                     }
                 ]
 }
