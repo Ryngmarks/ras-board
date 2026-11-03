@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T18:33:05Z",
+    "updated":  "2026-11-03T19:06:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -56,16 +56,6 @@
                         "state":  "waiting",
                         "note":  "väntar på FIX-01",
                         "since":  "2026-11-01T21:06:10Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "FIX-02 död/träd/flock",
-                        "since":  "2026-11-03T18:33:05Z",
-                        "agent":  "claude-fix02",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
