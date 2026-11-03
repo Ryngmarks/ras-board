@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T19:25:58Z",
+    "updated":  "2026-11-03T19:26:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,16 +57,6 @@
                         "note":  "spela FIX-01/02",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "omgranskning r2",
-                        "since":  "2026-11-03T19:11:45Z",
-                        "agent":  "fable-holistic-r2",
-                        "model":  "claude/claude-fable-5-1",
-                        "effort":  "high"
                     }
                 ]
 }
