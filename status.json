@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T17:21:12Z",
+    "updated":  "2026-11-03T17:21:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -51,14 +51,6 @@
                         "effort":  "high"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "spela polish-bygget",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "reviewer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -97,6 +89,13 @@
                         "agent":  "fable-holistic",
                         "model":  "claude/claude-fable-5-1",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "väntar på granskningar",
+                        "since":  "2026-11-01T21:06:10Z"
                     }
                 ]
 }
