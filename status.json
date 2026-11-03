@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T17:35:11Z",
+    "updated":  "2026-11-03T17:35:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -48,16 +48,6 @@
                         "since":  "2026-11-02T15:56:47Z",
                         "agent":  "wo09-recipes",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "helhetsgranskning",
-                        "since":  "2026-11-03T17:21:12Z",
-                        "agent":  "fable-holistic",
-                        "model":  "claude/claude-fable-5-1",
                         "effort":  "high"
                     },
                     {
