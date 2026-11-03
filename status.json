@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T20:11:32Z",
+    "updated":  "2026-11-03T20:11:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,8 +54,9 @@
                         "role":  "project-manager",
                         "project":  "Project Doom",
                         "state":  "waiting",
-                        "note":  "väntar på FIX-03",
-                        "since":  "2026-11-01T21:06:10Z"
+                        "note":  "spela FIX-03, Tripo-fil",
+                        "since":  "2026-11-01T21:06:10Z",
+                        "for":  "owner"
                     }
                 ]
 }
