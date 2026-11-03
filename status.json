@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T15:09:22Z",
+    "updated":  "2026-11-03T17:20:59Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -57,6 +57,16 @@
                         "note":  "spela polish-bygget",
                         "since":  "2026-11-01T21:06:10Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "holistic review GPT",
+                        "since":  "2026-11-03T17:20:59Z",
+                        "agent":  "ng01-rpg-foundation-holistic-review-GPT",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
