@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T15:51:04Z",
+    "updated":  "2026-11-07T15:56:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -73,16 +73,6 @@
                         "note":  "ras08 draft",
                         "since":  "2026-11-07T15:50:50Z",
                         "agent":  "architect-brain",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "architect",
-                        "since":  "2026-11-07T15:51:04Z",
-                        "agent":  "ras08-brain-architect",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
