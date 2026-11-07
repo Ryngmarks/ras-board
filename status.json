@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:53:26Z",
+    "updated":  "2026-11-07T20:53:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,6 +93,16 @@
                         "note":  "WO-04 feel at 6 m",
                         "since":  "2026-11-07T20:53:26Z",
                         "agent":  "wo04",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-04 Feel at 6 m",
+                        "since":  "2026-11-07T20:53:34Z",
+                        "agent":  "ng02-wow-camera-WO-04-Feel-at-6-m",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
