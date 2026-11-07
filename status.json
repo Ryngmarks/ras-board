@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T23:25:47Z",
+    "updated":  "2026-11-07T23:39:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -75,16 +75,6 @@
                         "agent":  "ng03-combat-roles-WO-02-Shapes-ranged-mo",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "security-auditor",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "security-auditor delta",
-                        "since":  "2026-11-07T23:18:06Z",
-                        "agent":  "ras09-brain-tree-security-auditor-delta",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
