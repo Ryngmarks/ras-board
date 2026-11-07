@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T15:37:28Z",
+    "updated":  "2026-11-07T15:37:31Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -60,13 +60,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08-brain discovery",
-                        "since":  "2026-11-07T15:36:55Z"
-                    },
-                    {
                         "role":  "engineering-analyst",
                         "project":  "RAS",
                         "state":  "working",
@@ -105,6 +98,13 @@
                         "agent":  "ras08-brain-research",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras08 vantar pa analys och research",
+                        "since":  "2026-11-07T15:37:31Z"
                     }
                 ]
 }
