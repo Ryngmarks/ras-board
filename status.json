@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T12:36:08Z",
+    "updated":  "2026-11-07T12:36:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,6 +65,16 @@
                         "note":  "WO-01 movement core",
                         "since":  "2026-11-07T12:36:08Z",
                         "agent":  "ng02-wo01",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-01 movement core",
+                        "since":  "2026-11-07T12:36:16Z",
+                        "agent":  "ng02-wow-camera-WO-01-movement-core",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
