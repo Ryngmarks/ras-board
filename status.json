@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T23:03:26Z",
+    "updated":  "2026-11-07T23:10:10Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -55,16 +55,6 @@
                         "state":  "working",
                         "note":  "ng03 handoff to new chat",
                         "since":  "2026-11-07T21:26:28Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-01 cast core",
-                        "since":  "2026-11-07T22:35:02Z",
-                        "agent":  "ng03-wo01",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
