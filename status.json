@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T23:15:33Z",
+    "updated":  "2026-11-07T23:17:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -73,6 +73,16 @@
                         "note":  "WO-02 Shapes + ranged module",
                         "since":  "2026-11-07T23:11:03Z",
                         "agent":  "ng03-combat-roles-WO-02-Shapes-ranged-mo",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "review WO-11 + WO-13",
+                        "since":  "2026-11-07T23:17:58Z",
+                        "agent":  "ras09-brain-tree-review-WO-11-WO-13",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
