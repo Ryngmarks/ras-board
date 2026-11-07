@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T14:16:15Z",
+    "updated":  "2026-11-07T14:23:40Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,16 +65,6 @@
                         "note":  "review WO-02b",
                         "since":  "2026-11-07T14:16:11Z",
                         "agent":  "ng02-rv02b",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "review WO-02b",
-                        "since":  "2026-11-07T14:16:15Z",
-                        "agent":  "ng02-wow-camera-review-WO-02b",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
