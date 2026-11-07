@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:41:21Z",
+    "updated":  "2026-11-07T20:52:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -58,16 +58,6 @@
                         "note":  "ng02 handoff, new PM chat for G1",
                         "since":  "2026-11-07T14:49:56Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-10",
-                        "since":  "2026-11-07T20:22:44Z",
-                        "agent":  "ras09-brain-tree-WO-10",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
