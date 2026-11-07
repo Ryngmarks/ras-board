@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T22:35:10Z",
+    "updated":  "2026-11-07T22:42:19Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -73,6 +73,16 @@
                         "note":  "WO-01 Cast core + cast bar",
                         "since":  "2026-11-07T22:35:10Z",
                         "agent":  "ng03-combat-roles-WO-01-Cast-core-cast-b",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "WO-13",
+                        "since":  "2026-11-07T22:42:19Z",
+                        "agent":  "ras09-brain-tree-WO-13",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
