@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T19:01:00Z",
+    "updated":  "2026-11-07T19:12:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,16 +93,6 @@
                         "note":  "granskning",
                         "since":  "2026-11-07T19:00:49Z",
                         "agent":  "auditor-brain",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "security-auditor",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "security audit",
-                        "since":  "2026-11-07T19:01:00Z",
-                        "agent":  "ras08-brain-security-audit",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
