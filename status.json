@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T19:32:19Z",
+    "updated":  "2026-11-07T19:33:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -74,16 +74,6 @@
                         "since":  "2026-11-07T19:13:29Z",
                         "agent":  "codex-brain-engine",
                         "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08 WO-03 https",
-                        "since":  "2026-11-07T19:13:31Z",
-                        "agent":  "claude-brain-page",
-                        "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     },
                     {
