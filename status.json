@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T18:59:44Z",
+    "updated":  "2026-11-07T18:59:47Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -85,16 +85,6 @@
                         "agent":  "ng02-wow-camera-WO-03-Targeting-bar",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08 WO-02 granskning",
-                        "since":  "2026-11-07T18:47:03Z",
-                        "agent":  "codex-review-brain-page",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
                     }
                 ]
 }
