@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T18:12:11Z",
+    "updated":  "2026-11-07T18:12:31Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -58,16 +58,6 @@
                         "note":  "ng02 handoff, new PM chat for G1",
                         "since":  "2026-11-07T14:49:56Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08 WO-01 brain",
-                        "since":  "2026-11-07T17:35:38Z",
-                        "agent":  "codex-brain-engine",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
