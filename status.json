@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T12:10:28Z",
+    "updated":  "2026-11-07T12:10:30Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,9 +54,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng02 wow camera discovery",
-                        "since":  "2026-11-07T11:56:02Z"
+                        "state":  "waiting",
+                        "note":  "ng02 draft decisions",
+                        "since":  "2026-11-07T12:10:30Z",
+                        "for":  "owner"
                     }
                 ]
 }
