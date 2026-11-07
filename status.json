@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T15:56:20Z",
+    "updated":  "2026-11-07T15:57:53Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -63,8 +63,9 @@
                         "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
-                        "note":  "ras08 vantar pa analys och research",
-                        "since":  "2026-11-07T15:37:31Z"
+                        "note":  "ras08 beslut D1-D11",
+                        "since":  "2026-11-07T15:37:31Z",
+                        "for":  "owner"
                     }
                 ]
 }
