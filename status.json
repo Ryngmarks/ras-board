@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T21:03:55Z",
+    "updated":  "2026-11-07T21:03:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -53,13 +53,6 @@
                     },
                     {
                         "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng03-combat-roles",
-                        "since":  "2026-11-07T20:52:33Z"
-                    },
-                    {
-                        "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
                         "note":  "demo + lan-setup väntar",
@@ -85,6 +78,14 @@
                         "agent":  "ng02-wow-camera-WO-04-Feel-at-6-m",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "ng03 draft decisions D0-D6",
+                        "since":  "2026-11-07T21:03:58Z",
+                        "for":  "owner"
                     }
                 ]
 }
