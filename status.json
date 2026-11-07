@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T18:47:32Z",
+    "updated":  "2026-11-07T18:47:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,16 +65,6 @@
                         "state":  "waiting",
                         "note":  "ras08 vantar pa WO-01",
                         "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08 WO-01b fixar",
-                        "since":  "2026-11-07T18:16:47Z",
-                        "agent":  "codex-brain-engine",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
