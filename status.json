@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T14:47:22Z",
+    "updated":  "2026-11-07T14:49:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,9 +54,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng02 WO-01",
-                        "since":  "2026-11-07T12:36:06Z"
+                        "state":  "waiting",
+                        "note":  "ng02 handoff, new PM chat for G1",
+                        "since":  "2026-11-07T14:49:56Z",
+                        "for":  "owner"
                     }
                 ]
 }
