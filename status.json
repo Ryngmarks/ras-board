@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-03T20:17:59Z",
+    "updated":  "2026-11-07T11:56:02Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -54,10 +54,9 @@
                     {
                         "role":  "project-manager",
                         "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "spela FIX-03, Tripo-fil",
-                        "since":  "2026-11-01T21:06:10Z",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "ng02 wow camera discovery",
+                        "since":  "2026-11-07T11:56:02Z"
                     }
                 ]
 }
