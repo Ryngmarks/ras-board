@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:52:35Z",
+    "updated":  "2026-11-07T20:52:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -72,6 +72,16 @@
                         "note":  "ng03 prior art",
                         "since":  "2026-11-07T20:52:35Z",
                         "agent":  "ana03",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "analyst",
+                        "since":  "2026-11-07T20:52:46Z",
+                        "agent":  "ng03-combat-roles-analyst",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
