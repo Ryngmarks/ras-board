@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T23:52:00Z",
+    "updated":  "2026-11-07T23:57:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -83,16 +83,6 @@
                         "note":  "WO-14",
                         "since":  "2026-11-07T23:40:37Z",
                         "agent":  "ras09-brain-tree-WO-14",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "review WO-02",
-                        "since":  "2026-11-07T23:52:00Z",
-                        "agent":  "ng03-combat-roles-review-WO-02",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
