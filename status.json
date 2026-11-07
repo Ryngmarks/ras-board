@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T23:10:13Z",
+    "updated":  "2026-11-07T23:10:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,6 +65,16 @@
                         "agent":  "ras09-brain-tree-WO-13",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-02 ranged module",
+                        "since":  "2026-11-07T23:10:56Z",
+                        "agent":  "ng03-wo02",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
