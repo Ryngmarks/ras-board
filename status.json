@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T15:56:16Z",
+    "updated":  "2026-11-07T15:56:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,16 +65,6 @@
                         "state":  "waiting",
                         "note":  "ras08 vantar pa analys och research",
                         "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "ras08 draft",
-                        "since":  "2026-11-07T15:50:50Z",
-                        "agent":  "architect-brain",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
