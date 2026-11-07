@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:52:46Z",
+    "updated":  "2026-11-07T20:52:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -53,13 +53,6 @@
                     },
                     {
                         "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "väntar på WO-01d och WO-10",
-                        "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
-                        "role":  "project-manager",
                         "project":  "Project Doom",
                         "state":  "working",
                         "note":  "ng03-combat-roles",
@@ -84,6 +77,14 @@
                         "agent":  "ng03-combat-roles-analyst",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "demo + lan-setup väntar",
+                        "since":  "2026-11-07T15:37:31Z",
+                        "for":  "owner"
                     }
                 ]
 }
