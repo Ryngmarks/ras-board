@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T19:34:52Z",
+    "updated":  "2026-11-07T19:34:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -63,8 +63,9 @@
                         "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
-                        "note":  "ras08 vantar pa WO-01",
-                        "since":  "2026-11-07T15:37:31Z"
+                        "note":  "ras08 vantar pa Codex-grans",
+                        "since":  "2026-11-07T15:37:31Z",
+                        "for":  "owner"
                     }
                 ]
 }
