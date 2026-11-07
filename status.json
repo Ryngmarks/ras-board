@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T18:12:34Z",
+    "updated":  "2026-11-07T18:12:36Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -74,6 +74,16 @@
                         "since":  "2026-11-07T18:12:34Z",
                         "agent":  "claude-brain-page",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras08 WO-01 granskning",
+                        "since":  "2026-11-07T18:12:36Z",
+                        "agent":  "review-brain-engine",
+                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "high"
                     }
                 ]
