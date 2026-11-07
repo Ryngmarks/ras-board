@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:05:37Z",
+    "updated":  "2026-11-07T20:09:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -60,14 +60,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras08 vantar pa Codex-grans",
-                        "since":  "2026-11-07T15:37:31Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "reviewer",
                         "project":  "RAS",
                         "state":  "working",
@@ -86,6 +78,14 @@
                         "agent":  "ras08-brain-review-WO-01c-WO-03",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras08 granskning, ras09 ny chatt",
+                        "since":  "2026-11-07T15:37:31Z",
+                        "for":  "owner"
                     }
                 ]
 }
