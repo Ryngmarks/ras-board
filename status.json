@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T18:39:01Z",
+    "updated":  "2026-11-07T18:39:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -113,6 +113,16 @@
                         "note":  "WO-03 targeting and bar",
                         "since":  "2026-11-07T18:39:01Z",
                         "agent":  "wo03",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-03 Targeting + bar",
+                        "since":  "2026-11-07T18:39:09Z",
+                        "agent":  "ng02-wow-camera-WO-03-Targeting-bar",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
