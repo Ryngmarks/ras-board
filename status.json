@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T14:49:56Z",
+    "updated":  "2026-11-07T15:36:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -58,6 +58,13 @@
                         "note":  "ng02 handoff, new PM chat for G1",
                         "since":  "2026-11-07T14:49:56Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "ras08-brain discovery",
+                        "since":  "2026-11-07T15:36:55Z"
                     }
                 ]
 }
