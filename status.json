@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:13:15Z",
+    "updated":  "2026-11-07T20:13:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -60,14 +60,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras08 granskning, ras09 ny chatt",
-                        "since":  "2026-11-07T15:37:31Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "RAS",
                         "state":  "working",
@@ -86,6 +78,13 @@
                         "agent":  "ras09-brain-tree-analyst",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-01d och analytiker",
+                        "since":  "2026-11-07T15:37:31Z"
                     }
                 ]
 }
