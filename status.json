@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:52:26Z",
+    "updated":  "2026-11-07T20:52:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -53,18 +53,17 @@
                     },
                     {
                         "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "ng02 handoff, new PM chat for G1",
-                        "since":  "2026-11-07T14:49:56Z",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "project-manager",
                         "project":  "RAS",
                         "state":  "waiting",
                         "note":  "väntar på WO-01d och WO-10",
                         "since":  "2026-11-07T15:37:31Z"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng03-combat-roles",
+                        "since":  "2026-11-07T20:52:33Z"
                     }
                 ]
 }
