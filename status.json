@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T12:11:48Z",
+    "updated":  "2026-11-07T12:11:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -68,6 +68,16 @@
                         "agent":  "ng02-c1",
                         "model":  "claude/opus-5.5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng02 consultation",
+                        "since":  "2026-11-07T12:11:50Z",
+                        "agent":  "ng02-c2",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
