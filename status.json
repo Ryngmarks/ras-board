@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T20:05:33Z",
+    "updated":  "2026-11-07T20:05:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -76,6 +76,16 @@
                         "agent":  "codex-review-brain",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "medium"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "review WO-01c + WO-03",
+                        "since":  "2026-11-07T20:05:37Z",
+                        "agent":  "ras08-brain-review-WO-01c-WO-03",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
