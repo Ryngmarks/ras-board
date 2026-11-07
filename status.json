@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T16:08:17Z",
+    "updated":  "2026-11-07T16:08:19Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -60,14 +60,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "ras08 beslut D1-D11",
-                        "since":  "2026-11-07T15:37:31Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "RAS",
                         "state":  "working",
@@ -76,6 +68,13 @@
                         "agent":  "ux-brain-mock",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "ras08 vantar pa mockup",
+                        "since":  "2026-11-07T15:37:31Z"
                     }
                 ]
 }
