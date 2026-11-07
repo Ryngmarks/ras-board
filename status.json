@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T19:17:20Z",
+    "updated":  "2026-11-07T19:17:32Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -113,6 +113,16 @@
                         "note":  "WO-03 review",
                         "since":  "2026-11-07T19:17:20Z",
                         "agent":  "rev03",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "review WO-03",
+                        "since":  "2026-11-07T19:17:32Z",
+                        "agent":  "ng02-wow-camera-review-WO-03",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
