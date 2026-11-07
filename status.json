@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T21:23:50Z",
+    "updated":  "2026-11-07T21:24:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -58,16 +58,6 @@
                         "note":  "demo + lan-setup väntar",
                         "since":  "2026-11-07T15:37:31Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-04 feel at 6 m",
-                        "since":  "2026-11-07T20:53:26Z",
-                        "agent":  "wo04",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "project-manager",
