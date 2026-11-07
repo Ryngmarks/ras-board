@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-07T19:21:55Z",
+    "updated":  "2026-11-07T19:22:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "WO-03 HTTPS + server fixes",
                         "since":  "2026-11-07T19:13:37Z",
                         "agent":  "ras08-brain-WO-03-HTTPS-server-fixes",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-03 review",
-                        "since":  "2026-11-07T19:17:20Z",
-                        "agent":  "rev03",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
