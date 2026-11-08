@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T20:05:16Z",
+    "updated":  "2026-11-08T20:11:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,16 +94,6 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-01 review (Claude fallback)",
-                        "since":  "2026-11-08T20:01:15Z",
-                        "agent":  "ng04-human-body-WO-01-review-Claude-fall",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "xhigh"
                     },
                     {
                         "role":  "implementer",
