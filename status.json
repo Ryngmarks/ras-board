@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:46:36Z",
+    "updated":  "2026-11-08T15:47:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -75,16 +75,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-19 + granskning",
                         "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
-                        "role":  "security-auditor",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "granskning",
-                        "since":  "2026-11-08T15:22:56Z",
-                        "agent":  "claude-sec-r3",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
