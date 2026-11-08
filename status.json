@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T10:16:10Z",
+    "updated":  "2026-11-08T10:16:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -122,6 +122,16 @@
                         "agent":  "codex-r2",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "security-auditor",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "granskning",
+                        "since":  "2026-11-08T10:16:12Z",
+                        "agent":  "sa-recheck",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
