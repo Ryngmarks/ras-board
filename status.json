@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T14:55:49Z",
+    "updated":  "2026-11-08T14:55:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,6 +82,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-19 + granskning",
                         "since":  "2026-11-07T15:37:31Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "Forestry Road pilot",
+                        "since":  "2026-11-08T14:55:50Z",
+                        "agent":  "claude-wo20",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
