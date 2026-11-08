@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T18:56:12Z",
+    "updated":  "2026-11-08T19:09:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,16 +94,6 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-02c measure.py fix",
-                        "since":  "2026-11-08T18:56:07Z",
-                        "agent":  "ng04-human-body-WO-02c-measure.py-fix",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
