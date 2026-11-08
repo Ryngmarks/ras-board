@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T18:50:58Z",
+    "updated":  "2026-11-08T18:51:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,16 +93,6 @@
                         "state":  "working",
                         "note":  "ng04 consultations",
                         "since":  "2026-11-08T16:11:46Z"
-                    },
-                    {
-                        "role":  "3d-artist",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng04 WO-03A male arm A",
-                        "since":  "2026-11-08T17:50:15Z",
-                        "agent":  "m3a",
-                        "model":  "claude/opus-5.5",
-                        "effort":  "high"
                     }
                 ]
 }
