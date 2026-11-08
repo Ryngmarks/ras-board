@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T11:13:39Z",
+    "updated":  "2026-11-08T11:13:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -90,6 +90,16 @@
                         "note":  "Codex re-check WO-17c",
                         "since":  "2026-11-08T11:13:35Z",
                         "agent":  "ras09-brain-tree-Codex-re-check-WO-17c",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Ryngmark Agents",
+                        "state":  "working",
+                        "note":  "omkontroll WO-17c",
+                        "since":  "2026-11-08T11:13:42Z",
+                        "agent":  "codex-r3",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
