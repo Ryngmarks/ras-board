@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T17:28:46Z",
+    "updated":  "2026-11-08T17:35:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "since":  "2026-11-08T17:28:41Z",
                         "agent":  "n4w2b",
                         "model":  "claude/opus-5.5",
-                        "effort":  "medium"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-02a fix round 2",
-                        "since":  "2026-11-08T17:28:46Z",
-                        "agent":  "ng04-human-body-WO-02a-fix-round-2",
-                        "model":  "claude/claude-opus-5-5",
                         "effort":  "medium"
                     }
                 ]
