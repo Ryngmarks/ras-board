@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:49:56Z",
+    "updated":  "2026-11-08T00:49:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -85,6 +85,16 @@
                         "agent":  "wo17",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "Ryngmark Agents",
+                        "state":  "working",
+                        "note":  "kontroller inför WO-17",
+                        "since":  "2026-11-08T00:49:58Z",
+                        "agent":  "ras09-checks",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "medium"
                     }
                 ]
 }
