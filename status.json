@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T11:55:35Z",
+    "updated":  "2026-11-08T11:55:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -80,8 +80,9 @@
                         "role":  "project-manager",
                         "project":  "Ryngmark Agents",
                         "state":  "waiting",
-                        "note":  "väntar på WO-17b + auth",
-                        "since":  "2026-11-08T00:50:26Z"
+                        "note":  "test + beslut D1-D6",
+                        "since":  "2026-11-08T00:50:26Z",
+                        "for":  "owner"
                     }
                 ]
 }
