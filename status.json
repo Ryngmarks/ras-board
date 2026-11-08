@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:47:35Z",
+    "updated":  "2026-11-08T15:47:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -70,13 +70,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "väntar på WO-19 + granskning",
-                        "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -92,6 +85,14 @@
                         "state":  "waiting",
                         "note":  "ng04 owner decisions D1-D10",
                         "since":  "2026-11-08T15:35:50Z",
+                        "for":  "owner"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "test Brain + beslut",
+                        "since":  "2026-11-07T15:37:31Z",
                         "for":  "owner"
                     }
                 ]
