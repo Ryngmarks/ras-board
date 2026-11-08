@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:30:08Z",
+    "updated":  "2026-11-08T15:30:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "ng04-human-body discovery",
                         "since":  "2026-11-07T21:26:28Z"
-                    },
-                    {
-                        "role":  "research",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng04 Meshy terms and API",
-                        "since":  "2026-11-08T15:25:28Z",
-                        "agent":  "rs1",
-                        "model":  "claude/opus-5.5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
