@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T14:54:16Z",
+    "updated":  "2026-11-08T14:55:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,16 +82,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-19 + granskning",
                         "since":  "2026-11-07T15:37:31Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "filter + korpus",
-                        "since":  "2026-11-08T14:19:27Z",
-                        "agent":  "claude-wo23",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
