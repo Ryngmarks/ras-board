@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:35:45Z",
+    "updated":  "2026-11-08T15:35:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -97,13 +97,6 @@
                         "effort":  "high"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng04-human-body discovery",
-                        "since":  "2026-11-07T21:26:28Z"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Project Doom",
                         "state":  "working",
@@ -112,6 +105,14 @@
                         "agent":  "wo03",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "waiting",
+                        "note":  "ng04 owner decisions D1-D10",
+                        "since":  "2026-11-08T15:35:50Z",
+                        "for":  "owner"
                     }
                 ]
 }
