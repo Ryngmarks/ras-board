@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T13:55:40Z",
+    "updated":  "2026-11-08T13:55:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -39,14 +39,6 @@
                         "state":  "waiting",
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
-                        "for":  "owner"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "RAS",
-                        "state":  "waiting",
-                        "note":  "demo + lan-setup väntar",
-                        "since":  "2026-11-07T15:37:31Z",
                         "for":  "owner"
                     },
                     {
@@ -103,6 +95,13 @@
                         "agent":  "claude-fr-docs",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "RAS",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-19 + granskning",
+                        "since":  "2026-11-07T15:37:31Z"
                     }
                 ]
 }
