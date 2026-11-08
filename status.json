@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:25:53Z",
+    "updated":  "2026-11-08T15:26:01Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -130,6 +130,16 @@
                         "note":  "analyst",
                         "since":  "2026-11-08T15:25:53Z",
                         "agent":  "ng04-human-body-analyst",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "research",
+                        "since":  "2026-11-08T15:26:01Z",
+                        "agent":  "ng04-human-body-research",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
