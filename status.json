@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:01:28Z",
+    "updated":  "2026-11-08T00:01:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,6 +93,16 @@
                         "note":  "WO-03 Roles + ranged roles",
                         "since":  "2026-11-08T00:01:28Z",
                         "agent":  "ng03-combat-roles-WO-03-Roles-ranged-rol",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-03 enemy roles",
+                        "since":  "2026-11-08T00:01:33Z",
+                        "agent":  "ng03-wo03",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
