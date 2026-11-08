@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:25:26Z",
+    "updated":  "2026-11-08T15:25:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -110,6 +110,16 @@
                         "note":  "ng04 prior art",
                         "since":  "2026-11-08T15:25:26Z",
                         "agent":  "an1",
+                        "model":  "claude/opus-5.5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng04 Meshy terms and API",
+                        "since":  "2026-11-08T15:25:28Z",
+                        "agent":  "rs1",
                         "model":  "claude/opus-5.5",
                         "effort":  "default"
                     }
