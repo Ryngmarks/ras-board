@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T17:03:52Z",
+    "updated":  "2026-11-08T17:04:02Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -133,6 +133,16 @@
                         "agent":  "ad2",
                         "model":  "claude/opus-5.5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "review WO-02a",
+                        "since":  "2026-11-08T17:04:02Z",
+                        "agent":  "ng04-human-body-review-WO-02a",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
