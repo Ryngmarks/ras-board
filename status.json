@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:52:17Z",
+    "updated":  "2026-11-08T15:52:19Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,6 +93,16 @@
                         "state":  "working",
                         "note":  "ng04 Meshy spike",
                         "since":  "2026-11-08T15:52:17Z"
+                    },
+                    {
+                        "role":  "3d-artist",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng04 Meshy spike P1a",
+                        "since":  "2026-11-08T15:52:19Z",
+                        "agent":  "art1",
+                        "model":  "claude/opus-5.5",
+                        "effort":  "high"
                     }
                 ]
 }
