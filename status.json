@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T10:03:30Z",
+    "updated":  "2026-11-08T10:09:15Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-17b + auth",
                         "since":  "2026-11-08T00:50:26Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "IA review",
+                        "since":  "2026-11-08T10:09:15Z",
+                        "agent":  "ras09-brain-tree-IA-review",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
