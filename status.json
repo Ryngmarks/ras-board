@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T09:57:19Z",
+    "updated":  "2026-11-08T09:57:22Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -91,6 +91,16 @@
                         "note":  "WO-17b textkontroll",
                         "since":  "2026-11-08T09:57:19Z",
                         "agent":  "wo17b",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "engineering-analyst",
+                        "project":  "RAS",
+                        "state":  "working",
+                        "note":  "granskning",
+                        "since":  "2026-11-08T09:57:22Z",
+                        "agent":  "auth-review",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
