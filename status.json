@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T19:09:36Z",
+    "updated":  "2026-11-08T19:23:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,6 +94,16 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-02c review (Codex)",
+                        "since":  "2026-11-08T19:23:00Z",
+                        "agent":  "ng04-human-body-WO-02c-review-Codex-",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
