@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T20:01:15Z",
+    "updated":  "2026-11-08T20:02:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,16 +94,6 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-03A round 3 male arm A",
-                        "since":  "2026-11-08T19:33:07Z",
-                        "agent":  "ng04-human-body-WO-03A-round-3-male-arm-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "reviewer",
