@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T10:31:05Z",
+    "updated":  "2026-11-08T10:31:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,6 +82,16 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-17b + auth",
                         "since":  "2026-11-08T00:50:26Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Ryngmark Agents",
+                        "state":  "working",
+                        "note":  "WO-17c rättningar",
+                        "since":  "2026-11-08T10:31:07Z",
+                        "agent":  "wo17c",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
