@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:50:22Z",
+    "updated":  "2026-11-08T00:50:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -115,6 +115,13 @@
                         "agent":  "ras09-brain-tree-analyst-checks-Spelgrun",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "medium"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Ryngmark Agents",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-17 + kontroller",
+                        "since":  "2026-11-08T00:50:26Z"
                     }
                 ]
 }
