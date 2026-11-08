@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T10:27:12Z",
+    "updated":  "2026-11-08T10:30:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,16 +82,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-17b + auth",
                         "since":  "2026-11-08T00:50:26Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "Codex review r2",
-                        "since":  "2026-11-08T10:15:52Z",
-                        "agent":  "ras09-brain-tree-Codex-review-r2",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
