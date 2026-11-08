@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T16:06:26Z",
+    "updated":  "2026-11-08T16:11:46Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -90,10 +90,9 @@
                     {
                         "role":  "project-manager",
                         "project":  "Project Doom",
-                        "state":  "waiting",
-                        "note":  "ng04 spike done, owner picks next step",
-                        "since":  "2026-11-08T16:06:26Z",
-                        "for":  "owner"
+                        "state":  "working",
+                        "note":  "ng04 consultations",
+                        "since":  "2026-11-08T16:11:46Z"
                     }
                 ]
 }
