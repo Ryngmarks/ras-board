@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T11:22:34Z",
+    "updated":  "2026-11-08T11:22:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -90,6 +90,16 @@
                         "note":  "WO-17d",
                         "since":  "2026-11-08T11:22:30Z",
                         "agent":  "ras09-brain-tree-WO-17d",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Ryngmark Agents",
+                        "state":  "working",
+                        "note":  "WO-17d maskering",
+                        "since":  "2026-11-08T11:22:37Z",
+                        "agent":  "wo17d",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
