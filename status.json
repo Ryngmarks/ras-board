@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:50:42Z",
+    "updated":  "2026-11-08T00:50:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,16 +93,6 @@
                         "note":  "kontroller inför WO-17",
                         "since":  "2026-11-08T00:49:58Z",
                         "agent":  "ras09-checks",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "medium"
-                    },
-                    {
-                        "role":  "engineering-analyst",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "analyst checks (Spelgrund + auth)",
-                        "since":  "2026-11-08T00:50:22Z",
-                        "agent":  "ras09-brain-tree-analyst-checks-Spelgrun",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "medium"
                     },
