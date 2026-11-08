@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:49:58Z",
+    "updated":  "2026-11-08T00:50:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -95,6 +95,16 @@
                         "agent":  "ras09-checks",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "medium"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-17",
+                        "since":  "2026-11-08T00:50:09Z",
+                        "agent":  "ras09-brain-tree-WO-17",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
