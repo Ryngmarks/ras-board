@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T09:57:51Z",
+    "updated":  "2026-11-08T09:58:26Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -77,14 +77,6 @@
                         "effort":  "default"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Ryngmark Agents",
-                        "state":  "waiting",
-                        "note":  "visuell granskning WO-17",
-                        "since":  "2026-11-08T00:50:26Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Ryngmark Agents",
                         "state":  "working",
@@ -123,6 +115,13 @@
                         "agent":  "ras09-brain-tree-auth-review",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Ryngmark Agents",
+                        "state":  "waiting",
+                        "note":  "väntar på WO-17b + auth",
+                        "since":  "2026-11-08T00:50:26Z"
                     }
                 ]
 }
