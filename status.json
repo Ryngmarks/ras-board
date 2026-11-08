@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T09:48:55Z",
+    "updated":  "2026-11-08T09:57:19Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -83,6 +83,16 @@
                         "note":  "visuell granskning WO-17",
                         "since":  "2026-11-08T00:50:26Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Ryngmark Agents",
+                        "state":  "working",
+                        "note":  "WO-17b textkontroll",
+                        "since":  "2026-11-08T09:57:19Z",
+                        "agent":  "wo17b",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
