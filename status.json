@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:23:03Z",
+    "updated":  "2026-11-08T15:25:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -40,13 +40,6 @@
                         "note":  "m07 rorelse och rackvidd",
                         "since":  "2026-11-01T09:47:41Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "project-manager",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng03 handoff to new chat",
-                        "since":  "2026-11-07T21:26:28Z"
                     },
                     {
                         "role":  "implementer",
@@ -102,6 +95,13 @@
                         "agent":  "ras09-brain-tree-Security-Auditor-LAN-re",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng04-human-body discovery",
+                        "since":  "2026-11-07T21:26:28Z"
                     }
                 ]
 }
