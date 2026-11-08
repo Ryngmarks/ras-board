@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T14:11:27Z",
+    "updated":  "2026-11-08T14:11:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "agent":  "ras09-brain-tree-WO-19",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "dokumenträttning",
-                        "since":  "2026-11-08T14:08:43Z",
-                        "agent":  "claude-wo22",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "medium"
                     }
                 ]
 }
