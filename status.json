@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T10:14:42Z",
+    "updated":  "2026-11-08T10:15:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -112,6 +112,16 @@
                         "agent":  "ia-review",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "Codex review r2",
+                        "since":  "2026-11-08T10:15:52Z",
+                        "agent":  "ras09-brain-tree-Codex-review-r2",
+                        "model":  "codex/gpt-6.1-sol",
+                        "effort":  "default"
                     }
                 ]
 }
