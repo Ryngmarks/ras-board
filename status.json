@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T20:11:42Z",
+    "updated":  "2026-11-08T20:13:01Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "note":  "WO-03A round 4 male arm A",
                         "since":  "2026-11-08T20:05:16Z",
                         "agent":  "ng04-human-body-WO-03A-round-4-male-arm-",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-04 Melee skills + reach fix",
+                        "since":  "2026-11-08T20:13:01Z",
+                        "agent":  "ng03-combat-roles-WO-04-Melee-skills-rea",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
                     }
