@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T19:23:00Z",
+    "updated":  "2026-11-08T19:26:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -104,6 +104,16 @@
                         "agent":  "ng04-human-body-WO-02c-review-Codex-",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-01 Mesh-swap path + P0 hash proof",
+                        "since":  "2026-11-08T19:26:21Z",
+                        "agent":  "ng04-human-body-WO-01-Mesh-swap-path-P0-",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "high"
                     }
                 ]
 }
