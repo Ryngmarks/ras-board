@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T11:43:03Z",
+    "updated":  "2026-11-08T11:47:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,16 +82,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-17b + auth",
                         "since":  "2026-11-08T00:50:26Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "Codex mini-check WO-17d",
-                        "since":  "2026-11-08T11:42:57Z",
-                        "agent":  "ras09-brain-tree-Codex-mini-check-WO-17d",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
