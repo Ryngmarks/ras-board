@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T00:07:30Z",
+    "updated":  "2026-11-08T00:12:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -65,16 +65,6 @@
                         "agent":  "ng03-wo02",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "RAS",
-                        "state":  "working",
-                        "note":  "WO-13b",
-                        "since":  "2026-11-07T23:40:31Z",
-                        "agent":  "ras09-brain-tree-WO-13b",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
