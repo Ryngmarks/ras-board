@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T19:45:46Z",
+    "updated":  "2026-11-08T20:00:35Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -94,16 +94,6 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-01 Mesh-swap path + P0 hash proof",
-                        "since":  "2026-11-08T19:26:21Z",
-                        "agent":  "ng04-human-body-WO-01-Mesh-swap-path-P0-",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     },
                     {
                         "role":  "implementer",
