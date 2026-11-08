@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T20:00:35Z",
+    "updated":  "2026-11-08T20:01:15Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -104,6 +104,16 @@
                         "agent":  "ng04-human-body-WO-03A-round-3-male-arm-",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "high"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "WO-01 review (Claude fallback)",
+                        "since":  "2026-11-08T20:01:15Z",
+                        "agent":  "ng04-human-body-WO-01-review-Claude-fall",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "xhigh"
                     }
                 ]
 }
