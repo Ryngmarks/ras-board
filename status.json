@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T15:26:01Z",
+    "updated":  "2026-11-08T15:26:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -141,6 +141,16 @@
                         "since":  "2026-11-08T15:26:01Z",
                         "agent":  "ng04-human-body-research",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng03 WO-03 run 3",
+                        "since":  "2026-11-08T15:26:33Z",
+                        "agent":  "wo03",
+                        "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
                     }
                 ]
