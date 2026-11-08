@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T17:04:04Z",
+    "updated":  "2026-11-08T17:07:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -143,16 +143,6 @@
                         "agent":  "ng04-human-body-review-WO-02a",
                         "model":  "codex/gpt-6.1-sol",
                         "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "WO-02b Gate calibration",
-                        "since":  "2026-11-08T17:04:04Z",
-                        "agent":  "ng04-human-body-WO-02b-Gate-calibration",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "high"
                     }
                 ]
 }
