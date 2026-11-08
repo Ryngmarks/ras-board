@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T17:02:58Z",
+    "updated":  "2026-11-08T17:03:27Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -93,6 +93,16 @@
                         "state":  "working",
                         "note":  "ng04 consultations",
                         "since":  "2026-11-08T16:11:46Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Project Doom",
+                        "state":  "working",
+                        "note":  "ng03 review WO-03",
+                        "since":  "2026-11-08T17:03:27Z",
+                        "agent":  "rv3",
+                        "model":  "claude/opus-5.5",
+                        "effort":  "high"
                     }
                 ]
 }
