@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T16:12:07Z",
+    "updated":  "2026-11-08T16:14:50Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,16 +111,6 @@
                         "note":  "ng04 consult light",
                         "since":  "2026-11-08T16:11:53Z",
                         "agent":  "lc1",
-                        "model":  "claude/opus-5.5",
-                        "effort":  "high"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Project Doom",
-                        "state":  "working",
-                        "note":  "ng04 consult artdir",
-                        "since":  "2026-11-08T16:11:55Z",
-                        "agent":  "ad1",
                         "model":  "claude/opus-5.5",
                         "effort":  "high"
                     },
