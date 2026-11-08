@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-08T11:22:30Z",
+    "updated":  "2026-11-08T11:22:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -82,16 +82,6 @@
                         "state":  "waiting",
                         "note":  "väntar på WO-17b + auth",
                         "since":  "2026-11-08T00:50:26Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Ryngmark Agents",
-                        "state":  "working",
-                        "note":  "omkontroll WO-17c",
-                        "since":  "2026-11-08T11:13:42Z",
-                        "agent":  "codex-r3",
-                        "model":  "codex/gpt-6.1-sol",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
