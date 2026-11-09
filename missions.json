@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T22:37:15.556Z",
+  "generated_at": "2026-11-09T23:13:39.925Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -187,22 +187,22 @@
       "project": "RAS",
       "id": "ras08-brain",
       "name": "RAS Brain: knowledge engine and canvas",
-      "phase": "review",
-      "updated": "2026-11-09T22:36:59.733Z"
+      "phase": "done",
+      "updated": "2026-11-09T23:13:39.664Z"
     },
     {
       "project": "RAS",
       "id": "ras09-brain-tree",
       "name": "Brain knowledge tree and focused maps",
-      "phase": "owner",
-      "updated": "2026-11-09T22:36:59.837Z"
+      "phase": "done",
+      "updated": "2026-11-09T23:13:39.760Z"
     },
     {
       "project": "RAS",
       "id": "ras10-brain2",
       "name": "RAS Brain 2.0",
-      "phase": "owner",
-      "updated": "2026-11-09T22:37:15.489Z"
+      "phase": "build",
+      "updated": "2026-11-09T23:13:39.866Z"
     },
     {
       "project": "RAS",
