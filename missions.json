@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T13:54:47.379Z",
+  "generated_at": "2026-11-09T22:37:15.556Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -138,8 +138,8 @@
       "project": "RAS",
       "id": "ng01-rpg-foundation",
       "name": "Project Doom - new RPG foundation from Mossvale parts",
-      "phase": "owner",
-      "updated": "2026-11-02T13:54:47.323Z"
+      "phase": "done",
+      "updated": "2026-11-08T09:58:16.039Z"
     },
     {
       "project": "RAS",
@@ -182,6 +182,27 @@
       "name": "Cross-project mission log",
       "phase": "review",
       "updated": "2026-11-01T14:31:33.849Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras08-brain",
+      "name": "RAS Brain: knowledge engine and canvas",
+      "phase": "review",
+      "updated": "2026-11-09T22:36:59.733Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras09-brain-tree",
+      "name": "Brain knowledge tree and focused maps",
+      "phase": "owner",
+      "updated": "2026-11-09T22:36:59.837Z"
+    },
+    {
+      "project": "RAS",
+      "id": "ras10-brain2",
+      "name": "RAS Brain 2.0",
+      "phase": "owner",
+      "updated": "2026-11-09T22:37:15.489Z"
     },
     {
       "project": "RAS",
