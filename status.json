@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-13T22:18:23Z",
+    "updated":  "2026-11-13T22:19:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -95,6 +95,13 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "fas 0 riktning",
+                        "since":  "2026-11-13T22:19:57Z"
                     }
                 ]
 }
