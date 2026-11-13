@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-13T23:40:33Z",
+    "updated":  "2026-11-13T23:47:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "steg 1.1 ryggrad",
                         "since":  "2026-11-13T23:17:26Z"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "forslag stilbibel",
-                        "since":  "2026-11-13T23:38:39Z",
-                        "agent":  "w03",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
