@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-13T22:34:55Z",
+    "updated":  "2026-11-13T22:34:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -121,6 +121,16 @@
                         "since":  "2026-11-13T22:34:55Z",
                         "agent":  "c-animator",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "konsult regler",
+                        "since":  "2026-11-13T22:34:58Z",
+                        "agent":  "c-systems",
+                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
