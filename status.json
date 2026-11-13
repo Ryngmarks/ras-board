@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-13T23:40:31Z",
+    "updated":  "2026-11-13T23:40:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -110,6 +110,16 @@
                         "note":  "forslag stilbibel",
                         "since":  "2026-11-13T23:38:39Z",
                         "agent":  "w03",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "WO-10b rorelse och navigering",
+                        "since":  "2026-11-13T23:40:33Z",
+                        "agent":  "wo-10b",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
