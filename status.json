@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-13T23:03:21Z",
+    "updated":  "2026-11-13T23:03:24Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -99,9 +99,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "arbetsorder fas 0",
-                        "since":  "2026-11-13T23:00:29Z"
+                        "state":  "waiting",
+                        "note":  "WO-01 verifierad",
+                        "since":  "2026-11-13T23:03:24Z",
+                        "for":  "owner"
                     }
                 ]
 }
