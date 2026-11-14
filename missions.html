@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-y8dljoe5kKgPao70nb5bpPQTchpVsjMFJrCsrRCkZ68='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tePwnLyuu7WN24AErB/wldnPLqQ1yfhhVsUPBxee4V4='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – uppdrag</title>
 <style>
@@ -226,6 +226,16 @@ const fmtWhen = iso => { const t = Date.parse(iso); return isFinite(t) ? new Dat
 // ---- Missions (ras07). Two shapes, one cleaner each; both return the same rows. Keep identical in index.html. ----
 // Local: RAS docs/missions.json embedded by build-local (+ `tokens` per mission). Public: publish-missions.cjs output.
 const relPath = p => (typeof p === "string" && p.length <= 200 && !/[\u0000-\u001f]/.test(p) && !/^[a-z][a-z0-9+.-]*:|^[\\/]/i.test(p) && !p.replace(/\\/g, "/").split("/").includes("..") ? p : "");
+// Work orders per mission (owner decision 2026-11-14: public). Same shape in the local log and the public list; a row
+// with an unknown status or without id and title drops out. Keep identical in index.html and missions.html.
+const WO_STATUS = { done: "klar", working: "pågår nu", owner: "ditt beslut", todo: "kvar" };
+function cleanWos(list) {
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return (Array.isArray(list) ? list : []).filter(w => w && typeof w === "object" && Object.hasOwn(WO_STATUS, w.status) && str(w.id, 24) && str(w.title, 80)).slice(0, 60)
+    .map(w => ({ id: str(w.id, 24), title: str(w.title, 80), role: /^[a-z0-9-]{1,40}$/.test(w.role || "") ? w.role : "", status: w.status,
+      started: when(w.started), done: when(w.done), after: str(w.after, 24), result: str(w.result, 120) }));
+}
 // Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
 // cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
 function cleanMissions(raw) {
@@ -238,7 +248,7 @@ function cleanMissions(raw) {
       branch: str(m.branch, 80), worktree: str(m.worktree, 80), brief: relPath(m.brief), status: relPath(m.status), public: m.public !== false,
       tokens: typeof m.tokens === "number" && isFinite(m.tokens) && m.tokens >= 0 ? m.tokens : null,
       log: (Array.isArray(m.log) ? m.log : []).filter(e => e && typeof e === "object" && Object.hasOwn(PHASES, e.phase)).slice(-30)
-        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })) }));
+        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })), wos: cleanWos(m.work_orders) }));
 }
 function cleanPublicMissions(raw) {
   if (!raw || typeof raw !== "object" || !Array.isArray(raw.missions)) return null;
@@ -246,7 +256,7 @@ function cleanPublicMissions(raw) {
   const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
   return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project, 80) && str(m.id, 60))
     .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.name, 80) || str(m.id, 60),
-      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [] }));
+      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [], wos: cleanWos(m.work_orders) }));
 }
 // The ONLY code that knows where mission data comes from.
 async function loadMissions(doc, fetchFn) {

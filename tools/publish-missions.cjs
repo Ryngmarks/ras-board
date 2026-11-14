@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Publishes the short mission list to the public board (ras07, owner decisions #1, #5, #6, #10): per mission only project,
-// id, name, phase and updated (an ISO time, nothing else). Missions with `public: false` (security audits) are never
+// id, name, phase and updated (an ISO time, nothing else) – plus, when the mission has them, its work orders (owner decision
+// 2026-11-14): id, title, status and optionally role, started, done, after and result, each rebuilt from a whitelist. Missions with `public: false` (security audits) are never
 // published; every finished mission stays in the list – there is no cap (review finding 3).
 //
 // Reads  <RAS_MISSIONS_FILE or <RAS_HOME or ../ryngmark-agents>/docs/missions.json>  (written by tools/ras-missions.mjs)
@@ -26,6 +27,41 @@ const tokenFile = path.join(os.homedir(), '.ras', 'board-token');
 const PHASES = ['analysis', 'plan', 'owner', 'build', 'review', 'done', 'paused'];
 const ID = /^[a-z0-9][a-z0-9-]{2,40}$/;
 
+const WO_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/;
+const ROLE = /^[a-z0-9-]{1,40}$/;
+const WO_STATUS = ['done', 'working', 'owner', 'todo'];
+const isoTime = (v, field) => {
+  if (typeof v !== 'string' || v.length > 40 || !Number.isFinite(Date.parse(v))) throw new Error(`${field} is not a date`);
+  return new Date(v).toISOString();
+};
+// Work orders in plan order. Nothing is copied as it stands: ids and roles must match their pattern, times are rebuilt from
+// the parsed date and every text goes through the same guard as the mission name. A mission without the field gets none.
+function workOrders(list, at) {
+  if (list === undefined || list === null) return null;
+  if (!Array.isArray(list) || list.length > 60) throw new Error(`${at}.work_orders is not a list of at most 60 work orders`);
+  return list.map((w, j) => {
+    const f = `${at}.work_orders[${j}]`;
+    if (!w || typeof w !== 'object') throw new Error(`${f} is not a work order`);
+    if (typeof w.id !== 'string' || !WO_ID.test(w.id)) throw new Error(`${f}.id is not a work order id`);
+    if (!WO_STATUS.includes(w.status)) throw new Error(`${f}.status is not a known status`);
+    const title = text(w.title, 80, `${f}.title`);
+    if (!title) throw new Error(`${f} has no title`);
+    const out = { id: w.id, title, status: w.status };
+    if (w.role !== undefined && w.role !== null) {
+      if (typeof w.role !== 'string' || !ROLE.test(w.role)) throw new Error(`${f}.role is not a role id`);
+      out.role = w.role;
+    }
+    for (const k of ['started', 'done']) if (w[k] !== undefined && w[k] !== null) out[k] = isoTime(w[k], `${f}.${k}`);
+    if (w.after !== undefined && w.after !== null) {
+      if (typeof w.after !== 'string' || !WO_ID.test(w.after)) throw new Error(`${f}.after is not a work order id`);
+      out.after = w.after;
+    }
+    const result = text(w.result, 120, `${f}.result`);
+    if (result) out.result = result;
+    return out;
+  });
+}
+
 function sanitize(doc) {
   if (!doc || doc.version !== 1 || !Array.isArray(doc.missions)) throw new Error('missions.json is not a version 1 mission list');
   const missions = doc.missions
@@ -40,7 +76,8 @@ function sanitize(doc) {
       if (!project || !name) throw new Error(`${at} has no project or title`);
       // owner #10: a time only – rebuilt from the parsed date, so no text can ride along
       if (typeof m.updated !== 'string' || m.updated.length > 40 || !Number.isFinite(Date.parse(m.updated))) throw new Error(`${at}.updated is not a date`);
-      return { project, id: m.id, name, phase: m.phase, updated: new Date(m.updated).toISOString() };
+      const wos = workOrders(m.work_orders, at);
+      return { project, id: m.id, name, phase: m.phase, updated: new Date(m.updated).toISOString(), ...(wos ? { work_orders: wos } : {}) };
     })
     .sort((a, b) => a.project.localeCompare(b.project) || a.id.localeCompare(b.id));
   return { generated_at: new Date().toISOString(), missions };

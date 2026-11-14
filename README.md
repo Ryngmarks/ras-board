@@ -33,6 +33,26 @@ Format:
 ```
 `state` is `working` or `waiting`. A role with no entry is free.
 
+## Work orders (Planen)
+Owner decision 2026-11-14: work orders may be public. When a mission in RAS `docs/missions.json` carries `work_orders`,
+`publish-missions.cjs` publishes them and Översikt shows the section **Planen**: one timeline per active mission (done =
+green tick, working = green box with how long it has run, owner = dark box with a button, todo = empty ring). Without the
+field nothing changes and the section stays hidden. The list order is the plan order.
+```json
+"work_orders": [
+  { "id": "WO-01", "title": "Kortmodell", "role": "implementer", "status": "done",
+    "started": "<ISO time>", "done": "<ISO time>", "result": "Granskad och godkänd" },
+  { "id": "WO-02", "title": "Kortlek", "role": "implementer", "status": "working", "started": "<ISO time>", "after": "WO-01" },
+  { "id": "WO-03", "title": "Välj kortbaksida", "status": "owner", "started": "<ISO time>" },
+  { "id": "WO-04", "title": "Granska koden", "role": "reviewer", "status": "todo", "after": "WO-02" } ]
+```
+- Required: `id` (letters, digits, `.`, `_`, `-`, at most 24), `title` (at most 80), `status` (`done`, `working`, `owner`, `todo`).
+- Optional: `role` (a role id as in `status.json`), `started` and `done` (times), `after` (the work order it waits for),
+  `result` (what was delivered, at most 120). At most 60 work orders per mission.
+- For `owner`, `started` is when the question was put to Johan – the board shows it as "har väntat".
+- The publisher rebuilds every value from a whitelist and stops (publishes nothing) on a bad id, status, role, date or a
+  text that looks like a path, URL, address or key. Other fields on a work order are never published.
+
 ## Security
 - `status.json` is untrusted: `clean()` keeps only known fields and states, everything is escaped before rendering,
   and owner alerts come only from `for: "owner"`.
