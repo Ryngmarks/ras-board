@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T23:13:39.925Z",
+  "generated_at": "2026-11-14T15:37:40.121Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -63,6 +63,235 @@
       "name": "Playbook improvement research",
       "phase": "owner",
       "updated": "2026-11-01T12:58:41.357Z"
+    },
+    {
+      "project": "Copperglade",
+      "id": "n01-aaa-plan",
+      "name": "Plan och ryggrad för AAA-kvalitet",
+      "phase": "build",
+      "updated": "2026-11-14T15:37:39.901Z",
+      "work_orders": [
+        {
+          "id": "W01",
+          "title": "Kontrollkommandot",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-13T23:12:48.000Z",
+          "result": "Granskat av projektledaren"
+        },
+        {
+          "id": "W02a",
+          "title": "Referenstal för kvalitetsribborna",
+          "status": "done",
+          "role": "research",
+          "done": "2026-11-13T23:28:12.000Z",
+          "result": "Inga publicerade mätningar finns"
+        },
+        {
+          "id": "Q-04",
+          "title": "Referensklipp: vilka spel och vem räknar bildrutor?",
+          "status": "owner",
+          "started": "2026-11-14T04:36:11.000Z"
+        },
+        {
+          "id": "W03",
+          "title": "Stilbibeln: dina val S1 till S10",
+          "status": "owner",
+          "started": "2026-11-13T23:47:34.000Z"
+        },
+        {
+          "id": "W04",
+          "title": "Stridsstandarden: dina val O1 till O7",
+          "status": "owner",
+          "started": "2026-11-13T23:40:16.000Z"
+        },
+        {
+          "id": "Q-02",
+          "title": "Välj kamerans inramning",
+          "status": "owner",
+          "started": "2026-11-14T04:36:11.000Z"
+        },
+        {
+          "id": "Q-03",
+          "title": "Vilken dator är lägsta måldator?",
+          "status": "owner",
+          "started": "2026-11-14T04:36:11.000Z"
+        },
+        {
+          "id": "W11",
+          "title": "Kodregler och kontrollsteg",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-13T23:28:12.000Z",
+          "result": "Egen självtest fångar alla planterade fel"
+        },
+        {
+          "id": "WO-10a",
+          "title": "Regelkärna: klocka, slump och spelläge",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-13T23:40:16.000Z",
+          "after": "W11",
+          "result": "Granskad och rättad"
+        },
+        {
+          "id": "WO-10b",
+          "title": "Navigering och rörelse",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T01:17:18.000Z",
+          "after": "WO-10a",
+          "result": "Granskad, två rättningsvarv"
+        },
+        {
+          "id": "Q-01",
+          "title": "Ska hjältar blockera varandra?",
+          "status": "owner",
+          "started": "2026-11-14T04:36:11.000Z"
+        },
+        {
+          "id": "WO-12a",
+          "title": "Nätverksprotokoll och förbindelser",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T02:06:14.000Z",
+          "after": "WO-10b",
+          "result": "Granskad och rättad"
+        },
+        {
+          "id": "WO-12b",
+          "title": "Servern som bestämmer vad som är sant",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T03:24:15.000Z",
+          "after": "WO-12a",
+          "result": "Granskad och rättad"
+        },
+        {
+          "id": "WO-12c",
+          "title": "Klientkärna: förutsägelse och rättning",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T04:17:59.000Z",
+          "after": "WO-12b",
+          "result": "Granskad; klocksynk visade sig behövas"
+        },
+        {
+          "id": "ADD-1",
+          "title": "Tillägg 1 till blueprinten",
+          "status": "done",
+          "role": "solution-architect",
+          "done": "2026-11-14T10:44:14.000Z",
+          "after": "WO-12c",
+          "result": "Godkänt av ägaren; reviderat efter mätningar"
+        },
+        {
+          "id": "WO-12d",
+          "title": "Klocksynk mellan klient och server",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T11:30:11.000Z",
+          "after": "ADD-1",
+          "result": "Åtta mätgrindar godkända efter en rättning"
+        },
+        {
+          "id": "WO-12e",
+          "title": "Klientkärnans tester och ritning av andra spelare",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T11:58:23.000Z",
+          "after": "WO-12d",
+          "result": "Granskad och rättad"
+        },
+        {
+          "id": "WO-12f",
+          "title": "Navigeringsgräns och eget steg för tidstester",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T11:58:57.000Z",
+          "after": "WO-12d",
+          "result": "Granskad och rättad"
+        },
+        {
+          "id": "WO-12g",
+          "title": "Rättningar efter granskningen",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T12:47:03.000Z",
+          "after": "WO-12f",
+          "result": "Kontrollen grön på 32 sekunder"
+        },
+        {
+          "id": "WO-13a",
+          "title": "Unity-projektet: klick för att gå",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T13:52:14.000Z",
+          "after": "WO-12g",
+          "result": "Svarstid 15 och 34 ms mot gränsen 50 ms"
+        },
+        {
+          "id": "ADD-2",
+          "title": "Tillägg 2: flyttal och vägsökning i Unity",
+          "status": "done",
+          "role": "solution-architect",
+          "done": "2026-11-14T14:34:21.000Z",
+          "after": "WO-13a",
+          "result": "Mätt i dotnet, editorn och två spelarbyggen"
+        },
+        {
+          "id": "WO-13a-fix",
+          "title": "Rättningar i Unity-klienten",
+          "status": "done",
+          "role": "implementer",
+          "done": "2026-11-14T15:20:31.000Z",
+          "after": "WO-13a",
+          "result": "Noll rättningar i ensamspel"
+        },
+        {
+          "id": "WO-13c",
+          "title": "Regelkärnan räknar lika i dotnet och Unity",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-14T15:22:00.000Z",
+          "after": "WO-13a-fix"
+        },
+        {
+          "id": "REV-13c",
+          "title": "Granska flyttalsrättningen",
+          "status": "todo",
+          "role": "reviewer",
+          "after": "WO-13c"
+        },
+        {
+          "id": "WO-13d",
+          "title": "Billigare vägsökning i Unity",
+          "status": "todo",
+          "role": "implementer",
+          "after": "REV-13c"
+        },
+        {
+          "id": "REV-13d",
+          "title": "Granska vägsökningen",
+          "status": "todo",
+          "role": "reviewer",
+          "after": "WO-13d"
+        },
+        {
+          "id": "WO-13b",
+          "title": "Platshållare för en förmåga",
+          "status": "todo",
+          "role": "implementer",
+          "after": "REV-13d"
+        },
+        {
+          "id": "W14",
+          "title": "Modulkarta",
+          "status": "todo",
+          "role": "implementer",
+          "after": "WO-13b"
+        }
+      ]
     },
     {
       "project": "Mossvale",
