@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T16:40:09.588Z",
+  "generated_at": "2026-11-14T16:43:10.965Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T16:40:09.518Z",
+      "updated": "2026-11-14T16:43:10.896Z",
       "work_orders": [
         {
           "id": "W01",
@@ -104,160 +104,11 @@
         },
         {
           "id": "W03",
-          "title": "Stilbibeln: dina val S2 till S10",
-          "status": "owner",
+          "title": "Stilbibeln: val S2 till S10",
+          "status": "done",
           "started": "2026-11-13T23:47:34.000Z",
-          "decision": {
-            "summary": "Nio val om hur spelet ska se ut. Rekommendationerna är stilbibelns förslag; inget är bestämt. Proportionerna (S6) behövs först, eftersom de styr skelettet i steg 1.2b.",
-            "questions": [
-              {
-                "id": "S2",
-                "text": "Ska spelaren kunna zooma?",
-                "options": [
-                  {
-                    "label": "A Ingen zoom i fas 1",
-                    "text": "Kameran ligger fast, så att alla mätningar görs vid en och samma inramning. Tas upp igen i fas 2.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Liten zoom",
-                    "text": "Plus minus 15 procent av avståndet."
-                  },
-                  {
-                    "label": "C Stor zoom",
-                    "text": "Som i Mossvale, 13 till 30 meter."
-                  }
-                ]
-              },
-              {
-                "id": "S3",
-                "text": "Hur ska ljus och skugga på modellerna göras?",
-                "options": [
-                  {
-                    "label": "A Neutral färg med stiliserad skuggtrappa",
-                    "text": "Färgerna kommer från paletten och ljuset räknas i spelet. Passar modeller som byggs från kod; Mossvale gjorde så.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Målat ljus i texturerna",
-                    "text": "Ljus och skugga målas in i ytan, som i Hytale och Torchlight."
-                  }
-                ]
-              },
-              {
-                "id": "S4",
-                "text": "Mjuka eller kantiga ytor?",
-                "options": [
-                  {
-                    "label": "A Mjuka ytor med fasade kanter",
-                    "text": "Du valde bort kantiga ansikten och facetter i Mossvale.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Facetterad lågpoly",
-                    "text": "Varje yta syns som en plan fasett."
-                  }
-                ]
-              },
-              {
-                "id": "S5",
-                "text": "Ska figurer ha en konturlinje?",
-                "note": "Avgörs slutligt på renderade bilder.",
-                "options": [
-                  {
-                    "label": "A Ingen kontur"
-                  },
-                  {
-                    "label": "B Tunn kontur på figurer och det man kan använda",
-                    "text": "Gör hjälten lättare att se mot marken, vilket var svagt i Mossvale.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "C Kontur på allt"
-                  }
-                ]
-              },
-              {
-                "id": "S6",
-                "text": "Vilka proportioner ska figurerna ha?",
-                "note": "Styr skelettet i steg 1.2b.",
-                "options": [
-                  {
-                    "label": "A Heroisk, 7,5 till 8 huvuden hög",
-                    "text": "Visas bredvid den knubbiga varianten i spelstorlek i steg 1.2b innan det låses.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Knubbig, cirka 6,5 huvuden och större huvud"
-                  },
-                  {
-                    "label": "C Mittemellan, cirka 7 huvuden"
-                  }
-                ]
-              },
-              {
-                "id": "S7",
-                "text": "Godkänner du identitetstexten och listorna alltid och aldrig?",
-                "note": "Texten står i stilbibelns första avsnitt.",
-                "options": [
-                  {
-                    "label": "A Godkänn",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Jag vill ändra",
-                    "text": "Skriv vad som ska ändras."
-                  }
-                ]
-              },
-              {
-                "id": "S8",
-                "text": "Hur ska stål se ut i högre nivåer?",
-                "options": [
-                  {
-                    "label": "A Mörka stålkroppar med ljusa kanter",
-                    "text": "Ljust stål gav känslan av leksaksrobot i Mossvale.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Som i Mossvale",
-                    "text": "Stålet ljusnar till nästan vitt vid nivå 6."
-                  }
-                ]
-              },
-              {
-                "id": "S9",
-                "text": "Vilken glöd och plåt ska nivå 7 ha?",
-                "options": [
-                  {
-                    "label": "A Ärggrön glöd på svart plåt",
-                    "text": "Det senaste du godkände i Mossvale. Orange konkurrerar med eld och koppar.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Glödorange"
-                  },
-                  {
-                    "label": "C Mossvart plåt i stället för blåsvart"
-                  }
-                ]
-              },
-              {
-                "id": "S10",
-                "text": "Hur mörk ska natten vara?",
-                "options": [
-                  {
-                    "label": "A Spelbar natt",
-                    "text": "Upplysta gläntor; man ser tillräckligt för att spela.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "B Mörkare natt som kräver lykta"
-                  }
-                ]
-              }
-            ]
-          }
+          "done": "2026-11-14T16:43:10.896Z",
+          "result": "Rekommenderade val: S2 A, S3 A, S4 A, S5 B, S6 A, S7 A, S8 A, S9 A, S10 A"
         },
         {
           "id": "W04",
