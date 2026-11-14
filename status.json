@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T01:46:18Z",
+    "updated":  "2026-11-14T01:46:20Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "steg 1.1 ryggrad",
                         "since":  "2026-11-13T23:17:26Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "rattar natprotokoll",
+                        "since":  "2026-11-14T01:46:20Z",
+                        "agent":  "wo-12a-fix",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
