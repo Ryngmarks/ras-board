@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T18:14:03.946Z",
+  "generated_at": "2026-11-14T19:31:08.124Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T18:14:03.885Z",
+      "updated": "2026-11-14T19:31:08.047Z",
       "work_orders": [
         {
           "id": "W01",
@@ -381,16 +381,19 @@
         {
           "id": "WO-13d",
           "title": "Billigare vägsökning i Unity",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-14T18:14:03.885Z",
-          "after": "WO-13c-fix"
+          "done": "2026-11-14T19:31:07.959Z",
+          "after": "WO-13c-fix",
+          "result": "Långt klick 3 ms per sida mot 30 förut. Ett stressfall med hållen knapp missar målet 6 ms, står öppet"
         },
         {
           "id": "REV-13d",
           "title": "Granska vägsökningen",
-          "status": "todo",
+          "status": "working",
           "role": "reviewer",
+          "started": "2026-11-14T19:31:08.047Z",
           "after": "WO-13d"
         },
         {
