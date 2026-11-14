@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T10:00:10Z",
+    "updated":  "2026-11-14T10:00:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -97,14 +97,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Copperglade",
-                        "state":  "waiting",
-                        "note":  "addendum 1 for approval",
-                        "since":  "2026-11-14T09:54:11Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Copperglade",
                         "state":  "working",
@@ -113,6 +105,13 @@
                         "agent":  "wo-12d",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "n01 WO-12d",
+                        "since":  "2026-11-14T10:00:12Z"
                     }
                 ]
 }
