@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T19:55:21Z",
+    "updated":  "2026-11-14T21:17:18Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "n01 granskning WO-13d",
                         "since":  "2026-11-14T10:00:12Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "WO-13d-fix: dev-tools, tools",
-                        "since":  "2026-11-14T19:45:02Z",
-                        "agent":  "wo-13d-fix",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
