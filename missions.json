@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:20:35.615Z",
+  "generated_at": "2026-11-14T22:26:20.596Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:20:35.549Z",
+      "updated": "2026-11-14T22:26:20.520Z",
       "work_orders": [
         {
           "id": "W01",
@@ -476,6 +476,22 @@
           "status": "working",
           "role": "research",
           "started": "2026-11-14T22:20:35.469Z",
+          "after": "Q-07"
+        },
+        {
+          "id": "REF-04A",
+          "title": "Djupanalys av Albion-klippet: stil, kamera, strid, gränssnitt",
+          "status": "working",
+          "role": "research",
+          "started": "2026-11-14T22:26:20.450Z",
+          "after": "Q-07"
+        },
+        {
+          "id": "REF-04B",
+          "title": "Djupanalys av WoW-klippet: det som är nyttigt för oss",
+          "status": "working",
+          "role": "research",
+          "started": "2026-11-14T22:26:20.520Z",
           "after": "Q-07"
         }
       ]
