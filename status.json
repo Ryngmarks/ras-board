@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T04:36:12Z",
+    "updated":  "2026-11-14T04:36:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -99,9 +99,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "steg 1.1 ryggrad",
-                        "since":  "2026-11-13T23:17:26Z"
+                        "state":  "waiting",
+                        "note":  "nattrapport klar",
+                        "since":  "2026-11-14T04:36:14Z",
+                        "for":  "owner"
                     }
                 ]
 }
