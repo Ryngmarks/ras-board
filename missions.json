@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T19:31:08.124Z",
+  "generated_at": "2026-11-14T19:34:44.289Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T19:31:08.047Z",
+      "updated": "2026-11-14T19:34:44.215Z",
       "work_orders": [
         {
           "id": "W01",
@@ -395,6 +395,13 @@
           "role": "reviewer",
           "started": "2026-11-14T19:31:08.047Z",
           "after": "WO-13d"
+        },
+        {
+          "id": "ADD-3",
+          "title": "Tillägg 3: platshållaren för en förmåga",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-14T19:34:44.215Z"
         },
         {
           "id": "WO-13b",
