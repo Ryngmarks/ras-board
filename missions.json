@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:16:40.883Z",
+  "generated_at": "2026-11-14T22:20:35.615Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:16:40.764Z",
+      "updated": "2026-11-14T22:20:35.549Z",
       "work_orders": [
         {
           "id": "W01",
@@ -455,17 +455,28 @@
         {
           "id": "Q-07",
           "title": "Andra inspelningen: ägaren spelar, projektledaren spelar in",
-          "status": "working",
+          "status": "done",
           "role": "project-manager",
           "started": "2026-11-14T22:16:40.764Z",
-          "after": "REF-02"
+          "done": "2026-11-14T22:20:35.393Z",
+          "after": "REF-02",
+          "result": "Ägaren spelade Albion i fyra minuter medan projektledaren spelade in skärmen"
         },
         {
           "id": "REV-13b-1",
           "title": "Oberoende granskning av platshållarens regelkärna",
-          "status": "todo",
+          "status": "working",
           "role": "reviewer",
+          "started": "2026-11-14T22:20:35.549Z",
           "after": "WO-13b-1"
+        },
+        {
+          "id": "REF-03",
+          "title": "Mät slag, träffar, rörelse och kamera ur Albion-inspelningen",
+          "status": "working",
+          "role": "research",
+          "started": "2026-11-14T22:20:35.469Z",
+          "after": "Q-07"
         }
       ]
     },
