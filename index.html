@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-FEBozGw4/89Fyjx0r+xSTmaQbYD8cXCtXXh7cQKk+jM='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ujgP99BRIhgYi3E9+9y3ZaY2L2qEg3AQYzJGSKaNuf0='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – översikt</title>
 <style>
@@ -85,12 +85,19 @@
   @media (max-width: 380px) { .tabs a { font-size: 12px; padding: 7px 4px; gap: 4px; } .tabs a svg { width: 15px; height: 15px; } }
   /* ---- end shared look ---- */
 
-  .live-state { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+  .live-state { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 6px 10px; color: var(--muted); font-size: 13px; }
   .live-state .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3fbf7f; }
   .live-state.stale .pulse { background: var(--wait); }
   .live-state button { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-weight: 600; color: var(--fg); background: var(--surface); border: 1px solid var(--border-2); border-radius: 10px; padding: 7px 14px; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }
   .live-state button svg { width: 16px; height: 16px; }
   .live-state button:hover { border-color: var(--muted); }
+  .live-state button { min-height: 40px; transition: border-color .15s, color .15s; }
+  .live-state button:disabled { cursor: default; }
+  .live-state button.busy svg { animation: spin .8s linear infinite; }
+  .live-state button.ok { border-color: var(--work); color: #12704b; }
+  .live-state button.fail { border-color: var(--wait); color: #a4520c; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .live-state button.busy svg { animation: none; } }
 
   /* din tur: the only dark surface on the page (owner look 2026-11-14) */
   .phead { align-items: center; }
@@ -356,7 +363,7 @@
 <main>
   <div class="phead">
     <div><h1 class="vh">Översikt</h1><div class="eyebrow">Översikt</div></div>
-    <div class="live-state" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Uppdatera</button></div>
+    <div class="live-state" id="live"><span class="pulse"></span><span id="updated" role="status">Laddar…</span><button id="refresh" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg><span id="refresh-label">Uppdatera</span></button></div>
   </div>
 
   <section class="turn rest" id="owner-card" aria-labelledby="turn-title" aria-live="polite">
@@ -693,6 +700,7 @@ function cleanHistory(raw) {
 
 // ---- page state ----
 let etag = null, data = null, source = null, lastFetch = null, failed = false;
+let busy = false, checked = null, flash = "", flashTimer = 0;   // refresh feedback: fetching now, last successful check, result of the last tap
 let ORG = null;        // cleaned org.json, once loaded
 let HIST = null;       // { all, where } or { msg } once history has loaded
 let MISS = null;       // loadMissions() result
@@ -750,10 +758,17 @@ function paintRunning() {
 
 function render() {
   const entries = Array.isArray(data?.entries) ? data.entries : [];
-  document.getElementById("updated").textContent = data?.updated
+  // "Ändrad" = when the status last changed; "kontrollerad" = when this page last asked – so a tap on Uppdatera always shows.
+  const changed = data?.updated
     ? (ago(data.updated) === "nyss" ? "Ändrad nyss" : `Ändrad för ${ago(data.updated)} sedan`) + (source === "raw" ? " · cache, upp till 5 min gammal" : "")
     : (failed ? "Kunde inte hämta status" : "Ingen status ännu");
+  const at = checked ? ` · kontrollerad ${new Date(checked).toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })}` : "";
+  document.getElementById("updated").textContent = busy ? "Hämtar senaste läget…" : failed ? "Kunde inte hämta status – visar senast kända läge" : changed + at;
   document.getElementById("live").classList.toggle("stale", failed || source === "raw");
+  const btn = document.getElementById("refresh");
+  btn.disabled = busy;
+  btn.className = busy ? "busy" : flash === "fail" ? "fail" : flash ? "ok" : "";
+  document.getElementById("refresh-label").textContent = busy ? "Hämtar…" : flash === "fail" ? "Misslyckades" : flash === "new" ? "Uppdaterad" : flash === "same" ? "Inget nytt" : "Uppdatera";
 
   const items = ownerItems(), n = items.length, turn = document.getElementById("owner-card");
   // nothing is known until the first status or mission answer: keep "Laddar…" instead of claiming that nothing waits
@@ -1064,6 +1079,25 @@ async function load() {
   render();
 }
 
+// One refresh = status + mission list. A tap always gives feedback: the button spins and says "Hämtar…" (at least 0.6 s so it
+// can be seen), then "Uppdaterad", "Inget nytt" or "Misslyckades" for 4 s, and the status line shows when the page last checked.
+const snapshot = () => JSON.stringify([data, MISS?.list || null]);
+async function refreshAll(manual) {
+  if (busy) return;
+  busy = true; flash = ""; clearTimeout(flashTimer);
+  render();
+  const before = snapshot();
+  await Promise.all([load(), loadMissions(document, (url, opts) => fetch(url, opts)).then(r => { MISS = r; }),
+    manual ? new Promise(done => setTimeout(done, 600)) : null]);
+  busy = false;
+  if (!failed) checked = Date.now();
+  if (manual) {
+    flash = failed ? "fail" : snapshot() === before ? "same" : "new";
+    flashTimer = setTimeout(() => { flash = ""; render(); }, 4000);
+  }
+  render();
+}
+
 // Public page (no embedded data): the local-only note shows, and the library tab points at the local server (owner #9).
 function markPublic(doc, isPublic) {
   if (!isPublic) return;
@@ -1089,14 +1123,13 @@ function boot() {
     toggleDecision(b.dataset.dec);
     paintPlan();
   });
-  document.getElementById("refresh").addEventListener("click", load);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) load(); });
-  setInterval(() => { if (!document.hidden) load(); }, POLL_MS);
+  document.getElementById("refresh").addEventListener("click", () => refreshAll(true));
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) refreshAll(false); });
+  setInterval(() => { if (!document.hidden) refreshAll(false); }, POLL_MS);
   setInterval(render, 30_000);
-  load();
+  refreshAll(false);
   loadOrg();
   renderHistory();
-  loadMissions(document, (url, opts) => fetch(url, opts)).then(r => { MISS = r; render(); });
 }
 if (typeof document !== "undefined") boot();
 </script>
