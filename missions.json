@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T21:49:07.578Z",
+  "generated_at": "2026-11-14T21:58:35.732Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T21:49:07.495Z",
+      "updated": "2026-11-14T21:58:35.658Z",
       "work_orders": [
         {
           "id": "W01",
@@ -433,35 +433,20 @@
         {
           "id": "Q-06",
           "title": "Hur ska referenstiderna tas fram?",
-          "status": "owner",
+          "status": "done",
           "role": "project-manager",
           "started": "2026-11-14T21:49:07.495Z",
+          "done": "2026-11-14T21:58:35.587Z",
           "after": "REF-01",
-          "decision": {
-            "summary": "Agenterna försökte två gånger mäta attacktider ur offentliga klipp i webbläsaren. Stegning bildruta för bildruta fungerar, men reklam, pausade bilder som startar av sig själva och osäker bildskala gjorde att inga tider gick att mäta. Med en inspelad fil på datorn går mätningen att göra exakt.",
-            "questions": [
-              {
-                "id": "Q-06",
-                "text": "Hur ska referenstiderna tas fram?",
-                "note": "Det gäller hur många bildrutor en attack tar från ansats till träff, hur snabbt träffen syns och hur rörelsen startar och stannar. I dag är de talen startvärden utan mätning bakom.",
-                "options": [
-                  {
-                    "label": "Jag spelar in ett kort klipp",
-                    "text": "Du spelar in två till tre minuter i Albion eller WoW med Windows inbyggda inspelning i 60 bilder per sekund: några slag mot en fiende, gå, stanna, vända och zooma. En agent mäter sedan filen bildruta för bildruta.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "Hoppa över mätningen",
-                    "text": "Startvärdena i stridsstandarden behålls, och du bedömer känslan själv när den första riktiga attacken är spelbar i steg 1.4. Kravet på uppmätta referenser stryks."
-                  },
-                  {
-                    "label": "Försök en gång till",
-                    "text": "En tredje runda i webbläsaren med mindre mål: tre slag i ett klipp. Kostar mycket och har misslyckats två gånger."
-                  }
-                ]
-              }
-            ]
-          }
+          "result": "Ägaren lät projektledaren spela in skärmen under tre minuters spel. Filen mäts exakt"
+        },
+        {
+          "id": "REF-02",
+          "title": "Mät referenstider ur ägarens inspelning",
+          "status": "working",
+          "role": "research",
+          "started": "2026-11-14T21:58:35.658Z",
+          "after": "Q-06"
         }
       ]
     },
