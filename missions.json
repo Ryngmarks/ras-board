@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T21:17:15.464Z",
+  "generated_at": "2026-11-14T21:19:45.335Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T21:17:15.395Z",
+      "updated": "2026-11-14T21:19:45.264Z",
       "work_orders": [
         {
           "id": "W01",
@@ -122,78 +122,18 @@
         {
           "id": "Q-02",
           "title": "Kameran: hur långt ut och hur nära ska man kunna zooma?",
-          "status": "owner",
+          "status": "done",
           "started": "2026-11-14T04:36:11.000Z",
-          "decision": {
-            "summary": "Du har bestämt att man ska kunna zooma in. Då blir kameran ett spann i stället för ett enda avstånd. Två saker återstår: hur långt ut man kan zooma och hur nära. Talen är pixlar per meter i spelet på en skärm i 1080p.",
-            "questions": [
-              {
-                "id": "S1-ut",
-                "text": "Hur långt ut ska man kunna zooma?",
-                "note": "Det yttersta läget avgör hur långt förmågor kan nå utan att hamna utanför bild, och det är där allt måste vara läsbart. Kan avgöras på bilder i spelstorlek i steg 1.2b.",
-                "options": [
-                  {
-                    "label": "B Balanserad, cirka 69",
-                    "text": "Samma inramning som de godkända bilderna i Mossvale. Förmågor når knappt 6 meter i bild."
-                  },
-                  {
-                    "label": "C Vidare, cirka 60",
-                    "text": "Förmågor med upp till 7 meters räckvidd ryms i bild och hjälten är fortfarande tydlig. Projektledarens förslag nu när man kan zooma in till B och A.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "D Vid, cirka 45",
-                    "text": "Mest överblick, men hjälten blir liten och ansikten går inte att läsa i ytterläget."
-                  }
-                ]
-              },
-              {
-                "id": "S1-in",
-                "text": "Hur nära ska man kunna zooma in?",
-                "note": "Det innersta läget avgör hur detaljerade modeller och texturer måste vara. Ju närmare, desto mer arbete per figur.",
-                "options": [
-                  {
-                    "label": "A Nära, cirka 80",
-                    "text": "Hjälten blir ungefär en tiondel av skärmens höjd. Ansikte, händer och utrustning syns bra utan att modellerna behöver mer detalj än planerat.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "Närbild, cirka 110",
-                    "text": "Hjälten fyller nästan en sjundedel av skärmen. Snyggt för att titta på utrustning, men kräver ungefär dubbelt så detaljerade modeller och texturer."
-                  }
-                ]
-              }
-            ]
-          }
+          "done": "2026-11-14T21:19:45.054Z",
+          "result": "Ägaren: kameran går att zooma mellan cirka 60 och 80 pixlar per meter"
         },
         {
           "id": "Q-03",
           "title": "Vilken dator är lägsta måldator?",
-          "status": "owner",
+          "status": "done",
           "started": "2026-11-14T04:36:11.000Z",
-          "decision": {
-            "summary": "Du har valt kategorin äldre speldator, med grafikkort från ungefär 2017 till 2019, och 60 bilder per sekund ska hålla där. Det som saknas är vilken dator det är, så att prestandan kan mätas på riktigt.",
-            "questions": [
-              {
-                "id": "Q1",
-                "text": "Vilken dator ska räknas som lägsta måldator?",
-                "note": "Ange processor och grafikkort, eller en dator du har tillgång till."
-              },
-              {
-                "id": "Q2",
-                "text": "Finns datorn att mäta på?",
-                "options": [
-                  {
-                    "label": "A Ja, jag har tillgång till den"
-                  },
-                  {
-                    "label": "B Nej, uppskatta från utvecklingsdatorn",
-                    "text": "Då räknar vi med en faktor. Är måldatorn mer än ungefär dubbelt så långsam måste den nya vägsökningen byggas tidigare."
-                  }
-                ]
-              }
-            ]
-          }
+          "done": "2026-11-14T21:19:45.122Z",
+          "result": "Ägaren: ska gå på svagare datorer, som lägst en dator med grafikkortet RTX 2070"
         },
         {
           "id": "W11",
@@ -473,6 +413,20 @@
           "status": "todo",
           "role": "solution-architect",
           "after": "WO-13b-2"
+        },
+        {
+          "id": "STD-01",
+          "title": "Jämka stridsstandard och stilbibel mot zoomspannet",
+          "status": "todo",
+          "role": "solution-architect",
+          "after": "HOLD-01"
+        },
+        {
+          "id": "W06",
+          "title": "Budgetar för modeller, texturer och prestanda mot lägsta dator",
+          "status": "todo",
+          "role": "solution-architect",
+          "after": "STD-01"
         }
       ]
     },
