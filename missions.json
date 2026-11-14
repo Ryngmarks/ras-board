@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:53:07.573Z",
+  "generated_at": "2026-11-14T23:07:30.311Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:53:07.507Z",
+      "updated": "2026-11-14T23:07:30.231Z",
       "work_orders": [
         {
           "id": "W01",
@@ -551,10 +551,20 @@
         {
           "id": "WO-22a",
           "title": "Figurens proportioner: tre kroppsbyggen visade i spelets kamera",
-          "status": "working",
+          "status": "done",
           "role": "3d-artist",
           "started": "2026-11-14T22:53:07.507Z",
-          "after": "REF-04A"
+          "done": "2026-11-14T23:07:30.152Z",
+          "after": "REF-04A",
+          "result": "Fyra granskningsblad klara: tre kroppsbyggen i spelets kamera vid tre zoomlägen"
+        },
+        {
+          "id": "AD-22a",
+          "title": "Blind rangordning av kroppsbyggena",
+          "status": "working",
+          "role": "art-director",
+          "started": "2026-11-14T23:07:30.231Z",
+          "after": "WO-22a"
         }
       ]
     },
