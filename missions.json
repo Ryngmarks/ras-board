@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T16:43:10.965Z",
+  "generated_at": "2026-11-14T17:05:39.435Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T16:43:10.896Z",
+      "updated": "2026-11-14T17:05:39.365Z",
       "work_orders": [
         {
           "id": "W01",
@@ -351,16 +351,19 @@
         {
           "id": "WO-13c",
           "title": "Regelkärnan räknar lika i dotnet och Unity",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-14T15:22:00.000Z",
-          "after": "WO-13a-fix"
+          "done": "2026-11-14T17:05:39.300Z",
+          "after": "WO-13a-fix",
+          "result": "Samma resultat i dotnet, Unity-editorn och två spelarbyggen"
         },
         {
           "id": "REV-13c",
           "title": "Granska flyttalsrättningen",
-          "status": "todo",
+          "status": "working",
           "role": "reviewer",
+          "started": "2026-11-14T17:05:39.365Z",
           "after": "WO-13c"
         },
         {
