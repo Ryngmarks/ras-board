@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T23:07:30.311Z",
+  "generated_at": "2026-11-14T23:09:40.632Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T23:07:30.231Z",
+      "updated": "2026-11-14T23:09:40.356Z",
       "work_orders": [
         {
           "id": "W01",
@@ -561,10 +561,20 @@
         {
           "id": "AD-22a",
           "title": "Blind rangordning av kroppsbyggena",
-          "status": "working",
+          "status": "done",
           "role": "art-director",
           "started": "2026-11-14T23:07:30.231Z",
-          "after": "WO-22a"
+          "done": "2026-11-14T23:09:40.266Z",
+          "after": "WO-22a",
+          "result": "Blind rangordning: det kompakta bygget först på alla blad, Heroic sist"
+        },
+        {
+          "id": "WO-22b",
+          "title": "Proportioner, runda 2: ljusare kropp, delad mantel, kontur bara på kroppen",
+          "status": "working",
+          "role": "3d-artist",
+          "started": "2026-11-14T23:09:40.356Z",
+          "after": "AD-22a"
         }
       ]
     },
