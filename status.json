@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T19:34:49Z",
+    "updated":  "2026-11-14T19:35:41Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -122,6 +122,16 @@
                         "state":  "working",
                         "note":  "n01 granskning WO-13d",
                         "since":  "2026-11-14T10:00:12Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "WO-14 modulkarta",
+                        "since":  "2026-11-14T19:35:41Z",
+                        "agent":  "wo-14",
+                        "model":  "claude/claude-haiku-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
