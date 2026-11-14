@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T17:33:10.508Z",
+  "generated_at": "2026-11-14T18:13:07.654Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T17:33:10.455Z",
+      "updated": "2026-11-14T18:13:07.584Z",
       "work_orders": [
         {
           "id": "W01",
@@ -371,17 +371,19 @@
         {
           "id": "WO-13c-fix",
           "title": "Täta luckor i flyttalskontrollen",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-14T17:33:10.455Z",
-          "after": "REV-13c"
+          "done": "2026-11-14T18:13:07.515Z",
+          "after": "REV-13c",
+          "result": "Kontrollen tätad; hela kontrollen med Unity grön och på main"
         },
         {
           "id": "WO-13d",
           "title": "Billigare vägsökning i Unity",
           "status": "todo",
           "role": "implementer",
-          "after": "REV-13c"
+          "after": "WO-13c-fix"
         },
         {
           "id": "REV-13d",
