@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T10:43:20Z",
+    "updated":  "2026-11-14T10:44:15Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "n01 lead revision",
                         "since":  "2026-11-14T10:00:12Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "WO-12d-fix late rule",
+                        "since":  "2026-11-14T10:44:15Z",
+                        "agent":  "wo-12d",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
