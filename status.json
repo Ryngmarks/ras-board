@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T19:31:10Z",
+    "updated":  "2026-11-14T19:31:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "n01 WO-13d",
                         "since":  "2026-11-14T10:00:12Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "granskar WO-13d",
+                        "since":  "2026-11-14T19:31:12Z",
+                        "agent":  "rev-13d",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
