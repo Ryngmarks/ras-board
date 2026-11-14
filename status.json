@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T09:54:11Z",
+    "updated":  "2026-11-14T10:00:10Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,6 +103,16 @@
                         "note":  "addendum 1 for approval",
                         "since":  "2026-11-14T09:54:11Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "WO-12d command lead",
+                        "since":  "2026-11-14T10:00:10Z",
+                        "agent":  "wo-12d",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
