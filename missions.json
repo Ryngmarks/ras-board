@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T23:09:40.632Z",
+  "generated_at": "2026-11-14T23:21:29.926Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T23:09:40.356Z",
+      "updated": "2026-11-14T23:21:29.849Z",
       "work_orders": [
         {
           "id": "W01",
@@ -571,10 +571,20 @@
         {
           "id": "WO-22b",
           "title": "Proportioner, runda 2: ljusare kropp, delad mantel, kontur bara på kroppen",
-          "status": "working",
+          "status": "done",
           "role": "3d-artist",
           "started": "2026-11-14T23:09:40.356Z",
-          "after": "AD-22a"
+          "done": "2026-11-14T23:21:29.771Z",
+          "after": "AD-22a",
+          "result": "Runda 2 klar: figuren syns nu på både ljus och mörk mark, armarna syns framifrån"
+        },
+        {
+          "id": "AD-22b",
+          "title": "Blind rangordning, runda 2",
+          "status": "working",
+          "role": "art-director",
+          "started": "2026-11-14T23:21:29.849Z",
+          "after": "WO-22b"
         }
       ]
     },
