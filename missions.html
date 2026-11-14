@@ -2,14 +2,15 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-y8dljoe5kKgPao70nb5bpPQTchpVsjMFJrCsrRCkZ68='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tePwnLyuu7WN24AErB/wldnPLqQ1yfhhVsUPBxee4V4='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – uppdrag</title>
 <style>
-  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-01) ---- */
+  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-14) ---- */
   :root {
     color-scheme: light;
-    --bg: #f6f5f2; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #676d7a;
+    --bg: #f3f1ec; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #5b616e;
+    --ink: #16181d; --ink-2: #23262e; --ink-line: #343843; --on-ink: #b9bec9; --signal: #ffd23f;
     --shadow: 0 1px 2px rgba(31, 27, 20, .04), 0 8px 24px rgba(31, 27, 20, .06);
     --gaming: #e07b2e; --gaming-soft: #fdf1e6; --software: #3b7ff0; --software-soft: #ebf2fe; --core: #9a84df; --core-soft: #f3effc;
     --work: #1f9d6b; --work-soft: rgba(31, 157, 107, .12);
@@ -20,10 +21,10 @@
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { margin: 0; background: var(--bg) url(assets/ras-bg.svg) top center / max(100%, 1200px) auto no-repeat; color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
   svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
   code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
-  .topbar { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
+  .topbar { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, .82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
   .topbar-in { max-width: 1480px; margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; gap: 28px; }
   .brand { display: flex; align-items: baseline; gap: 10px; flex: none; color: var(--fg); text-decoration: none; padding-right: 28px; border-right: 1px solid var(--border); }
   .brand b { font-size: 19px; font-weight: 900; font-style: italic; letter-spacing: .02em; }
@@ -34,14 +35,14 @@
   .tabs a svg { width: 17px; height: 17px; color: var(--muted); }
   .tabs a:hover { background: var(--surface-2); border-color: var(--border); }
   .tabs a:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
-  .tabs a[aria-current="page"] { background: #f6ebde; border-color: #ecd9c3; font-weight: 650; }
-  .tabs a[aria-current="page"] svg { color: var(--gaming); }
+  .tabs a[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; font-weight: 650; }
+  .tabs a[aria-current="page"] svg { color: var(--signal); }
   main { max-width: 1480px; margin: 0 auto; padding: 28px 28px 56px; }
   .phead { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 20px; flex-wrap: wrap; }
   .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 6px 0 4px; }
   .lede { margin: 0; color: var(--muted); }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
+  .card { background: rgba(255, 255, 255, .9); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
   .chead { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
   .chead h2 { margin: 0; font-size: 17px; font-weight: 700; }
   .chead p { margin: 0; color: var(--muted); font-size: 13px; }
@@ -225,6 +226,16 @@ const fmtWhen = iso => { const t = Date.parse(iso); return isFinite(t) ? new Dat
 // ---- Missions (ras07). Two shapes, one cleaner each; both return the same rows. Keep identical in index.html. ----
 // Local: RAS docs/missions.json embedded by build-local (+ `tokens` per mission). Public: publish-missions.cjs output.
 const relPath = p => (typeof p === "string" && p.length <= 200 && !/[\u0000-\u001f]/.test(p) && !/^[a-z][a-z0-9+.-]*:|^[\\/]/i.test(p) && !p.replace(/\\/g, "/").split("/").includes("..") ? p : "");
+// Work orders per mission (owner decision 2026-11-14: public). Same shape in the local log and the public list; a row
+// with an unknown status or without id and title drops out. Keep identical in index.html and missions.html.
+const WO_STATUS = { done: "klar", working: "pågår nu", owner: "ditt beslut", todo: "kvar" };
+function cleanWos(list) {
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return (Array.isArray(list) ? list : []).filter(w => w && typeof w === "object" && Object.hasOwn(WO_STATUS, w.status) && str(w.id, 24) && str(w.title, 80)).slice(0, 60)
+    .map(w => ({ id: str(w.id, 24), title: str(w.title, 80), role: /^[a-z0-9-]{1,40}$/.test(w.role || "") ? w.role : "", status: w.status,
+      started: when(w.started), done: when(w.done), after: str(w.after, 24), result: str(w.result, 120) }));
+}
 // Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
 // cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
 function cleanMissions(raw) {
@@ -237,7 +248,7 @@ function cleanMissions(raw) {
       branch: str(m.branch, 80), worktree: str(m.worktree, 80), brief: relPath(m.brief), status: relPath(m.status), public: m.public !== false,
       tokens: typeof m.tokens === "number" && isFinite(m.tokens) && m.tokens >= 0 ? m.tokens : null,
       log: (Array.isArray(m.log) ? m.log : []).filter(e => e && typeof e === "object" && Object.hasOwn(PHASES, e.phase)).slice(-30)
-        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })) }));
+        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })), wos: cleanWos(m.work_orders) }));
 }
 function cleanPublicMissions(raw) {
   if (!raw || typeof raw !== "object" || !Array.isArray(raw.missions)) return null;
@@ -245,7 +256,7 @@ function cleanPublicMissions(raw) {
   const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
   return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project, 80) && str(m.id, 60))
     .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.name, 80) || str(m.id, 60),
-      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [] }));
+      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [], wos: cleanWos(m.work_orders) }));
 }
 // The ONLY code that knows where mission data comes from.
 async function loadMissions(doc, fetchFn) {

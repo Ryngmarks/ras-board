@@ -27,6 +27,39 @@
           "phase": "build",
           "note": "WO-01 klar"
         }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-01",
+          "title": "Kortmodell",
+          "role": "implementer",
+          "status": "done",
+          "started": "2026-10-30T10:00:00.000Z",
+          "done": "2026-11-01T08:30:00.000Z",
+          "result": "Granskad och godkänd"
+        },
+        {
+          "id": "WO-02",
+          "title": "Kortlek",
+          "role": "implementer",
+          "status": "working",
+          "started": "2026-11-01T09:00:00.000Z",
+          "after": "WO-01"
+        },
+        {
+          "id": "WO-03",
+          "title": "Granska koden",
+          "role": "reviewer",
+          "status": "todo",
+          "after": "WO-02"
+        },
+        {
+          "id": "WO-04",
+          "title": "Speltest",
+          "role": "playtester",
+          "status": "todo",
+          "after": "WO-02"
+        }
       ]
     },
     {

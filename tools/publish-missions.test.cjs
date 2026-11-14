@@ -32,11 +32,11 @@ const noFetch = () => { throw new Error('fetch must not be called'); };
 // ---- publish-missions.cjs ----
 const one = patch => { const d = doc(); Object.assign(d.missions.find(m => m.id === 'm20-test-cards'), patch); return sanitize(d); };
 
-test('publish: exactly generated_at + missions, and exactly project, id, name, phase, updated per mission', () => {
+test('publish: exactly generated_at + missions, and exactly project, id, name, phase, updated (+ work_orders when the mission has them)', () => {
   const out = sanitize(doc());
   assert.deepEqual(Object.keys(out), ['generated_at', 'missions']);
   for (const m of out.missions) {
-    assert.deepEqual(Object.keys(m), ['project', 'id', 'name', 'phase', 'updated']);
+    assert.deepEqual(Object.keys(m), m.id === 'm20-test-cards' ? ['project', 'id', 'name', 'phase', 'updated', 'work_orders'] : ['project', 'id', 'name', 'phase', 'updated']);
     assert.match(m.updated, /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/, 'owner #10: an ISO time only');
   }
   assert.equal(out.missions.find(m => m.id === 'm20-test-cards').updated, '2026-11-01T09:00:00.000Z');
@@ -48,6 +48,50 @@ test('publish: updated is rebuilt from the date, so no text rides along; a non-d
   assert.equal(one({ updated: '2026-11-01T10:00:00+02:00' }).missions.find(m => m.id === 'm20-test-cards').updated, '2026-11-01T08:00:00.000Z');
   for (const updated of ['yesterday', 'WO-02 C:/Users/x', '', null, undefined, 7, '2026-11-01T10:00:00Z ' + 'x'.repeat(40)])
     assert.throws(() => one({ updated }), String(updated));
+});
+
+// ---- work orders (owner decision 2026-11-14: public) ----
+test('publish: work orders are rebuilt from a whitelist, in plan order, with only the fields that are set', () => {
+  const wos = sanitize(doc()).missions.find(m => m.id === 'm20-test-cards').work_orders;
+  assert.deepEqual(wos.map(w => w.id), ['WO-01', 'WO-02', 'WO-03', 'WO-04']);
+  assert.deepEqual(wos[0], { id: 'WO-01', title: 'Kortmodell', status: 'done', role: 'implementer', started: '2026-10-30T10:00:00.000Z', done: '2026-11-01T08:30:00.000Z', result: 'Granskad och godkänd' });
+  assert.deepEqual(wos[2], { id: 'WO-03', title: 'Granska koden', status: 'todo', role: 'reviewer', after: 'WO-02' });
+  const extra = one({ work_orders: [{ id: 'WO-01', title: 'T', status: 'todo', branch: 'secret-branch', note: 'private note', worktree: 'cl-m20' }] });
+  assert.deepEqual(extra.missions.find(m => m.id === 'm20-test-cards').work_orders, [{ id: 'WO-01', title: 'T', status: 'todo' }], 'unknown fields never ride along');
+});
+
+test('publish: a bad work order stops the publish (no silent drop)', () => {
+  const wo = patch => one({ work_orders: [{ id: 'WO-01', title: 'T', status: 'todo', ...patch }] });
+  for (const patch of [{ id: 'WO 01' }, { id: '' }, { id: 'x'.repeat(25) }, { status: 'blocked' }, { title: '' }, { title: 7 }, { title: 'see C:/Users/x/notes' },
+    { title: 'mail a@b.se' }, { role: 'Implementer!' }, { started: 'yesterday' }, { done: 7 }, { after: 'WO 02' }, { result: 'https://example.com/x' }])
+    assert.throws(() => wo(patch), JSON.stringify(patch));
+  assert.throws(() => one({ work_orders: 'WO-01' }));
+  assert.throws(() => one({ work_orders: [null] }));
+  assert.throws(() => one({ work_orders: Array.from({ length: 61 }, (_, i) => ({ id: 'WO-' + i, title: 'T', status: 'todo' })) }));
+});
+
+test('pages: both cleaners give the same work orders, drop unknown rows and escape-safe plain strings only', () => {
+  const pub = sanitize(doc());
+  for (const name of ['index.html', 'missions.html']) {
+    const p = page(name);
+    const fromPublic = p.cleanPublicMissions(JSON.parse(JSON.stringify(pub))).find(m => m.id === 'm20-test-cards').wos;
+    const fromLocal = p.cleanMissions(doc()).find(m => m.id === 'm20-test-cards').wos;
+    assert.equal(JSON.stringify(fromPublic), JSON.stringify(fromLocal), name);
+    assert.equal(fromPublic.length, 4, name);
+    assert.deepEqual(Object.keys(fromPublic[0]), ['id', 'title', 'role', 'status', 'started', 'done', 'after', 'result'], name);
+    const rows = p.cleanWos([{ id: 'WO-01', title: 'ok', status: 'todo', role: '<img>', started: 'nope', extra: 1 }, { id: 'WO-02', title: 'x', status: 'evil' }, { title: 'no id', status: 'todo' }, null, 'x']);
+    assert.equal(JSON.stringify(rows), JSON.stringify([{ id: 'WO-01', title: 'ok', role: '', status: 'todo', started: '', done: '', after: '', result: '' }]), name);
+    assert.equal(p.cleanWos(undefined).length, 0, name);
+    assert.equal(p.cleanWos(Array.from({ length: 500 }, (_, i) => ({ id: 'W' + i, title: 't', status: 'todo' }))).length, 60, name);
+  }
+});
+
+test('board: a hostile work order title is escaped in the plan', () => {
+  const p = page('index.html');
+  const w = p.cleanWos([{ id: '<b>', title: '<img src=x onerror=alert(1)>', status: 'done', role: 'implementer', result: '<script>' }])[0];
+  const html = p.woItem(w, { key: 'P/m' }, {});
+  assert.equal(/<img|<script|<b>/.test(html.replace(/<b>(?=&lt;)/g, '')), false);
+  assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'));
 });
 
 // ras07 review finding 3 + owner #6: no silent cut – every public mission (old done and active) survives publish -> cleaner.

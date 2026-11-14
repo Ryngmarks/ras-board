@@ -2,14 +2,15 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-6FlONP/z0iNfxim0xUjeTqUc65D2lnfcyCEugXf28fE='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-BNkg8KhRFOdzGHIAfBgr7yu/Bpei7ulcYwxS+9vsCEc='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – översikt</title>
 <style>
-  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-01) ---- */
+  /* ---- shared look: keep identical in index.html, missions.html and library.html (owner look 2026-11-14) ---- */
   :root {
     color-scheme: light;
-    --bg: #f6f5f2; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #676d7a;
+    --bg: #f3f1ec; --surface: #ffffff; --surface-2: #faf9f7; --border: #e9e6e0; --border-2: #dcd8d0; --fg: #1d2027; --muted: #5b616e;
+    --ink: #16181d; --ink-2: #23262e; --ink-line: #343843; --on-ink: #b9bec9; --signal: #ffd23f;
     --shadow: 0 1px 2px rgba(31, 27, 20, .04), 0 8px 24px rgba(31, 27, 20, .06);
     --gaming: #e07b2e; --gaming-soft: #fdf1e6; --software: #3b7ff0; --software-soft: #ebf2fe; --core: #9a84df; --core-soft: #f3effc;
     --work: #1f9d6b; --work-soft: rgba(31, 157, 107, .12);
@@ -20,10 +21,10 @@
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { margin: 0; background: var(--bg) url(assets/ras-bg.svg) top center / max(100%, 1200px) auto no-repeat; color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
   svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
   code { font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
-  .topbar { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
+  .topbar { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, .82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(31, 27, 20, .04); }
   .topbar-in { max-width: 1480px; margin: 0 auto; padding: 0 28px; height: 60px; display: flex; align-items: center; gap: 28px; }
   .brand { display: flex; align-items: baseline; gap: 10px; flex: none; color: var(--fg); text-decoration: none; padding-right: 28px; border-right: 1px solid var(--border); }
   .brand b { font-size: 19px; font-weight: 900; font-style: italic; letter-spacing: .02em; }
@@ -34,14 +35,14 @@
   .tabs a svg { width: 17px; height: 17px; color: var(--muted); }
   .tabs a:hover { background: var(--surface-2); border-color: var(--border); }
   .tabs a:focus-visible { outline: 2px solid var(--software); outline-offset: 1px; }
-  .tabs a[aria-current="page"] { background: #f6ebde; border-color: #ecd9c3; font-weight: 650; }
-  .tabs a[aria-current="page"] svg { color: var(--gaming); }
+  .tabs a[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; font-weight: 650; }
+  .tabs a[aria-current="page"] svg { color: var(--signal); }
   main { max-width: 1480px; margin: 0 auto; padding: 28px 28px 56px; }
   .phead { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 20px; flex-wrap: wrap; }
   .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 6px 0 4px; }
   .lede { margin: 0; color: var(--muted); }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
+  .card { background: rgba(255, 255, 255, .9); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; min-width: 0; }
   .chead { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
   .chead h2 { margin: 0; font-size: 17px; font-weight: 700; }
   .chead p { margin: 0; color: var(--muted); font-size: 13px; }
@@ -91,19 +92,136 @@
   .live-state button svg { width: 16px; height: 16px; }
   .live-state button:hover { border-color: var(--muted); }
 
-  /* overview row */
-  .kpis { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin-top: 24px; align-items: stretch; }
-  @media (max-width: 1099px) { .kpis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .kpis .owner-kpi { grid-column: 1 / -1; } }
-  @media (max-width: 699px) { .kpis { grid-template-columns: minmax(0, 1fr); } }
-  .owner-kpi.hot { border-color: #f0c08f; background: linear-gradient(180deg, #fff8f1, #fff 70%); }
-  .owner-kpi.hot .ic { color: var(--gaming); background: var(--gaming-soft); border-color: transparent; }
-  .olist { display: grid; gap: 8px; }
-  .oitem { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: inherit; text-decoration: none; min-width: 0; }
-  a.oitem:hover { border-color: #ecc79f; }
-  .oitem div { display: grid; min-width: 0; flex: 1; }
-  .oitem b { overflow-wrap: anywhere; }
-  .oitem span.sub { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
-  .oitem .chev { color: var(--muted); }
+  /* din tur: the only dark surface on the page (owner look 2026-11-14) */
+  .phead { align-items: center; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .turn { margin-top: 18px; }
+  .turn h2 { margin: 0; }
+  .turn.hot { display: flex; flex-wrap: wrap; gap: 28px; padding: 30px; border-radius: 22px; background: var(--ink); color: #fff; box-shadow: 0 24px 60px rgba(22, 24, 29, .28); }
+  .turn-head { flex: 1 1 280px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .turn-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--signal); }
+  .turn-eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--signal); }
+  .turn.hot h2 { font-size: 46px; line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
+  .turn-head p { margin: 0; color: var(--on-ink); font-size: 16px; line-height: 1.5; max-width: 34ch; }
+  .turn-head .old { margin-top: auto; color: var(--on-ink); font-size: 13px; }
+  .decisions { flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-content: start; }
+  .dec { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 16px; background: var(--ink-2); border: 1px solid var(--ink-line); min-width: 0; }
+  .dec-top { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--on-ink); }
+  .dec-top b { margin-left: auto; color: var(--signal); white-space: nowrap; }
+  .dec h3 { margin: 0; font-size: 20px; line-height: 1.25; font-weight: 750; overflow-wrap: anywhere; }
+  .dec p { margin: 0; color: var(--on-ink); overflow-wrap: anywhere; }
+  .dec-btn { margin-top: auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px; border-radius: 12px; background: var(--signal); color: var(--ink); font-weight: 750; font-size: 15px; text-decoration: none; }
+  .dec-btn:hover { background: #ffdc66; }
+  .dec-btn:focus-visible, .dec-more:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .dec-more { align-self: center; color: var(--signal); font-weight: 650; text-decoration: none; }
+  .turn.rest { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; padding: 14px 20px; border-radius: 16px; background: rgba(255, 255, 255, .7); border: 1px solid var(--border-2); }
+  .turn.rest .ok { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #dcf2e8; color: #12704b; }
+  .turn.rest h2 { font-size: 16px; font-weight: 700; }
+  .turn.rest p { margin: 0; color: var(--muted); }
+  @media (max-width: 699px) { .turn.hot { padding: 20px; gap: 20px; } .turn.hot h2 { font-size: 32px; } }
+
+  /* agenterna jobbar: one lane per branch, every agent visible */
+  .zone { margin-top: 40px; }
+  .zhead { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 16px; }
+  .zhead .eyebrow { color: #12704b; letter-spacing: .14em; font-weight: 800; }
+  .zhead h2 { margin: 2px 0 0; font-size: 26px; font-weight: 800; letter-spacing: -.01em; }
+  .zhead p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .keys { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); }
+  .keys span { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { flex: none; box-sizing: border-box; width: 10px; height: 10px; border-radius: 50%; background: #c9c4ba; }
+  .dot.working { background: var(--work); }
+  .dot.owner { border-radius: 3px; background: var(--signal); }
+  .keys .dot.owner { background: var(--ink); border: 2px solid var(--signal); }
+  .dot.waiting { background: transparent; border: 2px solid #8a909c; }
+  .lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 18px; align-items: start; }
+  .lane { --acc: var(--core); display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 18px 18px 16px; border-radius: 18px; background: rgba(255, 255, 255, .9); border: 1px solid var(--border); border-top: 4px solid var(--acc); box-shadow: var(--shadow); }
+  .lane.gaming { --acc: var(--gaming); } .lane.software { --acc: var(--software); }
+  .lane-head { display: flex; align-items: center; gap: 10px; min-height: 30px; }
+  .lane-head small { margin-left: auto; font-size: 13px; color: var(--muted); text-align: right; }
+  .brand-logo { display: block; height: 28px; width: auto; max-width: 60%; object-fit: contain; mix-blend-mode: multiply; }
+  .core-mark { font-size: 24px; font-weight: 900; font-style: italic; letter-spacing: -.02em; color: #1f2a44; line-height: 28px; }
+  .core-mark span { font-size: 14px; letter-spacing: .02em; color: #6a55b8; margin-left: 3px; }
+  .arows { display: grid; gap: 8px; }
+  .arow { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; min-width: 0; }
+  .arow.working { background: #eaf6f0; border: 1px solid #bfe3d2; }
+  .arow.working .dot { animation: raspulse 2s infinite; }
+  .arow.owner { background: var(--ink); border: 1px solid var(--ink); color: #fff; }
+  .arow.waiting { background: #fff; border: 1px dashed #c9c4ba; }
+  .arow .who { flex: 1; min-width: 0; display: grid; }
+  .arow .who b { font-size: 15px; overflow-wrap: anywhere; }
+  .arow .who b small { margin-left: 8px; font: 12px ui-monospace, "Cascadia Code", Consolas, monospace; color: var(--muted); }
+  .arow .who span { font-size: 13px; color: #454b57; overflow-wrap: anywhere; }
+  .arow.owner .who span, .arow.owner .who b small { color: var(--on-ink); }
+  .arow .t { text-align: right; white-space: nowrap; line-height: 1.2; }
+  .arow .t b { display: block; font-size: 16px; font-variant-numeric: tabular-nums; color: #12704b; }
+  .arow .t small { font-size: 11px; color: #454b57; }
+  .arow.waiting .t b { color: #454b57; }
+  .arow.owner .t b { color: var(--signal); } .arow.owner .t small { color: var(--on-ink); }
+  .idle-h { margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .idle { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .idle span { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 12px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); color: #454b57; font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+  .idle span::before { content: ""; flex: none; box-sizing: border-box; width: 8px; height: 8px; border-radius: 50%; background: #c9c4ba; }
+  .idle span.planned { background: transparent; border-style: dashed; color: var(--muted); font-weight: 500; }
+  .idle span.planned::before { background: transparent; border: 1px dashed #8a909c; }
+  .bprojects { margin: 0; color: var(--muted); font-size: 12px; }
+  @keyframes raspulse { 0% { box-shadow: 0 0 0 0 rgba(31, 157, 107, .45); } 70% { box-shadow: 0 0 0 8px rgba(31, 157, 107, 0); } 100% { box-shadow: 0 0 0 0 rgba(31, 157, 107, 0); } }
+  @media (prefers-reduced-motion: reduce) { .arow.working .dot { animation: none; } }
+
+  /* planen: work orders per active mission as a timeline (shown when the mission list carries work_orders) */
+  .zhead .eyebrow.neutral { color: #454b57; }
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 18px; align-items: start; }
+  .plan { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px; border-radius: 18px; background: rgba(255, 255, 255, .9); border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .plan-top { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+  .plan-top h3 { margin: 0; font-size: 17px; font-weight: 750; overflow-wrap: anywhere; }
+  .plan-top .phase { margin-left: auto; }
+  .plan .p-owner { background: var(--ink); color: var(--signal); }
+  .segs { display: flex; align-items: center; gap: 10px; }
+  .segs div { flex: 1; display: flex; gap: 3px; height: 6px; }
+  .segs i { flex: 1; border-radius: 3px; background: #dcd8d0; }
+  .segs i.done { background: var(--work); } .segs i.working { background: #9bd6bd; } .segs i.owner { background: var(--ink); }
+  .segs b { font-size: 13px; color: #12704b; white-space: nowrap; }
+  .wos { list-style: none; margin: 0; padding: 0; }
+  .wo { display: flex; gap: 14px; }
+  .wo-rail { flex: none; width: 22px; display: flex; flex-direction: column; align-items: center; }
+  .wo-rail::after { content: ""; flex: 1; width: 2px; background: #dcd8d0; }
+  .wo.done .wo-rail::after { background: var(--work); }
+  .wo:last-child .wo-rail::after { display: none; }
+  .wo-mark { box-sizing: border-box; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 2px solid #8a909c; }
+  .wo-mark svg { width: 13px; height: 13px; stroke-width: 3.2; }
+  .wo.done .wo-mark { border: 0; background: var(--work); color: #fff; }
+  .wo.working .wo-mark { border: 0; background: #dcf2e8; }
+  .wo.working .wo-mark i { width: 10px; height: 10px; border-radius: 50%; background: var(--work); animation: raspulse 2s infinite; }
+  .wo.owner .wo-mark { border: 0; border-radius: 6px; background: var(--ink); }
+  .wo.owner .wo-mark i { width: 10px; height: 10px; border-radius: 3px; background: var(--signal); }
+  .wo-body { flex: 1; min-width: 0; padding-bottom: 14px; }
+  .wo:last-child .wo-body { padding-bottom: 0; }
+  .wo-line { display: flex; align-items: flex-start; gap: 10px; }
+  .wo-line > div { flex: 1; min-width: 0; display: grid; }
+  .wo code { color: var(--muted); }
+  .wo b { overflow-wrap: anywhere; }
+  .wo small { font-size: 12px; color: #454b57; overflow-wrap: anywhere; }
+  .wo.todo b { font-weight: 600; color: #454b57; } .wo.todo small { color: var(--muted); }
+  .chip { flex: none; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: #f0eee9; color: #454b57; white-space: nowrap; }
+  .wo-box { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 14px; }
+  .wo-box b { font-size: 16px; font-weight: 700; }
+  .wo.working .wo-box { background: #eaf6f0; border: 1px solid #bfe3d2; }
+  .wo.working code { color: #12704b; }
+  .wo.working .chip { align-self: flex-start; background: #fff; color: #12704b; font-weight: 700; }
+  .wo.owner .wo-box { background: var(--ink); color: #fff; }
+  .wo.owner code { color: var(--signal); }
+  .wo-t { text-align: right; white-space: nowrap; line-height: 1.2; }
+  .wo-t b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; color: #12704b; }
+  .wo-t small { font-size: 11px; }
+  .wo.owner .wo-t b { color: var(--signal); } .wo.owner .wo-t small { color: var(--on-ink); }
+  .wo-box .dec-btn { min-height: 44px; }
+  @media (prefers-reduced-motion: reduce) { .wo.working .wo-mark i { animation: none; } }
+
+  /* bakgrund: quiet cards under the two live zones */
+  .zlabel { margin: 40px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .card.quiet { background: rgba(255, 255, 255, .55); box-shadow: none; border-color: var(--border-2); }
+  .trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 18px; margin-top: 18px; align-items: stretch; }
+  .shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .shead h2 { margin: 0; font-size: 22px; font-weight: 800; }
   .calm { color: var(--muted); }
   .big { font-size: 34px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
   .bigrow { display: flex; align-items: baseline; gap: 10px; }
@@ -113,62 +231,6 @@
   .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .legend b { color: var(--fg); font-weight: 650; }
-
-  /* organisation: owner on top, three branch panels */
-  .section { margin-top: 34px; }
-  .shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-  .shead h2 { margin: 0; font-size: 22px; font-weight: 800; }
-  .shead p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
-  .oroot { display: flex; justify-content: center; }
-  .owner-node { display: flex; align-items: center; gap: 14px; min-width: 260px; padding: 12px 20px 12px 14px; border-radius: 14px; background: var(--surface); border: 1.5px solid #2b2f38; box-shadow: var(--shadow); }
-  .owner-node .ic { width: 44px; height: 44px; }
-  .owner-node b { display: block; font-size: 17px; }
-  .owner-node small { color: var(--muted); font-size: 13px; }
-  .olines { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; height: 48px; }
-  .olines::before { content: ""; position: absolute; left: 50%; top: 0; height: 24px; width: 2px; margin-left: -1px; background: var(--line); }
-  .olines::after { content: ""; position: absolute; top: 23px; height: 2px; left: calc((100% - 36px) / 6); right: calc((100% - 36px) / 6); background: var(--line); }
-  .olines span { position: relative; }
-  .olines span::before { content: ""; position: absolute; left: 50%; top: 23px; bottom: 0; width: 2px; margin-left: -1px; background: var(--line); }
-  .olines span.waiting::before { background: var(--gaming); }
-  .olines em { position: absolute; z-index: 1; left: 50%; top: 12px; transform: translateX(-50%); font-style: normal; white-space: nowrap; font-size: 12px; font-weight: 650; color: #a4520c; background: #fff7ef; border: 1px solid #f0c08f; border-radius: 999px; padding: 1px 10px; }
-  .obranches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
-  .ob { --acc: var(--core); --soft: var(--core-soft); display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 18px 16px 16px; border-radius: 18px;
-    border: 1px solid color-mix(in srgb, var(--acc) 28%, var(--border)); background: linear-gradient(180deg, var(--soft), #fff 62%); box-shadow: var(--shadow); }
-  .ob.gaming { --acc: var(--gaming); --soft: var(--gaming-soft); }
-  .ob.software { --acc: var(--software); --soft: var(--software-soft); }
-  .ob-logo { display: flex; justify-content: center; align-items: center; height: 36px; }
-  .brand-logo { display: block; height: 34px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
-  .core-mark { font-size: 27px; font-weight: 900; font-style: italic; letter-spacing: -.02em; color: #1f2a44; line-height: 1; }
-  .core-mark span { font-size: 15px; letter-spacing: .02em; color: var(--core); margin-left: 2px; }
-  .dir { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0, 0, 0, .03); }
-  .dir .ic { color: var(--acc); background: var(--soft); border-color: transparent; width: 42px; height: 42px; }
-  .dir div { min-width: 0; }
-  .dir b { display: block; font-size: 15px; }
-  .dir small { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; }
-  .dir.planned { border-style: dashed; background: transparent; box-shadow: none; }
-  .fork { height: 16px; margin: -6px 14% -4px; border: 2px solid var(--line); border-bottom: 0; border-radius: 10px 10px 0 0; position: relative; }
-  .fork::before { content: ""; position: absolute; left: 50%; top: -10px; height: 10px; width: 2px; margin-left: -1px; background: var(--line); }
-  .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; }
-  .role { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 84px; padding: 10px 8px; text-align: center; border-radius: 12px; background: #fff; border: 1px solid var(--border); }
-  .role svg { width: 21px; height: 21px; color: #3a3f4a; }
-  .role b { font-size: 13px; line-height: 1.25; overflow-wrap: anywhere; }
-  .role.planned { background: transparent; border-style: dashed; }
-  .role.planned svg, .role.planned b { color: var(--muted); }
-  .role.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
-  .role.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); background: #fffaf5; }
-  .dir.working { border-color: var(--work); box-shadow: 0 0 0 3px var(--work-soft); }
-  .dir.waiting { border-color: var(--wait); box-shadow: 0 0 0 3px var(--wait-soft); }
-  .tag { font-size: 11px; color: var(--muted); border: 1px dashed var(--border-2); border-radius: 999px; padding: 0 7px; }
-  .live { font-size: 11px; font-weight: 650; line-height: 1.3; color: var(--work); overflow-wrap: anywhere; }
-  .live.waiting { color: #a4520c; }
-  .live.more { color: var(--muted); font-weight: 500; }
-  .bprojects { color: var(--muted); font-size: 12px; text-align: center; margin: -4px 0 0; }
-  @media (max-width: 1099px) {
-    .olines { display: none; }
-    .oroot { justify-content: flex-start; margin: 14px 0; }
-    .obranches { grid-template-columns: minmax(0, 1fr); }
-  }
-  @media (max-width: 699px) { .owner-node { min-width: 0; width: 100%; } .roles { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); } }
 
   /* lower cards */
   .duo { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; margin-top: 22px; align-items: start; }
@@ -271,59 +333,68 @@
 </header>
 <main>
   <div class="phead">
-    <div>
-      <div class="eyebrow">Ryngmark Agent System</div>
-      <h1>Översikt</h1>
-      <p class="lede">Ditt team, dina uppdrag och det som kräver ditt beslut – samlat.</p>
-    </div>
+    <div><h1 class="vh">Översikt</h1><div class="eyebrow">Översikt</div></div>
     <div class="live-state" id="live"><span class="pulse"></span><span id="updated">Laddar…</span><button id="refresh" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Uppdatera</button></div>
   </div>
 
-  <p class="localnote" id="localnote" hidden>Token per uppdrag, anteckningar och uppdragsloggen finns bara på den lokala tavlan.
-    <a href="http://johansdator:5199/" rel="noopener">Öppna lokalt →</a>
-    <small>Fungerar i Johans hemnätverk när tavlan är igång.</small></p>
-
-  <section class="kpis" aria-label="Läget just nu">
-    <article class="card kpi owner-kpi" id="owner-card">
-      <div class="chead"><span class="ic" id="owner-ic"></span><h2>Väntar på Johan</h2><span class="sp"></span><span id="owner-count"></span></div>
-      <div class="olist" id="alerts" aria-live="polite"><div class="calm">Laddar…</div></div>
-    </article>
-    <article class="card kpi">
-      <div class="chead"><span class="ic" id="run-ic"></span><h2>Pågår nu</h2></div>
-      <div id="running"><div class="calm">Laddar…</div></div>
-    </article>
-    <article class="card kpi">
-      <div class="chead"><span class="ic" id="tok-ic"></span><h2>Tokens</h2><span class="sp"></span><span class="sub">senaste 7 dagarna</span></div>
-      <div id="tokens-kpi"><div class="calm">Laddar…</div></div>
-    </article>
+  <section class="turn rest" id="owner-card" aria-labelledby="turn-title" aria-live="polite">
+    <h2 id="turn-title">Din tur</h2><p>Laddar…</p>
   </section>
 
-  <section class="section" aria-labelledby="org-title">
-    <div class="shead"><div><h2 id="org-title">Organisation</h2><p>Ditt team och ansvarsfördelning. <span id="org-note"></span></p></div></div>
-    <div id="org" aria-live="polite"><div class="empty">Laddar organisationen…</div></div>
+  <section class="zone" aria-labelledby="org-title">
+    <div class="zhead">
+      <div><div class="eyebrow">Agenterna jobbar</div><h2 id="org-title">Agenter</h2><p id="org-note"></p></div>
+      <div class="keys" aria-label="Förklaring">
+        <span><span class="dot working"></span>Arbetar</span><span><span class="dot owner"></span>Väntar på dig</span>
+        <span><span class="dot waiting"></span>Väntar på annan agent</span><span><span class="dot"></span>Ledig</span>
+      </div>
+    </div>
+    <div id="org"><div class="empty">Laddar organisationen…</div></div>
   </section>
 
+  <section class="zone" id="plan" aria-labelledby="plan-title" hidden>
+    <div class="zhead">
+      <div><div class="eyebrow neutral">Planen</div><h2 id="plan-title">Work orders per uppdrag</h2></div>
+      <a class="link" style="margin-left:auto" href="missions.html">Alla uppdrag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+    </div>
+    <div class="plan-grid" id="plans"></div>
+  </section>
+
+  <h2 class="zlabel">Bakgrund</h2>
   <div class="duo">
-    <section class="card" aria-labelledby="projects-title">
+    <section class="card quiet" aria-labelledby="projects-title">
       <div class="chead"><span class="ic" id="proj-ic"></span><div><h2 id="projects-title">Projekt</h2><p>Anslutna projekt och deras status. <span id="projects-note"></span></p></div></div>
       <div class="projects" id="projects"></div>
     </section>
-    <section class="card" aria-labelledby="activity-title">
+    <section class="card quiet" aria-labelledby="activity-title">
       <div class="chead"><span class="ic" id="act-ic"></span><h2 id="activity-title">Senaste aktivitet</h2><span class="sp"></span><a class="link" href="missions.html">Alla uppdrag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></div>
       <ul class="acts" id="activity"><li><span></span><span class="calm">Laddar…</span><span></span></li></ul>
     </section>
   </div>
 
-  <div class="duo">
-    <section class="card" aria-labelledby="latest-title">
-      <div class="chead"><span class="ic" id="hist-ic"></span><h2 id="latest-title">Senaste uppdrag</h2><span class="sp"></span><span class="sub" id="latest-where"></span></div>
-      <div id="latest"><div class="calm">Laddar…</div></div>
-    </section>
-    <section class="card" aria-labelledby="days-title">
+  <div class="trio">
+    <article class="card quiet">
+      <div class="chead"><span class="ic" id="run-ic"></span><h2>Pågår nu</h2></div>
+      <div id="running"><div class="calm">Laddar…</div></div>
+    </article>
+    <article class="card quiet">
+      <div class="chead"><span class="ic" id="tok-ic"></span><h2>Tokens</h2><span class="sp"></span><span class="sub">senaste 7 dagarna</span></div>
+      <div id="tokens-kpi"><div class="calm">Laddar…</div></div>
+    </article>
+    <section class="card quiet" aria-labelledby="days-title">
       <div class="chead"><h2 id="days-title">Tokens per dag</h2><span class="sp"></span><span class="sub">avslutade uppdrag</span></div>
       <div id="days"><div class="calm">Laddar…</div></div>
     </section>
   </div>
+
+  <section class="card quiet" aria-labelledby="latest-title" style="margin-top:18px">
+    <div class="chead"><span class="ic" id="hist-ic"></span><h2 id="latest-title">Senaste uppdrag</h2><span class="sp"></span><span class="sub" id="latest-where"></span></div>
+    <div id="latest"><div class="calm">Laddar…</div></div>
+  </section>
+
+  <p class="localnote" id="localnote" hidden>Token per uppdrag, anteckningar och uppdragsloggen finns bara på den lokala tavlan.
+    <a href="http://johansdator:5199/" rel="noopener">Öppna lokalt →</a>
+    <small>Fungerar i Johans hemnätverk när tavlan är igång.</small></p>
 
   <section id="all-missions" class="all-missions" hidden>
     <div class="shead"><h2>Alla avslutade uppdrag <span class="sub" id="missions-note"></span></h2></div>
@@ -415,6 +486,8 @@ const ICONS = {
   check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
   flask: '<path d="M9 3h6"/><path d="M10 3v6L4.5 19A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+  tick: '<path d="m5 12 5 5 9-10"/>',
   dots: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
 };
 // role / director id -> icon
@@ -447,6 +520,16 @@ function ago(iso) {
   if (s < 86400) return Math.round(s / 3600) + " h";
   return Math.round(s / 86400) + " d";
 }
+// how long something has run or waited: "nyss", "40 min", "1 h 20 min", "3 d"
+function dur(iso) {
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (!isFinite(s)) return "";
+  if (s < 90) return "nyss";
+  const m = Math.round(s / 60);
+  if (m < 60) return m + " min";
+  if (m < 1440) return Math.floor(m / 60) + " h" + (m % 60 ? " " + (m % 60) + " min" : "");
+  return Math.floor(m / 1440) + " d";
+}
 const sinceText = iso => { const a = ago(iso); return !a ? "" : a === "nyss" ? "nyss" : `för ${a} sedan`; };
 
 // ---- status.json is untrusted input: keep only known shapes and plain strings before anything is rendered ----
@@ -464,6 +547,16 @@ function clean(raw) {
 // ---- Missions (ras07). Two shapes, one cleaner each; both return the same rows. Keep identical in missions.html. ----
 // Local: RAS docs/missions.json embedded by build-local (+ `tokens` per mission). Public: publish-missions.cjs output.
 const relPath = p => (typeof p === "string" && p.length <= 200 && !/[\u0000-\u001f]/.test(p) && !/^[a-z][a-z0-9+.-]*:|^[\\/]/i.test(p) && !p.replace(/\\/g, "/").split("/").includes("..") ? p : "");
+// Work orders per mission (owner decision 2026-11-14: public). Same shape in the local log and the public list; a row
+// with an unknown status or without id and title drops out. Keep identical in index.html and missions.html.
+const WO_STATUS = { done: "klar", working: "pågår nu", owner: "ditt beslut", todo: "kvar" };
+function cleanWos(list) {
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
+  const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
+  return (Array.isArray(list) ? list : []).filter(w => w && typeof w === "object" && Object.hasOwn(WO_STATUS, w.status) && str(w.id, 24) && str(w.title, 80)).slice(0, 60)
+    .map(w => ({ id: str(w.id, 24), title: str(w.title, 80), role: /^[a-z0-9-]{1,40}$/.test(w.role || "") ? w.role : "", status: w.status,
+      started: when(w.started), done: when(w.done), after: str(w.after, 24), result: str(w.result, 120) }));
+}
 // Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
 // cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
 function cleanMissions(raw) {
@@ -476,7 +569,7 @@ function cleanMissions(raw) {
       branch: str(m.branch, 80), worktree: str(m.worktree, 80), brief: relPath(m.brief), status: relPath(m.status), public: m.public !== false,
       tokens: typeof m.tokens === "number" && isFinite(m.tokens) && m.tokens >= 0 ? m.tokens : null,
       log: (Array.isArray(m.log) ? m.log : []).filter(e => e && typeof e === "object" && Object.hasOwn(PHASES, e.phase)).slice(-30)
-        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })) }));
+        .map(e => ({ at: when(e.at), phase: e.phase, note: str(e.note, 200) })), wos: cleanWos(m.work_orders) }));
 }
 function cleanPublicMissions(raw) {
   if (!raw || typeof raw !== "object" || !Array.isArray(raw.missions)) return null;
@@ -484,7 +577,7 @@ function cleanPublicMissions(raw) {
   const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
   return raw.missions.filter(m => m && typeof m === "object" && Object.hasOwn(PHASES, m.phase) && str(m.project, 80) && str(m.id, 60))
     .map(m => ({ key: str(m.project, 80) + "/" + str(m.id, 60), project: str(m.project, 80), id: str(m.id, 60), title: str(m.name, 80) || str(m.id, 60),
-      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [] }));
+      phase: m.phase, next: "", updated: when(m.updated), opened: "", closed: "", branch: "", worktree: "", brief: "", status: "", public: true, tokens: null, log: [], wos: cleanWos(m.work_orders) }));
 }
 // The ONLY code that knows where mission data comes from.
 async function loadMissions(doc, fetchFn) {
@@ -564,16 +657,19 @@ function orgBoxes() {
   return [...BRANCHES.flatMap(k => ORG.branches[k] ? [ORG.branches[k].director, ...ORG.branches[k].roles] : []), ORG.core.director, ...ORG.core.roles];
 }
 
-// ---- Väntar på Johan: missions in phase "owner" + status.json entries with for: "owner" ----
+// ---- Din tur: missions in phase "owner" + status.json entries with for: "owner". One dark card per decision. ----
+const BRANCH_NAME = { gaming: "RAS Gaming", software: "RAS Software", core: "RAS Core" };
 function ownerItems() {
-  const items = [];
+  const items = [], names = roleNames();
+  const card = (project, since, title, sub, href, cta) => {
+    const k = branchOf(project), t = Date.parse(since);
+    items.push({ t, html: `<article class="dec"><div class="dec-top"><span class="bdot ${k}"></span>${BRANCH_NAME[k]} · ${esc(project)}${isFinite(t) ? `<b>${esc(dur(since))}</b>` : ""}</div>` +
+      `<h3>${esc(title)}</h3><p>${esc(sub)}</p><a class="dec-btn" href="${href}">${cta} ${icon("arrow")}</a></article>` });
+  };
   for (const m of MISS?.list || []) if (m.phase === "owner")
-    items.push(`<a class="oitem" href="missions.html#${esc(encodeURIComponent(m.key))}"><span class="ic ${branchOf(m.project)}">${icon(BRANCH_ICON[branchOf(m.project)])}</span>` +
-      `<div><b>${esc(m.title)} – ${esc(m.project)}</b><span class="sub">${esc(m.next || "Väntar på ditt beslut")}${m.updated ? " · " + esc(sinceText(m.updated)) : ""}</span></div>${icon("chev")}</a>`);
-  const names = roleNames();
+    card(m.project, m.updated, m.title, m.next || "Väntar på ditt beslut", `missions.html#${esc(encodeURIComponent(m.key))}`, "Öppna beslutet");
   for (const e of liveEntries().filter(forOwner))
-    items.push(`<div class="oitem"><span class="ic ${branchOf(e.project)}">${icon(e.role)}</span>` +
-      `<div><b>${esc(e.project)} · ${esc(names[e.role] || e.role)}</b><span class="sub">${esc(e.note || "väntar på svar")} · ${esc(sinceText(e.since))}</span></div></div>`);
+    card(e.project, e.since, e.note || "Väntar på svar", `${names[e.role] || e.role} frågar`, "missions.html", "Visa uppdrag");
   return items;
 }
 
@@ -603,16 +699,23 @@ function render() {
     : (failed ? "Kunde inte hämta status" : "Ingen status ännu");
   document.getElementById("live").classList.toggle("stale", failed || source === "raw");
 
-  const items = ownerItems();
-  document.getElementById("owner-card").classList.toggle("hot", items.length > 0);
-  document.getElementById("owner-count").innerHTML = items.length ? `<span class="badge wait">${items.length} ${items.length === 1 ? "beslut" : "beslut"}</span>` : "";
-  // at most 4 in the card; the rest are one click away on the Uppdrag tab
-  document.getElementById("alerts").innerHTML = !items.length ? `<div class="calm">Inget väntar på dig just nu.</div>`
-    : items.slice(0, 4).join("") + (items.length > 4 ? `<a class="link" href="missions.html">+${items.length - 4} till under Uppdrag ${icon("chev")}</a>` : "");
-  document.title = (items.length ? `(${items.length}) väntar på dig · ` : "") + "RAS – översikt";
+  const items = ownerItems(), n = items.length, turn = document.getElementById("owner-card");
+  // nothing is known until the first status or mission answer: keep "Laddar…" instead of claiming that nothing waits
+  if (data || MISS || failed) {
+    const oldest = Math.min(...items.map(i => i.t).filter(isFinite));
+    turn.className = "turn " + (n ? "hot" : "rest");
+    // at most 4 cards; the rest are one click away on the Uppdrag tab
+    turn.innerHTML = n ? `<div class="turn-head"><div class="turn-eyebrow">Din tur</div><h2 id="turn-title">${n} beslut väntar på dig</h2>
+        <p>De här spåren står stilla tills du har svarat. Allt annat rullar vidare utan dig.</p>
+        ${isFinite(oldest) ? `<div class="old">Äldsta frågan har väntat ${esc(dur(new Date(oldest).toISOString()))}</div>` : ""}</div>
+      <div class="decisions">${items.slice(0, 4).map(i => i.html).join("")}${n > 4 ? `<a class="dec-more" href="missions.html">+${n - 4} till under Uppdrag</a>` : ""}</div>`
+      : `<span class="ok">${icon("tick")}</span><h2 id="turn-title">Inget väntar på dig</h2><p>Agenterna jobbar vidare. Den mörka rutan dyker upp här så fort någon behöver ditt beslut.</p>`;
+  }
+  document.title = (n ? `(${n}) väntar på dig · ` : "") + "RAS – översikt";
 
   paintRunning();
   paintOrg();
+  paintPlan();
   paintActivity();
 
   // projects: connected projects (status.json) + where roles work now
@@ -669,70 +772,86 @@ function paintActivity() {
     : `<li><span></span><span class="calm">Ingen aktivitet ännu.</span><span></span></li>`;
 }
 
-// ---- organisation tree ----
-function liveLines(es, who) {
-  if (!es.length) return "";
-  const rank = e => (forOwner(e) ? 0 : e.state === "working" ? 1 : 2);
-  const sorted = es.slice().sort((a, b) => rank(a) - rank(b) || (Date.parse(b.since) || 0) - (Date.parse(a.since) || 0));
-  const lines = sorted.slice(0, 2).map(e => {
-    const txt = forOwner(e) ? "Väntar på Johan" : e.note;
-    return `<span class="live ${e.state}">● ${who ? esc(who(e)) + " · " : ""}${esc(e.project)}${txt ? " · " + esc(txt) : ""}</span>`;
-  });
-  if (sorted.length > 2) lines.push(`<span class="live more">+${sorted.length - 2} till</span>`);
-  return lines.join("");
+// ---- Agenterna jobbar: one lane per branch. Active agents are rows (what, where, model, how long); the rest are tiles. ----
+function agentRow(e, name) {
+  const cls = forOwner(e) ? "owner" : e.state;
+  const label = cls === "owner" ? "väntar på dig" : cls === "working" ? "har kört" : "har väntat";
+  const model = e.model.replace(/^.*\//, "").replace(/^claude-/, "");
+  const bits = [e.note, e.project, model + (model && e.effort && e.effort !== "default" ? " " + e.effort : "")].filter(Boolean);
+  const t = dur(e.since);
+  return `<div class="arow ${cls}"><span class="dot ${cls}"></span><div class="who"><b>${esc(name)}${e.agent ? `<small>${esc(e.agent)}</small>` : ""}</b>` +
+    `<span>${esc(bits.join(" · "))}</span></div>${t ? `<span class="t"><b>${esc(t)}</b><small>${label}</small></span>` : ""}</div>`;
 }
-const boxState = es => (!es.length ? "" : es.some(forOwner) ? "waiting" : es.some(e => e.state === "working") ? "working" : "waiting");
 
 function paintOrg() {
   if (!ORG) return;
-  const live = liveEntries();
+  const live = liveEntries(), names = roleNames();
   const byRole = new Map();
   for (const e of live) { if (!byRole.has(e.role)) byRole.set(e.role, []); byRole.get(e.role).push(e); }
-  const placed = new Set();
-  const esOf = id => { if (!id) return []; placed.add(id); return byRole.get(id) || []; };
-
-  const roleBox = r => {
-    const es = esOf(r.id), st = boxState(es);
-    return `<div class="role ${r.status}${st ? " " + st : ""}"${r.note ? ` title="${esc(r.note)}"` : ""}>${icon(r.id)}<b>${esc(r.name)}</b>` +
-      `${r.status === "planned" ? `<span class="tag">planerad</span>` : ""}${liveLines(es)}</div>`;
+  const rank = e => (forOwner(e) ? 0 : e.state === "working" ? 1 : 2);
+  const tile = b => `<span class="${b.status === "planned" ? "planned" : ""}"${b.note || b.today ? ` title="${esc(b.note || b.today)}"` : ""}>${esc(b.name)}${b.status === "planned" ? " · planerad" : ""}</span>`;
+  const lane = (k, logo, d, roles, projects, extra = []) => {
+    const boxes = [d, ...roles];
+    const rows = [...boxes.flatMap(b => (byRole.get(b.id) || []).map(e => ({ e, name: b.name }))), ...extra]
+      .sort((a, b) => rank(a.e) - rank(b.e) || (Date.parse(b.e.since) || 0) - (Date.parse(a.e.since) || 0));
+    const idle = boxes.filter(b => !byRole.has(b.id));
+    const free = idle.filter(b => b.status !== "planned").length;
+    return `<section class="lane ${k}" aria-label="${esc(BRANCH_LABEL[k])}">
+      <div class="lane-head">${logo}<small>${esc(d.name)} · ${rows.filter(r => r.e.state === "working").length} arbetar</small></div>
+      ${rows.length ? `<div class="arows">${rows.map(r => agentRow(r.e, r.name)).join("")}</div>` : ""}
+      ${idle.length ? `<div><div class="idle-h">Lediga · ${free}</div><div class="idle">${idle.map(tile).join("")}</div></div>` : ""}
+      ${projects.length ? `<p class="bprojects">Projekt: ${projects.map(esc).join(" · ")}</p>` : ""}</section>`;
   };
-  const dirBox = d => {
-    const es = esOf(d.id), st = boxState(es), planned = d.status === "planned";
-    return `<div class="dir${planned ? " planned" : ""}${st ? " " + st : ""}"><span class="ic">${icon(d.id)}</span><div><b>${esc(d.name)}</b>` +
-      `<small>${planned ? "planerad" + (d.today ? " · " : "") : ""}${esc(d.today)}</small>${liveLines(es)}</div></div>`;
-  };
-  // A branch waits for Johan when one of its projects has a mission in phase "owner" or a for-owner entry.
-  const waitsFor = k => (MISS?.list || []).some(m => m.phase === "owner" && branchOf(m.project) === k) || live.some(e => forOwner(e) && branchOf(e.project) === k);
-  const panel = (k, logo, d, roles, projects) => `<section class="ob ${k}" aria-label="${esc(BRANCH_LABEL[k])}">
-    <div class="ob-logo">${logo}</div>${dirBox(d)}
-    ${projects.length ? `<p class="bprojects">${projects.map(esc).join(" · ")}</p>` : ""}
-    <div class="fork" aria-hidden="true"></div><div class="roles">${roles}</div></section>`;
 
-  const panels = BRANCHES.map(k => {
+  const lanes = BRANCHES.map(k => {
     const b = ORG.branches[k];
-    if (!b) return "";
-    return panel(k, `<img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180">`, b.director, b.roles.map(roleBox).join(""), b.projects);
+    return b ? lane(k, `<img class="brand-logo" src="assets/ras-${k}.png" alt="${esc(b.name)}" width="960" height="180">`, b.director, b.roles, b.projects) : "";
   });
-  // Core goes last so every role of the tree is placed before "Övriga" is worked out.
-  const coreRoles = ORG.core.roles.map(roleBox).join("");
-  const coreDir = ORG.core.director;
-  const coreHtml = (() => {
-    const html = panel("core", `<span class="core-mark" role="img" aria-label="${esc(ORG.core.name)}">RAS<span>CORE</span></span>`, coreDir, coreRoles, []);
-    const others = live.filter(e => !placed.has(e.role));
-    if (!others.length) return html;
-    const names = roleNames();
-    const box = `<div class="role ${boxState(others)}">${icon("dots")}<b>Övriga</b>${liveLines(others, e => names[e.role] || e.role)}</div>`;
-    return html.replace(/<\/div><\/section>$/, box + "</div></section>");
-  })();
+  // Entries from roles that have no box in the tree land in Core, under their own role name.
+  const placed = new Set(orgBoxes().map(b => b.id).filter(Boolean));
+  const others = live.filter(e => !placed.has(e.role)).map(e => ({ e, name: names[e.role] || e.role }));
+  lanes.push(lane("core", `<span class="core-mark" role="img" aria-label="${esc(ORG.core.name)}">RAS<span>CORE</span></span>`, ORG.core.director, ORG.core.roles, [], others));
 
   const all = [...BRANCHES.flatMap(k => ORG.branches[k]?.roles || []), ...ORG.core.roles];
-  document.getElementById("org-note").textContent = `${all.filter(r => r.status === "active").length} aktiva · ${all.filter(r => r.status === "planned").length} planerade`;
-  const lines = ["gaming", "software", "core"].map(k => waitsFor(k) ? `<span class="waiting"><em>Väntar på beslut</em></span>` : `<span></span>`).join("");
-  document.getElementById("org").innerHTML = `
-    <div class="oroot"><div class="owner-node"><span class="ic">${icon("user")}</span><div><b>${esc(ORG.owner.name)}</b><small>${esc(ORG.owner.title)}</small></div></div></div>
-    <div class="olines" aria-hidden="true">${lines}</div>
-    <div class="obranches">${panels.join("")}${coreHtml}</div>`;
+  const working = live.filter(e => e.state === "working").length, waiting = live.filter(e => e.state === "waiting" && !forOwner(e)).length;
+  document.getElementById("org-title").textContent = `${working} ${working === 1 ? "agent arbetar" : "agenter arbetar"} just nu`;
+  document.getElementById("org-note").textContent = `${waiting ? `${waiting} väntar på annan agent · ` : ""}${all.filter(r => r.status === "active").length} aktiva roller · ${all.filter(r => r.status === "planned").length} planerade`;
+  document.getElementById("org").innerHTML = `<div class="lanes">${lanes.join("")}</div>`;
 }
+// ---- Planen: the work orders of every active mission as a timeline. The section stays hidden until a mission carries them. ----
+function woItem(w, m, names) {
+  const who = w.role ? `<span class="chip">${esc(names[w.role] || w.role)}</span>` : "";
+  const t = w.started ? dur(w.started) : "";
+  const time = label => (t ? `<span class="wo-t"><b>${esc(t)}</b><small>${label}</small></span>` : "");
+  const head = `<div><code>${esc(w.id)} · ${WO_STATUS[w.status]}</code><b>${esc(w.title)}</b></div>`;
+  let mark = "", body;
+  if (w.status === "working") { mark = "<i></i>"; body = `<div class="wo-box"><div class="wo-line">${head}${time("har kört")}</div>${who}</div>`; }
+  else if (w.status === "owner") {
+    mark = "<i></i>";
+    body = `<div class="wo-box"><div class="wo-line">${head}${time("har väntat")}</div><a class="dec-btn" href="missions.html#${esc(encodeURIComponent(m.key))}">Öppna beslutet ${icon("arrow")}</a></div>`;
+  } else {
+    const done = w.status === "done";
+    if (done) mark = icon("tick");
+    const sub = done ? ["Klar" + (w.done ? " " + sinceText(w.done) : ""), w.result].filter(Boolean).join(" · ") : w.after ? `Startar efter ${w.after}` : "";
+    body = `<div class="wo-line"><div><code>${esc(w.id)}</code><b>${esc(w.title)}</b>${sub ? `<small>${esc(sub)}</small>` : ""}</div>${who}</div>`;
+  }
+  return `<li class="wo ${w.status}"><span class="wo-rail"><span class="wo-mark">${mark}</span></span><div class="wo-body">${body}</div></li>`;
+}
+function paintPlan() {
+  const active = (MISS?.list || []).filter(m => m.wos.length && m.phase !== "done" && m.phase !== "paused")
+    .sort((a, b) => (b.phase === "owner") - (a.phase === "owner") || (Date.parse(b.updated) || 0) - (Date.parse(a.updated) || 0));
+  document.getElementById("plan").hidden = !active.length;
+  if (!active.length) return;
+  const names = roleNames();
+  document.getElementById("plans").innerHTML = active.slice(0, 6).map(m => {
+    const done = m.wos.filter(w => w.status === "done").length;
+    return `<article class="plan"><div class="plan-top"><span class="bdot ${branchOf(m.project)}"></span><h3>${esc(m.title)}</h3><span class="sub">${esc(m.project)}</span>` +
+      `<span class="phase p-${m.phase}">${PHASES[m.phase]}</span></div>` +
+      `<div class="segs"><div role="img" aria-label="${done} av ${m.wos.length} work orders klara">${m.wos.map(w => `<i class="${w.status}"></i>`).join("")}</div><b>${done} av ${m.wos.length} klara</b></div>` +
+      `<ol class="wos">${m.wos.map(w => woItem(w, m, names)).join("")}</ol></article>`;
+  }).join("");
+}
+
 async function loadOrg() {
   try {
     // The local build embeds org.json (a page opened from file:// cannot fetch it); the public page fetches it same-origin.
@@ -868,7 +987,7 @@ function markPublic(doc, isPublic) {
 }
 
 function boot() {
-  for (const [id, ic] of [["owner-ic", "user"], ["run-ic", "play"], ["tok-ic", "database"], ["proj-ic", "layers"], ["act-ic", "clock"], ["hist-ic", "chart"]])
+  for (const [id, ic] of [["run-ic", "play"], ["tok-ic", "database"], ["proj-ic", "layers"], ["act-ic", "clock"], ["hist-ic", "chart"]])
     document.getElementById(id).innerHTML = icon(ic);
   markPublic(document, !document.getElementById("ras-history"));
   document.addEventListener("click", ev => {
