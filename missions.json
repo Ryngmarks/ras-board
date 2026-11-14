@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:26:20.596Z",
+  "generated_at": "2026-11-14T22:38:31.953Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:26:20.520Z",
+      "updated": "2026-11-14T22:38:31.878Z",
       "work_orders": [
         {
           "id": "W01",
@@ -473,10 +473,12 @@
         {
           "id": "REF-03",
           "title": "Mät slag, träffar, rörelse och kamera ur Albion-inspelningen",
-          "status": "working",
+          "status": "done",
           "role": "research",
           "started": "2026-11-14T22:20:35.469Z",
-          "after": "Q-07"
+          "done": "2026-11-14T22:38:31.878Z",
+          "after": "Q-07",
+          "result": "Mätt: förmågans ansats, start och stopp i rörelse, kamerans skala, ingen frysning vid träff. Grundattacken återstår"
         },
         {
           "id": "REF-04A",
