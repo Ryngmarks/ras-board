@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T13:51:52Z",
+    "updated":  "2026-11-14T13:52:16Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "n01 WO-13a",
                         "since":  "2026-11-14T10:00:12Z"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "Unity runtime findings",
+                        "since":  "2026-11-14T13:52:16Z",
+                        "agent":  "arch-add2",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
