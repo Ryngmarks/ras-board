@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T02:06:15Z",
+    "updated":  "2026-11-14T02:06:18Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "steg 1.1 ryggrad",
                         "since":  "2026-11-13T23:17:26Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "WO-12b server",
+                        "since":  "2026-11-14T02:06:18Z",
+                        "agent":  "wo-12b",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
