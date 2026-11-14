@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:39:11.957Z",
+  "generated_at": "2026-11-14T22:43:12.194Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:39:11.891Z",
+      "updated": "2026-11-14T22:43:12.125Z",
       "work_orders": [
         {
           "id": "W01",
@@ -483,10 +483,12 @@
         {
           "id": "REF-04A",
           "title": "Djupanalys av Albion-klippet: stil, kamera, strid, gränssnitt",
-          "status": "working",
+          "status": "done",
           "role": "research",
           "started": "2026-11-14T22:26:20.450Z",
-          "after": "Q-07"
+          "done": "2026-11-14T22:43:12.048Z",
+          "after": "Q-07",
+          "result": "Klar, med egen studie av figuren och rörelsen. Förslag till stilbibeln och stridsstandarden följer"
         },
         {
           "id": "REF-04B",
@@ -497,6 +499,51 @@
           "done": "2026-11-14T22:39:11.891Z",
           "after": "Q-07",
           "result": "Klar: gränssnittet täcker 40 procent av bilden, effekterna döljer spelet. Listor på vad vi tar och undviker"
+        },
+        {
+          "id": "Q-08",
+          "title": "Efter analysen: närmaste zoomläge och ett tredje klipp",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-14T22:43:12.125Z",
+          "after": "REF-04A",
+          "decision": {
+            "summary": "Djupanalysen av dina två klipp är klar. Två saker behöver ditt svar: hur nära kameran ska kunna gå, och om du vill spela in ett tredje kort klipp för det som inte gick att mäta.",
+            "questions": [
+              {
+                "id": "Q-08a",
+                "text": "Ska det närmaste zoomläget ligga närmare än 80?",
+                "note": "I ditt Albion-klipp används två lägen: ett vidare i strid, där hjälten är cirka 100 till 120 pixlar hög, och ett nära i staden, där han är cirka 170 till 220 pixlar. Vårt närmaste läge på 80 ger cirka 110 pixlar, alltså ungefär som Albions stridsläge.",
+                "options": [
+                  {
+                    "label": "Behåll 80",
+                    "text": "Närmaste läget blir som Albions stridsläge. Modeller och texturer behöver inte mer detalj än planerat."
+                  },
+                  {
+                    "label": "Gå närmare, cirka 130",
+                    "text": "Som Albions stadsläge: hjälten blir ungefär 180 pixlar hög och utrustningen syns ordentligt. Kräver ungefär två och en halv gånger så detaljerade texturer på figurer.",
+                    "recommended": true
+                  }
+                ]
+              },
+              {
+                "id": "Q-08b",
+                "text": "Vill du spela in ett tredje kort klipp i Albion?",
+                "note": "Det som saknas: tio vanliga slag mot en stillastående fiende utan annat i bild, stå still till fots i båda zoomlägena, samt en löpning med tvär vändning på slät mark. Cirka två minuter.",
+                "options": [
+                  {
+                    "label": "Ja",
+                    "text": "Säg till när du står redo, så startar projektledaren inspelningen. Då blir även grundattacken uppmätt.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Nej, det räcker",
+                    "text": "Grundattackens tider behålls som startvärden och du bedömer känslan själv när den första riktiga attacken är spelbar."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
