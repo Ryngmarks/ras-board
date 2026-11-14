@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T23:21:29.926Z",
+  "generated_at": "2026-11-14T23:24:37.932Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T23:21:29.849Z",
+      "updated": "2026-11-14T23:24:37.861Z",
       "work_orders": [
         {
           "id": "W01",
@@ -581,10 +581,49 @@
         {
           "id": "AD-22b",
           "title": "Blind rangordning, runda 2",
-          "status": "working",
+          "status": "done",
           "role": "art-director",
           "started": "2026-11-14T23:21:29.849Z",
-          "after": "WO-22b"
+          "done": "2026-11-14T23:24:37.787Z",
+          "after": "WO-22b",
+          "result": "Blind rangordning: de kompakta byggena först, Heroic sist även i runda 2"
+        },
+        {
+          "id": "Q-09",
+          "title": "Välj hjältens kroppsbygge",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-14T23:24:37.861Z",
+          "after": "AD-22b",
+          "decision": {
+            "summary": "Tre kroppsbyggen av samma hjälte har visats som enkla blockfigurer i spelets kamera, i två rundor. En art director har rangordnat dem blint, utan att veta vilket bygge som var vilket. Bladen finns i mappen för granskning, runda 1 och runda 2.",
+            "questions": [
+              {
+                "id": "S6",
+                "text": "Vilket kroppsbygge ska hjälten ha?",
+                "note": "Höjden är 1,80 meter i alla. Talet är hur många huvuden kroppen är hög. Du valde tidigare Heroic ur en tabell. På bilderna hamnade Heroic sist på alla blad i båda rundorna, och huvudet blir bara 10 pixlar brett i det yttersta zoomläget, under kravet på 12.",
+                "options": [
+                  {
+                    "label": "Kompakt, cirka 6,5 huvuden",
+                    "text": "Först eller tvåa på alla blad. Tydligt huvud och breda axlar i alla zoomlägen. Samma bygge som Albion-figuren du gillar, och utanför det spann du valde bort i förra projektet.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Mellan, cirka 7 huvuden",
+                    "text": "Trea på alla blad. Klarar kraven, men huvudet läses sämre i det yttersta läget."
+                  },
+                  {
+                    "label": "Heroic, 7,5 till 8 huvuden",
+                    "text": "Ditt tidigare val. Sist på alla blad. Klarar inte huvudkravet i det yttersta läget utan att kameran flyttas närmare."
+                  },
+                  {
+                    "label": "Kompakt med större huvud, cirka 5,8",
+                    "text": "Bäst i de två vidare lägena, men börjar likna en leksaksfigur i närbild och ligger inom det spann du valde bort tidigare."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
