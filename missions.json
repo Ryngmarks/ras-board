@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T19:38:24.188Z",
+  "generated_at": "2026-11-14T19:44:57.447Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T19:38:24.113Z",
+      "updated": "2026-11-14T19:44:57.382Z",
       "work_orders": [
         {
           "id": "W01",
@@ -391,10 +391,12 @@
         {
           "id": "REV-13d",
           "title": "Granska vägsökningen",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-14T19:31:08.047Z",
-          "after": "WO-13d"
+          "done": "2026-11-14T19:44:57.234Z",
+          "after": "WO-13d",
+          "result": "Godkänd med rättningar, inga allvarliga fel. Kärnan håller i granskarens egna körningar"
         },
         {
           "id": "ADD-3",
@@ -419,6 +421,47 @@
           "done": "2026-11-14T19:38:24.113Z",
           "after": "WO-13b",
           "result": "Modulkartan klar: 14 moduler, gränskontrollen går igenom"
+        },
+        {
+          "id": "WO-13d-fix",
+          "title": "Rättningar efter granskningen av vägsökningen",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-14T19:44:57.309Z",
+          "after": "REV-13d"
+        },
+        {
+          "id": "Q-05",
+          "title": "Ska man kunna hålla in musknappen för att gå?",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-14T19:44:57.382Z",
+          "after": "WO-13d-fix",
+          "decision": {
+            "summary": "Ska hjälten kunna gå genom att man håller in musknappen, som i Albion? Det står inte i planen i dag. Frågan kom upp när vägsökningens kostnad mättes.",
+            "questions": [
+              {
+                "id": "Q-05",
+                "text": "Ska man kunna hålla in musknappen för att gå?",
+                "note": "Med hållen knapp följer hjälten muspekaren. På den värsta tillåtna kartan kostar det i dag 7 till 8 ms per bildruta mot målet 6 ms. Det går att lösa när funktionen byggs.",
+                "options": [
+                  {
+                    "label": "Ja, som i Albion",
+                    "text": "Byggs i ett senare steg. Hjälten får ett nytt mål högst några gånger per sekund, så att kostnaden håller målet.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Nej, bara klick",
+                    "text": "Varje förflyttning kräver ett klick. Inget mer behöver byggas och kostnadsmålet håller redan."
+                  },
+                  {
+                    "label": "Vänta med beslutet",
+                    "text": "Frågan tas när striden är spelbar. Inget byggs tills dess."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
