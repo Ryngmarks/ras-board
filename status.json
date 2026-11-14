@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T15:38:40Z",
+    "updated":  "2026-11-14T17:05:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -95,16 +95,6 @@
                         "note":  "ng04 handoff, new PM chat",
                         "since":  "2026-11-08T18:51:26Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "WO-13c float parity",
-                        "since":  "2026-11-14T15:20:35Z",
-                        "agent":  "wo-13c",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "project-manager",
