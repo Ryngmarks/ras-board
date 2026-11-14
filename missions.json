@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T22:38:31.953Z",
+  "generated_at": "2026-11-14T22:39:11.957Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T22:38:31.878Z",
+      "updated": "2026-11-14T22:39:11.891Z",
       "work_orders": [
         {
           "id": "W01",
@@ -491,10 +491,12 @@
         {
           "id": "REF-04B",
           "title": "Djupanalys av WoW-klippet: det som är nyttigt för oss",
-          "status": "working",
+          "status": "done",
           "role": "research",
           "started": "2026-11-14T22:26:20.520Z",
-          "after": "Q-07"
+          "done": "2026-11-14T22:39:11.891Z",
+          "after": "Q-07",
+          "result": "Klar: gränssnittet täcker 40 procent av bilden, effekterna döljer spelet. Listor på vad vi tar och undviker"
         }
       ]
     },
