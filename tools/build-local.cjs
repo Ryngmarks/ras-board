@@ -112,9 +112,9 @@ writePage("index.html", `<script type="application/json" id="ras-history">${embe
 writePage("missions.html", missionsBlock + orgBlock);
 writePage("library.html", `<script type="application/json" id="ras-library">${embed(library)}</script>\n`);
 if (org) safeWrite(path.join(outDir, "org.json"), fs.readFileSync(orgFile));
-// Branch logos (owner, 2026-10-31).
+// Branch logos (owner, 2026-10-31) and the page background (owner look 2026-11-14).
 fs.mkdirSync(guard(path.join(outDir, "assets")), { recursive: true });
-for (const logo of ["ras-gaming.png", "ras-software.png"]) {
+for (const logo of ["ras-gaming.png", "ras-software.png", "ras-bg.svg"]) {
   const from = path.join(boardDir, "assets", logo);
   if (fs.existsSync(from)) safeWrite(path.join(outDir, "assets", logo), fs.readFileSync(from));
 }

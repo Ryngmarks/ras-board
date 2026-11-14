@@ -4,10 +4,10 @@ Live team board for the Ryngmark Agent System (RAS): which role works on which p
 
 Page: https://ryngmarks.github.io/ras-board/
 
-Three pages share one top bar (Översikt · Uppdrag · Spelbibliotek) and one light look (owner look 2026-11-01, ras07);
+Three pages share one top bar (Översikt · Uppdrag · Spelbibliotek) and one light look (owner look 2026-11-14: paper background `assets/ras-bg.svg`, dark active tab);
 the shared CSS block is marked "keep identical" in each page.
 
-- `index.html` – Översikt (static, no build): Väntar på Johan, Pågår nu, Tokens, the organisation tree, Projekt and Senaste aktivitet. It reads `status.json` through the GitHub API every 2 minutes (60 unauthenticated calls/h per IP are shared by all open tabs) and falls back to raw.githubusercontent.com (no limit, cached up to 5 min).
+- `index.html` – Översikt (static, no build), three zones: **Din tur** (the only dark surface: one card per decision that waits for Johan, a thin light row when nothing waits), **Agenterna jobbar** (one lane per branch; working and waiting agents are rows with work-order id, note, project, model and how long they have run, free and planned roles are tiles) and **Bakgrund** (Projekt, Senaste aktivitet, Pågår nu, Tokens). It reads `status.json` through the GitHub API every 2 minutes (60 unauthenticated calls/h per IP are shared by all open tabs) and falls back to raw.githubusercontent.com (no limit, cached up to 5 min).
 - `status.json` (`projects` = connected projects, `entries` = who works where) on branch **`status`** (so updates do not rebuild Pages) – written only by `tools/ras-status.ps1` in the RAS repo. Keep it short: role, project, state,
   a few words of note. Nothing secret – this repo is public.
 
@@ -43,7 +43,7 @@ Format:
 `tools/serve-local.cjs` serves the local board on **127.0.0.1:5199 only** by default (home network: see below) and
 refreshes the data (`ras-telemetry collect` + `history`, `build-org`, `build-local`) when a page load finds it older than
 2 minutes. Start it with the **RAS-tavla** button in the T3 project "RAS" – it opens in T3's preview, also from T3 remote.
-Only `/`, `/index.html`, `/missions.html`, `/library.html`, `/org.json` and the two logos are served.
+Only `/`, `/index.html`, `/missions.html`, `/library.html`, `/org.json`, the two logos and the background are served.
 On the public Pages site (no embedded data) every "local only" note links to the same page on the local board
 (`http://johansdator:5199/…`, the host name, never an IP or a key; plain links, nothing is fetched) and the Spelbibliotek
 tab points at the local server. Locally served pages keep relative links.

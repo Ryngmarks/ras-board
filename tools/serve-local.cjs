@@ -44,8 +44,8 @@ const telemetry = path.join(rasHome, 'tools', 'ras-telemetry.mjs');
 
 // The only routes (no directory listing; the Host header is checked, never used for routing).
 const ROUTES = { '/': 'index.html', '/index.html': 'index.html', '/library.html': 'library.html', '/missions.html': 'missions.html', '/org.json': 'org.json',
-  '/assets/ras-gaming.png': 'assets/ras-gaming.png', '/assets/ras-software.png': 'assets/ras-software.png' };
-const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png' };
+  '/assets/ras-gaming.png': 'assets/ras-gaming.png', '/assets/ras-software.png': 'assets/ras-software.png', '/assets/ras-bg.svg': 'assets/ras-bg.svg' };
+const types = { '.html': 'text/html; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png', '.svg': 'image/svg+xml' };
 
 const bindHost = lan => (lan ? LAN_HOST : HOST);
 const cookieName = port => `ras_board_${port}`;
