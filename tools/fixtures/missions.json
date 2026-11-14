@@ -58,7 +58,11 @@
           "title": "Speltest",
           "role": "playtester",
           "status": "todo",
-          "after": "WO-02"
+          "after": "WO-02",
+          "decision": {
+            "summary": "Not published: only a work order that waits for the owner carries a decision.",
+            "questions": [ { "id": "Q1", "text": "Should this ride along?" } ]
+          }
         }
       ]
     },

@@ -327,3 +327,176 @@ test('serve-local serves /missions.html and binds to 127.0.0.1 unless LAN mode i
   assert.equal(serve.bindHost(false), '127.0.0.1');
   assert.equal(serve.bindHost(undefined), '127.0.0.1');
 });
+
+// ---- decisions on work orders that wait for the owner ----
+const DEC = () => ({
+  summary: 'Kameran styr hur spelet känns.',
+  questions: [
+    { id: 'S1', text: 'Kamerans inramning', note: 'Gäller alla scener.', options: [{ label: 'A Närmare', text: 'Tätt på hjälten' }, { label: 'B Balanserad', text: 'Mitt emellan', recommended: true }, { label: 'C Vidare' }] },
+    { id: 'Q2', text: 'En fråga utan val besvaras i fritext.' }] });
+const owned = decision => one({ work_orders: [{ id: 'WO-05', title: 'Välj kamera', status: 'owner', started: '2026-11-01T10:00:00Z', decision }] }).missions.find(m => m.id === 'm20-test-cards').work_orders[0];
+const rx = s => new RegExp(s.replace(/[[\]().]/g, '\\$&'));
+
+test('publish: a decision on an owner work order is rebuilt from the whitelist', () => {
+  assert.deepEqual(owned(DEC()).decision, DEC());
+  const d = DEC();
+  d.extra = 'x'; d.questions[0].secret = 'x'; d.questions[0].options[0].branch = 'x'; d.questions[0].options[0].recommended = null;
+  assert.deepEqual(owned(d).decision, DEC(), 'unknown fields and a null recommended never ride along');
+  assert.equal('decision' in owned(undefined), false);
+  assert.equal('decision' in owned(null), false);
+  assert.deepEqual(owned({ questions: [{ id: 'Q', text: 'T', options: null }] }).decision, { questions: [{ id: 'Q', text: 'T' }] });
+});
+
+test('publish: a decision is published on no other status (the fixture carries one on a todo work order)', () => {
+  const wos = sanitize(doc()).missions.find(m => m.id === 'm20-test-cards').work_orders;
+  assert.equal('decision' in wos[3], false);
+  for (const status of ['done', 'working', 'todo']) {
+    const out = one({ work_orders: [{ id: 'WO-05', title: 'T', status, decision: DEC() }] }).missions.find(m => m.id === 'm20-test-cards').work_orders[0];
+    assert.equal('decision' in out, false, status);
+  }
+});
+
+test('publish: a malformed decision stops the publish and the error names the field', () => {
+  const bad = (fn, field) => { const d = DEC(); fn(d); assert.throws(() => owned(d), rx(field), field); };
+  bad(d => { d.questions = []; }, 'decision.questions');
+  bad(d => { d.questions = 'S1'; }, 'decision.questions');
+  bad(d => { d.questions = Array.from({ length: 13 }, (_, i) => ({ id: 'Q' + i, text: 'T' })); }, 'decision.questions');
+  bad(d => { d.questions[0].id = 'S 1'; }, 'questions[0].id');
+  bad(d => { d.questions[0].id = 7; }, 'questions[0].id');
+  bad(d => { d.questions[1].id = 'S1'; }, 'questions[1].id');
+  bad(d => { d.questions[0].text = ''; }, 'questions[0]');
+  bad(d => { delete d.questions[1].text; }, 'questions[1]');
+  bad(d => { d.questions[0] = null; }, 'questions[0]');
+  bad(d => { d.questions[0].options = [{ label: 'A' }]; }, 'questions[0].options');
+  bad(d => { d.questions[0].options = Array.from({ length: 7 }, (_, i) => ({ label: 'L' + i })); }, 'questions[0].options');
+  bad(d => { d.questions[0].options = 'A'; }, 'questions[0].options');
+  bad(d => { d.questions[0].options[1].label = ''; }, 'options[1]');
+  bad(d => { delete d.questions[0].options[2].label; }, 'options[2]');
+  bad(d => { d.questions[0].options[2].recommended = true; }, 'more than one recommended');
+  bad(d => { d.questions[0].options[0].recommended = 'true'; }, 'recommended is not true');
+  bad(d => { d.questions[0].options[0].recommended = false; }, 'recommended is not true');
+  bad(d => { d.summary = 7; }, 'decision.summary');
+  bad(d => { d.questions[0].note = {}; }, 'questions[0].note');
+  assert.throws(() => owned('S1'), /is not a decision/);
+  assert.throws(() => owned([DEC()]), /is not a decision/);
+});
+
+test('publish: decision texts are cut at their limits and run through the path/URL/address/key guard', () => {
+  const d = DEC();
+  d.summary = 's'.repeat(400); d.questions[0].text = 't'.repeat(300); d.questions[0].note = 'n'.repeat(400);
+  d.questions[0].options[0].label = 'l'.repeat(90); d.questions[0].options[0].text = 'x'.repeat(300);
+  const out = owned(d).decision;
+  assert.deepEqual([out.summary.length, out.questions[0].text.length, out.questions[0].note.length, out.questions[0].options[0].label.length, out.questions[0].options[0].text.length], [300, 200, 300, 60, 240]);
+  for (const [fn, field] of [
+    [x => { x.summary = 'se C:/Users/x/notes'; }, 'decision.summary'], [x => { x.questions[0].text = 'https://example.com'; }, 'questions[0].text'],
+    [x => { x.questions[0].note = 'mail a@b.se'; }, 'questions[0].note'], [x => { x.questions[0].options[0].label = 'ghp_abcdef'; }, 'options[0].label'],
+    [x => { x.questions[0].options[1].text = '/Users/johan/x'; }, 'options[1].text']]) {
+    const x = DEC(); fn(x);
+    assert.throws(() => owned(x), new RegExp(rx(field).source + '[^]*looks like a path'), field);
+  }
+});
+
+test('publish: the whole list is refused when one decision is bad (nothing is half published)', () => {
+  const d = doc();
+  d.missions[0].work_orders.push({ id: 'WO-05', title: 'T', status: 'owner', decision: { questions: [{ id: 'S1', text: 'T', options: [{ label: 'A' }, { label: 'B', recommended: true }, { label: 'C', recommended: true }] }] } });
+  assert.throws(() => sanitize(d), /work_orders\[4\]\.decision\.questions\[0\]/);
+});
+
+// ---- the decision panel on the board page ----
+const pageDec = () => {
+  const p = page('index.html');
+  const m = { key: 'Clicker Land/m20-test-cards' };
+  const w = p.cleanWos([{ id: 'WO-05', title: 'Välj kamera', status: 'owner', started: '2026-11-01T10:00:00Z', decision: DEC() }])[0];
+  return { p, m, w };
+};
+
+test('board: cleanWos keeps a valid decision on owner only, and drops an invalid one whole', () => {
+  const { p, w } = pageDec();
+  assert.equal(w.decision.questions.length, 2);
+  assert.equal(JSON.stringify(w.decision.questions[1]), JSON.stringify({ id: 'Q2', text: 'En fråga utan val besvaras i fritext.', note: '', options: [] }));
+  assert.equal(JSON.stringify(w.decision.questions[0].options.map(o => o.recommended)), "[false,true,false]");
+  const one1 = d => p.cleanWos([{ id: 'WO-05', title: 'T', status: 'owner', decision: d }])[0];
+  assert.equal(p.cleanWos([{ id: 'WO-05', title: 'T', status: 'todo', decision: DEC() }])[0].decision, undefined);
+  for (const fn of [d => { d.questions = []; }, d => { d.questions = Array.from({ length: 13 }, (_, i) => ({ id: 'Q' + i, text: 'T' })); }, d => { d.questions[1].id = 'S1'; },
+    d => { d.questions[0].id = '<b>'; }, d => { d.questions[0].text = ''; }, d => { d.questions[0].options.length = 1; }, d => { d.questions[0].options[0].label = ''; },
+    d => { d.questions[0].options[0].recommended = true; }, d => { d.questions[0].options[0].recommended = 'yes'; }, d => { d.questions = 'S1'; }]) {
+    const d = DEC(); fn(d);
+    assert.equal(one1(d).decision, undefined, fn.toString());
+  }
+  for (const d of [null, 'x', [], 7]) assert.equal(one1(d).decision, undefined);
+  const long = DEC(); long.questions[0].text = 't'.repeat(500); long.summary = 's'.repeat(500);
+  assert.equal(one1(long).decision.questions[0].text.length, 200);
+  assert.equal(one1(long).decision.summary.length, 300);
+});
+
+test('board: an owner work order with a decision gets a closed button and a hidden panel; one without keeps the link', () => {
+  const { p, m, w } = pageDec();
+  const html = p.woItem(w, m, {});
+  assert.match(html, /<button type="button" class="dec-btn" data-dec="[^"]+" aria-expanded="false" aria-controls="(dec-\d+)">Öppna beslutet/);
+  const id = html.match(/aria-controls="([^"]+)"/)[1];
+  assert.match(html, new RegExp(`<div class="dec-panel" id="${id}" role="region"[^>]* hidden>`));
+  assert.doesNotMatch(html, /<input|<form|<textarea|<select|onclick|<a /);
+  const plain = p.cleanWos([{ id: 'WO-06', title: 'Utan beslut', status: 'owner' }])[0];
+  const link = p.woItem(plain, m, {});
+  assert.match(link, /<a class="dec-btn" href="missions\.html#/);
+  assert.doesNotMatch(link, /<button|dec-panel/);
+});
+
+test('board: the open panel shows summary, ids, notes, options, the recommended mark, free text and how to answer', () => {
+  const { p, m, w } = pageDec();
+  p.toggleDecision(p.decKey(m, w));
+  const html = p.woItem(w, m, {});
+  assert.match(html, /aria-expanded="true"/);
+  assert.match(html, /Stäng beslutet/);
+  assert.doesNotMatch(html, /<div class="dec-panel"[^>]* hidden>/);
+  for (const s of ['Kameran styr hur spelet känns.', '<code>S1</code>', 'Kamerans inramning', 'Gäller alla scener.', 'A Närmare', 'Tätt på hjälten', 'B Balanserad', 'C Vidare', '<code>Q2</code>', 'Besvaras med fritext.', 'till exempel <b>S1 B</b>'])
+    assert.ok(html.includes(s), s);
+  assert.equal(html.match(/Rekommenderas/g).length, 1);
+  assert.match(html, /<li class="dec-opt rec"><b>B Balanserad<\/b><span class="dec-rec">Rekommenderas<\/span>/);
+  assert.equal(html.match(/Besvaras med fritext/g).length, 1, 'only the question without options');
+  p.toggleDecision(p.decKey(m, w));
+  assert.match(p.woItem(w, m, {}), /aria-expanded="false"/);
+});
+
+test('board: hostile decision text is escaped', () => {
+  const p = page('index.html');
+  const evil = '<img src=x onerror=alert(1)>"\'';
+  const w = p.cleanWos([{ id: 'WO-05', title: 'T', status: 'owner', decision: { summary: evil, questions: [{ id: 'S1', text: evil, note: evil, options: [{ label: evil, text: evil, recommended: true }, { label: evil }] }] } }])[0];
+  const m = { key: 'P/m' };
+  p.toggleDecision(p.decKey(m, w));
+  const html = p.woItem(w, m, {});
+  assert.doesNotMatch(html, /<img|<script/);
+  assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;&quot;&#39;'));
+});
+
+test('board: opened panels stay open when Planen is repainted (state lives in a set, not in the DOM) and focus returns to the button', () => {
+  const { p, m, w } = pageDec();
+  const host = { innerHTML: '', firstChild: null, buttons: [], querySelectorAll() { return this.buttons; } };
+  const els = { plan: { hidden: true }, plans: host };
+  let focused = null;
+  const key = p.decKey(m, w);
+  p.document = { getElementById: id => els[id], activeElement: null };
+  vm.runInContext(`MISS = { list: [{ key: ${JSON.stringify(m.key)}, project: 'Clicker Land', title: 'Test Cards', phase: 'owner', updated: '2026-11-01T09:00:00Z', wos: [${JSON.stringify(w)}] }] }`, p);
+  p.paintPlan();
+  assert.match(host.innerHTML, /aria-expanded="false"/);
+  p.toggleDecision(key);
+  host.buttons = [{ dataset: { dec: key }, focus() { focused = key; } }];
+  p.document.activeElement = { dataset: { dec: key } };
+  p.paintPlan();
+  assert.match(host.innerHTML, /aria-expanded="true"/);
+  assert.equal(focused, key, 'focus restored after the rebuild');
+  host.firstChild = {};
+  const before = host.innerHTML;
+  p.paintPlan(); p.paintPlan(); // the 30 s repaint: still open
+  assert.equal(host.innerHTML, before);
+  assert.match(host.innerHTML, /aria-expanded="true"/);
+  assert.equal(els.plan.hidden, false);
+});
+
+test('board: index.html draws decisions with no inline handler and the CSP hash is still valid; missions.html does not draw work orders', () => {
+  const html = read(path.join(repo, 'index.html'));
+  assert.ok(cspHashOk(html));
+  assert.doesNotMatch(html, /\son(click|change|input|submit)=/i);
+  assert.ok(html.includes('button[data-dec]'));
+  assert.doesNotMatch(read(path.join(repo, 'missions.html')), /woItem|cleanDecision|dec-panel/);
+});
