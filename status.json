@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T12:00:28Z",
+    "updated":  "2026-11-14T12:25:54Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "n01 lead revision",
                         "since":  "2026-11-14T10:00:12Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "review WO-12e and 12f",
-                        "since":  "2026-11-14T12:00:28Z",
-                        "agent":  "rev-12ef",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
