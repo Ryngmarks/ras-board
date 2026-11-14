@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-BNkg8KhRFOdzGHIAfBgr7yu/Bpei7ulcYwxS+9vsCEc='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-FEBozGw4/89Fyjx0r+xSTmaQbYD8cXCtXXh7cQKk+jM='; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RAS – översikt</title>
 <style>
@@ -214,6 +214,28 @@
   .wo-t small { font-size: 11px; }
   .wo.owner .wo-t b { color: var(--signal); } .wo.owner .wo-t small { color: var(--on-ink); }
   .wo-box .dec-btn { min-height: 44px; }
+  /* the open decision: what he has to answer, inside the dark box (read-only: no inputs) */
+  .wo-box button.dec-btn { border: 0; font-family: inherit; cursor: pointer; }
+  .dec-btn svg { width: 18px; height: 18px; flex: none; transition: transform .15s; }
+  .dec-btn[aria-expanded="true"] svg { transform: rotate(90deg); }
+  .dec-panel { display: flex; flex-direction: column; gap: 14px; padding-top: 12px; border-top: 1px solid var(--ink-line); min-width: 0; }
+  .dec-panel[hidden] { display: none; }
+  .dec-panel p { margin: 0; color: var(--on-ink); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+  .dec-qs, .dec-opts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .dec-qs { gap: 16px; } .dec-opts { gap: 6px; margin-top: 8px; }
+  .dec-q { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .dec-q > div { display: grid; gap: 2px; }
+  .dec-q b { font-size: 15px; line-height: 1.35; }
+  .wo.owner .dec-q small { color: var(--on-ink); font-size: 13px; line-height: 1.45; }
+  .dec-opt { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--ink-2); border: 1px solid var(--ink-line); min-width: 0; }
+  .dec-opt.rec { border-color: var(--signal); }
+  .dec-opt b { font-size: 14px; font-weight: 700; }
+  .dec-opt span { color: var(--on-ink); font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+  .dec-opt .dec-rec { align-self: flex-start; padding: 1px 8px; border-radius: 999px; background: var(--signal); color: var(--ink); font-size: 11px; font-weight: 750; letter-spacing: .02em; }
+  .dec-panel p.dec-free { font-size: 13px; font-style: italic; margin-top: 4px; }
+  .dec-panel p.dec-how { padding-top: 10px; border-top: 1px solid var(--ink-line); font-size: 13px; }
+  .dec-how b { color: var(--signal); font-size: 13px; }
+  @media (prefers-reduced-motion: reduce) { .dec-btn svg { transition: none; } }
   @media (prefers-reduced-motion: reduce) { .wo.working .wo-mark i { animation: none; } }
 
   /* bakgrund: quiet cards under the two live zones */
@@ -554,8 +576,42 @@ function cleanWos(list) {
   const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").slice(0, n) : "");
   const when = v => (typeof v === "string" && v.length <= 40 && isFinite(Date.parse(v)) ? v : "");
   return (Array.isArray(list) ? list : []).filter(w => w && typeof w === "object" && Object.hasOwn(WO_STATUS, w.status) && str(w.id, 24) && str(w.title, 80)).slice(0, 60)
-    .map(w => ({ id: str(w.id, 24), title: str(w.title, 80), role: /^[a-z0-9-]{1,40}$/.test(w.role || "") ? w.role : "", status: w.status,
-      started: when(w.started), done: when(w.done), after: str(w.after, 24), result: str(w.result, 120) }));
+    .map(w => {
+      const row = { id: str(w.id, 24), title: str(w.title, 80), role: /^[a-z0-9-]{1,40}$/.test(w.role || "") ? w.role : "", status: w.status,
+        started: when(w.started), done: when(w.done), after: str(w.after, 24), result: str(w.result, 120) };
+      const d = w.status === "owner" ? cleanDecision(w.decision) : null;
+      if (d) row.decision = d;
+      return row;
+    });
+}
+// What the owner has to answer (only on a work order that waits for him; the same limits as publish-missions.cjs). A
+// decision with any structural fault (not 1-12 questions, bad or repeated id, no text, 1 or 7+ options, no label, two
+// recommended options, `recommended` other than true) is dropped whole and never rendered. index.html only: missions.html
+// does not draw work orders.
+function cleanDecision(d) {
+  if (!d || typeof d !== "object" || Array.isArray(d)) return null;
+  const str = (v, n) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").trim().slice(0, n) : "");
+  if (!Array.isArray(d.questions) || d.questions.length < 1 || d.questions.length > 12) return null;
+  const seen = new Set(), questions = [];
+  for (const q of d.questions) {
+    if (!q || typeof q !== "object" || typeof q.id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(q.id) || seen.has(q.id)) return null;
+    seen.add(q.id);
+    const text = str(q.text, 200);
+    if (!text) return null;
+    const out = { id: q.id, text, note: str(q.note, 300), options: [] };
+    if (q.options !== undefined && q.options !== null) {
+      if (!Array.isArray(q.options) || q.options.length < 2 || q.options.length > 6) return null;
+      let rec = 0;
+      for (const o of q.options) {
+        if (!o || typeof o !== "object") return null;
+        const label = str(o.label, 60);
+        if (!label || (o.recommended !== undefined && o.recommended !== null && o.recommended !== true) || (o.recommended === true && ++rec > 1)) return null;
+        out.options.push({ label, text: str(o.text, 240), recommended: o.recommended === true });
+      }
+    }
+    questions.push(out);
+  }
+  return { summary: str(d.summary, 300), questions };
 }
 // Sanity limit only (a broken or hostile file must not hang the page) – far above any real log, so the archive is never
 // cut (ras07 review finding 3; publish-missions.cjs publishes every public mission).
@@ -819,6 +875,25 @@ function paintOrg() {
   document.getElementById("org").innerHTML = `<div class="lanes">${lanes.join("")}</div>`;
 }
 // ---- Planen: the work orders of every active mission as a timeline. The section stays hidden until a mission carries them. ----
+// Opened decisions are remembered here (not in the DOM), because paintPlan() rebuilds the whole section on every repaint.
+const OPEN_DEC = new Set();
+let PLAN_HTML = "";
+const DEC_IDS = new Map();
+function decKey(m, w) { return m.key + " | " + w.id; }
+const decPanelId = key => { if (!DEC_IDS.has(key)) DEC_IDS.set(key, "dec-" + DEC_IDS.size); return DEC_IDS.get(key); };
+function toggleDecision(key) { if (OPEN_DEC.has(key)) OPEN_DEC.delete(key); else OPEN_DEC.add(key); }
+// The panel is read-only: summary, every question with its options, and how to answer. No inputs, nothing is sent.
+function decisionPanel(d) {
+  const opt = o => `<li class="dec-opt${o.recommended ? " rec" : ""}"><b>${esc(o.label)}</b>${o.recommended ? `<span class="dec-rec">Rekommenderas</span>` : ""}${o.text ? `<span>${esc(o.text)}</span>` : ""}</li>`;
+  const q = x => `<li class="dec-q"><div><code>${esc(x.id)}</code><b>${esc(x.text)}</b>${x.note ? `<small>${esc(x.note)}</small>` : ""}</div>` +
+    (x.options.length ? `<ul class="dec-opts" aria-label="Val för ${esc(x.id)}">${x.options.map(opt).join("")}</ul>` : `<p class="dec-free">Besvaras med fritext.</p>`) + `</li>`;
+  // The example is built from this decision's own first question with choices (its recommended choice, else its first).
+  const first = d.questions.find(x => x.options.length);
+  const pick = first && (first.options.find(o => o.recommended) || first.options[0]);
+  const how = first ? `Svara i projektets chatt: skriv frågans id och ditt val, till exempel <b>${esc(first.id + " " + pick.label.split(" ")[0])}</b>.`
+    : "Svara i projektets chatt: skriv frågans id följt av ditt svar.";
+  return (d.summary ? `<p>${esc(d.summary)}</p>` : "") + `<ol class="dec-qs">${d.questions.map(q).join("")}</ol>` + `<p class="dec-how">${how}</p>`;
+}
 function woItem(w, m, names) {
   const who = w.role ? `<span class="chip">${esc(names[w.role] || w.role)}</span>` : "";
   const t = w.started ? dur(w.started) : "";
@@ -828,7 +903,12 @@ function woItem(w, m, names) {
   if (w.status === "working") { mark = "<i></i>"; body = `<div class="wo-box"><div class="wo-line">${head}${time("har kört")}</div>${who}</div>`; }
   else if (w.status === "owner") {
     mark = "<i></i>";
-    body = `<div class="wo-box"><div class="wo-line">${head}${time("har väntat")}</div><a class="dec-btn" href="missions.html#${esc(encodeURIComponent(m.key))}">Öppna beslutet ${icon("arrow")}</a></div>`;
+    const top = `<div class="wo-line">${head}${time("har väntat")}</div>`;
+    if (w.decision) {
+      const key = decKey(m, w), open = OPEN_DEC.has(key), pid = decPanelId(key);
+      body = `<div class="wo-box">${top}<button type="button" class="dec-btn" data-dec="${esc(key)}" aria-expanded="${open}" aria-controls="${pid}">${open ? "Stäng beslutet" : "Öppna beslutet"} ${icon("arrow")}</button>` +
+        `<div class="dec-panel" id="${pid}" role="region" aria-label="Beslut: ${esc(w.title)}"${open ? "" : " hidden"}>${decisionPanel(w.decision)}</div></div>`;
+    } else body = `<div class="wo-box">${top}<a class="dec-btn" href="missions.html#${esc(encodeURIComponent(m.key))}">Öppna beslutet ${icon("arrow")}</a></div>`;
   } else {
     const done = w.status === "done";
     if (done) mark = icon("tick");
@@ -843,13 +923,19 @@ function paintPlan() {
   document.getElementById("plan").hidden = !active.length;
   if (!active.length) return;
   const names = roleNames();
-  document.getElementById("plans").innerHTML = active.slice(0, 6).map(m => {
+  // keyboard focus on a decision button survives the rebuild, and an unchanged section is not touched (keeps text selections)
+  const host = document.getElementById("plans"), had = document.activeElement?.dataset?.dec;
+  const html = active.slice(0, 6).map(m => {
     const done = m.wos.filter(w => w.status === "done").length;
     return `<article class="plan"><div class="plan-top"><span class="bdot ${branchOf(m.project)}"></span><h3>${esc(m.title)}</h3><span class="sub">${esc(m.project)}</span>` +
       `<span class="phase p-${m.phase}">${PHASES[m.phase]}</span></div>` +
       `<div class="segs"><div role="img" aria-label="${done} av ${m.wos.length} work orders klara">${m.wos.map(w => `<i class="${w.status}"></i>`).join("")}</div><b>${done} av ${m.wos.length} klara</b></div>` +
       `<ol class="wos">${m.wos.map(w => woItem(w, m, names)).join("")}</ol></article>`;
   }).join("");
+  if (html === PLAN_HTML && host.firstChild) return;
+  PLAN_HTML = html;
+  host.innerHTML = html;
+  if (had !== undefined) for (const b of host.querySelectorAll("button[data-dec]")) if (b.dataset.dec === had) { b.focus(); break; }
 }
 
 async function loadOrg() {
@@ -996,6 +1082,12 @@ function boot() {
     table.hidden = !table.hidden;
     paintTokens();
     if (!table.hidden) table.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.addEventListener("click", ev => {
+    const b = ev.target.closest?.("button[data-dec]");
+    if (!b) return;
+    toggleDecision(b.dataset.dec);
+    paintPlan();
   });
   document.getElementById("refresh").addEventListener("click", load);
   document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - (lastFetch || 0) > 60_000) load(); });

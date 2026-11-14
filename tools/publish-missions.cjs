@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 // Publishes the short mission list to the public board (ras07, owner decisions #1, #5, #6, #10): per mission only project,
 // id, name, phase and updated (an ISO time, nothing else) – plus, when the mission has them, its work orders (owner decision
-// 2026-11-14): id, title, status and optionally role, started, done, after and result, each rebuilt from a whitelist. Missions with `public: false` (security audits) are never
+// 2026-11-14): id, title, status and optionally role, started, done, after and result, each rebuilt from a whitelist. A work
+// order with status `owner` may also carry a `decision` (summary + 1-12 questions, each with optional note and 2-6 options with
+// label, text and `recommended: true`): what the owner has to answer, rebuilt from a whitelist, public like the rest, and
+// published on no other status. Missions with `public: false` (security audits) are never
 // published; every finished mission stays in the list – there is no cap (review finding 3).
 //
 // Reads  <RAS_MISSIONS_FILE or <RAS_HOME or ../ryngmark-agents>/docs/missions.json>  (written by tools/ras-missions.mjs)
@@ -34,6 +37,52 @@ const isoTime = (v, field) => {
   if (typeof v !== 'string' || v.length > 40 || !Number.isFinite(Date.parse(v))) throw new Error(`${field} is not a date`);
   return new Date(v).toISOString();
 };
+const Q_MAX = 12, OPT_MIN = 2, OPT_MAX = 6;
+// What the owner has to answer on a work order that waits for him. Every value is rebuilt from the whitelist; anything
+// malformed stops the publish with the field named (never a silent drop).
+function decision(d, at) {
+  if (d === undefined || d === null) return null;
+  if (typeof d !== 'object' || Array.isArray(d)) throw new Error(`${at} is not a decision`);
+  const out = {};
+  const summary = text(d.summary, 300, `${at}.summary`);
+  if (summary) out.summary = summary;
+  if (!Array.isArray(d.questions) || d.questions.length < 1 || d.questions.length > Q_MAX) throw new Error(`${at}.questions is not a list of 1 to ${Q_MAX} questions`);
+  const seen = new Set();
+  out.questions = d.questions.map((q, i) => {
+    const f = `${at}.questions[${i}]`;
+    if (!q || typeof q !== 'object' || Array.isArray(q)) throw new Error(`${f} is not a question`);
+    if (typeof q.id !== 'string' || !WO_ID.test(q.id)) throw new Error(`${f}.id is not a question id`);
+    if (seen.has(q.id)) throw new Error(`${f}.id is used twice in the decision`);
+    seen.add(q.id);
+    const qt = text(q.text, 200, `${f}.text`);
+    if (!qt) throw new Error(`${f} has no text`);
+    const o = { id: q.id, text: qt };
+    const note = text(q.note, 300, `${f}.note`);
+    if (note) o.note = note;
+    if (q.options !== undefined && q.options !== null) {
+      if (!Array.isArray(q.options) || q.options.length < OPT_MIN || q.options.length > OPT_MAX) throw new Error(`${f}.options is not a list of ${OPT_MIN} to ${OPT_MAX} options`);
+      let recommended = 0;
+      o.options = q.options.map((op, k) => {
+        const g = `${f}.options[${k}]`;
+        if (!op || typeof op !== 'object' || Array.isArray(op)) throw new Error(`${g} is not an option`);
+        const label = text(op.label, 60, `${g}.label`);
+        if (!label) throw new Error(`${g} has no label`);
+        const r = { label };
+        const t = text(op.text, 240, `${g}.text`);
+        if (t) r.text = t;
+        if (op.recommended !== undefined && op.recommended !== null) {
+          if (op.recommended !== true) throw new Error(`${g}.recommended is not true`);
+          if (++recommended > 1) throw new Error(`${f} has more than one recommended option`);
+          r.recommended = true;
+        }
+        return r;
+      });
+    }
+    return o;
+  });
+  return out;
+}
+
 // Work orders in plan order. Nothing is copied as it stands: ids and roles must match their pattern, times are rebuilt from
 // the parsed date and every text goes through the same guard as the mission name. A mission without the field gets none.
 function workOrders(list, at) {
@@ -58,6 +107,8 @@ function workOrders(list, at) {
     }
     const result = text(w.result, 120, `${f}.result`);
     if (result) out.result = result;
+    // a decision is public only while the work order waits for the owner
+    if (w.status === 'owner') { const d = decision(w.decision, `${f}.decision`); if (d) out.decision = d; }
     return out;
   });
 }

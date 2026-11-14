@@ -52,6 +52,24 @@ field nothing changes and the section stays hidden. The list order is the plan o
 - For `owner`, `started` is when the question was put to Johan – the board shows it as "har väntat".
 - The publisher rebuilds every value from a whitelist and stops (publishes nothing) on a bad id, status, role, date or a
   text that looks like a path, URL, address or key. Other fields on a work order are never published.
+- **Open decisions.** A work order with status `owner` may carry a `decision`: what Johan has to answer and, where there are
+  choices, the choices. On the board the dark box then has a button **Öppna beslutet** that opens a read-only panel in the
+  box (summary, each question with id, note and options, the recommended option marked, and how to answer: in the
+  project chat, e.g. `S1 B`). Without a `decision` the button is a link to the Uppdrag tab as before. **Decisions are public
+  like the rest of the work orders** – write nothing in them that must not be on the open web.
+  ```json
+  "decision": { "summary": "Optional, at most 300.",
+    "questions": [
+      { "id": "S1", "text": "Kamerans inramning", "note": "Optional, at most 300.",
+        "options": [ { "label": "A Närmare", "text": "Optional, at most 240." },
+                     { "label": "B Balanserad", "recommended": true }, { "label": "C Vidare" } ] },
+      { "id": "Q2", "text": "No options = answered in free text." } ] }
+  ```
+  Limits: 1–12 questions; question `id` like a work order id and unique within the decision; `text` required, at most 200;
+  `options` optional, 2–6; option `label` required, at most 60; `recommended` only `true`, on at most one option per
+  question. No other fields. The publisher publishes `decision` on `owner` work orders only, rebuilds it from this whitelist,
+  sends every text through the same path/URL/address/key guard, and stops the whole publish – naming the field – on
+  anything malformed. The page applies the same limits and drops (never renders) a decision that breaks them.
 
 ## Security
 - `status.json` is untrusted: `clean()` keeps only known fields and states, everything is escaped before rendering,
