@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T19:46:51.689Z",
+  "generated_at": "2026-11-14T19:47:09.888Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T19:46:51.607Z",
+      "updated": "2026-11-14T19:47:09.809Z",
       "work_orders": [
         {
           "id": "W01",
@@ -405,14 +405,8 @@
           "role": "solution-architect",
           "started": "2026-11-14T19:34:44.215Z",
           "done": "2026-11-14T19:46:51.342Z",
+          "after": "REV-13d",
           "result": "Specifikationen klar. Platshållaren bestämmer ingen spelmekanik"
-        },
-        {
-          "id": "WO-13b",
-          "title": "Platshållare för en förmåga",
-          "status": "todo",
-          "role": "implementer",
-          "after": "REV-13d"
         },
         {
           "id": "W14",
@@ -421,7 +415,7 @@
           "role": "implementer",
           "started": "2026-11-14T19:35:38.839Z",
           "done": "2026-11-14T19:38:24.113Z",
-          "after": "WO-13b",
+          "after": "REV-13d",
           "result": "Modulkartan klar: 14 moduler, gränskontrollen går igenom"
         },
         {
@@ -470,7 +464,7 @@
           "title": "Platshållare för en förmåga, regelkärnan",
           "status": "todo",
           "role": "implementer",
-          "after": "ADD-3"
+          "after": "WO-13d-fix"
         },
         {
           "id": "WO-13b-2",
