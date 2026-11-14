@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-14T22:16:43Z",
+    "updated":  "2026-11-14T22:20:38Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "n01 WO-13b-1 och REF-01",
                         "since":  "2026-11-14T10:00:12Z"
+                    },
+                    {
+                        "role":  "research",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "REF-03 matning",
+                        "since":  "2026-11-14T22:20:38Z",
+                        "agent":  "ref-03",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
