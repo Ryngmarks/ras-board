@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T21:58:35.732Z",
+  "generated_at": "2026-11-14T22:09:27.354Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T21:58:35.658Z",
+      "updated": "2026-11-14T22:09:27.276Z",
       "work_orders": [
         {
           "id": "W01",
@@ -443,10 +443,45 @@
         {
           "id": "REF-02",
           "title": "Mät referenstider ur ägarens inspelning",
-          "status": "working",
+          "status": "done",
           "role": "research",
           "started": "2026-11-14T21:58:35.658Z",
-          "after": "Q-06"
+          "done": "2026-11-14T22:09:27.198Z",
+          "after": "Q-06",
+          "result": "Metoden fungerar exakt, men klippet visade en trollkarl. Närstrid, rörelse och zoom gick inte att mäta"
+        },
+        {
+          "id": "Q-07",
+          "title": "En andra inspelning med närstrid?",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-14T22:09:27.276Z",
+          "after": "REF-02",
+          "decision": {
+            "summary": "Första inspelningen gick att mäta exakt, men den visade en trollkarl i en mörk grotta. Därför gick det inte att mäta närstridsslag, träfftiming, rörelse eller zoom. En andra inspelning på cirka tre minuter behövs för de måtten.",
+            "questions": [
+              {
+                "id": "Q-07",
+                "text": "Kan du spela in ett klipp till, med närstrid?",
+                "note": "Det som behövs: sex vanliga slag och tre förmågor mot en fiende med kameran stilla, figuren stor i bild, en långsam zoom ut och in, samt gå, stanna och vända på öppen mark. Bara spelet i bild.",
+                "options": [
+                  {
+                    "label": "Ja, i Albion",
+                    "text": "Albion har samma kamera ovanifrån som vårt spel och är därför den bästa referensen. Säg till när du står redo, så startar projektledaren inspelningen.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Ja, i WoW med närstridsfigur",
+                    "text": "Går också bra, men kameran bakom figuren gör vissa mått sämre som referens för ett spel sett ovanifrån."
+                  },
+                  {
+                    "label": "Nej, hoppa över",
+                    "text": "Startvärdena i stridsstandarden behålls och du bedömer känslan själv när den första riktiga attacken är spelbar."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
