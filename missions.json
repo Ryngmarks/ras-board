@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T19:34:44.289Z",
+  "generated_at": "2026-11-14T19:35:38.924Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T19:34:44.215Z",
+      "updated": "2026-11-14T19:35:38.839Z",
       "work_orders": [
         {
           "id": "W01",
@@ -413,8 +413,9 @@
         {
           "id": "W14",
           "title": "Modulkarta",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-14T19:35:38.839Z",
           "after": "WO-13b"
         }
       ]
