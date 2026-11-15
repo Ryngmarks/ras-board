@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T07:51:11Z",
+    "updated":  "2026-11-15T07:51:13Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "note":  "addendum 5 against the code",
                         "since":  "2026-11-15T07:38:43Z",
                         "agent":  "rev-arch-21",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "HOLD-02b: client-core",
+                        "since":  "2026-11-15T07:51:13Z",
+                        "agent":  "hold-02b",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
