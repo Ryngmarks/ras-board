@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T08:36:56Z",
+    "updated":  "2026-11-15T08:36:58Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "five decisions on the board",
                         "since":  "2026-11-14T22:45:52Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "CLIP-A: tools, own worktree",
-                        "since":  "2026-11-15T08:14:00Z",
-                        "agent":  "clip-a",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
