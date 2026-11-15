@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T06:26:08.798Z",
+  "generated_at": "2026-11-15T06:27:34.506Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T06:26:08.732Z",
+      "updated": "2026-11-15T06:27:34.426Z",
       "work_orders": [
         {
           "id": "W01",
@@ -715,7 +715,7 @@
           "started": "2026-11-15T05:58:18.297Z",
           "after": "HOLD-01",
           "decision": {
-            "summary": "Arkitekten har specificerat hur hjälten går medan musknappen hålls in. Fyra saker märker du som spelare och avgör därför själv. Inget av dem syns i dina Albion-klipp, så den tredje inspelningen kan visa hur Albion gör. Bygget kan börja utan svaren, med de rekommenderade valen.",
+            "summary": "Arkitekten har specificerat hur hjälten går medan musknappen hålls in, och specifikationen är granskad och reviderad. Sex saker märker du som spelare och avgör därför själv. Inget av dem syns i dina Albion-klipp. Bygget kan börja utan svaren, med de rekommenderade valen.",
             "questions": [
               {
                 "id": "H-slapp",
@@ -782,6 +782,37 @@
                     "text": "Markören visas bara vid vanliga klick."
                   }
                 ]
+              },
+              {
+                "id": "H-pahjalten",
+                "text": "Du håller in knappen och låter pekaren vila på hjälten själv. Vad händer?",
+                "options": [
+                  {
+                    "label": "Hjälten stannar",
+                    "text": "Att peka på sig själv betyder stanna. Hjälten vrider sig aldrig på stället.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Hjälten går klart",
+                    "text": "Hjälten går färdigt den förflyttning den höll på med. Det kan bli flera meter om du flyttade pekaren dit snabbt."
+                  }
+                ]
+              },
+              {
+                "id": "H-kort-tryck",
+                "text": "Ett kort tryck medan hjälten går: vart ska hjälten?",
+                "note": "Kameran följer hjälten, så marken under en stillastående pekare flyttar sig med hjälten.",
+                "options": [
+                  {
+                    "label": "Dit du tryckte",
+                    "text": "Trycket räknas som ett klick på platsen du tryckte på, om du inte rör musen en aning (cirka 12 pixlar) eller håller in längre än 0,4 sekunder. Då börjar hjälten följa pekaren.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Dit pekaren är när du släpper",
+                    "text": "Varje tryck längre än 0,15 sekunder följer pekaren. Ett tryck på 0,3 sekunder slutar då ungefär 1,5 meter bortom platsen du klickade på."
+                  }
+                ]
               }
             ]
           }
@@ -799,10 +830,12 @@
         {
           "id": "HOLD-01-R1",
           "title": "Arkitekten reviderar specifikationen efter granskningen",
-          "status": "working",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-15T06:17:12.184Z",
-          "after": "REV-HOLD-01"
+          "done": "2026-11-15T06:27:34.245Z",
+          "after": "REV-HOLD-01",
+          "result": "Reviderad: varje väg söks en gång, oavsett bildfrekvens. Väntat 3,4 till 3,7 ms och riktningsbyte under 50 ms"
         },
         {
           "id": "WO-20-fix",
@@ -811,6 +844,14 @@
           "role": "implementer",
           "started": "2026-11-15T06:26:08.732Z",
           "after": "REV-20"
+        },
+        {
+          "id": "REV-HOLD-01-R1",
+          "title": "Efterkontroll av den reviderade specifikationen",
+          "status": "working",
+          "role": "reviewer",
+          "started": "2026-11-15T06:27:34.329Z",
+          "after": "HOLD-01-R1"
         }
       ]
     },
