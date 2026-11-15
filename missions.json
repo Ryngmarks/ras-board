@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T07:38:37.265Z",
+  "generated_at": "2026-11-15T07:51:08.307Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T07:38:37.186Z",
+      "updated": "2026-11-15T07:51:08.235Z",
       "work_orders": [
         {
           "id": "W01",
@@ -780,10 +780,12 @@
         {
           "id": "HOLD-02a",
           "title": "Hållen musknapp, del 1: vägsökaren och servertester",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-15T07:16:12.874Z",
-          "after": "HOLD-01"
+          "done": "2026-11-15T07:51:08.131Z",
+          "after": "HOLD-01",
+          "result": "Vägsökaren klar och kontrollerad, även i Unity. Servern behövde inte ändras. Granskas nu"
         },
         {
           "id": "ARCH-21",
@@ -802,6 +804,14 @@
           "role": "reviewer",
           "started": "2026-11-15T07:38:37.186Z",
           "after": "ARCH-21"
+        },
+        {
+          "id": "HOLD-02b",
+          "title": "Hållen musknapp, del 2: klientens regler och rättningskrav",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-15T07:51:08.235Z",
+          "after": "HOLD-02a"
         }
       ]
     },
