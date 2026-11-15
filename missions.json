@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T06:27:34.506Z",
+  "generated_at": "2026-11-15T06:36:40.589Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T06:27:34.426Z",
+      "updated": "2026-11-15T06:36:40.518Z",
       "work_orders": [
         {
           "id": "W01",
@@ -315,23 +315,13 @@
           "result": "Samma resultat i dotnet, Unity-editorn och två spelarbyggen"
         },
         {
-          "id": "REV-13c",
-          "title": "Granska flyttalsrättningen",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-14T17:05:39.365Z",
-          "done": "2026-11-14T17:33:10.383Z",
-          "after": "WO-13c",
-          "result": "Godkänd med rättningar: inget dotnet-värde ändrat, kontrollen får tre luckor tätade"
-        },
-        {
           "id": "WO-13c-fix",
           "title": "Täta luckor i flyttalskontrollen",
           "status": "done",
           "role": "implementer",
           "started": "2026-11-14T17:33:10.455Z",
           "done": "2026-11-14T18:13:07.515Z",
-          "after": "REV-13c",
+          "after": "WO-13c",
           "result": "Kontrollen tätad; hela kontrollen med Unity grön och på main"
         },
         {
@@ -345,23 +335,13 @@
           "result": "Långt klick 3 ms per sida mot 30 förut. Ett stressfall med hållen knapp missar målet 6 ms, står öppet"
         },
         {
-          "id": "REV-13d",
-          "title": "Granska vägsökningen",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-14T19:31:08.047Z",
-          "done": "2026-11-14T19:44:57.234Z",
-          "after": "WO-13d",
-          "result": "Godkänd med rättningar, inga allvarliga fel. Kärnan håller i granskarens egna körningar"
-        },
-        {
           "id": "ADD-3",
           "title": "Tillägg 3: platshållaren för en förmåga",
           "status": "done",
           "role": "solution-architect",
           "started": "2026-11-14T19:34:44.215Z",
           "done": "2026-11-14T19:46:51.342Z",
-          "after": "REV-13d",
+          "after": "WO-13d",
           "result": "Specifikationen klar. Platshållaren bestämmer ingen spelmekanik"
         },
         {
@@ -371,7 +351,7 @@
           "role": "implementer",
           "started": "2026-11-14T19:35:38.839Z",
           "done": "2026-11-14T19:38:24.113Z",
-          "after": "REV-13d",
+          "after": "WO-13d",
           "result": "Modulkartan klar: 14 moduler, gränskontrollen går igenom"
         },
         {
@@ -381,7 +361,7 @@
           "role": "implementer",
           "started": "2026-11-14T19:44:57.309Z",
           "done": "2026-11-14T21:17:15.255Z",
-          "after": "REV-13d",
+          "after": "WO-13d",
           "result": "Mätningen är nu ärlig: klick 3 ms, hållen knapp mot avlägset mål 7 till 10 ms mot målet 6"
         },
         {
@@ -411,7 +391,7 @@
           "role": "implementer",
           "started": "2026-11-14T22:45:45.805Z",
           "done": "2026-11-15T00:16:02.907Z",
-          "after": "REV-13b-1",
+          "after": "WO-13b-1",
           "result": "Kapseln lutar vid knapptryck. Attackens start mätt: 84 till 101 ms mot målet 67 vid 30 uppdateringar per sekund"
         },
         {
@@ -467,16 +447,6 @@
           "done": "2026-11-14T22:20:35.393Z",
           "after": "REF-02",
           "result": "Ägaren spelade Albion i fyra minuter medan projektledaren spelade in skärmen"
-        },
-        {
-          "id": "REV-13b-1",
-          "title": "Oberoende granskning av platshållarens regelkärna",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-14T22:20:35.549Z",
-          "done": "2026-11-14T22:45:45.729Z",
-          "after": "WO-13b-1",
-          "result": "Godkänd utan allvarliga fynd. Granskarens egna tester hittade inga fel i regeln"
         },
         {
           "id": "REF-03",
@@ -631,16 +601,6 @@
           }
         },
         {
-          "id": "REV-13b-2",
-          "title": "Oberoende granskning av platshållaren i Unity",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-15T00:16:02.991Z",
-          "done": "2026-11-15T00:48:35.961Z",
-          "after": "WO-13b-2",
-          "result": "Godkänd med rättningar. Mätningen är ärlig, men två siffror behövde rättas"
-        },
-        {
           "id": "Q-10",
           "title": "Attackens start: 84 till 101 ms mot målet 67",
           "status": "owner",
@@ -684,7 +644,7 @@
           "role": "implementer",
           "started": "2026-11-15T00:48:36.030Z",
           "done": "2026-11-15T05:35:20.311Z",
-          "after": "REV-13b-2",
+          "after": "WO-13b-2",
           "result": "Mätfelet hittat: klockan och ritningen är rätt. Attackens start: 84 ms vid 144 bilder per sekund, 101 vid 60"
         },
         {
@@ -848,10 +808,19 @@
         {
           "id": "REV-HOLD-01-R1",
           "title": "Efterkontroll av den reviderade specifikationen",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-15T06:27:34.329Z",
-          "after": "HOLD-01-R1"
+          "done": "2026-11-15T06:36:01.266Z",
+          "after": "HOLD-01-R1",
+          "result": "Godkänd utan allvarliga fynd. Lösningen höll för granskarens angrepp och siffrorna gick att upprepa"
+        },
+        {
+          "id": "HOLD-02a",
+          "title": "Hållen musknapp, del 1: vägsökaren och servertester",
+          "status": "todo",
+          "role": "implementer",
+          "after": "REV-HOLD-01-R1"
         }
       ]
     },
