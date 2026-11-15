@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T07:38:40Z",
+    "updated":  "2026-11-15T07:38:43Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "note":  "HOLD-02a: sim, server tests",
                         "since":  "2026-11-15T07:16:18Z",
                         "agent":  "hold-02a",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "addendum 5 against the code",
+                        "since":  "2026-11-15T07:38:43Z",
+                        "agent":  "rev-arch-21",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
