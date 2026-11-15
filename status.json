@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T07:55:46Z",
+    "updated":  "2026-11-15T07:55:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -121,6 +121,16 @@
                         "note":  "HOLD-02a path finder",
                         "since":  "2026-11-15T07:51:16Z",
                         "agent":  "rev-hold-02a",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "addendum 5 revision 1",
+                        "since":  "2026-11-15T07:55:48Z",
+                        "agent":  "arch-21",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
