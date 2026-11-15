@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T00:16:31.986Z",
+  "generated_at": "2026-11-15T00:48:36.181Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T00:16:31.924Z",
+      "updated": "2026-11-15T00:48:36.110Z",
       "work_orders": [
         {
           "id": "W01",
@@ -419,7 +419,7 @@
           "title": "Gå med hållen musknapp, specifikation och bygge",
           "status": "todo",
           "role": "solution-architect",
-          "after": "REV-13b-2"
+          "after": "WO-13b-2-fix"
         },
         {
           "id": "STD-01",
@@ -630,10 +630,12 @@
         {
           "id": "REV-13b-2",
           "title": "Oberoende granskning av platshållaren i Unity",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-15T00:16:02.991Z",
-          "after": "WO-13b-2"
+          "done": "2026-11-15T00:48:35.961Z",
+          "after": "WO-13b-2",
+          "result": "Godkänd med rättningar. Mätningen är ärlig, men två siffror behövde rättas"
         },
         {
           "id": "Q-10",
@@ -671,6 +673,14 @@
               }
             ]
           }
+        },
+        {
+          "id": "WO-13b-2-fix",
+          "title": "Rättningar av mätningen för attackens start",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-15T00:48:36.030Z",
+          "after": "REV-13b-2"
         }
       ]
     },
