@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T07:17:49.508Z",
+  "generated_at": "2026-11-15T07:38:37.265Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T07:17:49.446Z",
+      "updated": "2026-11-15T07:38:37.186Z",
       "work_orders": [
         {
           "id": "W01",
@@ -396,13 +396,13 @@
         },
         {
           "id": "HOLD-01",
-          "title": "Gå med hållen musknapp: specifikation",
+          "title": "Gå med hållen musknapp: specifikation, granskad och reviderad",
           "status": "done",
           "role": "solution-architect",
           "started": "2026-11-15T05:35:20.388Z",
           "done": "2026-11-15T05:57:59.716Z",
           "after": "WO-13b-2-fix",
-          "result": "Specificerat som vanliga gåkommandon med sändregler. Väntat värsta bildruta 3,4 till 3,7 ms mot gränsen 6"
+          "result": "Varje väg söks en gång oavsett bildfrekvens. Väntat 3,4 till 3,7 ms mot gränsen 6. Granskad två gånger"
         },
         {
           "id": "STD-01",
@@ -658,16 +658,6 @@
           "result": "Klipp med etiketter, översiktssida och grindramverk fungerar. 235 kontroller gröna, 7 av 7 planterade fel fångade"
         },
         {
-          "id": "REV-HOLD-01",
-          "title": "Granskning av specifikationen mot koden",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-15T05:57:59.806Z",
-          "done": "2026-11-15T06:17:12.066Z",
-          "after": "HOLD-01",
-          "result": "Godkänd med rättningar. Löftet om 3,4 till 3,7 ms håller bara vid hög bildfrekvens, och mätkraven hade inte visat det"
-        },
-        {
           "id": "Q-11",
           "title": "Hur ska hållen musknapp bete sig?",
           "status": "owner",
@@ -778,44 +768,14 @@
           }
         },
         {
-          "id": "REV-20",
-          "title": "Oberoende granskning av klippverktyget",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-15T06:10:17.732Z",
-          "done": "2026-11-15T06:26:08.621Z",
-          "after": "WO-20",
-          "result": "Godkänd med rättningar. En trasig bildruta kortar klippet utan fel, och testerna prövar inte den ritade etiketten"
-        },
-        {
-          "id": "HOLD-01-R1",
-          "title": "Arkitekten reviderar specifikationen efter granskningen",
-          "status": "done",
-          "role": "solution-architect",
-          "started": "2026-11-15T06:17:12.184Z",
-          "done": "2026-11-15T06:27:34.245Z",
-          "after": "REV-HOLD-01",
-          "result": "Reviderad: varje väg söks en gång, oavsett bildfrekvens. Väntat 3,4 till 3,7 ms och riktningsbyte under 50 ms"
-        },
-        {
           "id": "WO-20-fix",
           "title": "Klippverktyget: rättningar efter granskningen",
           "status": "done",
           "role": "implementer",
           "started": "2026-11-15T06:26:08.732Z",
           "done": "2026-11-15T07:16:29.658Z",
-          "after": "REV-20",
+          "after": "WO-20",
           "result": "Trasiga bildrutor fäller klippet och testerna prövar den ritade bilden. 15 av 15 planterade fel fångade"
-        },
-        {
-          "id": "REV-HOLD-01-R1",
-          "title": "Efterkontroll av den reviderade specifikationen",
-          "status": "done",
-          "role": "reviewer",
-          "started": "2026-11-15T06:27:34.329Z",
-          "done": "2026-11-15T06:36:01.266Z",
-          "after": "HOLD-01-R1",
-          "result": "Godkänd utan allvarliga fynd. Lösningen höll för granskarens angrepp och siffrorna gick att upprepa"
         },
         {
           "id": "HOLD-02a",
@@ -823,15 +783,25 @@
           "status": "working",
           "role": "implementer",
           "started": "2026-11-15T07:16:12.874Z",
-          "after": "REV-HOLD-01-R1"
+          "after": "HOLD-01"
         },
         {
           "id": "ARCH-21",
           "title": "Stridslabbet och klippdelen i Unity: specifikation",
-          "status": "working",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-15T07:17:49.446Z",
-          "after": "WO-20-fix"
+          "done": "2026-11-15T07:38:37.094Z",
+          "after": "WO-20-fix",
+          "result": "Specificerat: tagning utan fönster, fyra kameror, två grindar med planterade fel. Inget är kört än"
+        },
+        {
+          "id": "REV-ARCH-21",
+          "title": "Granskning av stridslabbets specifikation mot koden",
+          "status": "working",
+          "role": "reviewer",
+          "started": "2026-11-15T07:38:37.186Z",
+          "after": "ARCH-21"
         }
       ]
     },
