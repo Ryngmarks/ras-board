@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T23:24:37.932Z",
+  "generated_at": "2026-11-15T00:16:31.986Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-14T23:24:37.861Z",
+      "updated": "2026-11-15T00:16:31.924Z",
       "work_orders": [
         {
           "id": "W01",
@@ -407,17 +407,19 @@
         {
           "id": "WO-13b-2",
           "title": "Platshållare för en förmåga, i Unity med mätning",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-14T22:45:45.805Z",
-          "after": "REV-13b-1"
+          "done": "2026-11-15T00:16:02.907Z",
+          "after": "REV-13b-1",
+          "result": "Kapseln lutar vid knapptryck. Attackens start mätt: 84 till 101 ms mot målet 67 vid 30 uppdateringar per sekund"
         },
         {
           "id": "HOLD-01",
           "title": "Gå med hållen musknapp, specifikation och bygge",
           "status": "todo",
           "role": "solution-architect",
-          "after": "WO-13b-2"
+          "after": "REV-13b-2"
         },
         {
           "id": "STD-01",
@@ -619,6 +621,51 @@
                   {
                     "label": "Kompakt med större huvud, cirka 5,8",
                     "text": "Bäst i de två vidare lägena, men börjar likna en leksaksfigur i närbild och ligger inom det spann du valde bort tidigare."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "REV-13b-2",
+          "title": "Oberoende granskning av platshållaren i Unity",
+          "status": "working",
+          "role": "reviewer",
+          "started": "2026-11-15T00:16:02.991Z",
+          "after": "WO-13b-2"
+        },
+        {
+          "id": "Q-10",
+          "title": "Attackens start: 84 till 101 ms mot målet 67",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-15T00:16:31.820Z",
+          "after": "WO-13b-2",
+          "decision": {
+            "summary": "Målet är att en attack i solospel syns inom 67 ms efter knapptrycket. Mätt i spelet: 84 ms vid 144 bilder per sekund och 101 ms vid 60, i de långsammaste fem procenten. Servern väntar en hel uppdatering innan attacken startar. Avgörs före steg 1.4.",
+            "questions": [
+              {
+                "id": "D9-solo",
+                "text": "Hur ska attacken hinna börja i tid?",
+                "note": "Förflyttning påverkas inte: klick till rörelse ligger på 15 respektive 34 ms och håller sitt mål med god marginal.",
+                "options": [
+                  {
+                    "label": "Ansatsen börjar direkt vid klicket",
+                    "text": "Din egen hjälte börjar ansatsen i samma stund som du trycker, innan servern har svarat. Attacken syns då efter cirka 15 till 35 ms. Om servern nekar tonas rörelsen bort. Cirka 300 rader kod. Arkitektens förslag.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Dubbla uppdateringstakten till 60",
+                    "text": "Servern räknar 60 gånger per sekund i stället för 30. Ger 49 ms med 144 bilder per sekund men 68 ms med 60, alltså fortfarande över målet där. Dubblar serverns arbete."
+                  },
+                  {
+                    "label": "Ingen väntan i solospel",
+                    "text": "En särskild väg för solospel utan den extra uppdateringen. Uppskattat 47 till 66 ms, på gränsen vid 60 bilder per sekund, och hjälper inte när man spelar två över nätverk."
+                  },
+                  {
+                    "label": "Höj målet",
+                    "text": "Målet ändras till cirka 100 ms i solospel. Inget byggs, men attacken känns segare än förflyttningen."
                   }
                 ]
               }
