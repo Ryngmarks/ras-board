@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T05:58:00Z",
+    "updated":  "2026-11-15T05:58:03Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "note":  "WO-20: tools",
                         "since":  "2026-11-15T05:39:19Z",
                         "agent":  "wo-20",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "addendum 4 against the code",
+                        "since":  "2026-11-15T05:58:03Z",
+                        "agent":  "rev-hold-01",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
