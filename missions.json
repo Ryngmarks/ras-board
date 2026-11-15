@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T05:39:17.139Z",
+  "generated_at": "2026-11-15T05:58:18.363Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T05:39:17.079Z",
+      "updated": "2026-11-15T05:58:18.297Z",
       "work_orders": [
         {
           "id": "W01",
@@ -416,11 +416,13 @@
         },
         {
           "id": "HOLD-01",
-          "title": "Gå med hållen musknapp, specifikation och bygge",
-          "status": "working",
+          "title": "Gå med hållen musknapp: specifikation",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-15T05:35:20.388Z",
-          "after": "WO-13b-2-fix"
+          "done": "2026-11-15T05:57:59.716Z",
+          "after": "WO-13b-2-fix",
+          "result": "Specificerat som vanliga gåkommandon med sändregler. Väntat värsta bildruta 3,4 till 3,7 ms mot gränsen 6"
         },
         {
           "id": "STD-01",
@@ -692,6 +694,93 @@
           "role": "implementer",
           "started": "2026-11-15T05:39:17.079Z",
           "after": "WO-13b-2-fix"
+        },
+        {
+          "id": "REV-HOLD-01",
+          "title": "Granskning av specifikationen mot koden",
+          "status": "working",
+          "role": "reviewer",
+          "started": "2026-11-15T05:57:59.806Z",
+          "after": "HOLD-01"
+        },
+        {
+          "id": "Q-11",
+          "title": "Hur ska hållen musknapp bete sig?",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-15T05:58:18.297Z",
+          "after": "HOLD-01",
+          "decision": {
+            "summary": "Arkitekten har specificerat hur hjälten går medan musknappen hålls in. Fyra saker märker du som spelare och avgör därför själv. Inget av dem syns i dina Albion-klipp, så den tredje inspelningen kan visa hur Albion gör. Bygget kan börja utan svaren, med de rekommenderade valen.",
+            "questions": [
+              {
+                "id": "H-slapp",
+                "text": "Vad gör hjälten när du släpper musknappen?",
+                "note": "Gäller när du har hållit in knappen och hjälten följer pekaren.",
+                "options": [
+                  {
+                    "label": "Går fram till där pekaren var",
+                    "text": "Hjälten går klart till platsen där pekaren var när du släppte, precis som efter ett vanligt klick där. Vill du stanna klickar du intill hjälten.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Stannar direkt",
+                    "text": "Hjälten stannar där den står, inom ungefär en tredjedels meter."
+                  }
+                ]
+              },
+              {
+                "id": "H-vagg",
+                "text": "Du håller pekaren på en plats bakom en vägg. Ska hjälten hitta vägen runt?",
+                "options": [
+                  {
+                    "label": "Ja, samma väg som vid ett klick",
+                    "text": "Hjälten går runt hindret, på samma väg som ett klick på platsen skulle ge. Att hålla in fungerar då likadant som att klicka.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Nej, rakt mot pekaren",
+                    "text": "Hjälten går rakt mot pekaren och stannar vid väggen."
+                  }
+                ]
+              },
+              {
+                "id": "H-formaga",
+                "text": "Du håller in knappen och använder en förmåga. Vad händer när förmågan är klar och du fortfarande håller in?",
+                "note": "Gäller från steg 1.4, när riktiga attacker finns. Tills dess väntar spelet på ett nytt tryck.",
+                "options": [
+                  {
+                    "label": "Hjälten följer pekaren igen",
+                    "text": "Hjälten börjar följa pekaren igen av sig själv. Hållen knapp betyder då alltid fortsätt gå.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Inget förrän nytt tryck",
+                    "text": "Hjälten står kvar tills du släpper och trycker in knappen igen."
+                  }
+                ]
+              },
+              {
+                "id": "H-markor",
+                "text": "Hur ska markören på marken bete sig medan du håller in?",
+                "options": [
+                  {
+                    "label": "Visas vid tryck och vid släpp",
+                    "text": "Markören visas där du tryckte, är borta medan du håller in och visas igen där du släpper.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Följer pekaren hela tiden",
+                    "text": "Markören flyttar sig med pekaren så länge knappen är intryckt. Den hoppar då många gånger per sekund."
+                  },
+                  {
+                    "label": "Visas aldrig vid hållen knapp",
+                    "text": "Markören visas bara vid vanliga klick."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
