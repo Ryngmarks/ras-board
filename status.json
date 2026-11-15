@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T06:17:17Z",
+    "updated":  "2026-11-15T06:26:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "five decisions on the board",
                         "since":  "2026-11-14T22:45:52Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "WO-20 clip tool",
-                        "since":  "2026-11-15T06:10:23Z",
-                        "agent":  "rev-20",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "solution-architect",
