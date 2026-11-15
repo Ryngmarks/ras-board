@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T06:36:40.589Z",
+  "generated_at": "2026-11-15T07:16:12.950Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T06:36:40.518Z",
+      "updated": "2026-11-15T07:16:12.874Z",
       "work_orders": [
         {
           "id": "W01",
@@ -818,8 +818,9 @@
         {
           "id": "HOLD-02a",
           "title": "Hållen musknapp, del 1: vägsökaren och servertester",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-15T07:16:12.874Z",
           "after": "REV-HOLD-01-R1"
         }
       ]
