@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T07:51:08.307Z",
+  "generated_at": "2026-11-15T07:55:43.142Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T07:51:08.235Z",
+      "updated": "2026-11-15T07:55:43.066Z",
       "work_orders": [
         {
           "id": "W01",
@@ -790,20 +790,20 @@
         {
           "id": "ARCH-21",
           "title": "Stridslabbet och klippdelen i Unity: specifikation",
-          "status": "done",
+          "status": "working",
           "role": "solution-architect",
-          "started": "2026-11-15T07:17:49.446Z",
-          "done": "2026-11-15T07:38:37.094Z",
-          "after": "WO-20-fix",
-          "result": "Specificerat: tagning utan fönster, fyra kameror, två grindar med planterade fel. Inget är kört än"
+          "started": "2026-11-15T07:55:43.066Z",
+          "after": "WO-20-fix"
         },
         {
           "id": "REV-ARCH-21",
           "title": "Granskning av stridslabbets specifikation mot koden",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-15T07:38:37.186Z",
-          "after": "ARCH-21"
+          "done": "2026-11-15T07:55:42.962Z",
+          "after": "ARCH-21",
+          "result": "Godkänd med rättningar. Två brister hade märkts först efter bygget; arkitekten reviderar"
         },
         {
           "id": "HOLD-02b",
