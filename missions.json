@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T00:48:36.181Z",
+  "generated_at": "2026-11-15T05:35:20.457Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T00:48:36.110Z",
+      "updated": "2026-11-15T05:35:20.388Z",
       "work_orders": [
         {
           "id": "W01",
@@ -417,8 +417,9 @@
         {
           "id": "HOLD-01",
           "title": "Gå med hållen musknapp, specifikation och bygge",
-          "status": "todo",
+          "status": "working",
           "role": "solution-architect",
+          "started": "2026-11-15T05:35:20.388Z",
           "after": "WO-13b-2-fix"
         },
         {
@@ -677,9 +678,10 @@
         {
           "id": "WO-13b-2-fix",
           "title": "Rättningar av mätningen för attackens start",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-15T00:48:36.030Z",
+          "done": "2026-11-15T05:35:20.311Z",
           "after": "REV-13b-2"
         }
       ]
