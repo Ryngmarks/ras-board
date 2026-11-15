@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T06:17:12.263Z",
+  "generated_at": "2026-11-15T06:26:08.798Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T06:17:12.184Z",
+      "updated": "2026-11-15T06:26:08.732Z",
       "work_orders": [
         {
           "id": "W01",
@@ -789,10 +789,12 @@
         {
           "id": "REV-20",
           "title": "Oberoende granskning av klippverktyget",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-15T06:10:17.732Z",
-          "after": "WO-20"
+          "done": "2026-11-15T06:26:08.621Z",
+          "after": "WO-20",
+          "result": "Godkänd med rättningar. En trasig bildruta kortar klippet utan fel, och testerna prövar inte den ritade etiketten"
         },
         {
           "id": "HOLD-01-R1",
@@ -801,6 +803,14 @@
           "role": "solution-architect",
           "started": "2026-11-15T06:17:12.184Z",
           "after": "REV-HOLD-01"
+        },
+        {
+          "id": "WO-20-fix",
+          "title": "Klippverktyget: rättningar efter granskningen",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-15T06:26:08.732Z",
+          "after": "REV-20"
         }
       ]
     },
