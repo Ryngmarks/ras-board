@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T07:38:43Z",
+    "updated":  "2026-11-15T07:51:11Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "five decisions on the board",
                         "since":  "2026-11-14T22:45:52Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "HOLD-02a: sim, server tests",
-                        "since":  "2026-11-15T07:16:18Z",
-                        "agent":  "hold-02a",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "reviewer",
