@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T06:10:17.798Z",
+  "generated_at": "2026-11-15T06:17:12.263Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T06:10:17.732Z",
+      "updated": "2026-11-15T06:17:12.184Z",
       "work_orders": [
         {
           "id": "W01",
@@ -700,10 +700,12 @@
         {
           "id": "REV-HOLD-01",
           "title": "Granskning av specifikationen mot koden",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-15T05:57:59.806Z",
-          "after": "HOLD-01"
+          "done": "2026-11-15T06:17:12.066Z",
+          "after": "HOLD-01",
+          "result": "Godkänd med rättningar. Löftet om 3,4 till 3,7 ms håller bara vid hög bildfrekvens, och mätkraven hade inte visat det"
         },
         {
           "id": "Q-11",
@@ -791,6 +793,14 @@
           "role": "reviewer",
           "started": "2026-11-15T06:10:17.732Z",
           "after": "WO-20"
+        },
+        {
+          "id": "HOLD-01-R1",
+          "title": "Arkitekten reviderar specifikationen efter granskningen",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-15T06:17:12.184Z",
+          "after": "REV-HOLD-01"
         }
       ]
     },
