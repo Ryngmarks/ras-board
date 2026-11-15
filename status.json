@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-15T05:39:19Z",
+    "updated":  "2026-11-15T05:58:00Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "n01 fragor Q-01 Q-08 Q-09",
                         "since":  "2026-11-14T22:45:52Z",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "solution-architect",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "HOLD-01: hold-to-move spec",
-                        "since":  "2026-11-15T05:36:41Z",
-                        "agent":  "hold-01",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
