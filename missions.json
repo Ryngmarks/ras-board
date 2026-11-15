@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T07:16:29.727Z",
+  "generated_at": "2026-11-15T07:17:49.508Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T07:16:29.658Z",
+      "updated": "2026-11-15T07:17:49.446Z",
       "work_orders": [
         {
           "id": "W01",
@@ -824,6 +824,14 @@
           "role": "implementer",
           "started": "2026-11-15T07:16:12.874Z",
           "after": "REV-HOLD-01-R1"
+        },
+        {
+          "id": "ARCH-21",
+          "title": "Stridslabbet och klippdelen i Unity: specifikation",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-15T07:17:49.446Z",
+          "after": "WO-20-fix"
         }
       ]
     },
