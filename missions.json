@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T05:58:18.363Z",
+  "generated_at": "2026-11-15T06:10:17.798Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T05:58:18.297Z",
+      "updated": "2026-11-15T06:10:17.732Z",
       "work_orders": [
         {
           "id": "W01",
@@ -690,10 +690,12 @@
         {
           "id": "WO-20",
           "title": "Klippverktyget: efterbearbetning flyttas från det gamla projektet",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-15T05:39:17.079Z",
-          "after": "WO-13b-2-fix"
+          "done": "2026-11-15T06:10:17.636Z",
+          "after": "WO-13b-2-fix",
+          "result": "Klipp med etiketter, översiktssida och grindramverk fungerar. 235 kontroller gröna, 7 av 7 planterade fel fångade"
         },
         {
           "id": "REV-HOLD-01",
@@ -781,6 +783,14 @@
               }
             ]
           }
+        },
+        {
+          "id": "REV-20",
+          "title": "Oberoende granskning av klippverktyget",
+          "status": "working",
+          "role": "reviewer",
+          "started": "2026-11-15T06:10:17.732Z",
+          "after": "WO-20"
         }
       ]
     },
