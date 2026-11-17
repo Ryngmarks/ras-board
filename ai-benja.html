@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body style="margin:0">
+<title>AI Benja Motion Graphic</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one 1600x900 stage scaled to fit, ten timed scenes; the dark-blue orchestrator rail sits above every agent scene. */
+:root{
+  --bg:#EEF1F5; --stage:#F7F8FA; --surface:#FFFFFF; --line:#D5DBE5; --fg:#1A2333; --muted:#5A6678;
+  --pm:#123E7C; --pm-ink:#FFFFFF;
+  --a1:#2F9BE3; --a2:#1C8A3C; --a3:#B88A00; --a4:#DD6B10; --a5:#8560C4; --hu:#3A485D;
+  --ok:#1C8A3C; --dev:#DD6B10; --miss:#7C8696; --pdf:#C4314B; --xls:#1C8A3C; --hold:#FFC83D; --hold-ink:#2A2000;
+  --sh:0 1px 2px rgba(20,35,60,.06),0 6px 18px rgba(20,35,60,.07);
+  --font:"Segoe UI Variable Display","Segoe UI",Inter,system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C111B; --stage:#121927; --surface:#1A2334; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
+  --pm:#1D55A8; --pm-ink:#FFFFFF;
+  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
+  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --xls:#3DB060; --hold:#FFC83D; --hold-ink:#2A2000;
+  --sh:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.28); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0C111B; --stage:#121927; --surface:#1A2334; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
+  --pm:#1D55A8; --pm-ink:#FFFFFF;
+  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
+  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --xls:#3DB060; --hold:#FFC83D; --hold-ink:#2A2000;
+  --sh:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.28); color-scheme:dark }
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px}
+.page{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:center}
+.top{width:100%;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.top h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.01em}
+.top p{margin:0;color:var(--muted);font-size:14px}
+.player{position:relative;width:100%;aspect-ratio:16/9;max-width:max(300px,calc((100dvh - 190px)*16/9));
+  background:var(--stage);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--sh)}
+.player:fullscreen{max-width:none;width:100vw;height:100vh;aspect-ratio:auto;border:0;border-radius:0}
+.stage{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;font-size:20px;line-height:1.3;
+  background:radial-gradient(1200px 500px at 50% -10%,color-mix(in srgb,var(--pm) 7%,var(--stage)),var(--stage))}
+.ctl{width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.ctl button{font:inherit;font-size:13px;font-weight:600;color:var(--fg);background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;height:34px;min-width:34px;padding:0 11px;cursor:pointer}
+.ctl button:hover{border-color:var(--pm)}
+.ctl button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.ctl .main{background:var(--pm);color:var(--pm-ink);border-color:var(--pm);min-width:76px}
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dots button{padding:0;width:34px;font-variant-numeric:tabular-nums}
+.dots button[aria-current="true"]{background:var(--pm);color:var(--pm-ink);border-color:var(--pm)}
+.now{font-size:13px;color:var(--muted);min-width:0;flex:1 1 180px}
+.bar{width:100%;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--pm)}
+
+/* ---------- animation engine ---------- */
+.scene{position:absolute;inset:0;opacity:0;transition:opacity .5s}
+.scene.on{opacity:1}
+.a{opacity:0}
+.scene.run .a{animation:in .6s var(--d,0s) cubic-bezier(.2,.7,.2,1) both}
+.scene.run .a.x{animation:in .5s var(--d,0s) cubic-bezier(.2,.7,.2,1) both,mv var(--mt,.9s) var(--d2,0s) var(--me,cubic-bezier(.5,0,.2,1)) forwards}
+@keyframes in{from{opacity:0;transform:translate(var(--fx,0),var(--fy,14px)) scale(var(--fs,1))}to{opacity:1;transform:none}}
+@keyframes mv{to{opacity:var(--to,1);transform:translate(var(--tx,0),var(--ty,0)) scale(var(--ts,1))}}
+.pop{--fy:0px;--fs:.86}
+.fade{--fy:0px}
+.flow{stroke:var(--c,var(--pm));stroke-width:2.5;fill:none;stroke-dasharray:5 7}
+.scene.run .flow{animation:in .6s var(--d,0s) both,dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+.scene.run .live{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.paused .scene *{animation-play-state:paused!important}
+@media (prefers-reduced-motion: reduce){
+  .scene{transition:none}
+  .scene.run .a,.scene.run .a.x{animation-duration:.01s!important;animation-delay:0s!important}
+  .scene.run .flow,.scene.run .live{animation:none;opacity:1}
+}
+
+/* ---------- shared pieces ---------- */
+.stage *{box-sizing:border-box}
+.p{position:absolute}
+.ic{flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh)}
+.ch{display:flex;align-items:center;gap:12px;height:62px;padding:0 22px;border-bottom:1px solid var(--line);font-weight:600;font-size:21px}
+.ch small{margin-left:auto;font-weight:500;font-size:16px;color:var(--muted)}
+.title{position:absolute;left:60px;top:96px;font-size:46px;font-weight:600;letter-spacing:-.01em}
+.mark{position:absolute;right:60px;top:40px;font-size:17px;color:var(--muted);letter-spacing:.04em}
+.mark b{color:var(--pm);letter-spacing:.12em}
+:root[data-theme="dark"] .mark b{color:var(--a1)}
+.cap{position:absolute;left:60px;right:60px;top:812px;text-align:center;font-size:30px;font-weight:600;letter-spacing:.005em}
+.tile{display:grid;place-items:center;flex:none;border-radius:8px;background:var(--c);color:#fff}
+
+.rail{position:absolute;left:40px;top:22px;width:1520px;height:66px;border-radius:10px;background:var(--pm);color:var(--pm-ink);
+  display:flex;align-items:center;gap:18px;padding:0 20px;box-shadow:var(--sh)}
+.rail .rt{display:grid;place-items:center;width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,.16)}
+.rail b{font-weight:600}
+.rail .rn{display:flex;flex-direction:column;line-height:1.2}
+.rail .rn b{font-size:21px}
+.rail span{font-size:14px;opacity:.78}
+.rail .rp,.rail .rs{display:flex;align-items:center;gap:10px;padding-left:18px;border-left:1px solid rgba(255,255,255,.25);height:38px}
+.rail .rp b{font-size:19px;font-variant-numeric:tabular-nums}
+.pw{position:relative;width:310px;height:34px}
+.pill{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:17px;white-space:nowrap;
+  font-style:normal;font-size:15px;font-weight:700;letter-spacing:.06em;background:#fff;color:#123E7C}
+.pill.hold{background:var(--hold);color:var(--hold-ink)}
+.rsteps{margin-left:auto;display:flex;gap:6px}
+.rsteps i{font-style:normal;font-size:14px;font-weight:700;width:42px;height:30px;border-radius:6px;display:grid;place-items:center;
+  border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.6)}
+.rsteps i.dn{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
+.rsteps i.cu{background:var(--c);color:#fff;border-color:#fff}
+
+.ahead{position:absolute;display:flex;align-items:center;gap:16px}
+.ahead .at{width:66px;height:66px;border-radius:10px;background:var(--c);color:#fff;display:grid;place-items:center}
+.ahead small{display:block;font-size:15px;color:var(--muted);letter-spacing:.03em}
+.ahead b{display:block;font-size:36px;font-weight:600;letter-spacing:-.01em}
+
+.file{position:absolute;display:flex;align-items:center;gap:12px;height:54px;padding:0 12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:8px;font-size:18px;white-space:nowrap;box-shadow:0 1px 2px rgba(20,35,60,.06)}
+.file em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--c);width:36px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none}
+.note{color:var(--muted);font-size:16px}
+.sk{height:10px;border-radius:5px;background:color-mix(in srgb,var(--muted) 22%,var(--surface))}
+
+.hband{position:absolute;display:flex;align-items:center;gap:20px;padding:0 26px;border-radius:10px;background:var(--hu);color:#fff;box-shadow:var(--sh)}
+.hband .ht{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
+.hband b{display:block;font-size:24px;letter-spacing:.07em}
+.hband span{display:block;font-size:18px;opacity:.86}
+.stamp{margin-left:auto;display:flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:22px;background:#fff;color:#1C6B34;font-weight:700;font-size:17px;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:15px;font-size:14px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--c);white-space:nowrap}
+.tint{background:color-mix(in srgb,var(--c) 11%,var(--surface));border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
+.row{display:flex;align-items:center;gap:14px;padding:0 22px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.tick{color:var(--ok);display:grid;place-items:center}
+.num{font-variant-numeric:tabular-nums}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.500-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+<symbol id="i-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.8"/><circle cx="4.500" cy="17.500" r="1.8"/><circle cx="19.500" cy="17.500" r="1.8"/><path d="M12 5.8V9M9.500 13.700l-3.500 2.600M14.500 13.700l3.500 2.600"/></symbol>
+<symbol id="i-intake" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.500l9 5 9-5"/><path d="M3 17l9 5 9-5"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2.200"/><path d="M12 2.500V6M12 18v3.500M2.500 12H6M18 12h3.500M5.300 5.300l2.500 2.500M16.200 16.200l2.500 2.500M5.300 18.700l2.500-2.500M16.200 7.800l2.500-2.500"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-5M12 16V8M16 16v-3"/></symbol>
+<symbol id="i-quote" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 14l2 2 4-4"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.500"/><path d="M5 20c0-3.900 3.100-6 7-6s7 2.100 7 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3zM12 10v4.500M12 17.300v.2"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.500"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.2M4 12h.2M4 18h.2"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6M6 11l6-6 6 6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.500 9.300c-.4-.8-1.300-1.300-2.500-1.300-1.500 0-2.500.7-2.500 1.800 0 2.600 5 1.300 5 4 0 1.100-1 1.900-2.500 1.900-1.300 0-2.200-.5-2.600-1.400M12 6.500V8M12 15.700v1.800"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.500c.7.7 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0012 3z"/></symbol>
+<symbol id="i-q" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 115 0c0 1.500-2.500 2-2.500 3.700M12 16.600v.2"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.700 0l3-3a4 4 0 00-5.700-5.700l-1 1M14 10a4 4 0 00-5.700 0l-3 3a4 4 0 005.700 5.700l1-1"/></symbol>
+</defs></svg>
+
+<div class="page">
+  <div class="top"><h1>AI Benja</h1><p>AI Agents for Sales &amp; Engineering · animated overview</p></div>
+  <div class="player" id="player"><div class="stage" id="stage" aria-live="off"></div></div>
+  <div class="bar"><i id="prog"></i></div>
+  <div class="ctl">
+    <button id="prev" aria-label="Previous scene">‹</button>
+    <button id="play" class="main">Pause</button>
+    <button id="next" aria-label="Next scene">›</button>
+    <div class="dots" id="dots"></div>
+    <div class="now" id="now"></div>
+    <button id="full">Fullscreen</button>
+  </div>
+</div>
+
+<script>
+(function(){
+const P=(x,y,w,h)=>`left:${x}px;top:${y}px;`+(w?`width:${w}px;`:'')+(h?`height:${h}px;`:'');
+const ic=(n,s=24)=>`<svg class="ic" width="${s}" height="${s}"><use href="#i-${n}"/></svg>`;
+const AG=[['Requirement Intake','intake'],['Documentation','layers'],['Engineering','gear'],['Commercial Analysis','chart'],['Quote','quote']];
+const FILES=['Technical Specification.pdf','Requirements.xlsx','Drawings.pdf','Customer Standard.pdf'];
+const file=(name,x,y,w,style='',cls='a')=>{const xl=/xlsx$/.test(name);
+  return `<div class="file ${cls}" style="${P(x,y,w)}--c:var(--${xl?'xls':'pdf'});${style}"><em>${xl?'XLSX':'PDF'}</em>${name}</div>`};
+const rail=(idx,s1,s2,t2)=>`<div class="rail">
+  <div class="rt">${ic('hub',28)}</div>
+  <div class="rn"><b>PL – AI Project Manager</b><span>Orchestrator · monitors every step</span></div>
+  <div class="rp"><span>Project</span><b>RFQ-12345</b></div>
+  <div class="rs"><span>Status</span><div class="pw">
+    <i class="pill a fade ${s2?'x':''}" style="--d:.2s;--d2:${t2}s;--to:0;--mt:.35s">${s1}</i>
+    ${s2?`<i class="pill hold a fade" style="--d:${t2+.3}s">${ic('pause',16)}${s2}</i>`:''}</div></div>
+  <div class="rsteps">${AG.map((a,i)=>`<i class="${i<idx?'dn':i==idx?'cu':''}" style="--c:var(--a${i+1})">A${i+1}</i>`).join('')}</div></div>`;
+const head=n=>`<div class="ahead a" style="${P(60,104)}--d:.3s;--c:var(--a${n})"><div class="at">${ic(AG[n-1][1],36)}</div>
+  <div><small>Specialist agent · activated by the AI Project Manager</small><b>A${n} – ${AG[n-1][0]} Agent</b></div></div>`;
+const hband=(y,t,title,text,stamp,ts)=>`<div class="hband a" style="${P(60,y,1480,92)}--d:${t}s">
+  <div class="ht">${ic('person',32)}</div><div><b>${title}</b><span>${text}</span></div>
+  ${stamp?`<div class="stamp a pop" style="--d:${ts}s">${ic('check',20)}${stamp}</div>`:''}</div>`;
+const cap=(t,txt)=>`<div class="cap a" style="--d:${t}s">${txt}</div>`;
+const mark=`<div class="mark"><b>AI BENJA</b> · AI Agents for Sales &amp; Engineering</div>`;
+
+const scenes=[];
+
+/* 1 — Customer RFQ */
+scenes.push({name:'Customer RFQ',dur:11.5,html:`${mark}
+<div class="title a" style="--d:.2s">Incoming Customer RFQ</div>
+<div class="card a" style="${P(60,190,680,490)}--d:.6s">
+  <div class="ch"><span class="tile" style="--c:var(--a1);width:38px;height:38px">${ic('mail',22)}</span>Customer Procurement<small>09:12</small></div>
+  <div style="padding:22px">
+    <div style="font-size:26px;font-weight:600">RFQ-12345 – Request for Quotation</div>
+    <div class="note" style="margin-top:6px">To: Sales</div>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:26px">
+      <div class="sk" style="width:92%"></div><div class="sk" style="width:84%"></div><div class="sk" style="width:58%"></div></div>
+    <div class="note" style="margin-top:44px;font-weight:600">4 attachments</div>
+  </div></div>
+${FILES.map((f,i)=>file(f,i%2?410:80,i<2?540:606,310,`--d:${1.6+i*.25}s;opacity:.55`,'a')).join('')}
+<div class="card a" style="${P(880,190,660,350)}--d:3.2s">
+  <div class="ch"><span class="tile" style="--c:var(--pm);width:38px;height:38px">${ic('folder',22)}</span>Customer Project<small class="num">RFQ-12345</small></div>
+  ${FILES.map((f,i)=>`<div class="note a p" style="${P(372,90+i*60)}--d:${5.2+i*.5}s;--fx:-10px;--fy:0px;display:flex;gap:8px;align-items:center"><span class="tick">${ic('check',20)}</span>Linked to project</div>`).join('')}
+</div>
+${FILES.map((f,i)=>{const ax=i%2?410:80,ay=i<2?540:606;
+  return file(f,ax,ay,310,`--d:${3.9+i*.5}s;--d2:${4.2+i*.5}s;--tx:${900-ax}px;--ty:${268+i*60-ay}px;--fy:0px`,'a x')}).join('')}
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:8s" d="M1210 540V584"/></svg>
+<div class="card tint a" style="${P(880,584,660,96)}--d:8s;--c:var(--a2);display:flex;align-items:center;gap:18px;padding:0 22px">
+  <span class="tile" style="--c:var(--a2);width:52px;height:52px">${ic('shield',30)}</span>
+  <div><div style="font-weight:600;font-size:22px">Originals stored securely in SharePoint</div><div class="note">4 original documents · versioned · unchanged</div></div>
+  <span class="a pop" style="--d:9s;margin-left:auto;color:var(--a2)">${ic('lock',30)}</span></div>
+${cap(6.8,'One RFQ – Multiple Documents – One Project')}`});
+
+/* 2 — AI Project Manager */
+const RESP=[['Monitor','eye'],['Coordinate','swap'],['Delegate','send'],['Track','list'],['Escalate','up']];
+scenes.push({name:'AI Project Manager',dur:11,html:`
+<div class="p a pop" style="${P(400,70,800,150)}--d:.3s;background:var(--pm);color:var(--pm-ink);border-radius:12px;box-shadow:var(--sh);display:flex;align-items:center;gap:26px;padding:0 34px">
+  <span style="width:88px;height:88px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center">${ic('hub',52)}</span>
+  <div><div style="font-size:42px;font-weight:600;letter-spacing:-.01em">PL – AI Project Manager</div><div style="font-size:20px;opacity:.82">The central orchestrator above the whole process</div></div></div>
+<svg class="p" style="left:0;top:0" width="1600" height="900">
+  ${RESP.map((r,i)=>`<path class="flow a" style="--d:${1.3+i*.35}s" d="M800 220L${310+i*245} 300"/>`).join('')}
+  <path class="flow a" style="--d:4.4s" d="M800 420V470"/></svg>
+${RESP.map((r,i)=>`<div class="card tint a" style="${P(200+i*245,300,220,120)}--d:${1.5+i*.35}s;--c:var(--pm);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+  <span style="color:var(--pm-fg,var(--a1))">${ic(r[1],34)}</span><b style="font-size:24px;font-weight:600">${r[0]}</b></div>`).join('')}
+<div class="card a" style="${P(470,470,660,110)}--d:4.6s;display:flex;align-items:center;gap:22px;padding:0 30px">
+  <div><div class="note">Project</div><div class="num" style="font-size:30px;font-weight:600">RFQ-12345</div></div>
+  <div style="margin-left:auto;text-align:right"><div class="note">Status</div>
+    <span class="badge" style="--c:var(--a1);height:38px;font-size:18px;padding:0 18px;border-radius:19px">INTAKE</span></div></div>
+${AG.map((a,i)=>`<div class="card" style="${P(200+i*245,680,220,90)}opacity:.5;display:flex;align-items:center;gap:12px;padding:0 14px;--c:var(--a${i+1})">
+  <span class="tile" style="width:44px;height:44px">${ic(a[1],24)}</span><div style="line-height:1.2"><b style="font-size:17px">A${i+1}</b><div style="font-size:15px">${a[0]}</div></div></div>`).join('')}
+<div class="card a pop" style="${P(200,680,220,90)}--d:8s;display:flex;align-items:center;gap:12px;padding:0 14px;--c:var(--a1);border:2.5px solid var(--a1)">
+  <span class="tile" style="width:44px;height:44px">${ic('intake',24)}</span><div style="line-height:1.2"><b style="font-size:17px">A1</b><div style="font-size:15px">Requirement Intake</div></div></div>
+<div class="p a x" style="${P(776,590)}--d:6.6s;--d2:7s;--tx:-466px;--ty:60px;--to:0;--mt:1.1s"><span class="tile" style="--c:var(--pm);width:48px;height:48px;box-shadow:var(--sh)">${ic('folder',26)}</span></div>
+${cap(8.2,'The AI Project Manager sends the project to the first specialist agent')}`});
+
+/* 3 — A1 Requirement Intake */
+const IDENT=['Customer','RFQ number','Document revisions','Product type','Technical requirements','Mandatory requirements','Units and values','Referenced standards','Missing information','Uncertainties'];
+const REQS=[['145 kV','Nominal Voltage','Technical Specification.pdf · p. 4, §3.1'],['4500 mm','Minimum Creepage Distance','Requirements.xlsx · row 18'],['950 kg','Maximum Weight','Technical Specification.pdf · p. 7, §5.2']];
+scenes.push({name:'A1 Requirement Intake',dur:15,html:`${rail(0,'INTAKE','PAUSED · HUMAN REVIEW',11)}${head(1)}
+${FILES.map((f,i)=>file(f,60,216+i*70,300,`--d:${.8+i*.2}s`)).join('')}
+${FILES.map((f,i)=>`<div class="p a x" style="${P(366,236+i*70,14,14)}--d:${2.2+i*.25}s;--d2:${2.4+i*.25}s;--tx:60px;--ty:${(1.5-i)*30}px;--to:0;--mt:.7s;border-radius:50%;background:var(--a1)"></div>`).join('')}
+<div class="note a" style="${P(60,506)}position:absolute;--d:1.8s">All documents are read together</div>
+<div class="card a" style="${P(410,200,450,470)}--d:2.6s">
+  <div class="ch" style="--c:var(--a1)"><span style="color:var(--a1)">${ic('intake',24)}</span>A1 identifies</div>
+  <div style="display:grid;grid-template-columns:1fr;gap:9px;padding:16px 20px">
+  ${IDENT.map((t,i)=>`<div class="a" style="--d:${3.2+i*.3}s;--fy:0px;--fx:-12px;display:flex;align-items:center;gap:10px;font-size:18px;height:29px">
+    <span style="width:9px;height:9px;border-radius:50%;background:var(--${i>7?'dev':'a1'})"></span>${t}</div>`).join('')}</div></div>
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:6.4s;--c:var(--a1)" d="M860 435H910"/></svg>
+<div class="card a" style="${P(910,200,630,470)}--d:6.4s">
+  <div class="ch">Structured requirements<small>each linked to its source</small></div>
+  ${REQS.map((r,i)=>`<div class="row a" style="--d:${7+i*.75}s;height:98px">
+    <b class="num" style="font-size:30px;font-weight:600;color:var(--a1);width:150px;white-space:nowrap">${r[0]}</b>
+    <div style="min-width:0"><div style="font-size:21px;font-weight:600">${r[1]}</div>
+    <div class="note" style="display:flex;align-items:center;gap:6px;font-size:15.5px;white-space:nowrap"><span style="color:var(--a1)">${ic('link',16)}</span>${r[2]}</div></div></div>`).join('')}
+  <div class="row a" style="--d:9.6s;height:112px;background:color-mix(in srgb,var(--dev) 9%,var(--surface));border-radius:0 0 10px 10px">
+    <b style="font-size:30px;font-weight:600;color:var(--dev);width:150px">Unclear</b>
+    <div><div style="font-size:21px;font-weight:600">Ambient temperature range</div>
+    <div class="note" style="font-size:15.5px;white-space:nowrap">Customer Standard.pdf · §4.3 differs from specification p. 5</div>
+    <span class="badge" style="--c:var(--dev);margin-top:5px;height:26px">${ic('warn',15)}HUMAN REVIEW REQUIRED</span></div></div></div>
+<div class="hband a" style="${P(410,694,1130,96)}--d:11.3s"><div class="ht">${ic('person',32)}</div>
+  <div><b>HUMAN REVIEW REQUIRED</b><span>The AI Project Manager stops the process and sends the question to a person.</span></div>
+  <span style="margin-left:auto">${ic('pause',38)}</span></div>
+${cap(9,'Traceable requirement extraction')}`});
+
+/* 4 — A2 Documentation */
+const MESS=[['Technical Specification.pdf',24,84,-7],['notes from call',210,150,5],['Drawings.pdf',40,214,4],['Rev A',258,236,-9],['Requirements.xlsx',110,300,-4],['email thread',36,376,8],['Rev B',262,372,6],['Customer Standard.pdf',70,446,-3]];
+const TASKS=['Structures the project','Organizes documents','Creates the requirement register','Manages document revisions','Links requirements to sources','Updates project status'];
+const TREE=[['01 Source Documents','4 originals'],['02 Requirement Register','REQ-001 … REQ-004'],['03 Document Revisions','Rev A → Rev B'],['04 Source Links','requirement ↔ page / section'],['05 Project Status','updated']];
+scenes.push({name:'A2 Documentation',dur:11.5,html:`${rail(1,'DOCUMENTATION')}${head(2)}
+<div class="card a" style="${P(60,200,420,580)}--d:.7s"><div class="ch">Unstructured project information</div>
+  ${MESS.map((m,i)=>`<div class="p a pop" style="${P(m[1],m[2])}--d:${1+i*.12}s"><div style="transform:rotate(${m[3]}deg);background:color-mix(in srgb,var(--muted) 12%,var(--surface));border:1px solid var(--line);border-radius:6px;padding:9px 13px;font-size:17px;white-space:nowrap">${m[0]}</div></div>`).join('')}</div>
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:2.3s;--c:var(--a2)" d="M480 490H530"/><path class="flow a" style="--d:2.8s;--c:var(--a2)" d="M950 490H1000"/></svg>
+<div class="card a" style="${P(530,200,420,580)}--d:2.3s"><div class="ch"><span style="color:var(--a2)">${ic('layers',24)}</span>A2 organizes</div>
+  ${TASKS.map((t,i)=>`<div class="row a" style="--d:${2.8+i*.75}s;height:86px;font-size:20px"><span class="tick a pop" style="--d:${3.3+i*.75}s;width:32px;height:32px;border-radius:50%;background:color-mix(in srgb,var(--a2) 16%,var(--surface))">${ic('check',20)}</span>${t}</div>`).join('')}</div>
+<div class="card a" style="${P(1000,200,540,580)}--d:2.8s"><div class="ch"><span style="color:var(--pm)">${ic('folder',24)}</span>Project RFQ-12345</div>
+  ${TREE.map((t,i)=>`<div class="row a" style="--d:${3.4+i*.85}s;height:103px;--fx:14px;--fy:0px">
+    <span class="tile" style="--c:var(--a2);width:44px;height:44px">${ic(i==1?'list':i==3?'link':i==4?'check':'folder',24)}</span>
+    <div><div style="font-size:21px;font-weight:600">${t[0]}</div><div class="note">${t[1]}</div></div></div>`).join('')}</div>
+${cap(8.6,'Structured – Organized – Traceable')}`});
+
+/* 5 — A3 Engineering */
+const CMP=[['Nominal Voltage','145 kV','145 kV','MATCH','ok'],['Minimum Creepage Distance','4500 mm','4200 mm','DEVIATION','dev'],['Maximum Weight','950 kg','910 kg','MATCH','ok'],['Seismic qualification','Required','No data','MISSING DATA','miss']];
+scenes.push({name:'A3 Engineering',dur:15,html:`${rail(2,'ENGINEERING','ENGINEERING REVIEW',9.6)}${head(3)}
+<div class="card a" style="${P(60,196,500,390)}--d:.7s;--fx:-20px;--fy:0px"><div class="ch">Customer requirements</div>
+  ${CMP.map(c=>`<div class="row" style="height:81px"><div style="min-width:0;flex:1;font-size:19px">${c[0]}</div><b class="num" style="font-size:24px;font-weight:600;white-space:nowrap">${c[1]}</b></div>`).join('')}</div>
+<div class="card a" style="${P(1040,196,500,390)}--d:1.2s;--fx:20px;--fy:0px"><div class="ch">Approved specifications &amp; products</div>
+  ${CMP.map(c=>`<div class="row" style="height:81px"><b class="num" style="font-size:24px;font-weight:600;white-space:nowrap;${c[4]=='miss'?'color:var(--miss)':''}">${c[2]}</b><div class="note" style="margin-left:auto;white-space:nowrap">${c[4]=='miss'?'no record found':'existing product'}</div></div>`).join('')}</div>
+<svg class="p" style="left:0;top:0" width="1600" height="900">${CMP.map((c,i)=>`<path class="flow a" style="--d:${2.4+i*.9}s;--c:var(--${c[4]})" d="M560 ${299+i*81}H1040"/>`).join('')}</svg>
+<div class="p a" style="${P(700,190,200)}--d:2s;text-align:center;font-size:16px;color:var(--muted);letter-spacing:.06em">A3 COMPARES</div>
+${CMP.map((c,i)=>`<div class="p a pop" style="${P(690,279+i*81,220,40)}--d:${3+i*.9}s;display:grid;place-items:center"><span class="badge" style="--c:var(--${c[4]});height:40px;font-size:16px;padding:0 18px;border-radius:20px">${c[3]}</span></div>`).join('')}
+<div class="card tint a pop" style="${P(360,608,880,70)}--d:7.4s;--c:var(--dev);border-width:2px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:24px;font-weight:700;letter-spacing:.02em">
+  <span style="color:var(--dev)">${ic('warn',30)}</span>DEVIATION – Engineering Review Required</div>
+${hband(702,9.8,'ENGINEERING REVIEW','The AI agent cannot approve technical compliance. An engineer reviews and approves the next step.','Approved by engineer',12.6)}
+${cap(10.8,'AI compares. Engineers decide on compliance.')}`});
+
+/* 6 — A4 Commercial Analysis */
+const AN=[['Cost','coin'],['Lead Time','clock'],['Commercial Risk','warn'],['Technical Risk','gear'],['Opportunities','bulb'],['Missing Information','q']];
+scenes.push({name:'A4 Commercial Analysis',dur:13.5,html:`${rail(3,'COMMERCIAL ANALYSIS','COMMERCIAL REVIEW',8.6)}${head(4)}
+${[['Approved technical data','passed engineering review','a3','check'],['Commercial information','available cost and delivery data','a4','doc']].map((c,i)=>`
+<div class="card a" style="${P(60,236+i*150,340,120)}--d:${.8+i*.4}s;display:flex;align-items:center;gap:14px;padding:0 18px;--c:var(--${c[2]})">
+  <span class="tile" style="width:48px;height:48px">${ic(c[3],26)}</span><div><div style="font-size:20px;font-weight:600">${c[0]}</div><div class="note" style="font-size:15px">${c[1]}</div></div></div>`).join('')}
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:1.8s;--c:var(--a4)" d="M400 296H430V446H400M430 371H470"/><path class="flow a" style="--d:5.4s;--c:var(--a4)" d="M1090 386H1140"/></svg>
+${AN.map((t,i)=>`<div class="card a pop" style="${P(470+(i%3)*210,200+Math.floor(i/3)*190,196,176)}--d:${2.2+i*.45}s;padding:16px;display:flex;flex-direction:column;gap:10px">
+  <span style="color:var(--a4)">${ic(t[1],32)}</span><b style="font-size:19px;font-weight:600;line-height:1.15">${t[0]}</b>
+  <div class="sk" style="width:86%;margin-top:auto"></div><div class="sk" style="width:60%"></div>
+  <span class="tick a pop p" style="right:14px;top:14px;--d:${2.9+i*.45}s">${ic('check',22)}</span></div>`).join('')}
+<div class="card a" style="${P(1140,200,400,366)}--d:5.4s"><div class="ch" style="font-size:20px"><span style="color:var(--a4)">${ic('doc',24)}</span>Commercial Decision Support</div>
+  ${AN.map((t,i)=>`<div class="a" style="--d:${5.9+i*.3}s;--fy:0px;--fx:12px;display:flex;align-items:center;gap:10px;height:49px;padding:0 22px;font-size:18px"><span class="tick">${ic('check',18)}</span>${t[0]}</div>`).join('')}</div>
+${hband(630,8.8,'COMMERCIAL REVIEW','A person reviews the result before the project continues.','Approved to continue',11.4)}
+${cap(9.8,'Decision support for people – not automatic decisions')}`});
+
+/* 7 — A5 Quote */
+const INP=[['Technical Requirements','a1','list'],['Approved Engineering Data','a3','gear'],['Commercial Data','a4','chart']];
+const QS=['Customer and RFQ','Product','Technical requirements','Commercial conditions','Delivery information','References'];
+scenes.push({name:'A5 Quote',dur:13.5,html:`${rail(4,'QUOTE DRAFT','FINAL APPROVAL',8.8)}${head(5)}
+${INP.map((c,i)=>`<div class="card a" style="${P(60,214+i*138,440,100)}--d:${.8+i*.5}s;display:flex;align-items:center;gap:16px;padding:0 20px;--c:var(--${c[1]})">
+  <span class="tile" style="width:52px;height:52px">${ic(c[2],28)}</span><div><div style="font-size:22px;font-weight:600">${c[0]}</div>
+  <div class="note" style="display:flex;align-items:center;gap:6px;font-size:15px"><span class="tick">${ic('check',16)}</span>passed earlier steps</div></div></div>
+  ${i<2?`<div class="p a fade" style="${P(264,316+i*138,32)}--d:${1.1+i*.5}s;text-align:center;font-size:30px;font-weight:600;color:var(--muted);line-height:34px">+</div>`:''}`).join('')}
+<div class="note a" style="${P(60,608,440)}position:absolute;--d:2.6s;font-size:18px">A5 uses only information that has passed the earlier steps.</div>
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:3s;--c:var(--a5)" d="M500 402H600"/><path class="flow a" style="--d:8.8s;--c:var(--hu)" d="M1130 470H1200"/></svg>
+<div class="card a" style="${P(600,190,530,590)}--d:3.2s;overflow:hidden">
+  <div class="ch" style="height:70px;font-size:26px"><span style="color:var(--a5)">${ic('quote',30)}</span>Quotation Draft<small class="num">RFQ-12345</small></div>
+  ${QS.map((q,i)=>`<div class="row a" style="--d:${3.8+i*.45}s;height:71px"><span style="width:10px;height:10px;border-radius:2px;background:var(--a5)"></span>
+    <div style="flex:1"><div style="font-size:19px;font-weight:600">${q}</div><div class="sk" style="width:${[70,46,82,64,54,38][i]}%;margin-top:7px;height:8px"></div></div></div>`).join('')}
+  <div class="p a pop" style="left:36px;top:240px;--d:6.8s"><div style="transform:rotate(-22deg);font-size:118px;font-weight:700;letter-spacing:.08em;color:var(--a5);opacity:.16;line-height:1">DRAFT</div></div>
+  <div class="p a" style="left:0;right:0;bottom:0;height:64px;--d:7.5s;background:var(--a5);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:.05em">${ic('warn',22)}DRAFT – HUMAN APPROVAL REQUIRED</div></div>
+<div class="p a" style="${P(1200,290,340,360)}--d:9s;background:var(--hu);color:#fff;border-radius:10px;box-shadow:var(--sh);padding:28px;display:flex;flex-direction:column;gap:12px">
+  <span style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center">${ic('person',36)}</span>
+  <b style="font-size:24px;letter-spacing:.07em">FINAL REVIEW</b><span style="font-size:18px;opacity:.86">A person carries out the final review before anything is sent to the customer.</span>
+  <div class="stamp a pop" style="--d:11.6s;margin:auto 0 0;align-self:flex-start">${ic('check',20)}Approved by a person</div></div>
+${cap(10,'The quotation stays a draft until a person approves it')}`});
+
+/* 8 — Overview */
+const TRK=[['Project Status','list'],['Open Tasks','check'],['Missing Information','q'],['Risks','warn'],['Human Reviews','person'],['Next Action','send']];
+scenes.push({name:'Project Manager overview',dur:12,html:`
+<div class="p a pop" style="${P(470,50,660,104)}--d:.3s;background:var(--pm);color:var(--pm-ink);border-radius:12px;box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;gap:18px">
+  ${ic('hub',44)}<div><div style="font-size:34px;font-weight:700;letter-spacing:.08em">AI PROJECT MANAGER</div><div style="font-size:17px;opacity:.82">Supervises every step</div></div></div>
+<svg class="p" style="left:0;top:0" width="1600" height="900">
+  <path class="flow a" style="--d:1s" d="M500 154V681M1100 154V681"/>
+  ${AG.map((a,i)=>`<path class="flow a" style="--d:${1.3+i*.4}s;--c:var(--a${i+1})" d="M500 ${249+i*108}H560M1100 ${249+i*108}H1040"/>`).join('')}
+  ${[0,1,2].map(i=>`<path class="flow a" style="--d:${4.4+i*.35}s" d="M440 ${302+i*150}H500M1160 ${302+i*150}H1100"/>`).join('')}</svg>
+${AG.map((a,i)=>`<div class="card a" style="${P(560,210+i*108,480,78)}--d:${1.4+i*.4}s;--c:var(--a${i+1});display:flex;align-items:center;gap:16px;padding:0 16px">
+  <span class="tile" style="width:50px;height:50px">${ic(a[1],28)}</span><b style="font-size:24px;font-weight:600">A${i+1} – ${a[0]}</b></div>
+  ${i<4?`<div class="p a fade" style="${P(786,290+i*108,28)}--d:${1.7+i*.4}s;text-align:center;font-size:22px;color:var(--muted);line-height:26px">↓</div>`:''}`).join('')}
+<div class="p a" style="${P(60,206,380)}--d:4.2s;font-size:15px;letter-spacing:.08em;color:var(--muted);font-weight:600">CONTINUOUSLY TRACKED</div>
+<div class="p a" style="${P(1160,206,380)}--d:4.2s;font-size:15px;letter-spacing:.08em;color:var(--muted);font-weight:600">CONTINUOUSLY TRACKED</div>
+${TRK.map((t,i)=>`<div class="card tint a" style="${P(i<3?60:1160,250+(i%3)*150,380,104)}--d:${4.4+(i%3)*.35+(i<3?0:.15)}s;--c:var(--pm);display:flex;align-items:center;gap:16px;padding:0 20px">
+  <span style="color:var(--a1)">${ic(t[1],32)}</span><b style="font-size:23px;font-weight:600">${t[0]}</b>
+  <span class="live" style="margin-left:auto;width:12px;height:12px;border-radius:50%;background:var(--a2)"></span></div>`).join('')}
+${cap(6.5,'One orchestrator keeps track of the whole project, from intake to quote')}`});
+
+/* 9 — Human control */
+const HC=[['Engineering Approval','Technical compliance is confirmed by an engineer','a3'],['Commercial Approval','Commercial conditions are confirmed by a person','a4'],['Final Quote Approval','Nothing reaches the customer without sign-off','a5']];
+scenes.push({name:'Human control',dur:11.5,html:`${mark}
+${['prepares.','analyzes.','coordinates.'].map((w,i)=>`<div class="p a" style="${P(80,170+i*104)}--d:${.5+i*.9}s;--fx:-20px;--fy:0px;font-size:74px;font-weight:600;letter-spacing:-.02em;color:var(--muted)"><span style="color:var(--a1)">AI</span> ${w}</div>`).join('')}
+<div class="p a" style="${P(80,510)}--d:3.8s;--fy:20px;font-size:100px;font-weight:700;letter-spacing:-.025em;line-height:1.1">Humans decide.
+  <div style="height:8px;border-radius:4px;background:var(--hu);margin-top:10px"></div></div>
+<svg class="p" style="left:0;top:0" width="1600" height="900"><path class="flow a" style="--d:5.2s;--c:var(--hu)" d="M900 150V760"/></svg>
+${HC.map((h,i)=>`<div class="p a" style="${P(940,180+i*192,600,150)}--d:${5.4+i*.9}s;--fx:24px;--fy:0px;background:var(--hu);color:#fff;border-radius:10px;box-shadow:var(--sh);display:flex;align-items:center;gap:22px;padding:0 26px">
+  <span style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none">${ic('person',40)}</span>
+  <div><div style="font-size:30px;font-weight:600">${h[0]}</div><div style="font-size:17px;opacity:.86">${h[1]}</div></div>
+  <span class="a pop" style="--d:${6+i*.9}s;margin-left:auto;width:44px;height:44px;border-radius:50%;background:#fff;color:#1C6B34;display:grid;place-items:center;flex:none">${ic('check',26)}</span></div>
+  <div class="p a pop" style="${P(888,243+i*192,24,24)}--d:${5.4+i*.9}s;border-radius:50%;background:var(--${h[2]});border:4px solid var(--stage)"></div>`).join('')}
+${cap(8.6,'AI supports the process. People keep control of critical technical and commercial decisions.')}`});
+
+/* 10 — Final result */
+const CH=[['CUSTOMER','RFQ','mail','miss'],['A1','INTAKE','intake','a1'],['A2','DOCUMENTATION','layers','a2'],['A3','ENGINEERING','gear','a3'],['HUMAN','REVIEW','person','hu'],['A4','COMMERCIAL','chart','a4'],['HUMAN','REVIEW','person','hu'],['A5','QUOTE','quote','a5'],['FINAL','APPROVAL','person','hu'],['CUSTOMER','QUOTATION','check','ok']];
+scenes.push({name:'Final result',dur:16,html:`
+<div class="p a" style="${P(39,70,1522,74)}--d:.3s;--fy:-14px;background:var(--pm);color:var(--pm-ink);border-radius:10px;box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;gap:16px">
+  ${ic('hub',34)}<b style="font-size:26px;letter-spacing:.1em">AI PROJECT MANAGER</b><span style="font-size:18px;opacity:.82">coordinates the whole chain</span></div>
+<svg class="p" style="left:0;top:0" width="1600" height="900">
+  ${CH.map((c,i)=>`<path class="flow a" style="--d:${1+i*.55}s" d="M${107+i*154} 144V214"/>`).join('')}
+  <path d="M60 366H1540" stroke="var(--line)" stroke-width="3"/></svg>
+${CH.map((c,i)=>`<div class="p a pop" style="${P(39+i*154,214,136,120)}--d:${1.1+i*.55}s;--c:var(--${c[3]});border-radius:10px;box-shadow:var(--sh);
+  ${c[3]=='hu'?'background:var(--hu);color:#fff;':'background:color-mix(in srgb,var(--c) 13%,var(--surface));border:1.5px solid var(--c);'}display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center">
+  <span style="${c[3]=='hu'?'':'color:var(--c)'}">${ic(c[2],30)}</span><div style="font-size:13.5px;font-weight:700;letter-spacing:.04em;line-height:1.25">${c[0]}<br>${c[1]}</div></div>
+  ${i<9?`<div class="p a fade" style="${P(175+i*154,256,18)}--d:${1.3+i*.55}s;text-align:center;font-size:24px;font-weight:700;color:var(--muted);line-height:34px">›</div>`:''}`).join('')}
+<div class="p a x" style="${P(97,356,20,20)}--d:1.1s;--d2:1.3s;--tx:1386px;--mt:5.2s;--me:linear;border-radius:50%;background:var(--pm);border:4px solid var(--stage)"></div>
+<div class="p a" style="${P(0,440,1600)}--d:7.6s;--fy:24px;text-align:center;font-size:132px;font-weight:700;letter-spacing:.14em;line-height:1;color:var(--pm-title,var(--fg))">AI BENJA</div>
+<div class="p a" style="${P(0,606,1600)}--d:9s;text-align:center;font-size:38px;font-weight:600">From customer requirements to structured decision support</div>
+<div class="p a" style="${P(0,690,1600)}--d:10.4s;display:flex;justify-content:center;gap:18px">
+  ${[['Traceable.','a1'],['Controlled.','pm'],['Human-approved.','hu']].map((t,i)=>`<span class="a pop" style="--d:${10.6+i*.5}s;font-size:26px;font-weight:600;padding:10px 26px;border-radius:30px;border:1.5px solid var(--${t[1]});background:color-mix(in srgb,var(--${t[1]}) 12%,var(--surface))">${t[0]}</span>`).join('')}</div>`});
+
+/* ---------- player ---------- */
+const stage=document.getElementById('stage'),player=document.getElementById('player');
+const els=scenes.map(s=>{const d=document.createElement('section');d.className='scene';d.innerHTML=s.html;stage.appendChild(d);return d});
+const total=scenes.reduce((a,s)=>a+s.dur,0);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cur=0,t=0,playing=!reduce,ended=false,last=null;
+const $=id=>document.getElementById(id);
+const dots=$('dots');
+scenes.forEach((s,i)=>{const b=document.createElement('button');b.textContent=i+1;b.title=s.name;b.setAttribute('aria-label','Scene '+(i+1)+': '+s.name);b.onclick=()=>show(i);dots.appendChild(b)});
+function ui(){
+  [...dots.children].forEach((b,i)=>b.setAttribute('aria-current',i===cur));
+  $('now').textContent='Scene '+(cur+1)+' of '+scenes.length+' · '+scenes[cur].name;
+  $('play').textContent=ended?'Replay':playing?'Pause':'Play';
+  stage.classList.toggle('paused',!playing&&!reduce);
+}
+function show(i){
+  els.forEach((e,j)=>{if(j===i)return;
+    if(e.classList.contains('on')){e.classList.remove('on');setTimeout(()=>{if(!e.classList.contains('on'))e.classList.remove('run')},520)}
+    else e.classList.remove('run')});
+  const e=els[i];e.classList.remove('run');void e.offsetWidth;e.classList.add('run','on');
+  cur=i;t=0;ended=false;ui();
+}
+function frame(now){
+  if(last!==null&&playing&&!document.hidden){
+    t+=Math.min(now-last,100)/1000;
+    if(t>=scenes[cur].dur){ if(cur<scenes.length-1)show(cur+1); else{t=scenes[cur].dur;playing=false;ended=true;ui()} }
+  }
+  last=now;
+  let done=0;for(let i=0;i<cur;i++)done+=scenes[i].dur;
+  $('prog').style.width=((done+t)/total*100)+'%';
+  requestAnimationFrame(frame);
+}
+$('play').onclick=()=>{ if(ended){playing=!reduce;show(0)} else{playing=!playing;ui()} };
+$('prev').onclick=()=>show(Math.max(0,cur-1));
+$('next').onclick=()=>show(Math.min(scenes.length-1,cur+1));
+$('full').onclick=()=>{ if(document.fullscreenElement)document.exitFullscreen(); else if(player.requestFullscreen)player.requestFullscreen().catch(()=>{}) };
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='BUTTON'&&e.key===' ')return;
+  if(e.key===' '){e.preventDefault();$('play').click()}
+  else if(e.key==='ArrowRight')$('next').click();
+  else if(e.key==='ArrowLeft')$('prev').click();
+});
+document.addEventListener('visibilitychange',()=>stage.classList.toggle('paused',document.hidden||(!playing&&!reduce)));
+function fit(){const w=player.clientWidth,h=player.clientHeight,s=Math.min(w/1600,h/900);
+  stage.style.transform='translate('+((w-1600*s)/2)+'px,'+((h-900*s)/2)+'px) scale('+s+')'}
+new ResizeObserver(fit).observe(player);fit();
+show(0);requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
