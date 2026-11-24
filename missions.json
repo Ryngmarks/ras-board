@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T23:06:05.188Z",
+  "generated_at": "2026-11-24T23:18:49.896Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-24T23:06:05.125Z",
+      "updated": "2026-11-24T23:18:49.836Z",
       "work_orders": [
         {
           "id": "F0",
@@ -537,10 +537,12 @@
         {
           "id": "CLIP-B1a",
           "title": "Stridslabbet, del 2: första experimentet, bild utan fönster",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-24T22:37:39.027Z",
-          "after": "CLIP-A"
+          "done": "2026-11-24T23:18:49.735Z",
+          "after": "CLIP-A",
+          "result": "Spelet kan spela in utan fönster. Rosa felfärg i byggda spelet hittad och rättad"
         },
         {
           "id": "CLIP-B1b",
