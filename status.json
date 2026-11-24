@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T22:37:41Z",
+    "updated":  "2026-11-24T23:18:52Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "camera being built; five decisions wait",
                         "since":  "2026-11-24T22:23:51Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "CLIP-B1a: dev-tools, tools",
-                        "since":  "2026-11-24T22:37:41Z",
-                        "agent":  "clip-b1a",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
