@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T21:47:12Z",
+    "updated":  "2026-11-24T21:47:15Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -112,6 +112,16 @@
                         "state":  "working",
                         "note":  "resumed; five decisions wait on the board",
                         "since":  "2026-11-24T21:12:39Z"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "CLIP-A clip tool gates",
+                        "since":  "2026-11-24T21:47:15Z",
+                        "agent":  "rev-clip-a",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
