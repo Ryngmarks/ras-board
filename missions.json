@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T08:34:56.995Z",
+  "generated_at": "2026-11-24T21:12:29.676Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-15T08:34:56.928Z",
+      "updated": "2026-11-24T21:12:29.505Z",
       "work_orders": [
         {
           "id": "F0",
@@ -482,16 +482,18 @@
         },
         {
           "id": "HOLD-02b",
-          "title": "Hållen musknapp, del 2: klientens regler (påbörjad, pausad)",
-          "status": "todo",
+          "title": "Hållen musknapp, del 2: klientens regler och rättningskrav",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-24T21:12:29.169Z",
           "after": "HOLD-02a"
         },
         {
           "id": "CLIP-A",
-          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar (påbörjad, pausad)",
-          "status": "todo",
+          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-24T21:12:29.329Z",
           "after": "ARCH-21"
         },
         {
