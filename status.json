@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T21:12:39Z",
+    "updated":  "2026-11-24T21:47:12Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,16 +103,6 @@
                         "note":  "HOLD-02b: client-core",
                         "since":  "2026-11-24T21:12:33Z",
                         "agent":  "hold-02b",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "CLIP-A: tools, own worktree",
-                        "since":  "2026-11-24T21:12:36Z",
-                        "agent":  "clip-a",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     },
