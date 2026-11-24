@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T21:12:36Z",
+    "updated":  "2026-11-24T21:12:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -97,14 +97,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Copperglade",
-                        "state":  "waiting",
-                        "note":  "paused, five decisions on the board",
-                        "since":  "2026-11-14T22:45:52Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Copperglade",
                         "state":  "working",
@@ -123,6 +115,13 @@
                         "agent":  "clip-a",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "resumed; five decisions wait on the board",
+                        "since":  "2026-11-24T21:12:39Z"
                     }
                 ]
 }
