@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T21:57:05.017Z",
+  "generated_at": "2026-11-24T22:00:48.673Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-24T21:57:04.956Z",
+      "updated": "2026-11-24T22:00:48.612Z",
       "work_orders": [
         {
           "id": "F0",
@@ -492,7 +492,7 @@
         },
         {
           "id": "CLIP-A",
-          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar (byggd, granskas)",
+          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar (klar, förs in)",
           "status": "working",
           "role": "implementer",
           "started": "2026-11-24T21:12:29.329Z",
