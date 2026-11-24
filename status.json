@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T22:09:54Z",
+    "updated":  "2026-11-24T22:09:56Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -99,9 +99,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "resumed; five decisions wait on the board",
-                        "since":  "2026-11-24T21:12:39Z"
+                        "state":  "waiting",
+                        "note":  "Unity licence: sign in to Unity Hub",
+                        "since":  "2026-11-24T22:09:56Z",
+                        "for":  "owner"
                     }
                 ]
 }
