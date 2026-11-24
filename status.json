@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-24T23:18:52Z",
+    "updated":  "2026-11-24T23:18:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -99,9 +99,10 @@
                     {
                         "role":  "project-manager",
                         "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "camera being built; five decisions wait",
-                        "since":  "2026-11-24T22:23:51Z"
+                        "state":  "waiting",
+                        "note":  "a build to try; five decisions wait",
+                        "since":  "2026-11-24T23:18:55Z",
+                        "for":  "owner"
                     }
                 ]
 }
