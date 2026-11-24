@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T22:00:48.673Z",
+  "generated_at": "2026-11-24T22:09:52.266Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-24T22:00:48.612Z",
+      "updated": "2026-11-24T22:09:52.198Z",
       "work_orders": [
         {
           "id": "F0",
@@ -492,11 +492,13 @@
         },
         {
           "id": "CLIP-A",
-          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar (klar, förs in)",
-          "status": "working",
+          "title": "Stridslabbet, del 1: klippverktygets kontrakt och grindar",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-24T21:12:29.329Z",
-          "after": "ARCH-21"
+          "done": "2026-11-24T22:09:52.015Z",
+          "after": "ARCH-21",
+          "result": "Tagningen jämförs mot beställningen. Grindar för träfftid och fotglidning byggda, granskade och rättade"
         },
         {
           "id": "HOLD-02c",
@@ -507,10 +509,10 @@
         },
         {
           "id": "HOLD-03",
-          "title": "Hållen musknapp, del 3: i spelet med pekaren, markören och kopplingen",
-          "status": "working",
+          "title": "Hållen musknapp, del 3: i spelet (byggd, väntar på Unity-licensen)",
+          "status": "owner",
           "role": "implementer",
-          "started": "2026-11-24T21:57:04.412Z",
+          "started": "2026-11-24T22:09:52.108Z",
           "after": "HOLD-02b"
         },
         {
