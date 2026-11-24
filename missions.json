@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T21:56:04.357Z",
+  "generated_at": "2026-11-24T21:57:05.017Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-24T21:56:04.302Z",
+      "updated": "2026-11-24T21:57:04.956Z",
       "work_orders": [
         {
           "id": "F0",
@@ -499,32 +499,26 @@
           "after": "ARCH-21"
         },
         {
-          "id": "HOLD-02a-fix",
-          "title": "Hållen musknapp: två små testrättningar i vägsökaren",
-          "status": "todo",
-          "role": "implementer",
-          "after": "HOLD-02b"
-        },
-        {
           "id": "HOLD-02c",
-          "title": "Hållen musknapp, del 3: kontrollvärde i alla fyra körmiljöer",
+          "title": "Hållen musknapp, del 4: kontrollvärde i alla fyra körmiljöer",
           "status": "todo",
           "role": "implementer",
-          "after": "HOLD-02a-fix"
+          "after": "HOLD-03"
         },
         {
           "id": "HOLD-03",
-          "title": "Hållen musknapp, del 4: i Unity med pekaren, markören och kopplingen",
-          "status": "todo",
+          "title": "Hållen musknapp, del 3: i spelet med pekaren, markören och kopplingen",
+          "status": "working",
           "role": "implementer",
-          "after": "HOLD-02c"
+          "started": "2026-11-24T21:57:04.412Z",
+          "after": "HOLD-02b"
         },
         {
           "id": "HOLD-04",
           "title": "Hållen musknapp, del 5: mätning i det byggda spelet mot 6 ms och 50 ms",
           "status": "todo",
           "role": "implementer",
-          "after": "HOLD-03"
+          "after": "HOLD-02c"
         },
         {
           "id": "CAM-01",
