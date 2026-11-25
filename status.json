@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T17:45:28Z",
+    "updated":  "2026-11-25T17:46:42Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -112,6 +112,16 @@
                         "state":  "working",
                         "note":  "skeleton being built; four decisions wait",
                         "since":  "2026-11-25T17:45:28Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "CLIP-B1b: dev-tools, tools",
+                        "since":  "2026-11-25T17:46:42Z",
+                        "agent":  "clip-b1b",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
