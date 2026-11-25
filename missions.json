@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T17:46:39.623Z",
+  "generated_at": "2026-11-25T18:03:58.648Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T17:46:39.547Z",
+      "updated": "2026-11-25T18:03:58.587Z",
       "work_orders": [
         {
           "id": "F0",
@@ -563,10 +563,12 @@
         {
           "id": "W22",
           "title": "Gemensamt skelett med det valda kroppsbygget",
-          "status": "working",
+          "status": "done",
           "role": "3d-artist",
           "started": "2026-11-25T17:45:22.086Z",
-          "after": "Q-09"
+          "done": "2026-11-25T18:03:58.503Z",
+          "after": "Q-09",
+          "result": "Skelett med 40 ben i det kompakta bygget. Kontraktsfil och test klara. Blad skickat till dig"
         },
         {
           "id": "W06",
@@ -601,6 +603,13 @@
           "status": "todo",
           "role": "implementer",
           "after": "S13"
+        },
+        {
+          "id": "W23",
+          "title": "Läs in skelettet i Unity och kontrollera mot kontraktet",
+          "status": "todo",
+          "role": "implementer",
+          "after": "W22"
         }
       ]
     },
