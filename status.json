@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T20:03:55Z",
+    "updated":  "2026-11-25T20:06:14Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-25T20:03:55Z",
                         "agent":  "walk-2",
                         "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "addendum 7: the first attack",
+                        "since":  "2026-11-25T20:06:14Z",
+                        "agent":  "arch-14",
+                        "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
                 ]
