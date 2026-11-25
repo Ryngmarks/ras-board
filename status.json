@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T17:45:25Z",
+    "updated":  "2026-11-25T17:45:28Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -97,14 +97,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Copperglade",
-                        "state":  "waiting",
-                        "note":  "a build to try; five decisions wait",
-                        "since":  "2026-11-24T23:18:55Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "3d-artist",
                         "project":  "Copperglade",
                         "state":  "working",
@@ -113,6 +105,13 @@
                         "agent":  "wo-22",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "skeleton being built; four decisions wait",
+                        "since":  "2026-11-25T17:45:28Z"
                     }
                 ]
 }
