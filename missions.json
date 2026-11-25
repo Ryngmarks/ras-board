@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T20:53:56.801Z",
+  "generated_at": "2026-11-25T20:55:42.578Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T20:53:56.738Z",
+      "updated": "2026-11-25T20:55:42.517Z",
       "work_orders": [
         {
           "id": "F0",
@@ -658,11 +658,13 @@
         },
         {
           "id": "ATK-1",
-          "title": "Attacken, del 1: träffen avgörs av servern (byggd, granskas)",
-          "status": "working",
+          "title": "Attacken, del 1: träffen avgörs av servern, docka med hälsa",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-25T20:17:22.021Z",
-          "after": "ARCH-14"
+          "done": "2026-11-25T20:55:42.339Z",
+          "after": "ARCH-14",
+          "result": "Servern avgör träffen på en docka med hälsa. Granskad: inga fel i reglerna, två testluckor tätas"
         },
         {
           "id": "ATK-2",
@@ -677,8 +679,9 @@
         {
           "id": "ATK-3",
           "title": "Attacken, del 3: ansatsen vid klicket, attacken i spelet",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-25T20:55:42.421Z",
           "after": "ATK-2"
         },
         {
