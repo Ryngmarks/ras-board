@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T19:08:33.001Z",
+  "generated_at": "2026-11-25T19:20:26.606Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T19:08:32.917Z",
+      "updated": "2026-11-25T19:20:26.514Z",
       "work_orders": [
         {
           "id": "F0",
@@ -532,7 +532,7 @@
           "title": "Stridslabbet, del 4: fyra kameror och avbrutna tagningar",
           "status": "todo",
           "role": "implementer",
-          "after": "CLIP-B1b"
+          "after": "WALK-1"
         },
         {
           "id": "CLIP-C",
@@ -595,10 +595,12 @@
         {
           "id": "ARCH-13",
           "title": "Gången, steg 1.3: specifikation",
-          "status": "working",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-25T19:08:32.629Z",
-          "after": "W23"
+          "done": "2026-11-25T19:20:25.232Z",
+          "after": "W23",
+          "result": "Kort specifikation: figuren springer vid 5 meter per sekund och fötterna kan inte glida"
         },
         {
           "id": "S13",
@@ -608,11 +610,77 @@
           "after": "ARCH-13"
         },
         {
+          "id": "WALK-1",
+          "title": "Gången, del 1: figuren springer i spelet",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-25T19:20:25.571Z",
+          "after": "ARCH-13"
+        },
+        {
+          "id": "WALK-2",
+          "title": "Gången, del 2: fötterna i stridslabbet och grinden för fotglidning",
+          "status": "todo",
+          "role": "implementer",
+          "after": "WALK-1"
+        },
+        {
+          "id": "PIPE-1",
+          "title": "Gemensamma animationsverktyg före steg 1.4",
+          "status": "todo",
+          "role": "implementer",
+          "after": "WALK-2"
+        },
+        {
+          "id": "Q-12",
+          "title": "Hur fort ska hjälten röra sig, och hur ska den stanna?",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-25T19:20:26.304Z",
+          "after": "ARCH-13",
+          "decision": {
+            "summary": "Gången är specificerad och byggs nu. Två saker märker du som spelare och avgör därför själv. Bygget görs först med de rekommenderade valen, och båda är lätta att ändra efteråt när du har sett figuren röra sig.",
+            "questions": [
+              {
+                "id": "G-fart",
+                "text": "Hur fort ska hjälten röra sig?",
+                "note": "I dag rör sig hjälten 5 meter per sekund. För en figur på 1,80 meter med de här benen är det löpning, inte gång.",
+                "options": [
+                  {
+                    "label": "Behåll 5 meter per sekund, löpning",
+                    "text": "Hjälten springer, med cirka 3,8 steg per sekund. Kartan korsas lika fort som i dag.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Sänk till cirka 3 meter per sekund",
+                    "text": "Lugnare, närmare takten till fots i Albion. Allt tar längre tid att nå, och farten är också en balansfråga."
+                  }
+                ]
+              },
+              {
+                "id": "G-stopp",
+                "text": "Hur ska hjälten stanna?",
+                "options": [
+                  {
+                    "label": "Tvärt, med ett sista steg som sätter sig",
+                    "text": "Hjälten stannar där servern stannar den, och kroppen fångar upp farten med ett kort avslutande steg. Rappt, som i Albion.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Bromsar in under cirka 0,2 sekunder",
+                    "text": "Mjukare för ögat, men hjälten glider då en liten bit efter att du har släppt."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
           "id": "S14",
           "title": "Steg 1.4: en attack, två metoder att animera",
           "status": "todo",
           "role": "implementer",
-          "after": "S13"
+          "after": "PIPE-1"
         },
         {
           "id": "W23",
