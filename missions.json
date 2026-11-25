@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T20:06:11.082Z",
+  "generated_at": "2026-11-25T20:17:22.723Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T20:06:11.022Z",
+      "updated": "2026-11-25T20:17:22.654Z",
       "work_orders": [
         {
           "id": "F0",
@@ -647,17 +647,83 @@
         {
           "id": "ARCH-14",
           "title": "Första riktiga attacken, steg 1.4: specifikation",
-          "status": "working",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-25T20:06:10.841Z",
-          "after": "Q-10"
+          "done": "2026-11-25T20:17:21.895Z",
+          "after": "Q-10",
+          "result": "Kort specifikation: hugg mot en träningsdocka, ansatsen ritas direkt, servern avgör träffen"
         },
         {
-          "id": "S14",
-          "title": "Steg 1.4: en attack, två metoder att animera",
+          "id": "ATK-1",
+          "title": "Attacken, del 1: träffen avgörs av servern, docka med hälsa",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-25T20:17:22.021Z",
+          "after": "ARCH-14"
+        },
+        {
+          "id": "ATK-2",
+          "title": "Attacken, del 2: hugget på figuren, svärdet och dockan",
           "status": "todo",
           "role": "implementer",
           "after": "ARCH-14"
+        },
+        {
+          "id": "ATK-3",
+          "title": "Attacken, del 3: ansatsen vid klicket, attacken i spelet",
+          "status": "todo",
+          "role": "implementer",
+          "after": "ATK-2"
+        },
+        {
+          "id": "Q-13",
+          "title": "Två animationsmetoder eller en, och hur man attackerar",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-25T20:17:22.417Z",
+          "after": "ARCH-14",
+          "decision": {
+            "summary": "Den första riktiga attacken är specificerad och byggs nu: hjälten hugger, och en träningsdocka tar skada. Två saker avgör du själv. Bygget görs först med de rekommenderade valen.",
+            "questions": [
+              {
+                "id": "A-jamforelse",
+                "text": "Ska attacken göras två gånger, med två animationsmetoder, och jämföras blint?",
+                "note": "Det är din plan sedan tidigare. Jämförelsen kostar två arbetsordrar för gemensamma verktyg plus cirka tolv agentkörningar. Den första attacken i spelet behöver inget av det.",
+                "options": [
+                  {
+                    "label": "Nej, stryk jämförelsen",
+                    "text": "Attacken görs en gång, som ställningar i data, på samma sätt som löpningen. Snabbast till en attack i spelet. Metoden med klipp från Blender prövas då inte alls.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Ja, men på den andra attacken",
+                    "text": "Första attacken görs en gång och kommer in i spelet. Jämförelsen görs sedan på nästa attack, så att ingen metod börjar från färdigt arbete."
+                  },
+                  {
+                    "label": "Ja, på den här attacken",
+                    "text": "Som planen säger. Den första attacken i spelet dröjer då tills de gemensamma verktygen och båda varianterna är klara."
+                  }
+                ]
+              },
+              {
+                "id": "A-styrning",
+                "text": "Hur ska man attackera?",
+                "note": "I dag startas platshållaren med tangenten Q mot pekaren.",
+                "options": [
+                  {
+                    "label": "Tangent mot pekaren, ett hugg per tryck",
+                    "text": "Du trycker Q och hjälten hugger mot platsen där pekaren är. Fungerar utan att ett mål är valt. Tangenten kan bytas senare.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Klicka på fienden, som i Albion",
+                    "text": "Du klickar på fienden; hjälten går fram och hugger om och om igen tills du gör något annat. Kräver målval och automatisk attack, alltså mer att bygga."
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "W23",
