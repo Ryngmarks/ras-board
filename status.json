@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T19:08:36Z",
+    "updated":  "2026-11-25T19:08:41Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "skeleton being built; four decisions wait",
                         "since":  "2026-11-25T17:45:28Z"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "addendum 6: the walk",
+                        "since":  "2026-11-25T19:08:41Z",
+                        "agent":  "arch-13",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
