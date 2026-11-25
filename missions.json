@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T18:40:22.988Z",
+  "generated_at": "2026-11-25T19:08:33.001Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T18:40:22.826Z",
+      "updated": "2026-11-25T19:08:32.917Z",
       "work_orders": [
         {
           "id": "F0",
@@ -593,11 +593,19 @@
           "role": "implementer"
         },
         {
+          "id": "ARCH-13",
+          "title": "Gången, steg 1.3: specifikation",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-25T19:08:32.629Z",
+          "after": "W23"
+        },
+        {
           "id": "S13",
           "title": "Steg 1.3: gång utan fotglidning",
           "status": "todo",
           "role": "implementer",
-          "after": "CLIP-D"
+          "after": "ARCH-13"
         },
         {
           "id": "S14",
@@ -609,10 +617,12 @@
         {
           "id": "W23",
           "title": "Läs in skelettet i Unity och visa en blockfigur i stridslabbet",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-25T18:40:22.730Z",
-          "after": "W22"
+          "done": "2026-11-25T19:08:32.468Z",
+          "after": "W22",
+          "result": "Skelettet byggs i Unity ur kontraktet. En blockfigur ritas av det byggda spelet. Bild skickad till dig"
         }
       ]
     },
