@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T20:20:12Z",
+    "updated":  "2026-11-25T20:46:48Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "skeleton being built; four decisions wait",
                         "since":  "2026-11-25T17:45:28Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "ATK-1: sim, net, server, own worktree",
-                        "since":  "2026-11-25T20:17:29Z",
-                        "agent":  "atk-1",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     },
                     {
                         "role":  "implementer",
