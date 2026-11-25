@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T20:53:59Z",
+    "updated":  "2026-11-25T20:55:45Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "skeleton being built; four decisions wait",
                         "since":  "2026-11-25T17:45:28Z"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "ATK-1 server hit",
-                        "since":  "2026-11-25T20:46:51Z",
-                        "agent":  "rev-atk-1",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
