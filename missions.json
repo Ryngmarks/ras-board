@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T20:03:49.162Z",
+  "generated_at": "2026-11-25T20:06:11.082Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T20:03:49.100Z",
+      "updated": "2026-11-25T20:06:11.022Z",
       "work_orders": [
         {
           "id": "F0",
@@ -279,39 +279,12 @@
         {
           "id": "Q-10",
           "title": "Attackens start: 84 till 101 ms mot målet 67",
-          "status": "owner",
+          "status": "done",
           "role": "project-manager",
           "started": "2026-11-15T00:16:31.820Z",
+          "done": "2026-11-25T20:06:10.744Z",
           "after": "S11B",
-          "decision": {
-            "summary": "Målet är att en attack i solospel syns inom 67 ms efter knapptrycket. Mätt i spelet: 84 ms vid 144 bilder per sekund och 101 ms vid 60, i de långsammaste fem procenten. Servern väntar en hel uppdatering innan attacken startar. Avgörs före steg 1.4.",
-            "questions": [
-              {
-                "id": "D9-solo",
-                "text": "Hur ska attacken hinna börja i tid?",
-                "note": "Förflyttning påverkas inte: klick till rörelse ligger på 15 respektive 34 ms och håller sitt mål med god marginal.",
-                "options": [
-                  {
-                    "label": "Ansatsen börjar direkt vid klicket",
-                    "text": "Din egen hjälte börjar ansatsen i samma stund som du trycker, innan servern har svarat. Attacken syns då efter cirka 15 till 35 ms. Om servern nekar tonas rörelsen bort. Cirka 300 rader kod. Arkitektens förslag.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "Dubbla uppdateringstakten till 60",
-                    "text": "Servern räknar 60 gånger per sekund i stället för 30. Ger 49 ms med 144 bilder per sekund men 68 ms med 60, alltså fortfarande över målet där. Dubblar serverns arbete."
-                  },
-                  {
-                    "label": "Ingen väntan i solospel",
-                    "text": "En särskild väg för solospel utan den extra uppdateringen. Uppskattat 47 till 66 ms, på gränsen vid 60 bilder per sekund, och hjälper inte när man spelar två över nätverk."
-                  },
-                  {
-                    "label": "Höj målet",
-                    "text": "Målet ändras till cirka 100 ms i solospel. Inget byggs, men attacken känns segare än förflyttningen."
-                  }
-                ]
-              }
-            ]
-          }
+          "result": "Ansatsen börjar direkt vid klicket, innan servern svarat"
         },
         {
           "id": "WO-20",
@@ -672,11 +645,19 @@
           }
         },
         {
+          "id": "ARCH-14",
+          "title": "Första riktiga attacken, steg 1.4: specifikation",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-25T20:06:10.841Z",
+          "after": "Q-10"
+        },
+        {
           "id": "S14",
           "title": "Steg 1.4: en attack, två metoder att animera",
           "status": "todo",
           "role": "implementer",
-          "after": "PIPE-1"
+          "after": "ARCH-14"
         },
         {
           "id": "W23",
