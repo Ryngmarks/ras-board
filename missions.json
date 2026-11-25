@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T20:20:06.398Z",
+  "generated_at": "2026-11-25T20:27:41.519Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T20:20:06.338Z",
+      "updated": "2026-11-25T20:27:41.449Z",
       "work_orders": [
         {
           "id": "F0",
@@ -597,7 +597,7 @@
         },
         {
           "id": "PIPE-1",
-          "title": "Gemensamma animationsverktyg före steg 1.4",
+          "title": "Blandare, fjädrar och blick-IK, när en rörelse behöver dem",
           "status": "todo",
           "role": "implementer",
           "after": "WALK-2"
@@ -681,34 +681,14 @@
         },
         {
           "id": "Q-13",
-          "title": "Två animationsmetoder eller en, och hur man attackerar",
+          "title": "Hur ska man attackera? (Jämförelsen av två metoder: struken)",
           "status": "owner",
           "role": "project-manager",
           "started": "2026-11-25T20:17:22.417Z",
           "after": "ARCH-14",
           "decision": {
-            "summary": "Den första riktiga attacken är specificerad och byggs nu: hjälten hugger, och en träningsdocka tar skada. Två saker avgör du själv. Bygget görs först med de rekommenderade valen.",
+            "summary": "Du har strukit jämförelsen mellan två animationsmetoder: attacken görs en gång, som ställningar i data. Kvar att avgöra är hur man attackerar. Bygget görs först med det rekommenderade valet.",
             "questions": [
-              {
-                "id": "A-jamforelse",
-                "text": "Ska attacken göras två gånger, med två animationsmetoder, och jämföras blint?",
-                "note": "Det är din plan sedan tidigare. Jämförelsen kostar två arbetsordrar för gemensamma verktyg plus cirka tolv agentkörningar. Den första attacken i spelet behöver inget av det.",
-                "options": [
-                  {
-                    "label": "Nej, stryk jämförelsen",
-                    "text": "Attacken görs en gång, som ställningar i data, på samma sätt som löpningen. Snabbast till en attack i spelet. Metoden med klipp från Blender prövas då inte alls.",
-                    "recommended": true
-                  },
-                  {
-                    "label": "Ja, men på den andra attacken",
-                    "text": "Första attacken görs en gång och kommer in i spelet. Jämförelsen görs sedan på nästa attack, så att ingen metod börjar från färdigt arbete."
-                  },
-                  {
-                    "label": "Ja, på den här attacken",
-                    "text": "Som planen säger. Den första attacken i spelet dröjer då tills de gemensamma verktygen och båda varianterna är klara."
-                  }
-                ]
-              },
               {
                 "id": "A-styrning",
                 "text": "Hur ska man attackera?",
