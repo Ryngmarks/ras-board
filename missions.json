@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T19:20:58.395Z",
+  "generated_at": "2026-11-25T20:03:49.162Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T19:20:58.325Z",
+      "updated": "2026-11-25T20:03:49.100Z",
       "work_orders": [
         {
           "id": "F0",
@@ -605,16 +605,19 @@
         {
           "id": "WALK-1",
           "title": "Gången, del 1: figuren springer i spelet",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-25T19:20:25.571Z",
-          "after": "ARCH-13"
+          "done": "2026-11-25T20:03:48.922Z",
+          "after": "ARCH-13",
+          "result": "Figuren springer i spelet. Planterad fot glider 0,001 mm mot gränsen 2 cm. Klipp och bygge finns"
         },
         {
           "id": "WALK-2",
           "title": "Gången, del 2: fötterna i stridslabbet och grinden för fotglidning",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-25T20:03:49.020Z",
           "after": "WALK-1"
         },
         {
