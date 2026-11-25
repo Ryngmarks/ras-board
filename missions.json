@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T19:20:26.606Z",
+  "generated_at": "2026-11-25T19:20:58.395Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-25T19:20:26.514Z",
+      "updated": "2026-11-25T19:20:58.325Z",
       "work_orders": [
         {
           "id": "F0",
@@ -601,13 +601,6 @@
           "done": "2026-11-25T19:20:25.232Z",
           "after": "W23",
           "result": "Kort specifikation: figuren springer vid 5 meter per sekund och fötterna kan inte glida"
-        },
-        {
-          "id": "S13",
-          "title": "Steg 1.3: gång utan fotglidning",
-          "status": "todo",
-          "role": "implementer",
-          "after": "ARCH-13"
         },
         {
           "id": "WALK-1",
