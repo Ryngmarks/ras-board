@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T20:55:21Z",
+    "updated":  "2026-11-26T20:55:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "note":  "ATK-3: klientens forutsagelse",
                         "since":  "2026-11-26T20:55:21Z",
                         "agent":  "atk3-review",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "ATK-4: hugget i Combat Lab",
+                        "since":  "2026-11-26T20:55:23Z",
+                        "agent":  "atk4",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
