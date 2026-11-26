@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T20:55:23Z",
+    "updated":  "2026-11-26T20:55:25Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -97,14 +97,6 @@
                         "for":  "owner"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Copperglade",
-                        "state":  "waiting",
-                        "note":  "a build to try: run, cut the dummy with Q",
-                        "since":  "2026-11-25T22:18:58Z",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "reviewer",
                         "project":  "Copperglade",
                         "state":  "working",
@@ -123,6 +115,13 @@
                         "agent":  "atk4",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "steg 1.4 stangs",
+                        "since":  "2026-11-26T20:55:25Z"
                     }
                 ]
 }
