@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T21:41:41Z",
+    "updated":  "2026-11-26T21:54:49Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,16 +111,6 @@
                         "since":  "2026-11-26T21:41:39Z",
                         "agent":  "hf2",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "reviewer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "HF-1: frysning och dod",
-                        "since":  "2026-11-26T21:41:41Z",
-                        "agent":  "hf1-review",
-                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
