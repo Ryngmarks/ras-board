@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -7,525 +7,654 @@
 <body style="margin:0">
 <title>AI Benja Demo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: orchestrator sidebar (dark blue) beside a stage workspace; the pipeline strip on top is the navigation. */
+/* Layout: suite bar, compact left navigation, one work surface. Single light look by choice (enterprise tool). */
 :root{
-  --bg:#EEF1F5; --surface:#FFFFFF; --sunk:#F5F7FA; --line:#D5DBE5; --fg:#1A2333; --muted:#5A6678;
-  --pm:#123E7C; --pm-ink:#FFFFFF; --accent:#1B5FBF;
-  --a1:#2F9BE3; --a2:#1C8A3C; --a3:#B88A00; --a4:#DD6B10; --a5:#8560C4; --hu:#3A485D;
-  --ok:#1C8A3C; --dev:#C95F0A; --miss:#6F7A8B; --pdf:#C4314B; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#FFF1B8;
-  --sh:0 1px 2px rgba(20,35,60,.06),0 4px 14px rgba(20,35,60,.06);
-  --font:"Segoe UI Variable Text","Segoe UI",Inter,system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+  --bg:#F5F5F5; --surface:#FFFFFF; --sub:#FAFAFA; --line:#E0E0E0; --line2:#EDEBE9; --fg:#242424; --muted:#616161;
+  --brand:#0F6CBD; --brand-d:#115EA3; --brand-bg:#EBF3FC;
+  --ok:#0E700E; --ok-bg:#F1FAF1; --wait:#7A5200; --wait-bg:#FFF4CE; --warn:#B4470A; --warn-bg:#FDF3EC; --err:#B10E1C; --err-bg:#FDF3F4; --neu:#424242; --neu-bg:#F0F0F0;
+  --c-outlook:#0F6CBD; --c-sp:#038387; --c-pa:#2266E3; --c-teams:#5B5FC7; --c-ai:#3B3A39; --c-cond:#605E5C; --c-appr:#8A6A00; --c-excel:#107C41; --c-word:#185ABD; --c-pdf:#B10E1C;
+  --font:"Segoe UI","Segoe UI Web (West European)",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0C111B; --surface:#182132; --sunk:#121927; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
-  --pm:#1B4F9E; --pm-ink:#FFFFFF; --accent:#6FB1F5;
-  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
-  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#5A4A10;
-  --sh:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark } }
-:root[data-theme="dark"]{
-  --bg:#0C111B; --surface:#182132; --sunk:#121927; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
-  --pm:#1B4F9E; --pm-ink:#FFFFFF; --accent:#6FB1F5;
-  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
-  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#5A4A10;
-  --sh:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark }
-
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.45;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
-.wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-h1,h2,h3,p{margin:0}
-.ic{flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.43}
+h1,h2,h3,h4,p{margin:0}
 button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,summary:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
-
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
-.bar h1{font-size:20px;font-weight:700;letter-spacing:.01em}
-.bar .sub{color:var(--muted);font-size:14px}
-.bar .sp{margin-left:auto}
-.btn{height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px;
-  display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
-.btn:hover{border-color:var(--accent)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
-:root[data-theme="dark"] .btn.pri{color:#06121F}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.pri{color:#06121F}}
-.btn.pri:hover{filter:brightness(1.08)}
-.btn.warn{border-color:var(--dev);color:var(--dev)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.btn.on-pm{background:#fff;color:#123E7C;border-color:#fff}
-
-/* pipeline */
-.pipe{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);padding:12px}
-.pipe ol{list-style:none;margin:0;padding:0;display:flex;gap:6px;min-width:1040px}
-.pipe li{flex:1 1 0;display:flex;align-items:center;gap:6px;min-width:0}
-.pipe li+li::before{content:"›";color:var(--muted);font-weight:700}
-.node{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:8px;border:1.5px solid var(--line);
-  background:var(--sunk);font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;text-align:center;line-height:1.2;color:var(--muted)}
-.node .dot{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--line);color:var(--muted)}
-.node.done{color:var(--fg);border-color:color-mix(in srgb,var(--c) 55%,var(--line));background:color-mix(in srgb,var(--c) 9%,var(--surface))}
-.node.done .dot,.node.cur .dot{background:var(--c);color:#fff}
-.node.cur{color:var(--fg);border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface))}
-.node.wait{border-color:var(--hold);box-shadow:0 0 0 3px color-mix(in srgb,var(--hold) 45%,transparent)}
-.node[aria-current="true"]{outline:2.5px solid var(--accent);outline-offset:2px}
-.node small{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-transform:none}
-
-.grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:14px;align-items:start}
-@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
-
-/* orchestrator */
-.pm{background:var(--pm);color:var(--pm-ink);border-radius:10px;box-shadow:var(--sh);padding:16px;display:flex;flex-direction:column;gap:14px}
-.pm .hd{display:flex;gap:12px;align-items:center}
-.pm .hd span{width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,.16);display:grid;place-items:center}
-.pm h2{font-size:17px;font-weight:600}
-.pm .k{font-size:12px;opacity:.75;letter-spacing:.05em;text-transform:uppercase}
-.pm .proj{display:flex;justify-content:space-between;gap:10px;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:12px}
-.pm .proj{flex-wrap:wrap}
-.pm .proj b{font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:13px;font-size:12px;font-weight:700;letter-spacing:.05em;background:#fff;color:#123E7C;white-space:nowrap}
-.pill.hold{background:var(--hold);color:var(--hold-ink)}
-.pill.ok{background:#CDEFD6;color:#0F4F22}
-.pm .next{background:rgba(255,255,255,.12);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
-.pm .next p{font-size:15px;font-weight:600}
-.trk{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.trk div{background:rgba(255,255,255,.1);border-radius:8px;padding:9px 11px}
-.trk b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.2}
-.trk span{font-size:12px;opacity:.82}
-.pm ul{list-style:none;margin:0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:5px}
-.pm ul li{display:flex;gap:8px;opacity:.92}
-.pm ul li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--hold);margin-top:7px}
-.log{max-height:190px;overflow:auto;border-top:1px solid rgba(255,255,255,.22);padding-top:10px}
-.log li::before{background:rgba(255,255,255,.6)!important}
-.log time{opacity:.65;font-variant-numeric:tabular-nums;flex:none}
-
-/* workspace */
-main{display:flex;flex-direction:column;gap:14px;min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);min-width:0}
-.card>.ch{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:600;font-size:16px}
-.card>.ch small{margin-left:auto;font-weight:500;font-size:13px;color:var(--muted)}
-.card>.cb{padding:16px}
-.shead{display:flex;gap:14px;align-items:center}
-.shead .at{width:52px;height:52px;border-radius:10px;background:var(--c);color:#fff;display:grid;place-items:center;flex:none}
-.shead small{display:block;color:var(--muted);font-size:13px}
-.shead h2{font-size:24px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
-.lead{color:var(--muted);max-width:68ch}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.fact{background:var(--sunk);border-radius:8px;padding:10px 12px}
-.fact span{display:block;font-size:12px;color:var(--muted);letter-spacing:.03em}
-.fact b{font-weight:600}
-.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
-.file{display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-align:left;min-width:0;width:100%}
-.file:hover{border-color:var(--accent)}
-.file em{font-style:normal;font-size:10px;font-weight:700;color:#fff;background:var(--c,var(--pdf));width:34px;height:26px;border-radius:5px;display:grid;place-items:center;flex:none}
-.file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-.file small{margin-left:auto;color:var(--muted);white-space:nowrap}
-.sk{height:9px;border-radius:5px;background:color-mix(in srgb,var(--muted) 22%,var(--surface))}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:1px}
+.suite{background:var(--brand);color:#fff;display:flex;align-items:center;gap:12px;min-height:48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.waffle{display:grid;grid-template-columns:repeat(3,4px);gap:3px}
+.waffle i{width:4px;height:4px;background:#fff;border-radius:1px}
+.suite b{font-size:16px;font-weight:600}
+.suite .app{opacity:.9}
+.suite .chip{font-size:12px;border:1px solid rgba(255,255,255,.6);border-radius:4px;padding:1px 8px;white-space:nowrap}
+.suite .me{margin-left:auto;width:32px;height:32px;border-radius:50%;background:#fff;color:var(--brand-d);display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.note{background:var(--wait-bg);color:#3D2E00;font-size:12.5px;padding-block:6px;border-bottom:1px solid #F2E3A6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.shell{display:grid;grid-template-columns:208px minmax(0,1fr);min-height:calc(100% - 80px)}
+.rail{background:var(--surface);border-right:1px solid var(--line);padding:8px 0;display:flex;flex-direction:column;gap:1px}
+.rail .grp{font-size:12px;color:var(--muted);padding:12px 16px 4px}
+.nav{display:flex;align-items:center;gap:10px;height:36px;padding:0 16px 0 13px;border:0;border-left:3px solid transparent;background:none;text-align:left;width:100%;white-space:nowrap}
+.nav:hover{background:var(--neu-bg)}
+.nav[aria-current="true"]{border-left-color:var(--brand);background:var(--brand-bg);font-weight:600}
+.nav .dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#C19C00}
+.tile{flex:none;width:20px;height:20px;border-radius:4px;background:var(--c,var(--neu));color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;letter-spacing:0}
+.work{min-width:0;display:flex;flex-direction:column}
+.cmd{background:var(--surface);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:6px 16px}
+.cmd .sp{margin-left:auto}
+.btn{height:32px;padding:0 12px;border-radius:4px;border:1px solid #D1D1D1;background:var(--surface);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:#F5F5F5}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.pri:hover{background:var(--brand-d)}
+.btn.sub{border-color:transparent;font-weight:400}
+.btn[disabled]{color:#BDBDBD;background:#F0F0F0;border-color:#F0F0F0;cursor:not-allowed}
+.btn[aria-pressed="true"]{background:var(--brand-bg);border-color:var(--brand);color:var(--brand-d)}
+.content{padding:16px;display:flex;flex-direction:column;gap:16px;max-width:1240px;width:100%}
+.guide{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:4px;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:center}
+.guide .k{font-size:12px;color:var(--muted)}
+.guide h3{font-size:16px;font-weight:600}
+.guide .val{font-size:13px;margin-top:4px}
+.guide .val b{color:var(--brand-d)}
+.guide .hint{font-size:13px;color:var(--wait);font-weight:600;margin-top:4px}
+.guide .ga{display:flex;gap:6px}
+.vh h2{font-size:20px;font-weight:600}
+.vh p{color:var(--muted);max-width:76ch}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.meta b{color:var(--fg);font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;min-width:0}
+.panel>.ph{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:10px 16px;border-bottom:1px solid var(--line2);font-weight:600}
+.panel>.ph small{margin-left:auto;font-weight:400;color:var(--muted);font-size:12.5px}
+.panel>.pb{padding:14px 16px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap;background:var(--neu-bg);color:var(--neu)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.wait{background:var(--wait-bg);color:var(--wait)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.err{background:var(--err-bg);color:var(--err)} .pill.info{background:var(--brand-bg);color:var(--brand-d)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));background:var(--surface);border:1px solid var(--line);border-radius:4px}
+.facts div{padding:10px 16px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);margin:0 -1px -1px 0;min-width:0}
+.facts div>span:first-child{display:block;font-size:12px;color:var(--muted)}
+.facts b{font-weight:600}
+.prog{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--brand);transition:width .3s}
+.stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.stage{border:0;border-right:1px solid var(--line2);background:none;text-align:left;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0;border-top:3px solid var(--line)}
+.stage:last-child{border-right:0}
+.stage:hover{background:var(--sub)}
+.stage.done{border-top-color:var(--ok)} .stage.cur{border-top-color:var(--brand)} .stage.hold{border-top-color:#C19C00}
+.stage .n{font-size:12px;color:var(--muted)}
+.stage b{font-weight:600;font-size:15px}
+.stage .pill{align-self:flex-start}
+.stage .ms{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:12px;color:var(--muted);align-items:center}
+.stage .ms span{display:inline-flex;gap:5px;align-items:center}
+@media (max-width:1000px){.stages{grid-template-columns:repeat(3,minmax(0,1fr))}.stage{border-bottom:1px solid var(--line2)}}
+@media (max-width:560px){.stages{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;gap:10px;padding:8px 16px;border-bottom:1px solid var(--line2);font-size:13.5px}
+.list li:last-child{border-bottom:0}
+.list time{color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
+.list .who{font-weight:600;flex:none;min-width:74px}
+.empty{padding:22px 16px;color:var(--muted)}
 .tw{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:620px}
-th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:8px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+table{border-collapse:collapse;width:100%}
+th{font-size:12px;color:var(--muted);text-align:left;font-weight:600;padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface)}
+td{padding:9px 12px;border-bottom:1px solid var(--line2);vertical-align:top}
 tr:last-child td{border-bottom:0}
-td.v{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
-.id{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.src{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:0;color:var(--accent);font-size:13px;text-align:left;text-decoration:underline;text-underline-offset:2px}
-.badge{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:12px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--c);white-space:nowrap}
-.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 7px;border-radius:4px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{height:30px;padding:0 12px;border-radius:15px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600}
-.chip[aria-pressed="true"]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
-.human{background:var(--hu);color:#fff;border-radius:10px;box-shadow:var(--sh);padding:16px;display:flex;flex-direction:column;gap:12px}
-.human .hh{display:flex;gap:12px;align-items:center}
-.human .hh span{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
-.human h3{font-size:16px;letter-spacing:.07em}
-.human p{opacity:.9}
-.q{background:var(--surface);color:var(--fg);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px}
-.q h4{margin:0;font-size:15px}
-.q .note{color:var(--muted);font-size:13px}
+tbody tr:hover td{background:var(--sub)}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.r{text-align:right}
+.id{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lnk{border:0;background:none;padding:0;color:var(--brand-d);text-align:left;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.lnk:hover{text-decoration:underline}
+.xl{border:1px solid #C8C8C8;border-top:3px solid var(--c-excel)}
+.xl table{min-width:720px}
+.xl th,.xl td{border:1px solid #D9D9D9;padding:6px 10px}
+.xl th{background:#F3F2F1;color:var(--neu)}
+.xl .rn{background:#F3F2F1;color:var(--muted);text-align:center;width:34px;font-size:12px}
+.xl .cl th{text-align:center;font-weight:400;font-size:12px;padding:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.crumb{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:15px}
+.crumb button{border:0;background:none;padding:2px 4px;border-radius:4px;color:var(--muted)}
+.crumb button:hover{background:var(--neu-bg)}
+.crumb b{font-weight:600;padding:2px 4px}
+.ol{display:grid;grid-template-columns:170px 280px minmax(0,1fr);min-height:420px}
+.ol>div{border-right:1px solid var(--line2);min-width:0}
+.ol>div:last-child{border-right:0}
+.ol .fl{padding:8px 0}
+.ol .fl div{padding:7px 16px;display:flex;justify-content:space-between}
+.ol .fl .on{background:var(--brand-bg);font-weight:600}
+.ol .msg{padding:12px 14px;border-left:3px solid var(--brand);background:var(--brand-bg)}
+.ol .msg b{display:block}
+.ol .msg small{color:var(--muted)}
+.ol .rd{padding:16px;display:flex;flex-direction:column;gap:12px}
+@media (max-width:900px){.ol{grid-template-columns:minmax(0,1fr)}.ol>div{border-right:0;border-bottom:1px solid var(--line2)}.ol .fl{display:none}}
+.att{display:flex;flex-wrap:wrap;gap:8px}
+.att button{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:6px 10px;max-width:100%}
+.att button:hover{background:var(--sub)}
+.bar-info{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:8px 12px;border-radius:4px;background:var(--brand-bg);border:1px solid #B4D6FA;font-size:13.5px}
+.bar-info>span:not(.tile){flex:1 1 240px;min-width:0}
+.bar-info{flex-wrap:nowrap}
+@media (max-width:600px){.bar-info{flex-wrap:wrap}}
+.bar-info.ok{background:var(--ok-bg);border-color:#9FD89F}
+.bar-info.warn{background:var(--warn-bg);border-color:#F4BFAB}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:980px){.flow{grid-template-columns:minmax(0,1fr)}}
+.canvas{background:#F3F2F1;border:1px solid var(--line);border-radius:4px;padding:20px 12px;display:flex;flex-direction:column;align-items:center}
+.fa{width:min(100%,440px);display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid #C8C6C4;border-radius:4px;padding:0;text-align:left;min-height:46px;overflow:hidden}
+.fa .ct{align-self:stretch;width:42px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex:none}
+.fa .fx{flex:1;min-width:0;padding:6px 0}
+.fa b{display:block;font-weight:600;font-size:13.5px}
+.fa small{color:var(--muted);font-size:12px}
+.fa .st{margin-right:10px;flex:none}
+.fa.sel{outline:2px solid var(--brand);outline-offset:1px}
+.fa.run,.fa.next{border-color:var(--brand);box-shadow:0 0 0 2px #B4D6FA}
+.fa.wait{border-color:#C19C00;box-shadow:0 0 0 2px #F2E3A6}
+.fa.pend{opacity:.72}
+.arr{width:2px;height:18px;background:#8A8886;position:relative;margin:2px 0 6px}
+.arr::after{content:"";position:absolute;left:-4px;bottom:-4px;border:5px solid transparent;border-top-color:#8A8886;border-bottom:0}
+.brs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:min(100%,640px);margin-top:8px;border-top:2px solid #8A8886;padding-top:10px}
+.br{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.bl{font-size:12px;font-weight:600;padding:1px 10px;border-radius:10px}
+.bl.yes{background:var(--ok-bg);color:var(--ok)} .bl.no{background:var(--err-bg);color:var(--err)}
+.noop{font-size:12.5px;color:var(--muted);border:1px dashed #C8C6C4;border-radius:4px;padding:10px;text-align:center;width:100%}
+.det{position:sticky;top:8px}
+.det dl{margin:0;display:grid;gap:10px}
+.det dt{font-size:12px;color:var(--muted)}
+.det dd{margin:0}
+.appr{background:var(--surface);border:1px solid #C19C00;border-radius:4px}
+.appr .ah{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line2)}
+.appr .ah b{font-weight:600}
+.appr .ab{padding:14px 16px;display:flex;flex-direction:column;gap:14px}
+.appr h4{font-size:14px;font-weight:600;margin-bottom:6px}
 .opts{display:flex;flex-direction:column;gap:6px}
-.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:10px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface)}
-.opt:hover{border-color:var(--accent)}
-.opt i{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);margin-top:1px}
-.opt[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}
-.opt[aria-pressed="true"] i{border-color:var(--accent);background:radial-gradient(var(--accent) 45%,transparent 50%)}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:8px 12px;border-radius:4px;border:1px solid #D1D1D1;background:var(--surface)}
+.opt:hover{background:var(--sub)}
+.opt i{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid #616161;margin-top:2px}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-bg)}
+.opt[aria-pressed="true"] i{border-color:var(--brand);background:radial-gradient(var(--brand) 48%,transparent 54%)}
 .opt small{display:block;color:var(--muted)}
 .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.acts .hint{font-size:13px;opacity:.85}
-.cta{border:1.5px dashed color-mix(in srgb,var(--accent) 60%,var(--line));border-radius:10px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
-.cta p{flex:1 1 260px;font-weight:600}
-.cta small{display:block;font-weight:400;color:var(--muted)}
-.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.steps li{display:flex;gap:10px;align-items:center;color:var(--muted)}
-.steps li i{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
-.steps li.d{color:var(--fg)}
-.steps li.d i{background:var(--ok);border-color:var(--ok);color:#fff}
-.steps li.r i{border-color:var(--c);border-top-color:transparent;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion: reduce){.steps li.r i{animation:none}}
-.blist{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
-details{border-bottom:1px solid var(--line)}
-details:last-child{border-bottom:0}
-summary{display:flex;gap:12px;align-items:center;padding:12px 16px;cursor:pointer;font-weight:600;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary .fi{width:34px;height:34px;border-radius:8px;background:var(--a2);color:#fff;display:grid;place-items:center;flex:none}
-summary small{margin-left:auto;color:var(--muted);font-weight:500}
-summary::after{content:"+";color:var(--muted);font-size:18px;width:14px;text-align:center}
-details[open] summary::after{content:"–"}
-details .in{padding:0 16px 14px 62px;display:flex;flex-direction:column;gap:6px;font-size:14px}
-.an{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.an .card{padding:14px;display:flex;flex-direction:column;gap:6px}
-.an .t{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--a4)}
-.an .t b{color:var(--fg);font-weight:600}
-.an .big{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
-.an p,.an li{font-size:14px;color:var(--muted)}
-.quote{position:relative;overflow:hidden}
-.quote .wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-size:min(22vw,150px);font-weight:700;letter-spacing:.1em;color:var(--a5);opacity:.11;transform:rotate(-20deg)}
-.quote section{padding:14px 16px;border-bottom:1px solid var(--line)}
-.quote section h4{margin:0 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--a5)}
-.banner{display:flex;gap:10px;align-items:center;justify-content:center;padding:12px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--a5);text-align:center}
-.banner.ok{background:var(--ok)}
-.sp-band{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:10px;border:1px solid color-mix(in srgb,var(--a2) 45%,var(--line));background:color-mix(in srgb,var(--a2) 10%,var(--surface))}
-.sp-band span{width:40px;height:40px;border-radius:8px;background:var(--a2);color:#fff;display:grid;place-items:center;flex:none}
-.sp-band small{display:block;color:var(--muted)}
-.foot{color:var(--muted);font-size:13px}
-/* source viewer */
-.ov{position:fixed;inset:0;background:rgba(8,14,24,.55);display:grid;place-items:center;padding:16px;z-index:20}
-.dlg{background:var(--surface);color:var(--fg);border-radius:10px;width:min(620px,100%);max-height:min(86vh,720px);overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-.dlg .ch{position:sticky;top:0;background:var(--surface)}
-.page{margin:16px;padding:22px;border:1px solid var(--line);border-radius:4px;background:var(--sunk);font-size:14px;display:flex;flex-direction:column;gap:10px}
-.page .loc{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
-.page mark{background:var(--hi);color:inherit;padding:2px 3px;border-radius:3px;font-weight:600}
+.acts .hint{font-size:12.5px;color:var(--muted)}
+.blist{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.doc{background:var(--surface);border:1px solid #C8C6C4;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 32px;max-width:760px;position:relative;overflow:hidden}
+.doc h3{font-size:20px;font-weight:600;margin-bottom:2px}
+.doc section{padding:12px 0;border-top:1px solid var(--line2)}
+.doc section h4{font-size:12px;color:var(--c-word);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.doc .wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-size:min(20vw,130px);font-weight:700;letter-spacing:.08em;color:#8A8886;opacity:.13;transform:rotate(-20deg)}
+@media (max-width:600px){.doc{padding:18px 16px}}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.4);display:grid;place-items:center;padding:16px;z-index:20}
+.dlg{background:var(--surface);border-radius:8px;width:min(860px,100%);max-height:min(88vh,760px);overflow:auto;box-shadow:0 16px 48px rgba(0,0,0,.28)}
+.dlg .dh{position:sticky;top:0;background:var(--surface);display:flex;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);z-index:1}
+.dlg .dh b{font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.dlg .dh small{color:var(--muted);white-space:nowrap}
+.dlg .db{padding:16px;background:#F3F2F1;display:flex;flex-direction:column;gap:12px}
+.page{background:var(--surface);border:1px solid #C8C6C4;padding:22px;display:flex;flex-direction:column;gap:8px}
+.page .loc{font-size:12px;color:var(--muted)}
+.page mark{background:#FFF4CE;color:inherit;padding:2px 3px;font-weight:600}
+@media (max-width:820px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:0 8px}
+  .rail .grp{display:none}
+  .nav{border-left:0;border-bottom:3px solid transparent;padding:0 10px;width:auto;flex:none;height:40px}
+  .nav[aria-current="true"]{border-bottom-color:var(--brand)}
+  .nav .dot{margin-left:4px}
+  .guide{grid-template-columns:minmax(0,1fr)}
+  .det{position:static}
+}
+@media (prefers-reduced-motion: reduce){.prog i{transition:none}}
 </style>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
-<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.500-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
-<symbol id="i-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.8"/><circle cx="4.500" cy="17.500" r="1.8"/><circle cx="19.500" cy="17.500" r="1.8"/><path d="M12 5.800V9M9.500 13.700l-3.500 2.600M14.500 13.700l3.500 2.600"/></symbol>
-<symbol id="i-intake" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></symbol>
-<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.500l9 5 9-5"/><path d="M3 17l9 5 9-5"/></symbol>
-<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2.200"/><path d="M12 2.500V6M12 18v3.500M2.500 12H6M18 12h3.500M5.300 5.300l2.500 2.500M16.200 16.200l2.500 2.500M5.300 18.700l2.500-2.500M16.200 7.800l2.500-2.500"/></symbol>
-<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-5M12 16V8M16 16v-3"/></symbol>
-<symbol id="i-quote" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 14l2 2 4-4"/></symbol>
-<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.500"/><path d="M5 20c0-3.900 3.100-6 7-6s7 2.100 7 6"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
-<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3zM12 10v4.500M12 17.300v.2"/></symbol>
-<symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
-<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.700 0l3-3a4 4 0 00-5.700-5.700l-1 1M14 10a4 4 0 00-5.700 0l-3 3a4 4 0 005.700 5.700l1-1"/></symbol>
-<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.500 9.300c-.4-.8-1.300-1.300-2.500-1.300-1.500 0-2.500.7-2.500 1.800 0 2.600 5 1.300 5 4 0 1.100-1 1.900-2.500 1.900-1.300 0-2.200-.5-2.600-1.400M12 6.500V8M12 15.700v1.800"/></symbol>
-<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.500c.7.7 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0012 3z"/></symbol>
-<symbol id="i-q" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 115 0c0 1.500-2.500 2-2.500 3.700M12 16.600v.2"/></symbol>
-<symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12h14M13 6l6 6-6 6"/></symbol>
-</defs></svg>
-
-<div class="wrap">
-  <header class="bar">
-    <h1>AI Benja</h1><span class="sub">AI Agents for Sales &amp; Engineering · interactive demo</span>
-    <button class="btn sp" id="reset" data-act="reset">Restart demo</button>
-  </header>
-  <nav class="pipe" aria-label="Process steps"><ol id="pipe"></ol></nav>
-  <div class="grid">
-    <aside class="pm" id="pm" aria-label="AI Project Manager"></aside>
-    <main id="main"></main>
+<div class="suite">
+  <span class="waffle" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <b>Sales AI</b><span class="app">Offertförfrågningar</span><span class="chip">Konceptdemo</span>
+  <span class="me" title="Du agerar säljare, tekniker och godkännare i demon">DU</span>
+</div>
+<div class="note">Konceptdemo för intern utvärdering. Det här är inte en officiell Microsoft-produkt. Kund, dokument, priser och alla kopplingar till Outlook, SharePoint, Power Automate och Teams är simulerade – inget skickas eller sparas någonstans.</div>
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="Navigering"></nav>
+  <div class="work">
+    <div class="cmd" id="cmd"></div>
+    <div class="content" id="content"></div>
   </div>
-  <p class="foot">Simulated demo. The customer, documents, product articles, prices and lead times are invented example data, and the agents here follow a script rather than calling a live AI model.</p>
 </div>
 <div id="ov"></div>
 
 <script>
 (function(){
-const ic=(n,s=20)=>`<svg class="ic" width="${s}" height="${s}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const $=id=>document.getElementById(id);
+const sv=n=>n.toLocaleString('sv-SE');
+const eur=n=>sv(n)+' EUR';
+const L=n=>'ABCDEFGH'[n]||'H';
+const pill=(k,t)=>`<span class="pill ${k}">${t}</span>`;
+const tile=(con,l)=>`<span class="tile" style="--c:var(--c-${con})" aria-hidden="true">${l||CON[con].l}</span>`;
 
-const STG=[
- {id:'rfq',kind:'in',label:'Customer RFQ',icon:'mail',c:'miss'},
- {id:'a1',kind:'agent',label:'A1 Intake',name:'A1 – Requirement Intake Agent',icon:'intake',c:'a1',status:'INTAKE',
-  does:'Reads all customer documents together and turns them into structured, traceable requirements.',
-  run:['Reading 4 documents together','Identifying customer, RFQ number and revisions','Extracting requirements, units and values','Linking each requirement to its source','Checking for missing information and uncertainties']},
- {id:'a2',kind:'agent',label:'A2 Documentation',name:'A2 – Documentation Agent',icon:'layers',c:'a2',status:'DOCUMENTATION',
-  does:'Organizes the project: structure, documents, requirement register, revisions and source links.',
-  run:['Structuring the project','Organizing documents','Creating the requirement register','Recording document revisions','Linking requirements to sources','Updating project status']},
- {id:'a3',kind:'agent',label:'A3 Engineering',name:'A3 – Engineering Agent',icon:'gear',c:'a3',status:'ENGINEERING',
-  does:'Compares customer requirements with previously approved specifications, products and articles. It reports matches, deviations and missing data, and never approves compliance itself.',
-  run:['Loading requirement register','Searching approved specifications and articles','Comparing values and units','Classifying results']},
- {id:'eng',kind:'human',label:'Engineering Review',icon:'person',c:'hu',status:'ENGINEERING REVIEW'},
- {id:'a4',kind:'agent',label:'A4 Commercial',name:'A4 – Commercial Analysis Agent',icon:'chart',c:'a4',status:'COMMERCIAL ANALYSIS',
-  does:'Combines the approved engineering data with available commercial information and compiles decision support.',
-  run:['Loading approved engineering data','Estimating cost','Estimating lead time','Assessing commercial and technical risk','Compiling decision support']},
- {id:'com',kind:'human',label:'Commercial Review',icon:'person',c:'hu',status:'COMMERCIAL REVIEW'},
- {id:'a5',kind:'agent',label:'A5 Quote',name:'A5 – Quote Agent',icon:'quote',c:'a5',status:'QUOTE DRAFT',
-  does:'Builds a quotation draft using only information that has passed the earlier steps.',
-  run:['Collecting technical requirements','Collecting approved engineering data','Collecting approved commercial data','Writing quotation draft','Adding references']},
- {id:'fin',kind:'human',label:'Final Approval',icon:'person',c:'hu',status:'FINAL APPROVAL'},
- {id:'out',kind:'out',label:'Customer Quotation',icon:'check',c:'ok'}
+const CON={outlook:{n:'Outlook',l:'O'},sp:{n:'SharePoint',l:'S'},pa:{n:'Power Automate',l:'P'},teams:{n:'Teams',l:'T'},ai:{n:'Copilot Studio-agent',l:'AI'},
+ cond:{n:'Villkor',l:'◇'},appr:{n:'Godkännanden',l:'✓'},excel:{n:'Excel',l:'X'},word:{n:'Word',l:'W'},pdf:{n:'PDF',l:'PDF'}};
+const REAL={outlook:'Delad brevlåda och en anslutning med rätt behörighet. Regler för vilka mejl som startar flödet.',
+ sp:'En SharePoint-webbplats med bibliotek, kolumner och behörigheter per kund och projekt enligt IT-policy.',
+ pa:'Ett molnflöde i en godkänd miljö. Licensbehovet beror på vilka anslutningar som används.',
+ teams:'En kanal och behörighet för flödet att publicera meddelanden.',
+ ai:'En AI-tjänst i godkänd miljö, till exempel Copilot Studio eller AI Builder. Kräver normalt egen licens eller kapacitet, samt kvalitetssäkring av resultaten.',
+ cond:'Affärsregler som verksamheten bestämmer och äger.',
+ appr:'Definierade roller som får godkänna, med delegering och loggning.',
+ excel:'En godkänd källa för produktdata, till exempel en Excel-fil, SharePoint-lista eller integration mot affärssystem.',
+ word:'Godkända dokumentmallar i SharePoint. Mallifyllnad och PDF-konvertering kan kräva premium-anslutning.'};
+const AGENT={PL:'PL – Project Manager',A1:'A1 – Requirement Intake',A2:'A2 – Documentation',A3:'A3 – Engineering',A4:'A4 – Commercial Analysis',A5:'A5 – Quotation'};
+
+const FLOW=[
+ {id:'trg',con:'outlook',stage:'outlook',t:'När ett nytt e-postmeddelande kommer in',d:'Utlösare på den delade brevlådan för offertförfrågningar. En säljare kan också starta flödet manuellt.'},
+ {id:'pid',con:'pa',agent:'PL',stage:'sharepoint',t:'Skapa unikt projekt-ID',d:'Förfrågan får ID:t RFQ-12345. Samma ID används i alla mappar, dokument och godkännanden.'},
+ {id:'sp1',con:'sp',stage:'sharepoint',t:'Skapa kund- och projektmapp',d:'Mapparna 01–06 skapas under Sales AI / Example Customer AB / RFQ-12345.'},
+ {id:'sp2',con:'sp',stage:'sharepoint',t:'Spara e-post och bilagor',d:'E-postmeddelandet och de fyra bilagorna sparas oförändrade i 01_Original Documents.'},
+ {id:'tm1',con:'teams',stage:'sharepoint',t:'Publicera meddelande i kanal',d:'Säljteamet får veta att ett nytt RFQ-projekt har skapats, med länk till projektmappen.'},
+ {id:'a1',con:'ai',agent:'A1',stage:'krav',t:'Extrahera kundkrav ur dokumenten',d:'A1 hämtar de fyra dokumenten från SharePoint, läser dem tillsammans och tar fram varje krav med hänvisning till dokument och sida.'},
+ {id:'a2',con:'sp',agent:'A2',stage:'krav',t:'Spara kravregister',d:'A2 sparar kravregister, källreferenser och öppna frågor i 02_Requirements.'},
+ {id:'c1',con:'cond',agent:'PL',stage:'krav',t:'Villkor: finns oklara krav?',d:'Ett krav har två olika värden i kundens underlag. Flödet går till Ja-grenen och frågar en person.'},
+ {id:'clar',con:'appr',human:1,br:'c1',stage:'krav',t:'Starta och vänta på svar: klargörande',d:'En person avgör vilket temperaturintervall som gäller. Flödet väntar tills svaret finns.'},
+ {id:'xl',con:'excel',stage:'teknik',t:'Hämta godkända produktdata',d:'Rader hämtas från den godkända produktdatakällan och från tidigare projekt.'},
+ {id:'a3',con:'ai',agent:'A3',stage:'teknik',t:'Jämför krav mot produktkandidater',d:'A3 jämför varje krav med verifierade produktdata och sparar jämförelsematrisen i 03_Engineering. Agenten godkänner aldrig teknisk uppfyllelse.'},
+ {id:'c2',con:'cond',agent:'PL',stage:'teknik',t:'Villkor: avvikelse eller saknade data?',d:'Minst en avvikelse hittades. Engineering meddelas särskilt. Teknisk granskning görs alltid, oavsett utfall.'},
+ {id:'tm2',con:'teams',br:'c2',stage:'teknik',t:'Meddela Engineering',d:'Engineering får ett meddelande med avvikelserna och länk till jämförelsematrisen.'},
+ {id:'eng',con:'appr',human:1,stage:'teknik',t:'Starta och vänta på godkännande: teknisk granskning',d:'En tekniker beslutar hur avvikelser och saknade data ska hanteras. Flödet väntar.'},
+ {id:'a2b',con:'sp',agent:'A2',stage:'teknik',t:'Spara tekniskt beslut',d:'A2 dokumenterar beslutet i 03_Engineering och godkännandeposten i 06_Approvals.'},
+ {id:'a4',con:'ai',agent:'A4',stage:'kommersiellt',t:'Beräkna kommersiella konsekvenser',d:'A4 använder senast godkända projektdata och fasta räkneregler för pris och ledtid. Underlaget sparas i 04_Commercial.'},
+ {id:'com',con:'appr',human:1,stage:'kommersiellt',t:'Starta och vänta på godkännande: kommersiell granskning',d:'Sälj granskar pris, ledtid och risker. Flödet väntar.'},
+ {id:'a5',con:'word',agent:'A5',stage:'offert',t:'Fyll i offertmall',d:'A5 skapar ett offertutkast från en Word-mall med enbart uppgifter som har godkänts i tidigare steg. Utkastet sparas i 05_Quotation.'},
+ {id:'fin',con:'appr',human:1,stage:'offert',t:'Starta och vänta på godkännande: slutgodkännande',d:'En behörig person granskar offerten. Flödet väntar.'},
+ {id:'sp3',con:'sp',agent:'A2',stage:'offert',t:'Spara godkänd offert och beslutshistorik',d:'Den godkända offerten sparas i 05_Quotation och hela beslutshistoriken i 06_Approvals.'},
+ {id:'tm3',con:'teams',stage:'offert',t:'Meddela: offert godkänd',d:'Säljteamet får veta att offerten är godkänd och klar att skicka till kunden.'}
 ];
-const IX=Object.fromEntries(STG.map((s,i)=>[s.id,i]));
-const FILES=[['Technical Specification.pdf','Rev B','ts'],['Requirements.xlsx','Rev A','rx'],['Drawings.pdf','Rev A','dr'],['Customer Standard.pdf','CS-104 Rev C','cs']];
+const IX=Object.fromEntries(FLOW.map((a,i)=>[a.id,i]));
+const WAIT={clar:{v:'krav',n:'klargörande av krav',own:'Ansvarig säljare'},eng:{v:'teknik',n:'teknisk granskning',own:'Engineering'},com:{v:'kommersiellt',n:'kommersiell granskning',own:'Sälj'},fin:{v:'offert',n:'slutgodkännande',own:'Behörig godkännare'}};
+const STAGES=[
+ {id:'outlook',n:'Outlook',t:'Förfrågan tas emot',ms:[['outlook']]},
+ {id:'sharepoint',n:'SharePoint',t:'Projektet skapas och lagras',ms:[['sp'],['pa']]},
+ {id:'krav',n:'Kravanalys',t:'Kundens krav tas fram',ms:[['ai'],['sp']]},
+ {id:'teknik',n:'Teknik',t:'Matchning och granskning',ms:[['excel'],['appr']]},
+ {id:'kommersiellt',n:'Kommersiellt',t:'Pris, ledtid och risk',ms:[['excel'],['appr']]},
+ {id:'offert',n:'Offert',t:'Utkast och godkännande',ms:[['word'],['appr']]}];
+const NAV=[['oversikt','Översikt','pa','≡'],['outlook','Outlook','outlook'],['sharepoint','SharePoint','sp'],['flode','Flöde','pa'],
+ ['grp','Affärssteg'],['krav','Kravanalys','ai','1'],['teknik','Teknik','ai','2'],['kommersiellt','Kommersiellt','ai','3'],['offert','Offert','ai','4'],
+ ['grp','Om lösningen'],['inforande','Införande','cond','i']];
+const FOLD=['01_Original Documents','02_Requirements','03_Engineering','04_Commercial','05_Quotation','06_Approvals'];
+const FILES=[['Technical Specification.pdf','B','ts'],['Requirements.xlsx','A','rx'],['Drawings.pdf','A','dr'],['Customer Standard.pdf','C','cs']];
 const SRC={
- ts:{file:'Technical Specification.pdf',loc:'Page 1 · Cover',lines:['Technical Specification — RFQ-12345','Revision B','Scope: supply of one type of 145 kV outdoor high-voltage unit, including documentation.']},
- rx:{file:'Requirements.xlsx',loc:'Sheet “Requirements”',lines:['Row 17 · Insulation · Pollution class · Heavy','Row 18 · Insulation · Minimum creepage distance · 4500 · mm','Row 31 · Delivery · Requested delivery time · 20 · weeks after order']},
- dr:{file:'Drawings.pdf',loc:'Sheet 1 of 3',lines:['General arrangement drawing','Overall dimensions and mounting interface.','Rev A']},
- cs:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · Contents',lines:['4 Environmental conditions','5 Materials','6 Mechanical and seismic requirements']},
- r1:{file:'Technical Specification.pdf',loc:'Page 4 · §3.1 Electrical ratings',lines:['3.1 Electrical ratings','*The equipment shall be rated for a nominal system voltage of 145 kV.*','Rated frequency: 50 Hz.']},
- r2:{file:'Requirements.xlsx',loc:'Sheet “Requirements” · Row 18',lines:['Row 17 · Insulation · Pollution class · Heavy','*Row 18 · Insulation · Minimum creepage distance · 4500 · mm · Mandatory*','Row 19 · Insulation · Reference · IEC 60815']},
- r3:{file:'Technical Specification.pdf',loc:'Page 7 · §5.2 Mechanical',lines:['5.2 Mechanical','*The total weight of each unit shall not exceed 950 kg.*','Lifting points shall be provided.']},
+ ts:{file:'Technical Specification.pdf',loc:'Sida 1 · Försättsblad',lines:['Technical Specification — RFQ-12345','Revision B','Scope: supply of one type of 145 kV outdoor high-voltage unit, including documentation.']},
+ rx:{file:'Requirements.xlsx',loc:'Blad ”Requirements”',lines:['Row 17 · Insulation · Pollution class · Heavy','Row 18 · Insulation · Minimum creepage distance · 4500 · mm','Row 31 · Delivery · Requested delivery time · 20 · weeks after order']},
+ dr:{file:'Drawings.pdf',loc:'Blad 1 av 3',lines:['General arrangement drawing','Overall dimensions and mounting interface.','Rev A']},
+ cs:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · Innehåll',lines:['4 Environmental conditions','5 Materials','6 Mechanical and seismic requirements']},
+ r1:{file:'Technical Specification.pdf',loc:'Sida 4 · §3.1',lines:['3.1 Electrical ratings','*The equipment shall be rated for a nominal system voltage of 145 kV.*','Rated frequency: 50 Hz.']},
+ r2:{file:'Requirements.xlsx',loc:'Blad ”Requirements” · rad 18',lines:['Row 17 · Insulation · Pollution class · Heavy','*Row 18 · Insulation · Minimum creepage distance · 4500 · mm · Mandatory*','Row 19 · Insulation · Reference · IEC 60815']},
+ r3:{file:'Technical Specification.pdf',loc:'Sida 7 · §5.2',lines:['5.2 Mechanical','*The total weight of each unit shall not exceed 950 kg.*','Lifting points shall be provided.']},
  r4:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · §6.2',lines:['6.2 Seismic requirements','*Equipment shall be seismically qualified. Evidence of qualification is required.*']},
  r5a:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · §4.3',lines:['4.3 Ambient temperature','*Equipment shall operate at ambient temperatures from −40 °C to +40 °C.*']},
- r5b:{file:'Technical Specification.pdf',loc:'Page 5 · §3.4 Service conditions',lines:['3.4 Service conditions','*Ambient air temperature: −25 °C to +40 °C.*','Altitude: up to 1000 m.']},
- r6:{file:'Requirements.xlsx',loc:'Sheet “Requirements” · Row 31',lines:['Row 30 · Delivery · Incoterms · To be agreed','*Row 31 · Delivery · Requested delivery time · 20 · weeks after order*']}
+ r5b:{file:'Technical Specification.pdf',loc:'Sida 5 · §3.4',lines:['3.4 Service conditions','*Ambient air temperature: −25 °C to +40 °C.*','Altitude: up to 1000 m.']},
+ r6:{file:'Requirements.xlsx',loc:'Blad ”Requirements” · rad 31',lines:['Row 30 · Delivery · Incoterms · To be agreed','*Row 31 · Delivery · Requested delivery time · 20 · weeks after order*']}
 };
-const REQS=[
- ['REQ-001','Nominal Voltage','145 kV',true,'r1'],
- ['REQ-002','Minimum Creepage Distance','4500 mm',true,'r2'],
- ['REQ-003','Maximum Weight','950 kg',true,'r3'],
- ['REQ-004','Seismic qualification','Required',true,'r4'],
- ['REQ-006','Requested delivery time','20 weeks',false,'r6']
+const REQS=[['REQ-001','Nominell spänning','145 kV','Skall','r1'],['REQ-002','Minsta krypsträcka','4500 mm','Skall','r2'],['REQ-003','Maxvikt','950 kg','Skall','r3'],
+ ['REQ-004','Seismisk kvalificering','Krävs','Skall','r4'],['REQ-006','Önskad leveranstid','20 veckor','Önskemål','r6']];
+const TEMP={strict:'−40 … +40 °C',spec:'−25 … +40 °C',ask:'Öppen – fråga skickad till kund'};
+const DEVT={variant:'Offerera med förlängd krypsträcka (4650 mm, 940 kg)',state:'Offerera befintlig artikel med angiven avvikelse (4200 mm)'};
+const MIST={test:'Seismisk provning ingår i leveransen',open:'Seismisk kvalificering anges som öppen punkt i offerten'};
+const PRES=[
+ {t:'Så här går en kundförfrågan genom verksamheten',x:'Demon följer en förfrågan från e-post till godkänd offert. Allt sker i verktyg som organisationen redan använder.',v:'Välj Nästa för att börja.',view:'oversikt'},
+ {t:'En kundförfrågan kommer in i Outlook',x:'Kunden skickar ett e-postmeddelande med fyra tekniska bilagor till den delade brevlådan.',v:'Förfrågan fångas där den redan landar. Säljaren behöver inte lära sig ett nytt system.',view:'outlook'},
+ {t:'RFQ-projektet skapas i SharePoint',x:'Flödet ger förfrågan ett unikt ID, skapar mappstrukturen och sparar originalen.',v:'Mindre manuell dokumenthantering. Alla original ligger samlade från första minuten.',view:'sharepoint',until:'tm1',folder:0},
+ {t:'Kundens krav tas fram',x:'Dokumenten läses tillsammans och varje krav får en hänvisning till dokument och sida.',v:'Enhetlig kravanalys och spårbarhet tillbaka till kundens egna dokument.',view:'krav',until:'c1'},
+ {t:'Tidigare produkter matchas',x:'Kraven jämförs med godkända produktdata och tidigare projekt.',v:'Snabbare att hitta historiska konstruktionsdata. Avvikelser syns direkt.',view:'teknik',until:'tm2',need:'clar'},
+ {t:'Engineering granskar avvikelser',x:'En tekniker beslutar hur varje avvikelse och saknad uppgift ska hanteras.',v:'Teknikerns tid går till beslutet i stället för till letandet. Beslutet dokumenteras.',view:'teknik',until:'tm2',need:'clar'},
+ {t:'Kommersiella konsekvenser beräknas',x:'Pris och ledtid räknas fram med fasta regler på de tekniska beslut som just godkänts.',v:'Bättre överblick över risker. Samma räkneregler varje gång.',view:'kommersiellt',until:'a4',need:'eng'},
+ {t:'Offerten förbereds',x:'Ett utkast skapas från mall med enbart godkända uppgifter.',v:'Mindre repetitiv säljadministration.',view:'offert',until:'a5',need:'com'},
+ {t:'Godkännande och dokumentation slutförs',x:'Den godkända offerten och hela beslutshistoriken sparas i projektmappen.',v:'Varje viktigt beslut går att spåra i efterhand.',view:'sharepoint',until:'tm3',need:'fin',folder:null}
 ];
-const TEMP={strict:'−40 … +40 °C',spec:'−25 … +40 °C',ask:'Open – question sent to customer'};
 
 let S,timer=null;
-function fresh(){return {pos:0,phase:'ready',view:'rfq',run:0,clar:null,dev:null,miss:null,filter:'all',log:[],stopped:false,src:null,decisions:[]}}
-const log=t=>S.log.unshift([new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}),t]);
-const cur=()=>STG[S.pos];
-const reached=id=>S.pos>IX[id];              // stage finished
+function fresh(){return {ip:0,wait:null,auto:false,stopped:false,view:'oversikt',folder:null,pv:null,sel:null,pres:true,ps:0,mode:'',
+  clar:null,dev:null,miss:null,t:0,at:{},log:[],teams:[],dec:[],rev:{eng:0,com:0,q:0}}}
+const done=id=>S.ip>IX[id];
+const now=()=>{const m=9*60+12+S.t;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
+const today=new Date().toLocaleDateString('sv-SE');
+const log=(who,t)=>S.log.unshift([now(),who,t]);
+const teams=(ch,t)=>S.teams.unshift([now(),ch,t]);
 function money(){let cost=42000,lead=16;if(S.dev==='variant'){cost+=3800;lead+=3}if(S.miss==='test'){cost+=6500;lead+=4}return{cost,lead}}
-const eur=n=>'EUR '+n.toLocaleString('en-US');
-function cmp(){return [
- ['REQ-001','Nominal Voltage','145 kV','145 kV','ok'],
- ['REQ-002','Minimum Creepage Distance','4500 mm','4200 mm','dev'],
- ['REQ-003','Maximum Weight','950 kg','910 kg','ok'],
- ['REQ-004','Seismic qualification','Required','No test record found','miss'],
- ['REQ-005','Ambient temperature range',S.clar==='ask'?'Not confirmed':TEMP[S.clar],'−40 … +40 °C',S.clar==='ask'?'miss':'ok']]}
-const RES={ok:['MATCH','ok'],dev:['DEVIATION','dev'],miss:['MISSING DATA','miss']};
+function cmp(){const t=S.clar;return [
+ ['REQ-001','Nominell spänning','145 kV','145 kV','ok'],
+ ['REQ-002','Minsta krypsträcka','4500 mm','4200 mm','dev'],
+ ['REQ-003','Maxvikt','950 kg','910 kg','ok'],
+ ['REQ-004','Seismisk kvalificering','Krävs','Inget provningsprotokoll','miss'],
+ ['REQ-005','Omgivningstemperatur',t==='ask'?'Ej bekräftat':TEMP[t],'−40 … +40 °C',t==='ask'?'miss':'ok']]}
+const RES={ok:['ok','Uppfyller'],dev:['warn','Avvikelse'],miss:['','Data saknas']};
+function decisionFor(id){
+ if(id==='REQ-002')return S.dev==='variant'?pill('info','Föreslagen modifiering: 4650 mm'):S.dev==='state'?pill('warn','Godkänd avvikelse'):'';
+ if(id==='REQ-004')return S.miss==='test'?pill('info','Föreslagen åtgärd: provning ingår'):S.miss==='open'?pill('','Information saknas – öppen punkt'):'';
+ if(id==='REQ-005'&&S.clar==='ask')return pill('','Information saknas – fråga till kund');
+ return pill('ok','Verifierad produktdata')}
 function missing(){const m=[];
- if(S.pos>1||S.phase==='clarify')m.push('Quantity is not stated in the RFQ');
- if(S.clar==='ask')m.push('Ambient temperature range not confirmed by customer');
- if(S.pos>IX.a3&&S.miss!=='test')m.push('No seismic qualification record'+(S.miss==='open'?' (listed as open item)':''));
+ if(done('a1'))m.push('Antal enheter anges inte i förfrågan');
+ if(S.clar==='ask')m.push('Omgivningstemperatur är inte bekräftad av kunden');
+ if(done('a3')&&S.miss!=='test')m.push('Protokoll för seismisk kvalificering saknas'+(S.miss==='open'?' (öppen punkt i offerten)':''));
  return m}
 function risks(){const r=[];
- if(S.pos>IX.a3&&S.dev!=='variant')r.push('Creepage distance 4200 mm vs required 4500 mm'+(S.dev==='state'?' (deviation stated in quote)':''));
- if(S.pos>IX.a4&&money().lead>20)r.push('Lead time '+money().lead+' weeks exceeds requested 20 weeks');
- if(S.pos>IX.a4&&S.miss==='open')r.push('Seismic qualification not verified');
+ if(done('a3')&&S.dev!=='variant')r.push('Krypsträcka 4200 mm mot krav 4500 mm'+(S.dev==='state'?' (godkänd avvikelse, anges i offerten)':''));
+ if(done('a4')&&money().lead>20)r.push('Ledtid '+money().lead+' veckor överstiger kundens önskade 20 veckor');
+ if(done('a4')&&S.miss==='open')r.push('Seismisk kvalificering är inte verifierad');
  return r}
-function reviews(){return (S.clar?1:0)+(reached('eng')?1:0)+(reached('com')?1:0)+(reached('fin')?1:0)}
+function status(){
+ if(S.stopped)return['err','Avbruten'];
+ if(S.ip>=FLOW.length)return['ok','Godkänd och arkiverad'];
+ if(S.ip===0)return['info','Ny förfrågan'];
+ if(S.wait)return['wait','Väntar på '+WAIT[S.wait].n];
+ return['info',{sharepoint:'Registrering',krav:'Kravanalys',teknik:'Teknisk matchning',kommersiellt:'Kommersiell analys',offert:S.ip>IX.fin?'Dokumentation':'Offertutkast'}[FLOW[S.ip].stage]]}
+function owner(){if(S.stopped)return'–';if(S.ip>=FLOW.length)return'Sälj';if(S.wait)return WAIT[S.wait].own;if(S.ip===0)return'Sälj';return'PL – Project Manager (automatiskt steg)'}
+function nextAction(){if(S.stopped)return'Ingen – projektet är avbrutet';if(S.ip>=FLOW.length)return'Skicka offerten till kunden';if(S.ip===0)return'Starta flödet för den nya förfrågan';
+ if(S.wait)return'En person behöver göra '+WAIT[S.wait].n;return FLOW[S.ip].t}
+function stageState(id){const a=FLOW.map((x,i)=>[x,i]).filter(x=>x[0].stage===id),first=a[0][1],last=a[a.length-1][1];
+ if(S.ip>last)return'done';if(S.wait&&FLOW[IX[S.wait]].stage===id)return'hold';if(S.ip>=first&&S.ip>0||(id==='outlook'&&S.ip===0))return'cur';return''}
 
-/* ---------- next action ---------- */
-function next(){
- if(S.stopped)return{t:'Project stopped by a human decision.',s:'Nothing continues without a person restarting it.',b:'Restart demo',a:'reset'};
- const c=cur();
- if(c.kind==='in')return{t:'A new customer RFQ has arrived.',s:'Collect the email and its four documents into one project.',b:'Create project from RFQ',a:'create'};
- if(c.kind==='out')return{t:'Quotation approved by a person.',s:'Ready to send to the customer.',b:S.view==='out'?null:'View quotation',a:'view',v:'out'};
- if(S.phase==='running')return{t:c.name+' is working…',s:'The AI Project Manager is monitoring the step.'};
- if(S.phase==='clarify')return{t:'Waiting for a person: one requirement is unclear.',s:'The process is paused until someone answers.',b:S.view==='a1'?null:'Open the question',a:'view',v:'a1',hold:1};
- if(c.kind==='human')return{t:'Waiting for a person: '+c.label+'.',s:'The process is paused until a person decides.',b:S.view===c.id?null:'Open '+c.label.toLowerCase(),a:'view',v:c.id,hold:1};
- return{t:'Next: dispatch the project to '+c.name+'.',s:c.does,b:'Dispatch to '+c.label.split(' ')[0],a:'run'};
-}
-function statusPill(){
- if(S.stopped)return['STOPPED','hold'];
- const c=cur();
- if(c.kind==='in')return['NEW RFQ',''];
- if(c.kind==='out')return['APPROVED','ok'];
- if(S.phase==='clarify')return['PAUSED · HUMAN REVIEW','hold'];
- return[c.status,c.kind==='human'?'hold':''];
-}
+/* ---------- flow engine ---------- */
+function settle(){const a=FLOW[S.ip];if(a&&a.human&&!S.wait){S.wait=a.id;S.at['w_'+a.id]=now();log('PL','Flödet pausat – väntar på '+WAIT[a.id].n);
+  if(a.id!=='eng')teams(a.id==='fin'?'Godkännanden':'Sälj – Offertförfrågningar','RFQ-12345 väntar på '+WAIT[a.id].n+'.')}}
+function apply(a){S.t++;S.at[a.id]=now();
+ ({trg(){log('Outlook','Ny förfrågan mottagen från Example Customer AB')},
+  pid(){log('PL','Projekt-ID RFQ-12345 skapat')},
+  sp1(){log('SharePoint','Projektmapp med sex undermappar skapad')},
+  sp2(){log('SharePoint','E-post och 4 bilagor sparade i 01_Original Documents')},
+  tm1(){teams('Sälj – Offertförfrågningar','Nytt RFQ-projekt RFQ-12345 från Example Customer AB. Dokumenten finns i SharePoint.')},
+  a1(){log('A1','6 krav framtagna, 1 oklart, 1 uppgift saknas')},
+  a2(){log('A2','Kravregister Rev A sparat i 02_Requirements')},
+  c1(){log('PL','Oklart krav hittat – fråga skickas till ansvarig')},
+  xl(){log('Excel','Godkända produktdata hämtade: 3 kandidater')},
+  a3(){log('A3','Jämförelsematris sparad i 03_Engineering')},
+  c2(){log('PL','Avvikelse hittad – Engineering meddelas')},
+  tm2(){teams('Engineering – Granskningar','RFQ-12345 väntar på teknisk granskning: 1 avvikelse, '+cmp().filter(r=>r[4]==='miss').length+' uppgift(er) saknas.')},
+  a2b(){log('A2','Tekniskt beslut dokumenterat i 03_Engineering och 06_Approvals')},
+  a4(){log('A4','Kommersiellt underlag sparat i 04_Commercial')},
+  a5(){log('A5','Offertutkast sparat i 05_Quotation')},
+  sp3(){log('A2','Godkänd offert och beslutshistorik sparade i SharePoint')},
+  tm3(){teams('Sälj – Offertförfrågningar','Offert RFQ-12345 är godkänd och klar att skicka till kunden.')}
+ })[a.id]?.()}
+function step(){if(S.stopped||S.wait||S.ip>=FLOW.length)return false;apply(FLOW[S.ip]);S.ip++;S.sel=null;settle();return !S.wait&&S.ip<FLOW.length}
+function runTo(id){halt();S.auto=false;while(S.ip<=IX[id]&&!S.wait&&!S.stopped&&S.ip<FLOW.length)step()}
+function halt(){if(timer){clearTimeout(timer);timer=null}}
+function schedule(){halt();if(!S.auto||S.wait||S.stopped||S.ip>=FLOW.length)return;
+ timer=setTimeout(()=>{timer=null;const more=step();if(S.ip>=FLOW.length)S.auto=false;render();if(more)schedule()},matchMedia('(prefers-reduced-motion: reduce)').matches?350:1100)}
+function decide(k,title,text,who,res){S.t+=3;S.at[k]=now();S.dec=S.dec.filter(d=>d.k!==k);
+ S.dec.push({k,title,text,who,res:res||'Godkänd',at:now(),file:{clar:'Klargörande_Omgivningstemperatur',eng:'Godkännande_Teknik',com:'Godkännande_Kommersiellt',fin:'Godkännande_Slutgiltigt'}[k]+'_RFQ-12345'});
+ S.wait=null;S.ip++;S.sel=null;settle();resume()}
+function resume(){if(S.mode==='step'||S.stopped)return;if(S.auto)schedule();else while(step());}
+
+/* ---------- documents ---------- */
+function docs(){const D=[],at=k=>S.at[k]||'';
+ const add=(f,name,type,rev,status,owner,src,pv,t)=>D.push({f,name,type,rev,status,owner,src,pv,t});
+ if(done('sp2')){add(0,'RFQ-12345 – Request for Quotation.eml','E-post','–','Original','Power Automate','RFQ-brevlådan i Outlook','mail',at('sp2'));
+  FILES.forEach(f=>add(0,f[0],f[0].endsWith('xlsx')?'Excel':'PDF',f[1],'Original','Kund (sparad av flödet)','Bilaga i e-post','src:'+f[2],at('sp2')))}
+ if(done('a2')){const fx=!!S.clar;
+  add(1,'Kravregister_RFQ-12345.xlsx','Excel',fx?'B':'A',fx?(S.clar==='ask'?'Fastställt med öppen punkt':'Fastställt'):'Väntar på klargörande','A2 – Documentation','01_Original Documents (4 dokument)','reqreg',fx?at('clar'):at('a2'));
+  add(1,'Källreferenser_RFQ-12345.xlsx','Excel','A','Fastställt','A2 – Documentation','Kravregister och originaldokument','srcref',at('a2'));
+  add(1,'Öppna frågor_RFQ-12345.docx','Word',fx?'B':'A','Öppen','A1 – Requirement Intake','Kravanalys','open',fx?at('clar'):at('a2'))}
+ if(done('a3')){add(2,'Produktkandidater_RFQ-12345.xlsx','Excel','A','Underlag','A3 – Engineering','Godkänd produktdatakälla','cands',at('a3'));
+  add(2,'Jämförelsematris_RFQ-12345.xlsx','Excel','A',done('eng')?'Granskad':'Väntar på teknisk granskning','A3 – Engineering','Kravregister Rev B och produktdata','matrix',at('a3'))}
+ if(done('a2b'))add(2,'Tekniskt beslut_RFQ-12345.docx','Word',L(S.rev.eng),'Godkänt','Engineering (dokumenterat av A2)','Jämförelsematris och godkännande','engdec',at('a2b'));
+ if(done('a4'))add(3,'Kommersiellt underlag_RFQ-12345.xlsx','Excel',L(S.rev.com),done('com')?'Godkänt':'Väntar på kommersiell granskning','A4 – Commercial Analysis','Tekniskt beslut och räkneregler','calc',at('a4'));
+ if(done('a5'))add(4,'Offert_RFQ-12345_UTKAST.docx','Word',L(S.rev.q),done('sp3')?'Ersatt av godkänd version':'Utkast – kräver godkännande','A5 – Quotation','Godkända projektdata','quote:0',at('a5'));
+ if(done('sp3'))add(4,'Offert_RFQ-12345.pdf','PDF',L(S.rev.q),'Godkänd','Behörig godkännare (sparad av A2)','Offertutkast Rev '+L(S.rev.q),'quote:1',at('sp3'));
+ S.dec.forEach(d=>add(5,d.file,'Godkännandepost','–',d.res,d.who,d.title,'appr:'+d.k,d.at));
+ if(done('sp3'))add(5,'Beslutshistorik_RFQ-12345.xlsx','Excel','A','Slutförd','A2 – Documentation','Alla godkännandeposter','hist',at('sp3'));
+ return D}
+const TYPE={'E-post':'outlook',Excel:'excel',Word:'word',PDF:'pdf',Godkännandepost:'appr'};
+const TL={'E-post':'@',Excel:'X',Word:'W',PDF:'PDF',Godkännandepost:'✓'};
+const stKind=s=>/Väntar|Utkast/.test(s)?'wait':/Godkän|Fastställt|Granskad|Slutförd/.test(s)&&!/öppen/.test(s)?'ok':/Öppen|öppen/.test(s)?'warn':'';
+
+/* ---------- shared tables ---------- */
+const srcBtn=k=>`<button class="lnk" data-act="pv" data-v="src:${k}">${SRC[k].file} · ${SRC[k].loc.replace(/^.*· /,'')}</button>`;
+function reqTable(){const p=S.wait==='clar';return `<div class="tw"><table style="min-width:680px"><thead><tr><th>ID</th><th>Krav</th><th>Värde</th><th>Typ</th><th>Källa i kundens dokument</th></tr></thead><tbody>
+ ${REQS.slice(0,4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="num"><b>${r[2]}</b></td><td>${r[3]}</td><td>${srcBtn(r[4])}</td></tr>`).join('')}
+ <tr><td class="id">REQ-005</td><td>Omgivningstemperatur</td><td class="num"><b>${S.clar?TEMP[S.clar]:'Oklart'}</b></td><td>${S.clar?(S.clar==='ask'?pill('warn','Öppen'):pill('ok','Klargjort av person')):pill('wait','Kräver klargörande')}</td><td>${srcBtn('r5a')}<br>${srcBtn('r5b')}</td></tr>
+ ${REQS.slice(4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="num"><b>${r[2]}</b></td><td>${r[3]}</td><td>${srcBtn(r[4])}</td></tr>`).join('')}</tbody></table></div>`}
+function matrix(){const d=done('eng'),rows=cmp();return `<div class="xl tw"><table><thead><tr class="cl"><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th>${d?'<th>F</th>':''}</tr>
+ <tr><th class="rn">1</th><th>ID</th><th>Krav</th><th>Kundens krav</th><th>145-A-4200 (verifierad)</th><th>Resultat</th>${d?'<th>Hantering efter granskning</th>':''}</tr></thead><tbody>
+ ${rows.map((r,i)=>`<tr><td class="rn">${i+2}</td><td class="id">${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td class="num">${r[3]}</td><td>${pill(RES[r[4]][0],RES[r[4]][1])}</td>${d?`<td>${decisionFor(r[0])}</td>`:''}</tr>`).join('')}</tbody></table></div>`}
+function cands(){return `<div class="tw"><table style="min-width:720px"><thead><tr><th>Kandidat</th><th>Beskrivning</th><th class="r">Likhet</th><th>Datastatus</th><th>Kommentar</th></tr></thead><tbody>
+ <tr><td><b>145-A-4200</b></td><td>Befintlig artikel, 145 kV</td><td class="num r">92 %</td><td>${pill('ok','Verifierad produktdata')}</td><td>1 avvikelse och 1 uppgift saknas trots hög likhet</td></tr>
+ <tr><td><b>145-A-4200 + förlängd krypsträcka</b></td><td>Modifiering av befintlig artikel: 4650 mm, 940 kg</td><td class="num r">88 %</td><td>${pill('info','Föreslagen modifiering')}</td><td>Värdena är inte verifierade. Kräver beslut av Engineering</td></tr>
+ <tr><td><b>123-C-3600</b></td><td>Tidigare levererad artikel, 123 kV</td><td class="num r">71 %</td><td>${pill('ok','Verifierad produktdata')}</td><td>Fel spänningsnivå, inte aktuell</td></tr></tbody></table></div>`}
+function calc(){const m=money();return `<div class="xl tw"><table><thead><tr class="cl"><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+ <tr><th class="rn">1</th><th>Post</th><th class="r">Pris</th><th class="r">Ledtid</th><th>Underlag</th></tr></thead><tbody>
+ <tr><td class="rn">2</td><td>Grundartikel 145-A-4200</td><td class="num r">${eur(42000)}</td><td class="num r">16 veckor</td><td>${pill('ok','Verifierad produktdata')}</td></tr>
+ ${S.dev==='variant'?`<tr><td class="rn">3</td><td>Modifiering: förlängd krypsträcka</td><td class="num r">+${eur(3800)}</td><td class="num r">+3 veckor</td><td>${pill('info','Föreslagen modifiering')}</td></tr>`:''}
+ ${S.miss==='test'?`<tr><td class="rn">${S.dev==='variant'?4:3}</td><td>Seismisk provning</td><td class="num r">+${eur(6500)}</td><td class="num r">+4 veckor</td><td>${pill('info','Föreslagen åtgärd')}</td></tr>`:''}
+ <tr><td class="rn"></td><td><b>Summa per enhet</b></td><td class="num r"><b>${eur(m.cost)}</b></td><td class="num r"><b>${m.lead} veckor</b></td><td>Kundens önskade ledtid: 20 veckor</td></tr></tbody></table></div>`}
+function comRisk(){const m=money(),o=[];
+ if(m.lead>20)o.push(['err','Ledtiden är '+(m.lead-20)+' veckor längre än kunden önskar.']);
+ if(S.dev==='state')o.push(['warn','Kunden kan välja att inte acceptera avvikelsen i krypsträcka.']);
+ if(S.miss==='open')o.push(['warn','Seismisk kvalificering är inte verifierad och står som öppen punkt.']);
+ if(S.clar==='ask')o.push(['warn','Omgivningstemperatur är inte bekräftad av kunden.']);
+ return o}
+function quote(ok){const m=money();return `<div class="doc">${ok?'':'<div class="wm">UTKAST</div>'}
+ <h3>Offert${ok?'':' – utkast'}</h3><p style="color:var(--muted)">RFQ-12345 · Rev ${L(S.rev.q)} · ${today}</p>
+ <section><h4>Kund och förfrågan</h4>Example Customer AB · RFQ-12345 – Request for Quotation</section>
+ <section><h4>Produkt</h4>${S.dev==='variant'?'145 kV utomhusenhet, artikel 145-A-4200 med förlängd krypsträcka':'145 kV utomhusenhet, artikel 145-A-4200'}</section>
+ <section><h4>Tekniska krav</h4><ul class="blist">
+  <li>Nominell spänning 145 kV: uppfylls</li>
+  <li>Krypsträcka: ${S.dev==='variant'?'4650 mm, uppfyller kravet 4500 mm':'4200 mm. Avvikelse från kravet 4500 mm, godkänd av Engineering att offerera'}</li>
+  <li>Vikt: ${S.dev==='variant'?'940':'910'} kg, uppfyller maxvikt 950 kg</li>
+  <li>Seismisk kvalificering: ${S.miss==='test'?'provning ingår i leveransen':'undantag, inte verifierad, öppen punkt'}</li>
+  <li>Omgivningstemperatur: ${S.clar==='ask'?'bekräftas av kunden, produkten är klassad för −40 … +40 °C':TEMP[S.clar]+', uppfylls'}</li></ul></section>
+ <section><h4>Kommersiella villkor</h4>Pris ${eur(m.cost)} per enhet. Antal bekräftas av kunden.</section>
+ <section><h4>Leverans</h4>${m.lead} veckor efter order (kundens önskemål: 20 veckor).</section>
+ <section><h4>Referenser</h4><ul class="blist"><li>${FILES.map(f=>f[0]+' Rev '+f[1]).join(' · ')}</li><li>Kravregister REQ-001 … REQ-006</li><li>Teknisk och kommersiell granskning godkänd av person</li></ul></section></div>`}
+function history(){return `<div class="tw"><table style="min-width:620px"><thead><tr><th>Tid</th><th>Beslut</th><th>Av</th><th>Innehåll</th></tr></thead><tbody>
+ ${S.dec.map(d=>`<tr><td class="num">${d.at}</td><td><b>${d.title}</b></td><td>${d.who}</td><td>${d.text}</td></tr>`).join('')||'<tr><td colspan="4">Inga beslut ännu.</td></tr>'}</tbody></table></div>`}
+
+/* ---------- preview ---------- */
+function preview(key){const [k,arg]=key.split(':');let title='',body='';
+ const page=(loc,inner)=>`<div class="page"><div class="loc">${loc}</div>${inner}</div>`;
+ if(k==='src'){const d=SRC[arg];title=d.file;body=page(d.loc+' · original i 01_Original Documents',d.lines.map(l=>/^\*/.test(l)?`<p><mark>${l.replace(/\*/g,'')}</mark></p>`:`<p>${l}</p>`).join(''))}
+ else if(k==='mail'){title='RFQ-12345 – Request for Quotation.eml';body=page('Från: Example Customer AB, inköp · Till: RFQ-brevlådan · 09:12','<p><b>RFQ-12345 – Request for Quotation</b></p><p>Please quote according to the attached specification, requirement list, drawings and our customer standard.</p><p>4 bilagor: '+FILES.map(f=>f[0]).join(', ')+'</p>')}
+ else if(k==='reqreg'){title='Kravregister_RFQ-12345.xlsx';body=`<div class="panel">${reqTable()}</div>`}
+ else if(k==='srcref'){title='Källreferenser_RFQ-12345.xlsx';body=`<div class="panel tw"><table style="min-width:560px"><thead><tr><th>Krav</th><th>Dokument</th><th>Plats</th></tr></thead><tbody>${[['REQ-001','r1'],['REQ-002','r2'],['REQ-003','r3'],['REQ-004','r4'],['REQ-005','r5a'],['REQ-005','r5b'],['REQ-006','r6']].map(r=>`<tr><td class="id">${r[0]}</td><td>${SRC[r[1]].file}</td><td>${srcBtn(r[1])}</td></tr>`).join('')}</tbody></table></div>`}
+ else if(k==='open'){title='Öppna frågor_RFQ-12345.docx';body=page('Sammanställt av A1',`<ul class="blist">${missing().concat(S.clar?[]:['Omgivningstemperatur: två olika intervall i underlaget']).map(x=>`<li>${x}</li>`).join('')}</ul>`)}
+ else if(k==='cands'){title='Produktkandidater_RFQ-12345.xlsx';body=`<div class="panel">${cands()}</div><p style="font-size:13px">Likhet visar hur lik en tidigare produkt är förfrågan. Det är inte ett intyg på att kraven uppfylls.</p>`}
+ else if(k==='matrix'){title='Jämförelsematris_RFQ-12345.xlsx';body=matrix()}
+ else if(k==='engdec'){title='Tekniskt beslut_RFQ-12345.docx';body=page('Beslutat av Engineering · dokumenterat av A2',`<p><b>Krypsträcka:</b> ${DEVT[S.dev]}</p><p><b>Seismisk kvalificering:</b> ${MIST[S.miss]}</p>`)}
+ else if(k==='calc'){title='Kommersiellt underlag_RFQ-12345.xlsx';body=calc()}
+ else if(k==='quote'){title=arg==='1'?'Offert_RFQ-12345.pdf':'Offert_RFQ-12345_UTKAST.docx';body=quote(arg==='1')}
+ else if(k==='appr'){const d=S.dec.find(x=>x.k===arg);title=d.file;body=page('Godkännandepost · '+today+' '+d.at,`<p><b>${d.title}</b></p><p>Utfall: ${d.res}</p><p>Beslutat av: ${d.who}</p><p>${d.text}</p>`)}
+ else if(k==='hist'){title='Beslutshistorik_RFQ-12345.xlsx';body=`<div class="panel">${history()}</div>`}
+ return `<div class="ov" data-act="closepv"><div class="dlg" role="dialog" aria-modal="true" aria-label="${title}"><div class="dh"><b>${title}</b><small>Förhandsgranskning · simulerat innehåll</small><button class="btn" style="margin-left:auto" data-act="closepv" id="closePv">Stäng</button></div><div class="db">${body}</div></div></div>`}
+
+/* ---------- views ---------- */
+const vh=(t,p,meta)=>`<div class="vh"><h2>${t}</h2><p>${p}</p>${meta?`<div class="meta">${meta}</div>`:''}</div>`;
+const by=(agents,ms)=>`<span>Utförs av <b>${agents}</b></span><span>Microsoft-komponent: <b>${ms}</b></span><span>${pill('','Simulerat i demon')}</span>`;
+const opt=(act,v,on,title,sub)=>`<button class="opt" data-act="${act}" data-v="${v}" aria-pressed="${on}"><i></i><span>${title}<small>${sub}</small></span></button>`;
+const apprHead=(t,role)=>`<div class="ah">${tile('appr')}<b>${t}</b>${pill('wait','Väntar på dig')}<small style="margin-left:auto;color:var(--muted)">Du agerar ${role} i demon</small></div>`;
+const notYet=t=>`<div class="panel"><div class="empty">${t}</div></div>`;
+const stopped=()=>`<div class="bar-info warn"><b>Projektet är avbrutet av en person.</b> Ingen offert tas fram. Välj Starta om för att prova en annan väg.</div>`;
+
+const VIEW={
+oversikt(){const st=status(),ms=missing(),rk=risks(),n=ms.length+rk.length,pct=Math.round(S.ip/FLOW.length*100);
+ return vh('Processöversikt','En kundförfrågan tas emot, lagras, analyseras, granskas och blir en offert i verktyg som organisationen redan använder.')+`
+ <div class="facts"><div><span>Kund</span><b>Example Customer AB</b></div><div><span>RFQ-nummer</span><b>${S.ip>1?'RFQ-12345':'Tilldelas vid start'}</b></div>
+  <div><span>Projektstatus</span>${pill(st[0],st[1])}</div><div><span>Ansvarig just nu</span><b>${owner()}</b></div><div><span>Nästa åtgärd</span><b>${nextAction()}</b></div>
+  <div><span>Öppna frågor och risker</span><b>${n}</b></div></div>
+ <div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:4px"><span>Förfrågans väg genom processen</span><span>${pct} % av flödet klart</span></div><div class="prog"><i style="width:${pct}%"></i></div></div>
+ <div class="stages">${STAGES.map((s,i)=>{const x=stageState(s.id);return `<button class="stage ${x}" data-act="view" data-v="${s.id}"><span class="n">Steg ${i+1}</span><b>${s.n}</b><span>${s.t}</span>
+  <span class="ms">${s.ms.map(m=>`<span>${tile(m[0])}${CON[m[0]].n}</span>`).join('')}</span>${pill(x==='done'?'ok':x==='hold'?'wait':x==='cur'?'info':'',x==='done'?'Klar':x==='hold'?'Väntar på person':x==='cur'?'Pågår':'Ej påbörjad')}</button>`}).join('')}</div>
+ <div class="bar-info">${tile('sp')}<span><b>SharePoint är projektets dokumentarkiv.</b> PL – Project Manager styr ordningen och håller status. Varje agent läser godkänt underlag från projektmappen och sparar sitt resultat där.</span></div>
+ <div class="two">
+  <div class="panel"><div class="ph">Öppna frågor och risker<small>${n} st</small></div>${n?`<ul class="list">${ms.map(m=>`<li>${pill('','Information saknas')}<span>${m}</span></li>`).join('')}${rk.map(m=>`<li>${pill('err','Risk')}<span>${m}</span></li>`).join('')}</ul>`:'<div class="empty">Inga öppna frågor.</div>'}</div>
+  <div class="panel"><div class="ph">${tile('teams')}Meddelanden i Teams<small>simulerade</small></div>${S.teams.length?`<ul class="list">${S.teams.map(m=>`<li><time>${m[0]}</time><span><b>${m[1]}</b><br>${m[2]}</span></li>`).join('')}</ul>`:'<div class="empty">Inga meddelanden ännu.</div>'}</div>
+ </div>
+ <div class="panel"><div class="ph">Aktivitet<small>förs av PL – Project Manager</small></div>${S.log.length?`<ul class="list">${S.log.map(l=>`<li><time>${l[0]}</time><span class="who">${l[1]}</span><span>${l[2]}</span></li>`).join('')}</ul>`:'<div class="empty">Flödet har inte startat. En ny förfrågan väntar i Outlook.</div>'}</div>`},
+
+outlook(){const st=S.ip>0;
+ return vh('Outlook','Förfrågan kommer in till den delade brevlådan. Flödet kan starta automatiskt eller av en säljare.',by('Power Automate','Outlook-utlösare'))+`
+ <div class="panel"><div class="ol">
+  <div class="fl"><div>Inkorg</div><div class="on"><span>Offertförfrågningar</span><span>${st?'':'1'}</span></div><div>Skickat</div><div>Arkiv</div></div>
+  <div><div class="msg"><b>Example Customer AB</b>RFQ-12345 – Request for Quotation<br><small>09:12 · 4 bilagor</small></div></div>
+  <div class="rd"><div><h3 style="font-size:18px;font-weight:600">RFQ-12345 – Request for Quotation</h3><span style="color:var(--muted)">Example Customer AB, inköp · till Offertförfrågningar · 09:12</span></div>
+   <p>Please quote according to the attached specification, requirement list, drawings and our customer standard.</p>
+   <div class="att">${FILES.map(f=>`<button data-act="pv" data-v="src:${f[2]}">${tile(f[0].endsWith('xlsx')?'excel':'pdf',f[0].endsWith('xlsx')?'X':'PDF')}${f[0]}</button>`).join('')}</div>
+   ${st?`<div class="bar-info ok">${tile('sp')}<span>${done('sp2')?'E-post och bilagor är sparade i SharePoint.':'Flödet har startat.'}</span><button class="btn" data-act="folder" data-v="0">Öppna projektmappen</button></div>`
+     :`<div class="acts"><button class="btn pri" data-act="startflow">Starta RFQ-flöde</button><span class="hint">I en verklig lösning kan flödet starta automatiskt när mejlet kommer in.</span></div>`}
+  </div></div></div>`},
+
+sharepoint(){const D=docs(),f=S.folder,ex=done('sp1');
+ const crumb=`<div class="crumb"><button data-act="folder" data-v="">Sales AI</button>›<button data-act="folder" data-v="">Example Customer AB</button>›${f==null?'<b>RFQ-12345</b>':`<button data-act="folder" data-v="">RFQ-12345</button>›<b>${FOLD[f]}</b>`}</div>`;
+ let body;
+ if(!ex)body='<div class="empty">Det finns ingen projektmapp för den här förfrågan ännu. Den skapas när flödet startar.</div>';
+ else if(f==null)body=`<div class="tw"><table style="min-width:560px"><thead><tr><th>Namn</th><th>Typ</th><th class="r">Objekt</th><th>Senast ändrad</th></tr></thead><tbody>${FOLD.map((n,i)=>{const d=D.filter(x=>x.f===i);return `<tr><td><button class="lnk" data-act="folder" data-v="${i}"><span class="tile" style="--c:#C19C00" aria-hidden="true">▤</span>${n}</button></td><td>Mapp</td><td class="num r">${d.length}</td><td class="num">${d.length?today+' '+d.map(x=>x.t).sort().pop():'–'}</td></tr>`}).join('')}</tbody></table></div>`;
+ else{const d=D.filter(x=>x.f===f);body=d.length?`<div class="tw"><table style="min-width:980px"><thead><tr><th>Namn</th><th>Typ</th><th>Ändrad</th><th>Rev</th><th>Dokumentstatus</th><th>Ansvarig</th><th>Källa</th></tr></thead><tbody>
+  ${d.map(x=>`<tr><td><button class="lnk" data-act="pv" data-v="${x.pv}">${tile(TYPE[x.type],TL[x.type])}${x.name}</button></td><td>${x.type}</td><td class="num">${today} ${x.t}</td><td>${x.rev}</td><td>${pill(stKind(x.status),x.status)}</td><td>${x.owner}</td><td>${x.src}</td></tr>`).join('')}</tbody></table></div>`
+  :'<div class="empty">Mappen är tom. Dokument läggs här när motsvarande steg i flödet har körts.</div>'}
+ return vh('SharePoint','Projektets dokumentarkiv. Här ligger original, analyser, beslut och offert samlade under samma projekt-ID.',by('A2 – Documentation','SharePoint-dokumentbibliotek'))+`
+ ${ex?`<div class="bar-info">${tile('sp')}<span><b>${D.length} dokument i projektet.</b> Förfrågan kom in med 4 bilagor${D.length>5?'; resten har skapats under processen':''}.</span></div>`:''}
+ <div class="panel"><div class="ph">${crumb}<small>Dokumentbibliotek · simulerat</small></div>${body}</div>`},
+
+flode(){let h='',i=0;
+ const card=(a,idx)=>{const st=idx<S.ip?'done':idx===S.ip?(S.wait===a.id?'wait':S.auto?'run':S.stopped?'pend':'next'):'pend';
+  const p=st==='done'?pill('ok','Klar'):st==='wait'?pill('wait','Väntar på person'):st==='run'?pill('info','Körs'):st==='next'?pill('info','Nästa'):'';
+  return `<button class="fa ${st} ${(S.sel||cur())===a.id?'sel':''}" data-act="sel" data-v="${a.id}"><span class="ct" style="background:var(--c-${a.con})">${CON[a.con].l}</span><span class="fx"><b>${a.t}</b><small>${CON[a.con].n}${a.agent?' · '+AGENT[a.agent]:''}</small></span><span class="st">${p}</span></button>`};
+ const arr='<span class="arr" aria-hidden="true"></span>';
+ while(i<FLOW.length){const a=FLOW[i];h+=card(a,i);
+  if(a.con==='cond'){const b=[];let j=i+1;while(j<FLOW.length&&FLOW[j].br===a.id){b.push(card(FLOW[j],j));j++}
+   h+=`<div class="brs"><div class="br"><span class="bl yes">Om ja</span>${b.join(arr)}</div><div class="br"><span class="bl no">Om nej</span><div class="noop">Ingen extra åtgärd</div></div></div>`;i=j}else i++;
+  if(i<FLOW.length)h+=arr}
+ const a=FLOW[IX[S.sel||cur()]]||FLOW[FLOW.length-1];
+ return vh('Flöde','Hela processen som ett molnflöde. Välj en åtgärd för att se vad den gör. Steg som kräver en person pausar alltid flödet.',by('PL – Project Manager','Power Automate'))+`
+ <div class="flow"><div class="canvas">${h}</div>
+ <div class="panel det"><div class="ph">${tile(a.con)}${CON[a.con].n}</div><div class="pb"><dl>
+  <div><dt>Åtgärd</dt><dd><b>${a.t}</b></dd></div><div><dt>Vad händer</dt><dd>${a.d}</dd></div>
+  ${a.agent?`<div><dt>Utförs av</dt><dd>${AGENT[a.agent]}</dd></div>`:''}
+  <div><dt>I demon</dt><dd>Simulerat. Inget anrop görs.</dd></div><div><dt>I en verklig lösning krävs</dt><dd>${REAL[a.con]}</dd></div>
+  ${S.wait===a.id?`<div><button class="btn pri" data-act="view" data-v="${WAIT[a.id].v}">Öppna granskningen</button></div>`:''}</dl></div></div></div>`},
+
+krav(){const h=vh('Kravanalys','Kundens krav tas fram ur de fyra dokumenten och sparas som ett kravregister med källhänvisningar.',by('A1 – Requirement Intake, A2 – Documentation','Copilot Studio-agent, SharePoint'));
+ if(!done('a1'))return h+notYet('Kraven tas fram när dokumenten har sparats i SharePoint.');
+ return h+`<div class="facts">${[['Kund','Example Customer AB'],['RFQ-nummer','RFQ-12345'],['Produkttyp','145 kV utomhusenhet'],['Hänvisade standarder','IEC 60815 · CS-104'],['Dokumentrevisioner','Spec B · Krav A · Ritn. A · CS-104 C']].map(f=>`<div><span>${f[0]}</span><b>${f[1]}</b></div>`).join('')}</div>
+ ${S.wait==='clar'?`<div class="appr">${apprHead('Klargörande krävs','ansvarig säljare')}<div class="ab"><div><h4>Kundens dokument anger två olika temperaturintervall. Vilket gäller?</h4>
+  <p style="color:var(--muted);margin-bottom:8px">Customer Standard §4.3 anger −40 till +40 °C. Technical Specification sida 5 anger −25 till +40 °C.</p><div class="opts">
+  ${opt('clar','strict',false,'Använd −40 … +40 °C','Customer Standard CS-104 §4.3, det strängare värdet')}
+  ${opt('clar','spec',false,'Använd −25 … +40 °C','Technical Specification sida 5, §3.4')}
+  ${opt('clar','ask',false,'Fråga kunden','Fortsätt med kravet markerat som öppet')}</div></div></div></div>`:''}
+ <div class="panel"><div class="ph">${tile('excel')}Kravregister<small>${done('a2')?'sparat i 02_Requirements · Rev '+(S.clar?'B':'A'):'sparas av A2'} · välj en källa för att se originaltexten</small></div>${reqTable()}</div>
+ <div class="panel"><div class="ph">Information som saknas</div><ul class="list">${missing().filter(x=>!/seism/i.test(x)).map(m=>`<li>${pill('','Information saknas')}<span>${m}</span></li>`).join('')}</ul></div>`},
+
+teknik(){const h=vh('Teknik','Kraven jämförs med godkända produktdata och tidigare projekt. Engineering beslutar om avvikelser.',by('A3 – Engineering','Excel-datakälla, Copilot Studio-agent, Godkännanden'));
+ if(!done('a3'))return h+notYet('Jämförelsen görs när kravregistret är fastställt.');
+ const w=S.wait==='eng';
+ return h+`<div class="legend">${pill('ok','Verifierad produktdata')}${pill('info','Föreslagen modifiering')}${pill('','Information saknas')}${pill('warn','Godkänd avvikelse')}${pill('err','Kommersiell risk')}</div>
+ ${S.stopped&&S.ip===IX.eng?stopped():''}
+ ${w&&!S.stopped?`<div class="appr">${apprHead('Teknisk granskning','tekniker')}<div class="ab">
+  <div><h4>Avvikelse: minsta krypsträcka. Krav 4500 mm, befintlig artikel 4200 mm.</h4><div class="opts">
+   ${opt('dev','variant',S.dev==='variant','Offerera med förlängd krypsträcka','Föreslagen modifiering: 4650 mm och 940 kg. Uppfyller kravet, påverkar pris och ledtid.')}
+   ${opt('dev','state',S.dev==='state','Offerera befintlig artikel med angiven avvikelse','Offerten anger 4200 mm mot kravet 4500 mm.')}</div></div>
+  <div><h4>Data saknas: seismisk kvalificering krävs, inget provningsprotokoll finns.</h4><div class="opts">
+   ${opt('miss','test',S.miss==='test','Låt seismisk provning ingå i leveransen','Påverkar pris och ledtid. Stänger luckan.')}
+   ${opt('miss','open',S.miss==='open','Ange som öppen punkt i offerten','Offerten får ett uttryckligt undantag.')}</div></div>
+  <div class="acts"><button class="btn pri" data-act="engOk" ${S.dev&&S.miss?'':'disabled'}>Godkänn tekniskt underlag</button><button class="btn" data-act="stop">Avvisa – offerera inte</button>
+   ${S.dev&&S.miss?'':'<span class="hint">Välj ett alternativ för båda punkterna.</span>'}</div></div></div>`:''}
+ ${done('eng')?`<div class="bar-info ok"><b>Godkänt av Engineering.</b><span>${DEVT[S.dev]}. ${MIST[S.miss]}.</span></div>`:''}
+ <div class="panel"><div class="ph">${tile('excel')}Jämförelsematris<small>sparad i 03_Engineering</small></div><div class="pb" style="padding:12px">${matrix()}</div></div>
+ <div class="panel"><div class="ph">Produktkandidater<small>från godkänd produktdatakälla</small></div>${cands()}
+  <div class="pb" style="border-top:1px solid var(--line2);font-size:13px"><b>Hög likhet är inte teknisk uppfyllelse.</b> Likhet visar hur lik en tidigare produkt är förfrågan. Kandidaten med högst likhet har ändå en avvikelse. Uppfyllelse fastställs av Engineering.</div></div>`},
+
+kommersiellt(){const h=vh('Kommersiellt','Pris, ledtid och risker räknas fram med fasta regler på de tekniska beslut som Engineering har godkänt.',by('A4 – Commercial Analysis','Excel, Godkännanden'));
+ if(!done('a4'))return h+notYet('Beräkningen görs när Engineering har godkänt det tekniska underlaget.');
+ const rk=comRisk(),w=S.wait==='com';
+ return h+`${S.stopped&&S.ip===IX.com?stopped():''}
+ ${w&&!S.stopped?`<div class="appr">${apprHead('Kommersiell granskning','säljare')}<div class="ab"><p>Granska beräkningen och riskerna nedan innan offerten tas fram.</p>
+  <div class="acts"><button class="btn pri" data-act="comOk">Godkänn kommersiellt underlag</button><button class="btn" data-act="comBack">Skicka tillbaka till Teknik</button><button class="btn" data-act="stop">Avvisa – offerera inte</button></div></div></div>`:''}
+ ${done('com')?`<div class="bar-info ok"><b>Godkänt av Sälj.</b><span>Prisbas ${eur(money().cost)}, ledtid ${money().lead} veckor.</span></div>`:''}
+ <div class="panel"><div class="ph">${tile('excel')}Kalkyl<small>sparad i 04_Commercial · Rev ${L(S.rev.com)}</small></div><div class="pb" style="padding:12px">${calc()}</div></div>
+ <div class="two"><div class="panel"><div class="ph">Kommersiella risker</div>${rk.length?`<ul class="list">${rk.map(r=>`<li>${pill(r[0],r[0]==='err'?'Hög':'Medel')}<span>${r[1]}</span></li>`).join('')}</ul>`:'<div class="empty">Inga identifierade risker. Offerten uppfyller krav och önskad ledtid.</div>'}</div>
+ <div class="panel"><div class="ph">Information som saknas</div><ul class="list">${missing().map(m=>`<li>${pill('','Information saknas')}<span>${m}</span></li>`).join('')}</ul></div></div>
+ <p style="font-size:12.5px;color:var(--muted)">Räkneregler i demon: grundpris 42 000 EUR och 16 veckor. Förlängd krypsträcka +3 800 EUR och +3 veckor. Seismisk provning +6 500 EUR och +4 veckor. Exempelvärden.</p>`},
+
+offert(){const h=vh('Offert','Ett offertutkast skapas från mall med enbart godkända uppgifter. En behörig person fattar slutbeslutet.',by('A5 – Quotation, A2 – Documentation','Word-mall, Godkännanden, SharePoint'));
+ if(!done('a5'))return h+notYet('Offertutkastet skapas när det kommersiella underlaget är godkänt.');
+ const w=S.wait==='fin',ok=done('fin');
+ return h+`${w?`<div class="appr">${apprHead('Slutgodkännande','behörig godkännare')}<div class="ab"><p>Inget skickas till kunden utan ditt godkännande.</p>
+  <div class="acts"><button class="btn pri" data-act="finOk">Godkänn offerten</button><button class="btn" data-act="finBack">Skicka tillbaka för revidering</button></div></div></div>`:''}
+ ${ok?`<div class="bar-info ok"><b>Godkänd av behörig person.</b><span>${done('sp3')?'Offert och beslutshistorik är sparade i SharePoint.':'Sparas i SharePoint i nästa steg.'}</span><button class="btn" data-act="folder" data-v="5">Öppna 06_Approvals</button></div>
+  <div class="panel"><div class="ph">Beslut fattade av personer</div>${history()}</div>`:''}
+ ${quote(ok)}`},
+
+inforande(){const R=[
+ ['Mottagning av förfrågan','Outlook (Exchange Online), Power Automate','Delad brevlåda, anslutning med rätt behörighet, regler för vilka mejl som startar flödet.'],
+ ['Projektlagring','SharePoint','Webbplats och bibliotek, kolumner för status och revision, behörigheter per kund och projekt, regler för bevarande.'],
+ ['Styrning av processen (PL)','Power Automate','Molnflöde i godkänd miljö, tjänstkonto, policy för dataförlustskydd. Licensbehov beror på anslutningarna.'],
+ ['Kravanalys (A1, A2)','Copilot Studio eller AI Builder','AI-tjänst som normalt kräver egen licens eller kapacitet. Kvalitetssäkring av resultat och klassning av kunddata.'],
+ ['Teknisk matchning (A3)','Excel, SharePoint-lista eller affärssystem','En ägd och godkänd källa för produktdata. Eventuell integration mot konstruktions- eller affärssystem.'],
+ ['Granskningar','Godkännanden i Teams och Power Automate','Bestämda roller som får godkänna, delegering vid frånvaro, loggning.'],
+ ['Kommersiell analys (A4)','Excel','Räkneregler som ägs av Sälj. Eventuell integration mot pris- och ledtidskälla.'],
+ ['Offert (A5)','Word-mall i SharePoint','Godkända mallar. Mallifyllnad och PDF kan kräva premium-anslutning.'],
+ ['Meddelanden','Teams','Kanaler och behörighet för flödet att publicera.']];
+ return vh('Införande','Vad som är simulerat här och vad en verklig lösning skulle behöva.')+`
+ <div class="bar-info warn"><span><b>Microsoft 365-licenser omfattar inte automatiskt alla funktioner.</b> Vilka licenser, behörigheter och integrationer som krävs måste bekräftas med IT. En verklig lösning ska köras i godkänd Microsoft 365-miljö och följa företagets IT-säkerhetskrav.</span></div>
+ <div class="panel"><div class="tw"><table style="min-width:820px"><thead><tr><th>Steg i processen</th><th>Microsoft-tjänst som skulle ansvara</th><th>I demon</th><th>Krävs i en verklig lösning</th></tr></thead><tbody>
+ ${R.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${pill('','Simulerat')}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div></div>
+ <div class="panel"><div class="ph">Principer som gäller oavsett teknik</div><div class="pb"><ul class="blist"><li>SharePoint är dokumentarkivet. PL – Project Manager håller ordning och status men lagrar inga dokument.</li><li>AI gör specialiserad analys och lämnar beslutsunderlag.</li><li>Engineering och Sälj behåller rätten att godkänna.</li><li>Varje viktigt beslut sparas som en godkännandepost.</li></ul></div></div>`}
+};
+const cur=()=>FLOW[Math.min(S.ip,FLOW.length-1)].id;
 
 /* ---------- render ---------- */
 function render(){
- $('pipe').innerHTML=STG.map((s,i)=>{
-  const st=i<S.pos||(s.kind==='out'&&S.pos===i)?'done':i===S.pos?'cur':'';
-  const wait=i===S.pos&&!S.stopped&&(s.kind==='human'||S.phase==='clarify');
-  const sub=st==='done'?'done':i===S.pos?(S.stopped?'stopped':wait?'waiting for person':S.phase==='running'?'working…':'ready'):'';
-  return `<li><button class="node ${st} ${wait?'wait':''}" style="--c:var(--${s.c})" data-act="view" data-v="${s.id}" aria-current="${S.view===s.id}">
-   <span class="dot">${ic(st==='done'&&s.kind!=='out'?'check':s.icon,18)}</span>${s.label}<small>${sub||'&nbsp;'}</small></button></li>`}).join('');
- const n=next(),sp=statusPill(),ms=missing(),rk=risks();
- $('pm').innerHTML=`
-  <div class="hd"><span>${ic('hub',26)}</span><div><h2>PL – AI Project Manager</h2><div class="k">Orchestrator</div></div></div>
-  <div class="proj"><div><div class="k">Project</div><b>${S.pos?'RFQ-12345':'—'}</b></div><span class="pill ${sp[1]}">${sp[1]==='hold'?ic('pause',14):''}${sp[0]}</span></div>
-  <div class="next"><div class="k">Next action</div><p>${n.t}</p>${n.b?`<button class="btn on-pm" data-act="${n.a}" ${n.v?`data-v="${n.v}"`:''}>${n.b}${ic('send',16)}</button>`:''}</div>
-  <div class="trk">
-   <div><b>${S.stopped||cur().kind==='out'?0:1}</b><span>Open tasks</span></div>
-   <div><b>${ms.length}</b><span>Missing information</span></div>
-   <div><b>${rk.length}</b><span>Risks</span></div>
-   <div><b>${reviews()} / 4</b><span>Human reviews done</span></div></div>
-  ${ms.length?`<div><div class="k" style="margin-bottom:6px">Missing information</div><ul>${ms.map(m=>`<li>${m}</li>`).join('')}</ul></div>`:''}
-  ${rk.length?`<div><div class="k" style="margin-bottom:6px">Risks</div><ul>${rk.map(m=>`<li>${m}</li>`).join('')}</ul></div>`:''}
-  <div class="log"><div class="k" style="margin-bottom:6px">Activity log</div><ul class="log-l">${S.log.length?S.log.map(l=>`<li class="log"><time>${l[0]}</time><span>${l[1]}</span></li>`).join(''):'<li>Monitoring inbox for new RFQs</li>'}</ul></div>`;
- $('main').innerHTML=VIEW[S.view]()+cta(n);
- $('ov').innerHTML=S.src?viewer(S.src):'';
+ const wv=S.wait&&!S.stopped?WAIT[S.wait].v:null;
+ $('rail').innerHTML=NAV.map(n=>n[0]==='grp'?`<div class="grp">${n[1]}</div>`:`<button class="nav" data-act="view" data-v="${n[0]}" aria-current="${S.view===n[0]}">${tile(n[2],n[3])}${n[1]}${wv===n[0]?'<span class="dot" title="Väntar på person"></span>':''}</button>`).join('');
+ const end=S.ip>=FLOW.length,st=status(),can=!S.wait&&!S.stopped&&!end;
+ $('cmd').innerHTML=`
+  ${S.auto&&can?`<button class="btn pri" data-act="pause">Pausa</button>`:`<button class="btn pri" data-act="run" ${can?'':'disabled'}>${S.ip===0?'Starta simulerad RFQ':'Fortsätt'}</button>`}
+  <button class="btn" data-act="step" ${can?'':'disabled'}>Stega</button>
+  <button class="btn" data-act="reset">Starta om</button>
+  ${wv?`<button class="btn" data-act="view" data-v="${wv}">Öppna granskning</button>`:''}
+  <span class="sp">${pill(st[0],st[1])}</span>
+  <button class="btn" data-act="pres" aria-pressed="${S.pres}">Presentationsläge</button>`;
+ $('content').innerHTML=(S.pres?guide():'')+VIEW[S.view]();
+ $('ov').innerHTML=S.pv?preview(S.pv):'';
 }
-function cta(n){ if(!n.b||n.a==='reset')return '';
- return `<div class="cta"><p>${n.t}<small>${n.s||''}</small></p><button class="btn pri" data-act="${n.a}" ${n.v?`data-v="${n.v}"`:''}>${n.b}${ic('send',16)}</button></div>`}
-const shead=(s,small)=>`<div class="shead" style="--c:var(--${s.c})"><div class="at">${ic(s.icon,28)}</div><div><small>${small}</small><h2>${s.name||s.label}</h2></div></div>`;
-const srcBtn=k=>`<button class="src" data-act="src" data-v="${k}">${ic('link',14)}${SRC[k].file} · ${SRC[k].loc.replace(/^.*· /,'')}</button>`;
-function agentIdle(s){const i=IX[s.id];
- if(S.pos===i&&S.phase==='running')return `<div class="card"><div class="ch">Working</div><div class="cb"><ul class="steps" style="--c:var(--${s.c})">${s.run.map((t,k)=>`<li class="${k<S.run?'d':k===S.run?'r':''}"><i>${k<S.run?ic('check',13):''}</i>${t}</li>`).join('')}</ul></div></div>`;
- return `<div class="card"><div class="ch">What this agent does</div><div class="cb"><p class="lead">${s.does}</p><ul class="blist" style="margin-top:10px">${s.run.map(t=>`<li>${t}</li>`).join('')}</ul>
-  ${S.pos<i?`<p class="lead" style="margin-top:12px">Not reached yet. The AI Project Manager activates this agent when the earlier steps are complete.</p>`:''}</div></div>`}
-const hasOut=id=>S.pos>IX[id]||(id==='a1'&&S.pos===1&&S.phase==='clarify');
-const opt=(act,v,on,title,sub)=>`<button class="opt" data-act="${act}" data-v="${v}" aria-pressed="${on}"><i></i><span>${title}<small>${sub}</small></span></button>`;
-const humanDone=(title,rows)=>`<div class="card"><div class="ch">${ic('check',20)}${title}<small>decided by a person</small></div><div class="cb"><ul class="blist">${rows.map(r=>`<li>${r}</li>`).join('')}</ul></div></div>`;
-const notYet=s=>`<div class="shead" style="--c:var(--hu)"><div class="at">${ic('person',28)}</div><div><small>Human checkpoint</small><h2>${s.label}</h2></div></div>
- <div class="card"><div class="cb"><p class="lead">Not reached yet. When the process arrives here, the AI Project Manager stops and waits for a person to decide.</p></div></div>`;
-const DEVT={variant:'Offer variant 145-B-4650 (4650 mm, 940 kg)',state:'Offer article 145-A-4200 and state the deviation in the quote'};
-const MIST={test:'Include a seismic qualification test in the scope',open:'List seismic qualification as an open item in the quote'};
-
-const VIEW={
-rfq(){const made=S.pos>0;return `
- <div class="shead" style="--c:var(--a1)"><div class="at">${ic('mail',28)}</div><div><small>Step 1 · Sales inbox</small><h2>Incoming Customer RFQ</h2></div></div>
- <div class="card"><div class="ch">Example Customer AB · Procurement<small>09:12</small></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
-  <div><b style="font-size:18px">RFQ-12345 – Request for Quotation</b><div class="lead">To: Sales</div></div>
-  <p class="lead">Please quote according to the attached specification, requirement list, drawings and our customer standard.</p>
-  <div><div class="lead" style="font-weight:600;margin-bottom:6px">4 attachments — select one to open it</div>
-  <div class="files">${FILES.map(f=>`<button class="file" data-act="src" data-v="${f[2]}" style="--c:var(--${/xlsx/.test(f[0])?'a2':'pdf'})"><em>${/xlsx/.test(f[0])?'XLSX':'PDF'}</em><span>${f[0]}</span></button>`).join('')}</div></div></div></div>
- ${made?`<div class="card"><div class="ch">${ic('folder',20)}Customer Project<small>RFQ-12345</small></div><div class="cb"><p style="font-weight:600;margin-bottom:10px">One RFQ – Multiple Documents – One Project</p>
-  <div class="files">${FILES.map(f=>`<button class="file" data-act="src" data-v="${f[2]}" style="--c:var(--${/xlsx/.test(f[0])?'a2':'pdf'})"><em>${/xlsx/.test(f[0])?'XLSX':'PDF'}</em><span>${f[0]}</span><small>${f[1]}</small></button>`).join('')}</div></div></div>
-  <div class="sp-band"><span>${ic('shield',22)}</span><div><b>Originals stored securely in SharePoint</b><small>4 original documents · versioned · unchanged</small></div></div>`:''}`},
-
-a1(){const s=STG[1];if(!hasOut('a1'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
- const pending=S.phase==='clarify'&&S.pos===1;
- return shead(s,'Traceable requirement extraction')+`
- <div class="cols">${[['Customer','Example Customer AB'],['RFQ number','RFQ-12345'],['Product type','145 kV outdoor high-voltage unit'],['Referenced standards','IEC 60815 · Customer Standard CS-104'],['Document revisions','Spec Rev B · Requirements Rev A · Drawings Rev A · CS-104 Rev C']].map(f=>`<div class="fact"><span>${f[0]}</span><b>${f[1]}</b></div>`).join('')}</div>
- <div class="card"><div class="ch">Structured requirements<small>select a source to see the original text</small></div><div class="tw"><table>
-  <tr><th>ID</th><th>Requirement</th><th>Value</th><th>Type</th><th>Source</th></tr>
-  ${REQS.slice(0,4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td><span class="tag">${r[3]?'Mandatory':'Requested'}</span></td><td>${srcBtn(r[4])}</td></tr>`).join('')}
-  <tr style="${pending?'background:color-mix(in srgb,var(--dev) 8%,var(--surface))':''}"><td class="id">REQ-005</td><td>Ambient temperature range</td><td class="v">${S.clar?TEMP[S.clar]:`<span style="color:var(--dev)">Unclear</span>`}</td>
-   <td>${S.clar?`<span class="tag">${S.clar==='ask'?'Open':'Clarified by a person'}</span>`:`<span class="badge" style="--c:var(--dev)">${ic('warn',13)}HUMAN REVIEW</span>`}</td><td>${srcBtn('r5a')}<br>${srcBtn('r5b')}</td></tr>
-  ${REQS.slice(4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td><span class="tag">Requested</span></td><td>${srcBtn(r[4])}</td></tr>`).join('')}
- </table></div></div>
- <div class="card"><div class="ch">${ic('q',20)}Missing information</div><div class="cb"><ul class="blist"><li>Quantity is not stated in any of the four documents.</li></ul></div></div>
- ${pending?`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>HUMAN REVIEW REQUIRED</h3><p>The AI Project Manager has stopped the process and sent this question to you.</p></div></div>
-  <div class="q"><h4>The two documents give different ambient temperature ranges. Which applies?</h4>
-  <p class="note">Customer Standard §4.3 says −40 °C to +40 °C. Technical Specification p. 5 says −25 °C to +40 °C.</p>
-  <div class="opts">
-   ${opt('clar','strict',false,'Use −40 … +40 °C','Customer Standard CS-104 §4.3, the stricter value')}
-   ${opt('clar','spec',false,'Use −25 … +40 °C','Technical Specification p. 5 §3.4')}
-   ${opt('clar','ask',false,'Ask the customer','Continue with the requirement marked as open')}</div></div></div>`:''}`},
-
-a2(){const s=STG[2];if(!hasOut('a2'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
- const F=[['01 Source Documents','4 originals',FILES.map(f=>`${f[0]} — ${f[1]}`)],
-  ['02 Requirement Register','6 requirements',[...REQS.slice(0,4).map(r=>`${r[0]} · ${r[1]} · ${r[2]}`),`REQ-005 · Ambient temperature range · ${TEMP[S.clar]}`,`REQ-006 · Requested delivery time · 20 weeks`]],
-  ['03 Document Revisions','4 tracked',['Technical Specification.pdf — Rev B (supersedes Rev A)','Requirements.xlsx — Rev A','Drawings.pdf — Rev A','Customer Standard.pdf — CS-104 Rev C']],
-  ['04 Source Links','7 links',Object.keys(SRC).filter(k=>k[0]==='r'&&k.length>1&&k!=='rx').map(k=>srcBtn(k))],
-  ['05 Project Status','updated',['Status: DOCUMENTATION complete','Open question: quantity not stated',S.clar==='ask'?'Open question: ambient temperature range':'Ambient temperature range clarified by a person']]];
- return shead(s,'Structured – Organized – Traceable')+`<div class="card"><div class="ch">${ic('folder',20)}Project RFQ-12345<small>select a folder to open it</small></div>
- ${F.map((f,i)=>`<details ${i===1?'open':''}><summary><span class="fi">${ic('folder',18)}</span>${f[0]}<small>${f[1]}</small></summary><div class="in">${f[2].map(x=>`<div>${x}</div>`).join('')}</div></details>`).join('')}</div>`},
-
-a3(){const s=STG[3];if(!hasOut('a3'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
- const rows=cmp(),cnt=k=>rows.filter(r=>r[4]===k).length;
- return shead(s,'Comparison with approved specifications, products and articles')+`
- <div class="chips" role="group" aria-label="Filter results">
-  ${[['all','All '+rows.length],['ok','Match '+cnt('ok')],['dev','Deviation '+cnt('dev')],['miss','Missing data '+cnt('miss')]].map(f=>`<button class="chip" data-act="filter" data-v="${f[0]}" aria-pressed="${S.filter===f[0]}">${f[1]}</button>`).join('')}</div>
- <div class="card"><div class="ch">Customer requirement vs. existing article 145-A-4200</div><div class="tw"><table>
-  <tr><th>ID</th><th>Requirement</th><th>Customer</th><th>Existing product</th><th>Result</th></tr>
-  ${rows.filter(r=>S.filter==='all'||r[4]===S.filter).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td class="v">${r[3]}</td><td><span class="badge" style="--c:var(--${RES[r[4]][1]})">${RES[r[4]][0]}</span></td></tr>`).join('')}
- </table></div></div>
- <div class="card" style="border-color:var(--dev)"><div class="cb" style="display:flex;gap:10px;align-items:center;font-weight:600"><span style="color:var(--dev)">${ic('warn',22)}</span>DEVIATION – Engineering Review Required. The agent does not approve technical compliance.</div></div>`},
-
-eng(){const s=STG[4];if(S.pos<4)return notYet(s);
- if(S.pos>4)return shead(s,'Human checkpoint · completed')+humanDone('Engineering approval recorded',[`Creepage distance: ${DEVT[S.dev]}`,`Seismic qualification: ${MIST[S.miss]}`]);
- if(S.stopped)return shead(s,'Human checkpoint')+`<div class="card"><div class="cb"><b>Stopped by the engineer.</b><p class="lead">No quotation will be prepared for this RFQ. Restart the demo to try another path.</p></div></div>`;
- return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>ENGINEERING REVIEW</h3><p>You are the engineer. The AI agent found one deviation and one item with missing data. Decide how each is handled.</p></div></div>
-  <div class="q"><h4><span class="badge" style="--c:var(--dev)">DEVIATION</span> Minimum creepage distance: required 4500 mm, existing article 4200 mm</h4><div class="opts">
-   ${opt('dev','variant',S.dev==='variant','Offer variant 145-B-4650','4650 mm and 940 kg. Meets the requirement, adds cost and lead time.')}
-   ${opt('dev','state',S.dev==='state','Offer article 145-A-4200 with a stated deviation','The quote will state 4200 mm against the required 4500 mm.')}</div></div>
-  <div class="q"><h4><span class="badge" style="--c:var(--miss)">MISSING DATA</span> Seismic qualification: required, no test record found</h4><div class="opts">
-   ${opt('miss','test',S.miss==='test','Include a qualification test in the scope','Adds cost and lead time. Closes the gap.')}
-   ${opt('miss','open',S.miss==='open','List as an open item in the quote','The quote will carry an explicit exception.')}</div></div>
-  <div class="acts"><button class="btn pri" data-act="engOk" ${S.dev&&S.miss?'':'disabled'}>${ic('check',16)}Approve engineering data</button>
-   <button class="btn warn" style="background:var(--surface)" data-act="stop">Stop – cannot quote</button>
-   ${S.dev&&S.miss?'':'<span class="hint">Choose an option for both items to approve.</span>'}</div></div>`},
-
-a4(){const s=STG[5];if(!hasOut('a4'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
- const m=money(),late=m.lead>20;
- const cr=late?['High','Lead time is longer than the customer requested.']:S.dev==='state'?['Medium','The customer may not accept the stated creepage deviation.']:['Low','Offer meets the stated requirements and timing.'];
- const tr=S.miss==='open'||S.clar==='ask'?['Medium',[S.miss==='open'?'Seismic qualification is not verified.':'',S.clar==='ask'?'Ambient temperature range is not confirmed.':''].filter(Boolean).join(' ')]:['Low','Technical gaps were closed in engineering review.'];
- return shead(s,'Commercial Decision Support')+`<div class="an">
-  <div class="card"><div class="t">${ic('coin',20)}<b>Cost</b></div><div class="big">${eur(m.cost)}</div><ul class="blist"><li>Base article ${eur(42000)}</li>${S.dev==='variant'?`<li>Variant 145-B-4650 +${eur(3800)}</li>`:''}${S.miss==='test'?`<li>Seismic test +${eur(6500)}</li>`:''}<li>Estimate for 1 unit</li></ul></div>
-  <div class="card"><div class="t">${ic('clock',20)}<b>Lead Time</b></div><div class="big">${m.lead} weeks</div><p>Customer requested 20 weeks. ${late?'This is '+(m.lead-20)+' weeks longer.':'This is within the request.'}</p></div>
-  <div class="card"><div class="t">${ic('warn',20)}<b>Commercial Risk</b></div><div class="big">${cr[0]}</div><p>${cr[1]}</p></div>
-  <div class="card"><div class="t">${ic('gear',20)}<b>Technical Risk</b></div><div class="big">${tr[0]}</div><p>${tr[1]}</p></div>
-  <div class="card"><div class="t">${ic('bulb',20)}<b>Opportunities</b></div><ul class="blist"><li>Customer Standard CS-104 is now registered, so the next RFQ from this customer is faster to process.</li>${S.dev==='variant'?'<li>Variant 145-B-4650 can be reused for other heavy-pollution sites.</li>':''}</ul></div>
-  <div class="card"><div class="t">${ic('q',20)}<b>Missing Information</b></div><ul class="blist">${missing().map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`},
-
-com(){const s=STG[6];if(S.pos<6)return notYet(s);
- if(S.pos>6)return shead(s,'Human checkpoint · completed')+humanDone('Commercial approval recorded',[`Price basis ${eur(money().cost)} for 1 unit`,`Lead time ${money().lead} weeks`]);
- if(S.stopped)return shead(s,'Human checkpoint')+`<div class="card"><div class="cb"><b>Stopped at commercial review.</b><p class="lead">Restart the demo to try another path.</p></div></div>`;
- const m=money();
- return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>COMMERCIAL REVIEW</h3><p>You are the commercial reviewer. Check the decision support from A4 before the project continues.</p></div></div>
-  <div class="q"><h4>Summary from A4</h4><div class="cols"><div class="fact"><span>Cost estimate</span><b>${eur(m.cost)}</b></div><div class="fact"><span>Lead time</span><b>${m.lead} weeks (requested 20)</b></div><div class="fact"><span>Open items</span><b>${missing().length}</b></div></div>
-  <button class="src" data-act="view" data-v="a4">${ic('chart',14)}Open the full analysis</button></div>
-  <div class="acts"><button class="btn pri" data-act="comOk">${ic('check',16)}Approve commercial basis</button><button class="btn warn" style="background:var(--surface)" data-act="stop">Stop – do not quote</button></div></div>`},
-
-a5(){const s=STG[7];if(!hasOut('a5'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);return shead(s,'Quotation Draft')+quote(S.pos>IX.fin)},
-
-fin(){const s=STG[8];if(S.pos<8)return notYet(s);
- if(S.pos>8)return shead(s,'Human checkpoint · completed')+humanDone('Final quote approval recorded',['Quotation RFQ-12345 approved for sending to the customer']);
- return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>FINAL APPROVAL</h3><p>You carry out the final review. Nothing is sent to the customer without your approval.</p></div></div>
-  <div class="acts"><button class="btn pri" data-act="finOk">${ic('check',16)}Approve quotation</button><button class="btn" style="color:var(--fg)" data-act="finBack">Return to commercial review</button></div></div>`+quote(false)},
-
-out(){const s=STG[9];if(S.pos<9)return `<div class="shead" style="--c:var(--ok)"><div class="at">${ic('check',28)}</div><div><small>Result</small><h2>Customer Quotation</h2></div></div><div class="card"><div class="cb"><p class="lead">Not reached yet. The quotation exists only after a person has given final approval.</p></div></div>`;
- return `<div class="shead" style="--c:var(--ok)"><div class="at">${ic('check',28)}</div><div><small>Traceable. Controlled. Human-approved.</small><h2>Customer Quotation</h2></div></div>
- <div class="card"><div class="ch">${ic('person',20)}Decisions made by people</div><div class="cb"><ul class="blist">${S.decisions.map(d=>`<li><b>${d[0]}:</b> ${d[1]}</li>`).join('')}</ul></div></div>`+quote(true)}
-};
-function quote(ok){const m=money();
- return `<div class="card quote">${ok?'':'<div class="wm">DRAFT</div>'}
- <div class="ch">${ic('quote',20)}Quotation ${ok?'':'Draft'}<small>RFQ-12345</small></div>
- <section><h4>Customer and RFQ</h4>Example Customer AB · RFQ-12345 – Request for Quotation</section>
- <section><h4>Product</h4>${S.dev==='variant'?'145 kV outdoor unit, article 145-B-4650 (variant)':'145 kV outdoor unit, article 145-A-4200'}</section>
- <section><h4>Technical requirements</h4><ul class="blist">
-  <li>Nominal voltage 145 kV: complies</li>
-  <li>Creepage distance: ${S.dev==='variant'?'4650 mm, complies with required 4500 mm':'4200 mm. Deviation from required 4500 mm, approved for offering by engineering'}</li>
-  <li>Weight: ${S.dev==='variant'?'940':'910'} kg, complies with maximum 950 kg</li>
-  <li>Seismic qualification: ${S.miss==='test'?'qualification test included in scope':'exception, not verified, open item'}</li>
-  <li>Ambient temperature: ${S.clar==='ask'?'to be confirmed by customer, product rated −40 … +40 °C':TEMP[S.clar]+', complies'}</li></ul></section>
- <section><h4>Commercial conditions</h4>Price ${eur(m.cost)} per unit. Quantity to be confirmed by the customer.</section>
- <section><h4>Delivery information</h4>${m.lead} weeks after order (requested: 20 weeks).</section>
- <section><h4>References</h4><ul class="blist"><li>${FILES.map(f=>f[0]+' '+f[1]).join(' · ')}</li><li>Requirement register REQ-001 … REQ-006</li><li>Engineering review and commercial review approved by a person</li></ul></section>
- <div class="banner ${ok?'ok':''}">${ic(ok?'check':'warn',20)}${ok?'APPROVED BY A PERSON – READY TO SEND':'DRAFT – HUMAN APPROVAL REQUIRED'}</div></div>`}
-function viewer(k){const d=SRC[k];
- return `<div class="ov" data-act="close"><div class="dlg" role="dialog" aria-modal="true" aria-label="${d.file}"><div class="card" style="border:0;box-shadow:none">
-  <div class="ch">${ic('link',18)}${d.file}<small><button class="btn" data-act="close" id="closeSrc">Close</button></small></div>
-  <div class="page"><div class="loc">${d.loc} · original stored in SharePoint</div>${d.lines.map(l=>/^\*/.test(l)?`<p><mark>${l.replace(/\*/g,'')}</mark></p>`:`<p>${l}</p>`).join('')}</div></div></div></div>`}
+function guide(){const p=PRES[S.ps],nx=PRES[S.ps+1],blocked=nx&&nx.need&&!done(nx.need);
+ return `<div class="guide"><div><div class="k">${S.ps?`Steg ${S.ps} av 8`:'Presentation'}</div><h3>${p.t}</h3><p>${p.x}</p>
+  <p class="val">${S.ps?'<b>Verksamhetsnytta:</b> ':''}${p.v}</p>
+  ${S.stopped?'<p class="hint">Projektet är avbrutet. Välj Starta om för att börja om.</p>':blocked?`<p class="hint">Ett beslut av en person krävs för att gå vidare: ${WAIT[nx.need].n}.</p>`:''}</div>
+  <div class="ga"><button class="btn" data-act="pprev" ${S.ps?'':'disabled'}>Föregående</button>
+  ${blocked&&!S.stopped?`<button class="btn pri" data-act="view" data-v="${WAIT[nx.need].v}" ${S.view===WAIT[nx.need].v?'disabled':''}>${S.view===WAIT[nx.need].v?'Beslut krävs nedan':'Gå till beslutet'}</button>`:`<button class="btn pri" data-act="pnext" ${nx&&!S.stopped?'':'disabled'}>Nästa</button>`}</div></div>`}
+function goStep(k){const p=PRES[k];if(p.need&&!done(p.need))return;S.mode='';S.ps=k;if(p.until)runTo(p.until);S.view=p.view;if('folder' in p)S.folder=p.folder}
 
 /* ---------- actions ---------- */
-function advance(){S.pos++;const c=cur();S.phase=c.kind==='human'?'review':c.kind==='out'?'done':'ready'}
-function runAgent(){const c=cur();if(c.kind!=='agent'||S.phase!=='ready')return;
- S.phase='running';S.run=0;S.view=c.id;log('Dispatched project to '+c.name);render();
- const fast=matchMedia('(prefers-reduced-motion: reduce)').matches;
- timer=setInterval(()=>{S.run++;
-  if(S.run>=c.run.length){clearInterval(timer);timer=null;finish(c)}
-  render()},fast?120:520)}
-function finish(c){
- if(c.id==='a1'){S.phase='clarify';log('A1 extracted 6 requirements, 1 unclear, 1 item missing');log('Process paused: human review required')}
- else{ const msg={a2:'A2 organized the project and created the requirement register',a3:'A3 found '+cmp().filter(r=>r[4]==='ok').length+' matches, 1 deviation and '+cmp().filter(r=>r[4]==='miss').length+' missing data',a4:'A4 compiled Commercial Decision Support',a5:'A5 prepared the quotation draft'}[c.id];
-  log(msg);advance();if(cur().kind==='human')log('Process paused: '+cur().label.toLowerCase()+' required')}}
 const ACT={
- reset(){if(timer){clearInterval(timer);timer=null}S=fresh()},
  view(v){S.view=v},
- create(){log('Project RFQ-12345 created from 1 email and 4 documents');log('Original documents stored in SharePoint');S.pos=1;S.phase='ready'},
- run(){runAgent();return false},
- src(v){S.src=v},
- close(){S.src=null},
- filter(v){S.filter=v},
- clar(v){S.clar=v;S.decisions.push(['Requirement clarification','Ambient temperature range: '+TEMP[v]]);log('Person answered: ambient temperature '+TEMP[v]);advance()},
+ folder(v){S.view='sharepoint';S.folder=v===''||v==null?null:+v},
+ pv(v){S.pv=v},closepv(){S.pv=null},
+ sel(v){S.sel=v},
+ pres(){S.pres=!S.pres},
+ pnext(){goStep(S.ps+1)},
+ pprev(){S.ps--;S.view=PRES[S.ps].view;if('folder' in PRES[S.ps])S.folder=PRES[S.ps].folder},
+ run(){S.mode='';S.auto=true;if(S.ip===0){step()}schedule()},
+ startflow(){S.mode='';S.auto=true;step();S.view='flode';schedule()},
+ pause(){S.auto=false;halt()},
+ step(){S.mode='step';S.auto=false;halt();step()},
+ reset(){halt();const pres=S.pres;S=fresh();S.pres=pres},
+ clar(v){S.clar=v;log('Person','Klargörande: omgivningstemperatur '+TEMP[v]);log('A2','Kravregister uppdaterat till Rev B');decide('clar','Klargörande av krav','Omgivningstemperatur: '+TEMP[v],'Ansvarig säljare','Besvarad')},
  dev(v){S.dev=v},miss(v){S.miss=v},
- engOk(){if(!(S.dev&&S.miss))return;S.decisions.push(['Engineering approval',DEVT[S.dev]+'. '+MIST[S.miss]+'.']);log('Engineering data approved by a person');advance()},
- comOk(){S.decisions.push(['Commercial approval','Price basis '+eur(money().cost)+', lead time '+money().lead+' weeks.']);log('Commercial basis approved by a person');advance()},
- finOk(){S.decisions.push(['Final quote approval','Quotation approved for sending to the customer.']);log('Quotation approved by a person');advance();S.view='out'},
- finBack(){log('Quotation returned to commercial review by a person');S.decisions=S.decisions.filter(d=>d[0]!=='Commercial approval');S.pos=IX.com;S.phase='review';S.view='com'},
- stop(){S.stopped=true;log('Project stopped by a person at '+cur().label.toLowerCase())}
+ engOk(){if(!(S.dev&&S.miss))return;log('Person','Tekniskt underlag godkänt av Engineering');decide('eng','Teknisk granskning',DEVT[S.dev]+'. '+MIST[S.miss]+'.','Engineering')},
+ comOk(){log('Person','Kommersiellt underlag godkänt av Sälj');decide('com','Kommersiell granskning','Prisbas '+eur(money().cost)+', ledtid '+money().lead+' veckor.','Sälj')},
+ finOk(){log('Person','Offerten godkänd av behörig person');decide('fin','Slutgodkännande','Offert Rev '+L(S.rev.q)+' godkänd för att skickas till kunden.','Behörig godkännare')},
+ comBack(){log('Person','Skickat tillbaka till Teknik för ny granskning');S.dec=S.dec.filter(d=>d.k!=='eng');S.rev.eng++;S.rev.com++;S.ip=IX.eng;S.wait=null;halt();settle();S.view='teknik'},
+ finBack(){log('Person','Offerten skickad tillbaka för revidering');S.dec=S.dec.filter(d=>d.k!=='com');S.rev.q++;S.ip=IX.com;S.wait=null;settle();S.view='kommersiellt'},
+ stop(){S.stopped=true;S.auto=false;halt();log('Person','Projektet avbrutet vid '+WAIT[S.wait].n)}
 };
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
- if(b.dataset.act==='close'&&b.classList.contains('ov')&&e.target!==b)return;
- const act=b.dataset.act,keep=window.scrollY;
- if(ACT[act](b.dataset.v)===false)return;
- render();
- if(act==='src'){const c=$('closeSrc');c&&c.focus()}
- else if(act==='view'||act==='create'||/Ok$|clar|finBack/.test(act)){const m=$('main');if(m.getBoundingClientRect().top<0||innerWidth<=860)m.scrollIntoView({block:'start'})}
- else window.scrollTo(0,keep);
+ if(b.classList.contains('ov')&&e.target!==b)return;
+ const act=b.dataset.act,y=window.scrollY,v0=S.view;
+ ACT[act](b.dataset.v);render();
+ if(act==='pv'){const c=$('closePv');c&&c.focus()}
+ else if(S.view!==v0||act==='pnext'||act==='pprev'||act==='folder')window.scrollTo(0,0);
+ else window.scrollTo(0,y);
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.src){S.src=null;render()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.pv){S.pv=null;render()}});
 S=fresh();render();
 })();
 </script>
