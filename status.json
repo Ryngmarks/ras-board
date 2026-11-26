@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T21:41:37Z",
+    "updated":  "2026-11-26T21:41:39Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,6 +102,16 @@
                         "state":  "working",
                         "note":  "steg 1.4 stangs",
                         "since":  "2026-11-26T20:55:25Z"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "HF-2: ljud, partiklar, skakning, dod",
+                        "since":  "2026-11-26T21:41:39Z",
+                        "agent":  "hf2",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
