@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T21:54:46.586Z",
+  "generated_at": "2026-11-26T23:27:31.122Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-26T21:54:46.526Z",
+      "updated": "2026-11-26T23:27:31.063Z",
       "work_orders": [
         {
           "id": "F0",
@@ -829,16 +829,26 @@
         {
           "id": "HF-2",
           "title": "Träffen du känner: ljud, partiklar, skakning, dockan faller",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-26T21:41:35.172Z",
-          "after": "HF-1"
+          "done": "2026-11-26T23:27:30.874Z",
+          "after": "HF-1",
+          "result": "Klart: ljud, gnistor, stjärna, frysning, skak, knuff och dockans död. Bygget finns att prova i tre versioner"
         },
         {
           "id": "HF-3",
           "title": "Alla lager mätta på inspelning, tre varianter för blindtest",
           "status": "todo",
           "role": "implementer",
+          "after": "HF-2"
+        },
+        {
+          "id": "A1-fix",
+          "title": "Attacken ska ritas i samma bildruta som knapptrycket",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-26T23:27:30.947Z",
           "after": "HF-2"
         }
       ]
