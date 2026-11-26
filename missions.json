@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T20:55:18.672Z",
+  "generated_at": "2026-11-26T20:56:32.065Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-26T20:55:18.593Z",
+      "updated": "2026-11-26T20:56:32.001Z",
       "work_orders": [
         {
           "id": "F0",
@@ -740,6 +740,14 @@
           "role": "implementer",
           "started": "2026-11-26T20:55:18.482Z",
           "after": "ATK-3"
+        },
+        {
+          "id": "ARCH-15",
+          "title": "Specifikation för träffkänsla (steg 1.5)",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-26T20:56:32.001Z",
+          "after": "ATK-4"
         }
       ]
     },
