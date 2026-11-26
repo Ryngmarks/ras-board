@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-25T22:18:58Z",
+    "updated":  "2026-11-26T20:55:21Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -103,6 +103,16 @@
                         "note":  "a build to try: run, cut the dummy with Q",
                         "since":  "2026-11-25T22:18:58Z",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "ATK-3: klientens forutsagelse",
+                        "since":  "2026-11-26T20:55:21Z",
+                        "agent":  "atk3-review",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
