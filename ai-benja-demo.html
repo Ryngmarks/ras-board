@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body style="margin:0">
+<title>AI Benja Demo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: orchestrator sidebar (dark blue) beside a stage workspace; the pipeline strip on top is the navigation. */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --sunk:#F5F7FA; --line:#D5DBE5; --fg:#1A2333; --muted:#5A6678;
+  --pm:#123E7C; --pm-ink:#FFFFFF; --accent:#1B5FBF;
+  --a1:#2F9BE3; --a2:#1C8A3C; --a3:#B88A00; --a4:#DD6B10; --a5:#8560C4; --hu:#3A485D;
+  --ok:#1C8A3C; --dev:#C95F0A; --miss:#6F7A8B; --pdf:#C4314B; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#FFF1B8;
+  --sh:0 1px 2px rgba(20,35,60,.06),0 4px 14px rgba(20,35,60,.06);
+  --font:"Segoe UI Variable Text","Segoe UI",Inter,system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C111B; --surface:#182132; --sunk:#121927; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
+  --pm:#1B4F9E; --pm-ink:#FFFFFF; --accent:#6FB1F5;
+  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
+  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#5A4A10;
+  --sh:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0C111B; --surface:#182132; --sunk:#121927; --line:#2E3B52; --fg:#E7ECF5; --muted:#9BA8BC;
+  --pm:#1B4F9E; --pm-ink:#FFFFFF; --accent:#6FB1F5;
+  --a1:#4CAEEF; --a2:#3DB060; --a3:#D9A91A; --a4:#F08432; --a5:#A283DC; --hu:#56667F;
+  --ok:#3DB060; --dev:#F08432; --miss:#8B96A8; --pdf:#E0566E; --hold:#FFC83D; --hold-ink:#2A2000; --hi:#5A4A10;
+  --sh:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+.wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3,p{margin:0}
+.ic{flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.bar h1{font-size:20px;font-weight:700;letter-spacing:.01em}
+.bar .sub{color:var(--muted);font-size:14px}
+.bar .sp{margin-left:auto}
+.btn{height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.pri{color:#06121F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.pri{color:#06121F}}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.warn{border-color:var(--dev);color:var(--dev)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.on-pm{background:#fff;color:#123E7C;border-color:#fff}
+
+/* pipeline */
+.pipe{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);padding:12px}
+.pipe ol{list-style:none;margin:0;padding:0;display:flex;gap:6px;min-width:1040px}
+.pipe li{flex:1 1 0;display:flex;align-items:center;gap:6px;min-width:0}
+.pipe li+li::before{content:"›";color:var(--muted);font-weight:700}
+.node{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:8px;border:1.5px solid var(--line);
+  background:var(--sunk);font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;text-align:center;line-height:1.2;color:var(--muted)}
+.node .dot{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--line);color:var(--muted)}
+.node.done{color:var(--fg);border-color:color-mix(in srgb,var(--c) 55%,var(--line));background:color-mix(in srgb,var(--c) 9%,var(--surface))}
+.node.done .dot,.node.cur .dot{background:var(--c);color:#fff}
+.node.cur{color:var(--fg);border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface))}
+.node.wait{border-color:var(--hold);box-shadow:0 0 0 3px color-mix(in srgb,var(--hold) 45%,transparent)}
+.node[aria-current="true"]{outline:2.5px solid var(--accent);outline-offset:2px}
+.node small{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-transform:none}
+
+.grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+/* orchestrator */
+.pm{background:var(--pm);color:var(--pm-ink);border-radius:10px;box-shadow:var(--sh);padding:16px;display:flex;flex-direction:column;gap:14px}
+.pm .hd{display:flex;gap:12px;align-items:center}
+.pm .hd span{width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,.16);display:grid;place-items:center}
+.pm h2{font-size:17px;font-weight:600}
+.pm .k{font-size:12px;opacity:.75;letter-spacing:.05em;text-transform:uppercase}
+.pm .proj{display:flex;justify-content:space-between;gap:10px;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:12px}
+.pm .proj{flex-wrap:wrap}
+.pm .proj b{font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:13px;font-size:12px;font-weight:700;letter-spacing:.05em;background:#fff;color:#123E7C;white-space:nowrap}
+.pill.hold{background:var(--hold);color:var(--hold-ink)}
+.pill.ok{background:#CDEFD6;color:#0F4F22}
+.pm .next{background:rgba(255,255,255,.12);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.pm .next p{font-size:15px;font-weight:600}
+.trk{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.trk div{background:rgba(255,255,255,.1);border-radius:8px;padding:9px 11px}
+.trk b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.2}
+.trk span{font-size:12px;opacity:.82}
+.pm ul{list-style:none;margin:0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:5px}
+.pm ul li{display:flex;gap:8px;opacity:.92}
+.pm ul li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--hold);margin-top:7px}
+.log{max-height:190px;overflow:auto;border-top:1px solid rgba(255,255,255,.22);padding-top:10px}
+.log li::before{background:rgba(255,255,255,.6)!important}
+.log time{opacity:.65;font-variant-numeric:tabular-nums;flex:none}
+
+/* workspace */
+main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);min-width:0}
+.card>.ch{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:600;font-size:16px}
+.card>.ch small{margin-left:auto;font-weight:500;font-size:13px;color:var(--muted)}
+.card>.cb{padding:16px}
+.shead{display:flex;gap:14px;align-items:center}
+.shead .at{width:52px;height:52px;border-radius:10px;background:var(--c);color:#fff;display:grid;place-items:center;flex:none}
+.shead small{display:block;color:var(--muted);font-size:13px}
+.shead h2{font-size:24px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.lead{color:var(--muted);max-width:68ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.fact{background:var(--sunk);border-radius:8px;padding:10px 12px}
+.fact span{display:block;font-size:12px;color:var(--muted);letter-spacing:.03em}
+.fact b{font-weight:600}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.file{display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-align:left;min-width:0;width:100%}
+.file:hover{border-color:var(--accent)}
+.file em{font-style:normal;font-size:10px;font-weight:700;color:#fff;background:var(--c,var(--pdf));width:34px;height:26px;border-radius:5px;display:grid;place-items:center;flex:none}
+.file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.file small{margin-left:auto;color:var(--muted);white-space:nowrap}
+.sk{height:9px;border-radius:5px;background:color-mix(in srgb,var(--muted) 22%,var(--surface))}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:8px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.v{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.id{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.src{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:0;color:var(--accent);font-size:13px;text-align:left;text-decoration:underline;text-underline-offset:2px}
+.badge{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:12px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--c);white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 7px;border-radius:4px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:30px;padding:0 12px;border-radius:15px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.human{background:var(--hu);color:#fff;border-radius:10px;box-shadow:var(--sh);padding:16px;display:flex;flex-direction:column;gap:12px}
+.human .hh{display:flex;gap:12px;align-items:center}
+.human .hh span{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
+.human h3{font-size:16px;letter-spacing:.07em}
+.human p{opacity:.9}
+.q{background:var(--surface);color:var(--fg);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.q h4{margin:0;font-size:15px}
+.q .note{color:var(--muted);font-size:13px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:10px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface)}
+.opt:hover{border-color:var(--accent)}
+.opt i{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);margin-top:1px}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}
+.opt[aria-pressed="true"] i{border-color:var(--accent);background:radial-gradient(var(--accent) 45%,transparent 50%)}
+.opt small{display:block;color:var(--muted)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.acts .hint{font-size:13px;opacity:.85}
+.cta{border:1.5px dashed color-mix(in srgb,var(--accent) 60%,var(--line));border-radius:10px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
+.cta p{flex:1 1 260px;font-weight:600}
+.cta small{display:block;font-weight:400;color:var(--muted)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.steps li{display:flex;gap:10px;align-items:center;color:var(--muted)}
+.steps li i{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.steps li.d{color:var(--fg)}
+.steps li.d i{background:var(--ok);border-color:var(--ok);color:#fff}
+.steps li.r i{border-color:var(--c);border-top-color:transparent;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.steps li.r i{animation:none}}
+.blist{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+details{border-bottom:1px solid var(--line)}
+details:last-child{border-bottom:0}
+summary{display:flex;gap:12px;align-items:center;padding:12px 16px;cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary .fi{width:34px;height:34px;border-radius:8px;background:var(--a2);color:#fff;display:grid;place-items:center;flex:none}
+summary small{margin-left:auto;color:var(--muted);font-weight:500}
+summary::after{content:"+";color:var(--muted);font-size:18px;width:14px;text-align:center}
+details[open] summary::after{content:"–"}
+details .in{padding:0 16px 14px 62px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.an{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.an .card{padding:14px;display:flex;flex-direction:column;gap:6px}
+.an .t{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--a4)}
+.an .t b{color:var(--fg);font-weight:600}
+.an .big{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.an p,.an li{font-size:14px;color:var(--muted)}
+.quote{position:relative;overflow:hidden}
+.quote .wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-size:min(22vw,150px);font-weight:700;letter-spacing:.1em;color:var(--a5);opacity:.11;transform:rotate(-20deg)}
+.quote section{padding:14px 16px;border-bottom:1px solid var(--line)}
+.quote section h4{margin:0 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--a5)}
+.banner{display:flex;gap:10px;align-items:center;justify-content:center;padding:12px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--a5);text-align:center}
+.banner.ok{background:var(--ok)}
+.sp-band{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:10px;border:1px solid color-mix(in srgb,var(--a2) 45%,var(--line));background:color-mix(in srgb,var(--a2) 10%,var(--surface))}
+.sp-band span{width:40px;height:40px;border-radius:8px;background:var(--a2);color:#fff;display:grid;place-items:center;flex:none}
+.sp-band small{display:block;color:var(--muted)}
+.foot{color:var(--muted);font-size:13px}
+/* source viewer */
+.ov{position:fixed;inset:0;background:rgba(8,14,24,.55);display:grid;place-items:center;padding:16px;z-index:20}
+.dlg{background:var(--surface);color:var(--fg);border-radius:10px;width:min(620px,100%);max-height:min(86vh,720px);overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.dlg .ch{position:sticky;top:0;background:var(--surface)}
+.page{margin:16px;padding:22px;border:1px solid var(--line);border-radius:4px;background:var(--sunk);font-size:14px;display:flex;flex-direction:column;gap:10px}
+.page .loc{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.page mark{background:var(--hi);color:inherit;padding:2px 3px;border-radius:3px;font-weight:600}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.500-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.8"/><circle cx="4.500" cy="17.500" r="1.8"/><circle cx="19.500" cy="17.500" r="1.8"/><path d="M12 5.800V9M9.500 13.700l-3.500 2.600M14.500 13.700l3.500 2.600"/></symbol>
+<symbol id="i-intake" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.500l9 5 9-5"/><path d="M3 17l9 5 9-5"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2.200"/><path d="M12 2.500V6M12 18v3.500M2.500 12H6M18 12h3.500M5.300 5.300l2.500 2.500M16.200 16.200l2.500 2.500M5.300 18.700l2.500-2.500M16.200 7.800l2.500-2.500"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-5M12 16V8M16 16v-3"/></symbol>
+<symbol id="i-quote" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 14l2 2 4-4"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.500"/><path d="M5 20c0-3.900 3.100-6 7-6s7 2.100 7 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3zM12 10v4.500M12 17.300v.2"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.700 0l3-3a4 4 0 00-5.700-5.700l-1 1M14 10a4 4 0 00-5.700 0l-3 3a4 4 0 005.700 5.700l1-1"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.500 9.300c-.4-.8-1.300-1.300-2.500-1.300-1.500 0-2.500.7-2.500 1.800 0 2.600 5 1.300 5 4 0 1.100-1 1.900-2.500 1.900-1.300 0-2.200-.5-2.600-1.400M12 6.500V8M12 15.700v1.800"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.500c.7.7 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0012 3z"/></symbol>
+<symbol id="i-q" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 115 0c0 1.500-2.500 2-2.500 3.700M12 16.600v.2"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12h14M13 6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <header class="bar">
+    <h1>AI Benja</h1><span class="sub">AI Agents for Sales &amp; Engineering · interactive demo</span>
+    <button class="btn sp" id="reset" data-act="reset">Restart demo</button>
+  </header>
+  <nav class="pipe" aria-label="Process steps"><ol id="pipe"></ol></nav>
+  <div class="grid">
+    <aside class="pm" id="pm" aria-label="AI Project Manager"></aside>
+    <main id="main"></main>
+  </div>
+  <p class="foot">Simulated demo. The customer, documents, product articles, prices and lead times are invented example data, and the agents here follow a script rather than calling a live AI model.</p>
+</div>
+<div id="ov"></div>
+
+<script>
+(function(){
+const ic=(n,s=20)=>`<svg class="ic" width="${s}" height="${s}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const $=id=>document.getElementById(id);
+
+const STG=[
+ {id:'rfq',kind:'in',label:'Customer RFQ',icon:'mail',c:'miss'},
+ {id:'a1',kind:'agent',label:'A1 Intake',name:'A1 – Requirement Intake Agent',icon:'intake',c:'a1',status:'INTAKE',
+  does:'Reads all customer documents together and turns them into structured, traceable requirements.',
+  run:['Reading 4 documents together','Identifying customer, RFQ number and revisions','Extracting requirements, units and values','Linking each requirement to its source','Checking for missing information and uncertainties']},
+ {id:'a2',kind:'agent',label:'A2 Documentation',name:'A2 – Documentation Agent',icon:'layers',c:'a2',status:'DOCUMENTATION',
+  does:'Organizes the project: structure, documents, requirement register, revisions and source links.',
+  run:['Structuring the project','Organizing documents','Creating the requirement register','Recording document revisions','Linking requirements to sources','Updating project status']},
+ {id:'a3',kind:'agent',label:'A3 Engineering',name:'A3 – Engineering Agent',icon:'gear',c:'a3',status:'ENGINEERING',
+  does:'Compares customer requirements with previously approved specifications, products and articles. It reports matches, deviations and missing data, and never approves compliance itself.',
+  run:['Loading requirement register','Searching approved specifications and articles','Comparing values and units','Classifying results']},
+ {id:'eng',kind:'human',label:'Engineering Review',icon:'person',c:'hu',status:'ENGINEERING REVIEW'},
+ {id:'a4',kind:'agent',label:'A4 Commercial',name:'A4 – Commercial Analysis Agent',icon:'chart',c:'a4',status:'COMMERCIAL ANALYSIS',
+  does:'Combines the approved engineering data with available commercial information and compiles decision support.',
+  run:['Loading approved engineering data','Estimating cost','Estimating lead time','Assessing commercial and technical risk','Compiling decision support']},
+ {id:'com',kind:'human',label:'Commercial Review',icon:'person',c:'hu',status:'COMMERCIAL REVIEW'},
+ {id:'a5',kind:'agent',label:'A5 Quote',name:'A5 – Quote Agent',icon:'quote',c:'a5',status:'QUOTE DRAFT',
+  does:'Builds a quotation draft using only information that has passed the earlier steps.',
+  run:['Collecting technical requirements','Collecting approved engineering data','Collecting approved commercial data','Writing quotation draft','Adding references']},
+ {id:'fin',kind:'human',label:'Final Approval',icon:'person',c:'hu',status:'FINAL APPROVAL'},
+ {id:'out',kind:'out',label:'Customer Quotation',icon:'check',c:'ok'}
+];
+const IX=Object.fromEntries(STG.map((s,i)=>[s.id,i]));
+const FILES=[['Technical Specification.pdf','Rev B','ts'],['Requirements.xlsx','Rev A','rx'],['Drawings.pdf','Rev A','dr'],['Customer Standard.pdf','CS-104 Rev C','cs']];
+const SRC={
+ ts:{file:'Technical Specification.pdf',loc:'Page 1 · Cover',lines:['Technical Specification — RFQ-12345','Revision B','Scope: supply of one type of 145 kV outdoor high-voltage unit, including documentation.']},
+ rx:{file:'Requirements.xlsx',loc:'Sheet “Requirements”',lines:['Row 17 · Insulation · Pollution class · Heavy','Row 18 · Insulation · Minimum creepage distance · 4500 · mm','Row 31 · Delivery · Requested delivery time · 20 · weeks after order']},
+ dr:{file:'Drawings.pdf',loc:'Sheet 1 of 3',lines:['General arrangement drawing','Overall dimensions and mounting interface.','Rev A']},
+ cs:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · Contents',lines:['4 Environmental conditions','5 Materials','6 Mechanical and seismic requirements']},
+ r1:{file:'Technical Specification.pdf',loc:'Page 4 · §3.1 Electrical ratings',lines:['3.1 Electrical ratings','*The equipment shall be rated for a nominal system voltage of 145 kV.*','Rated frequency: 50 Hz.']},
+ r2:{file:'Requirements.xlsx',loc:'Sheet “Requirements” · Row 18',lines:['Row 17 · Insulation · Pollution class · Heavy','*Row 18 · Insulation · Minimum creepage distance · 4500 · mm · Mandatory*','Row 19 · Insulation · Reference · IEC 60815']},
+ r3:{file:'Technical Specification.pdf',loc:'Page 7 · §5.2 Mechanical',lines:['5.2 Mechanical','*The total weight of each unit shall not exceed 950 kg.*','Lifting points shall be provided.']},
+ r4:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · §6.2',lines:['6.2 Seismic requirements','*Equipment shall be seismically qualified. Evidence of qualification is required.*']},
+ r5a:{file:'Customer Standard.pdf',loc:'CS-104 Rev C · §4.3',lines:['4.3 Ambient temperature','*Equipment shall operate at ambient temperatures from −40 °C to +40 °C.*']},
+ r5b:{file:'Technical Specification.pdf',loc:'Page 5 · §3.4 Service conditions',lines:['3.4 Service conditions','*Ambient air temperature: −25 °C to +40 °C.*','Altitude: up to 1000 m.']},
+ r6:{file:'Requirements.xlsx',loc:'Sheet “Requirements” · Row 31',lines:['Row 30 · Delivery · Incoterms · To be agreed','*Row 31 · Delivery · Requested delivery time · 20 · weeks after order*']}
+};
+const REQS=[
+ ['REQ-001','Nominal Voltage','145 kV',true,'r1'],
+ ['REQ-002','Minimum Creepage Distance','4500 mm',true,'r2'],
+ ['REQ-003','Maximum Weight','950 kg',true,'r3'],
+ ['REQ-004','Seismic qualification','Required',true,'r4'],
+ ['REQ-006','Requested delivery time','20 weeks',false,'r6']
+];
+const TEMP={strict:'−40 … +40 °C',spec:'−25 … +40 °C',ask:'Open – question sent to customer'};
+
+let S,timer=null;
+function fresh(){return {pos:0,phase:'ready',view:'rfq',run:0,clar:null,dev:null,miss:null,filter:'all',log:[],stopped:false,src:null,decisions:[]}}
+const log=t=>S.log.unshift([new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}),t]);
+const cur=()=>STG[S.pos];
+const reached=id=>S.pos>IX[id];              // stage finished
+function money(){let cost=42000,lead=16;if(S.dev==='variant'){cost+=3800;lead+=3}if(S.miss==='test'){cost+=6500;lead+=4}return{cost,lead}}
+const eur=n=>'EUR '+n.toLocaleString('en-US');
+function cmp(){return [
+ ['REQ-001','Nominal Voltage','145 kV','145 kV','ok'],
+ ['REQ-002','Minimum Creepage Distance','4500 mm','4200 mm','dev'],
+ ['REQ-003','Maximum Weight','950 kg','910 kg','ok'],
+ ['REQ-004','Seismic qualification','Required','No test record found','miss'],
+ ['REQ-005','Ambient temperature range',S.clar==='ask'?'Not confirmed':TEMP[S.clar],'−40 … +40 °C',S.clar==='ask'?'miss':'ok']]}
+const RES={ok:['MATCH','ok'],dev:['DEVIATION','dev'],miss:['MISSING DATA','miss']};
+function missing(){const m=[];
+ if(S.pos>1||S.phase==='clarify')m.push('Quantity is not stated in the RFQ');
+ if(S.clar==='ask')m.push('Ambient temperature range not confirmed by customer');
+ if(S.pos>IX.a3&&S.miss!=='test')m.push('No seismic qualification record'+(S.miss==='open'?' (listed as open item)':''));
+ return m}
+function risks(){const r=[];
+ if(S.pos>IX.a3&&S.dev!=='variant')r.push('Creepage distance 4200 mm vs required 4500 mm'+(S.dev==='state'?' (deviation stated in quote)':''));
+ if(S.pos>IX.a4&&money().lead>20)r.push('Lead time '+money().lead+' weeks exceeds requested 20 weeks');
+ if(S.pos>IX.a4&&S.miss==='open')r.push('Seismic qualification not verified');
+ return r}
+function reviews(){return (S.clar?1:0)+(reached('eng')?1:0)+(reached('com')?1:0)+(reached('fin')?1:0)}
+
+/* ---------- next action ---------- */
+function next(){
+ if(S.stopped)return{t:'Project stopped by a human decision.',s:'Nothing continues without a person restarting it.',b:'Restart demo',a:'reset'};
+ const c=cur();
+ if(c.kind==='in')return{t:'A new customer RFQ has arrived.',s:'Collect the email and its four documents into one project.',b:'Create project from RFQ',a:'create'};
+ if(c.kind==='out')return{t:'Quotation approved by a person.',s:'Ready to send to the customer.',b:S.view==='out'?null:'View quotation',a:'view',v:'out'};
+ if(S.phase==='running')return{t:c.name+' is working…',s:'The AI Project Manager is monitoring the step.'};
+ if(S.phase==='clarify')return{t:'Waiting for a person: one requirement is unclear.',s:'The process is paused until someone answers.',b:S.view==='a1'?null:'Open the question',a:'view',v:'a1',hold:1};
+ if(c.kind==='human')return{t:'Waiting for a person: '+c.label+'.',s:'The process is paused until a person decides.',b:S.view===c.id?null:'Open '+c.label.toLowerCase(),a:'view',v:c.id,hold:1};
+ return{t:'Next: dispatch the project to '+c.name+'.',s:c.does,b:'Dispatch to '+c.label.split(' ')[0],a:'run'};
+}
+function statusPill(){
+ if(S.stopped)return['STOPPED','hold'];
+ const c=cur();
+ if(c.kind==='in')return['NEW RFQ',''];
+ if(c.kind==='out')return['APPROVED','ok'];
+ if(S.phase==='clarify')return['PAUSED · HUMAN REVIEW','hold'];
+ return[c.status,c.kind==='human'?'hold':''];
+}
+
+/* ---------- render ---------- */
+function render(){
+ $('pipe').innerHTML=STG.map((s,i)=>{
+  const st=i<S.pos||(s.kind==='out'&&S.pos===i)?'done':i===S.pos?'cur':'';
+  const wait=i===S.pos&&!S.stopped&&(s.kind==='human'||S.phase==='clarify');
+  const sub=st==='done'?'done':i===S.pos?(S.stopped?'stopped':wait?'waiting for person':S.phase==='running'?'working…':'ready'):'';
+  return `<li><button class="node ${st} ${wait?'wait':''}" style="--c:var(--${s.c})" data-act="view" data-v="${s.id}" aria-current="${S.view===s.id}">
+   <span class="dot">${ic(st==='done'&&s.kind!=='out'?'check':s.icon,18)}</span>${s.label}<small>${sub||'&nbsp;'}</small></button></li>`}).join('');
+ const n=next(),sp=statusPill(),ms=missing(),rk=risks();
+ $('pm').innerHTML=`
+  <div class="hd"><span>${ic('hub',26)}</span><div><h2>PL – AI Project Manager</h2><div class="k">Orchestrator</div></div></div>
+  <div class="proj"><div><div class="k">Project</div><b>${S.pos?'RFQ-12345':'—'}</b></div><span class="pill ${sp[1]}">${sp[1]==='hold'?ic('pause',14):''}${sp[0]}</span></div>
+  <div class="next"><div class="k">Next action</div><p>${n.t}</p>${n.b?`<button class="btn on-pm" data-act="${n.a}" ${n.v?`data-v="${n.v}"`:''}>${n.b}${ic('send',16)}</button>`:''}</div>
+  <div class="trk">
+   <div><b>${S.stopped||cur().kind==='out'?0:1}</b><span>Open tasks</span></div>
+   <div><b>${ms.length}</b><span>Missing information</span></div>
+   <div><b>${rk.length}</b><span>Risks</span></div>
+   <div><b>${reviews()} / 4</b><span>Human reviews done</span></div></div>
+  ${ms.length?`<div><div class="k" style="margin-bottom:6px">Missing information</div><ul>${ms.map(m=>`<li>${m}</li>`).join('')}</ul></div>`:''}
+  ${rk.length?`<div><div class="k" style="margin-bottom:6px">Risks</div><ul>${rk.map(m=>`<li>${m}</li>`).join('')}</ul></div>`:''}
+  <div class="log"><div class="k" style="margin-bottom:6px">Activity log</div><ul class="log-l">${S.log.length?S.log.map(l=>`<li class="log"><time>${l[0]}</time><span>${l[1]}</span></li>`).join(''):'<li>Monitoring inbox for new RFQs</li>'}</ul></div>`;
+ $('main').innerHTML=VIEW[S.view]()+cta(n);
+ $('ov').innerHTML=S.src?viewer(S.src):'';
+}
+function cta(n){ if(!n.b||n.a==='reset')return '';
+ return `<div class="cta"><p>${n.t}<small>${n.s||''}</small></p><button class="btn pri" data-act="${n.a}" ${n.v?`data-v="${n.v}"`:''}>${n.b}${ic('send',16)}</button></div>`}
+const shead=(s,small)=>`<div class="shead" style="--c:var(--${s.c})"><div class="at">${ic(s.icon,28)}</div><div><small>${small}</small><h2>${s.name||s.label}</h2></div></div>`;
+const srcBtn=k=>`<button class="src" data-act="src" data-v="${k}">${ic('link',14)}${SRC[k].file} · ${SRC[k].loc.replace(/^.*· /,'')}</button>`;
+function agentIdle(s){const i=IX[s.id];
+ if(S.pos===i&&S.phase==='running')return `<div class="card"><div class="ch">Working</div><div class="cb"><ul class="steps" style="--c:var(--${s.c})">${s.run.map((t,k)=>`<li class="${k<S.run?'d':k===S.run?'r':''}"><i>${k<S.run?ic('check',13):''}</i>${t}</li>`).join('')}</ul></div></div>`;
+ return `<div class="card"><div class="ch">What this agent does</div><div class="cb"><p class="lead">${s.does}</p><ul class="blist" style="margin-top:10px">${s.run.map(t=>`<li>${t}</li>`).join('')}</ul>
+  ${S.pos<i?`<p class="lead" style="margin-top:12px">Not reached yet. The AI Project Manager activates this agent when the earlier steps are complete.</p>`:''}</div></div>`}
+const hasOut=id=>S.pos>IX[id]||(id==='a1'&&S.pos===1&&S.phase==='clarify');
+const opt=(act,v,on,title,sub)=>`<button class="opt" data-act="${act}" data-v="${v}" aria-pressed="${on}"><i></i><span>${title}<small>${sub}</small></span></button>`;
+const humanDone=(title,rows)=>`<div class="card"><div class="ch">${ic('check',20)}${title}<small>decided by a person</small></div><div class="cb"><ul class="blist">${rows.map(r=>`<li>${r}</li>`).join('')}</ul></div></div>`;
+const notYet=s=>`<div class="shead" style="--c:var(--hu)"><div class="at">${ic('person',28)}</div><div><small>Human checkpoint</small><h2>${s.label}</h2></div></div>
+ <div class="card"><div class="cb"><p class="lead">Not reached yet. When the process arrives here, the AI Project Manager stops and waits for a person to decide.</p></div></div>`;
+const DEVT={variant:'Offer variant 145-B-4650 (4650 mm, 940 kg)',state:'Offer article 145-A-4200 and state the deviation in the quote'};
+const MIST={test:'Include a seismic qualification test in the scope',open:'List seismic qualification as an open item in the quote'};
+
+const VIEW={
+rfq(){const made=S.pos>0;return `
+ <div class="shead" style="--c:var(--a1)"><div class="at">${ic('mail',28)}</div><div><small>Step 1 · Sales inbox</small><h2>Incoming Customer RFQ</h2></div></div>
+ <div class="card"><div class="ch">Example Customer AB · Procurement<small>09:12</small></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
+  <div><b style="font-size:18px">RFQ-12345 – Request for Quotation</b><div class="lead">To: Sales</div></div>
+  <p class="lead">Please quote according to the attached specification, requirement list, drawings and our customer standard.</p>
+  <div><div class="lead" style="font-weight:600;margin-bottom:6px">4 attachments — select one to open it</div>
+  <div class="files">${FILES.map(f=>`<button class="file" data-act="src" data-v="${f[2]}" style="--c:var(--${/xlsx/.test(f[0])?'a2':'pdf'})"><em>${/xlsx/.test(f[0])?'XLSX':'PDF'}</em><span>${f[0]}</span></button>`).join('')}</div></div></div></div>
+ ${made?`<div class="card"><div class="ch">${ic('folder',20)}Customer Project<small>RFQ-12345</small></div><div class="cb"><p style="font-weight:600;margin-bottom:10px">One RFQ – Multiple Documents – One Project</p>
+  <div class="files">${FILES.map(f=>`<button class="file" data-act="src" data-v="${f[2]}" style="--c:var(--${/xlsx/.test(f[0])?'a2':'pdf'})"><em>${/xlsx/.test(f[0])?'XLSX':'PDF'}</em><span>${f[0]}</span><small>${f[1]}</small></button>`).join('')}</div></div></div>
+  <div class="sp-band"><span>${ic('shield',22)}</span><div><b>Originals stored securely in SharePoint</b><small>4 original documents · versioned · unchanged</small></div></div>`:''}`},
+
+a1(){const s=STG[1];if(!hasOut('a1'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
+ const pending=S.phase==='clarify'&&S.pos===1;
+ return shead(s,'Traceable requirement extraction')+`
+ <div class="cols">${[['Customer','Example Customer AB'],['RFQ number','RFQ-12345'],['Product type','145 kV outdoor high-voltage unit'],['Referenced standards','IEC 60815 · Customer Standard CS-104'],['Document revisions','Spec Rev B · Requirements Rev A · Drawings Rev A · CS-104 Rev C']].map(f=>`<div class="fact"><span>${f[0]}</span><b>${f[1]}</b></div>`).join('')}</div>
+ <div class="card"><div class="ch">Structured requirements<small>select a source to see the original text</small></div><div class="tw"><table>
+  <tr><th>ID</th><th>Requirement</th><th>Value</th><th>Type</th><th>Source</th></tr>
+  ${REQS.slice(0,4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td><span class="tag">${r[3]?'Mandatory':'Requested'}</span></td><td>${srcBtn(r[4])}</td></tr>`).join('')}
+  <tr style="${pending?'background:color-mix(in srgb,var(--dev) 8%,var(--surface))':''}"><td class="id">REQ-005</td><td>Ambient temperature range</td><td class="v">${S.clar?TEMP[S.clar]:`<span style="color:var(--dev)">Unclear</span>`}</td>
+   <td>${S.clar?`<span class="tag">${S.clar==='ask'?'Open':'Clarified by a person'}</span>`:`<span class="badge" style="--c:var(--dev)">${ic('warn',13)}HUMAN REVIEW</span>`}</td><td>${srcBtn('r5a')}<br>${srcBtn('r5b')}</td></tr>
+  ${REQS.slice(4).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td><span class="tag">Requested</span></td><td>${srcBtn(r[4])}</td></tr>`).join('')}
+ </table></div></div>
+ <div class="card"><div class="ch">${ic('q',20)}Missing information</div><div class="cb"><ul class="blist"><li>Quantity is not stated in any of the four documents.</li></ul></div></div>
+ ${pending?`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>HUMAN REVIEW REQUIRED</h3><p>The AI Project Manager has stopped the process and sent this question to you.</p></div></div>
+  <div class="q"><h4>The two documents give different ambient temperature ranges. Which applies?</h4>
+  <p class="note">Customer Standard §4.3 says −40 °C to +40 °C. Technical Specification p. 5 says −25 °C to +40 °C.</p>
+  <div class="opts">
+   ${opt('clar','strict',false,'Use −40 … +40 °C','Customer Standard CS-104 §4.3, the stricter value')}
+   ${opt('clar','spec',false,'Use −25 … +40 °C','Technical Specification p. 5 §3.4')}
+   ${opt('clar','ask',false,'Ask the customer','Continue with the requirement marked as open')}</div></div></div>`:''}`},
+
+a2(){const s=STG[2];if(!hasOut('a2'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
+ const F=[['01 Source Documents','4 originals',FILES.map(f=>`${f[0]} — ${f[1]}`)],
+  ['02 Requirement Register','6 requirements',[...REQS.slice(0,4).map(r=>`${r[0]} · ${r[1]} · ${r[2]}`),`REQ-005 · Ambient temperature range · ${TEMP[S.clar]}`,`REQ-006 · Requested delivery time · 20 weeks`]],
+  ['03 Document Revisions','4 tracked',['Technical Specification.pdf — Rev B (supersedes Rev A)','Requirements.xlsx — Rev A','Drawings.pdf — Rev A','Customer Standard.pdf — CS-104 Rev C']],
+  ['04 Source Links','7 links',Object.keys(SRC).filter(k=>k[0]==='r'&&k.length>1&&k!=='rx').map(k=>srcBtn(k))],
+  ['05 Project Status','updated',['Status: DOCUMENTATION complete','Open question: quantity not stated',S.clar==='ask'?'Open question: ambient temperature range':'Ambient temperature range clarified by a person']]];
+ return shead(s,'Structured – Organized – Traceable')+`<div class="card"><div class="ch">${ic('folder',20)}Project RFQ-12345<small>select a folder to open it</small></div>
+ ${F.map((f,i)=>`<details ${i===1?'open':''}><summary><span class="fi">${ic('folder',18)}</span>${f[0]}<small>${f[1]}</small></summary><div class="in">${f[2].map(x=>`<div>${x}</div>`).join('')}</div></details>`).join('')}</div>`},
+
+a3(){const s=STG[3];if(!hasOut('a3'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
+ const rows=cmp(),cnt=k=>rows.filter(r=>r[4]===k).length;
+ return shead(s,'Comparison with approved specifications, products and articles')+`
+ <div class="chips" role="group" aria-label="Filter results">
+  ${[['all','All '+rows.length],['ok','Match '+cnt('ok')],['dev','Deviation '+cnt('dev')],['miss','Missing data '+cnt('miss')]].map(f=>`<button class="chip" data-act="filter" data-v="${f[0]}" aria-pressed="${S.filter===f[0]}">${f[1]}</button>`).join('')}</div>
+ <div class="card"><div class="ch">Customer requirement vs. existing article 145-A-4200</div><div class="tw"><table>
+  <tr><th>ID</th><th>Requirement</th><th>Customer</th><th>Existing product</th><th>Result</th></tr>
+  ${rows.filter(r=>S.filter==='all'||r[4]===S.filter).map(r=>`<tr><td class="id">${r[0]}</td><td>${r[1]}</td><td class="v">${r[2]}</td><td class="v">${r[3]}</td><td><span class="badge" style="--c:var(--${RES[r[4]][1]})">${RES[r[4]][0]}</span></td></tr>`).join('')}
+ </table></div></div>
+ <div class="card" style="border-color:var(--dev)"><div class="cb" style="display:flex;gap:10px;align-items:center;font-weight:600"><span style="color:var(--dev)">${ic('warn',22)}</span>DEVIATION – Engineering Review Required. The agent does not approve technical compliance.</div></div>`},
+
+eng(){const s=STG[4];if(S.pos<4)return notYet(s);
+ if(S.pos>4)return shead(s,'Human checkpoint · completed')+humanDone('Engineering approval recorded',[`Creepage distance: ${DEVT[S.dev]}`,`Seismic qualification: ${MIST[S.miss]}`]);
+ if(S.stopped)return shead(s,'Human checkpoint')+`<div class="card"><div class="cb"><b>Stopped by the engineer.</b><p class="lead">No quotation will be prepared for this RFQ. Restart the demo to try another path.</p></div></div>`;
+ return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>ENGINEERING REVIEW</h3><p>You are the engineer. The AI agent found one deviation and one item with missing data. Decide how each is handled.</p></div></div>
+  <div class="q"><h4><span class="badge" style="--c:var(--dev)">DEVIATION</span> Minimum creepage distance: required 4500 mm, existing article 4200 mm</h4><div class="opts">
+   ${opt('dev','variant',S.dev==='variant','Offer variant 145-B-4650','4650 mm and 940 kg. Meets the requirement, adds cost and lead time.')}
+   ${opt('dev','state',S.dev==='state','Offer article 145-A-4200 with a stated deviation','The quote will state 4200 mm against the required 4500 mm.')}</div></div>
+  <div class="q"><h4><span class="badge" style="--c:var(--miss)">MISSING DATA</span> Seismic qualification: required, no test record found</h4><div class="opts">
+   ${opt('miss','test',S.miss==='test','Include a qualification test in the scope','Adds cost and lead time. Closes the gap.')}
+   ${opt('miss','open',S.miss==='open','List as an open item in the quote','The quote will carry an explicit exception.')}</div></div>
+  <div class="acts"><button class="btn pri" data-act="engOk" ${S.dev&&S.miss?'':'disabled'}>${ic('check',16)}Approve engineering data</button>
+   <button class="btn warn" style="background:var(--surface)" data-act="stop">Stop – cannot quote</button>
+   ${S.dev&&S.miss?'':'<span class="hint">Choose an option for both items to approve.</span>'}</div></div>`},
+
+a4(){const s=STG[5];if(!hasOut('a4'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);
+ const m=money(),late=m.lead>20;
+ const cr=late?['High','Lead time is longer than the customer requested.']:S.dev==='state'?['Medium','The customer may not accept the stated creepage deviation.']:['Low','Offer meets the stated requirements and timing.'];
+ const tr=S.miss==='open'||S.clar==='ask'?['Medium',[S.miss==='open'?'Seismic qualification is not verified.':'',S.clar==='ask'?'Ambient temperature range is not confirmed.':''].filter(Boolean).join(' ')]:['Low','Technical gaps were closed in engineering review.'];
+ return shead(s,'Commercial Decision Support')+`<div class="an">
+  <div class="card"><div class="t">${ic('coin',20)}<b>Cost</b></div><div class="big">${eur(m.cost)}</div><ul class="blist"><li>Base article ${eur(42000)}</li>${S.dev==='variant'?`<li>Variant 145-B-4650 +${eur(3800)}</li>`:''}${S.miss==='test'?`<li>Seismic test +${eur(6500)}</li>`:''}<li>Estimate for 1 unit</li></ul></div>
+  <div class="card"><div class="t">${ic('clock',20)}<b>Lead Time</b></div><div class="big">${m.lead} weeks</div><p>Customer requested 20 weeks. ${late?'This is '+(m.lead-20)+' weeks longer.':'This is within the request.'}</p></div>
+  <div class="card"><div class="t">${ic('warn',20)}<b>Commercial Risk</b></div><div class="big">${cr[0]}</div><p>${cr[1]}</p></div>
+  <div class="card"><div class="t">${ic('gear',20)}<b>Technical Risk</b></div><div class="big">${tr[0]}</div><p>${tr[1]}</p></div>
+  <div class="card"><div class="t">${ic('bulb',20)}<b>Opportunities</b></div><ul class="blist"><li>Customer Standard CS-104 is now registered, so the next RFQ from this customer is faster to process.</li>${S.dev==='variant'?'<li>Variant 145-B-4650 can be reused for other heavy-pollution sites.</li>':''}</ul></div>
+  <div class="card"><div class="t">${ic('q',20)}<b>Missing Information</b></div><ul class="blist">${missing().map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`},
+
+com(){const s=STG[6];if(S.pos<6)return notYet(s);
+ if(S.pos>6)return shead(s,'Human checkpoint · completed')+humanDone('Commercial approval recorded',[`Price basis ${eur(money().cost)} for 1 unit`,`Lead time ${money().lead} weeks`]);
+ if(S.stopped)return shead(s,'Human checkpoint')+`<div class="card"><div class="cb"><b>Stopped at commercial review.</b><p class="lead">Restart the demo to try another path.</p></div></div>`;
+ const m=money();
+ return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>COMMERCIAL REVIEW</h3><p>You are the commercial reviewer. Check the decision support from A4 before the project continues.</p></div></div>
+  <div class="q"><h4>Summary from A4</h4><div class="cols"><div class="fact"><span>Cost estimate</span><b>${eur(m.cost)}</b></div><div class="fact"><span>Lead time</span><b>${m.lead} weeks (requested 20)</b></div><div class="fact"><span>Open items</span><b>${missing().length}</b></div></div>
+  <button class="src" data-act="view" data-v="a4">${ic('chart',14)}Open the full analysis</button></div>
+  <div class="acts"><button class="btn pri" data-act="comOk">${ic('check',16)}Approve commercial basis</button><button class="btn warn" style="background:var(--surface)" data-act="stop">Stop – do not quote</button></div></div>`},
+
+a5(){const s=STG[7];if(!hasOut('a5'))return shead(s,'Specialist agent · activated by the AI Project Manager')+agentIdle(s);return shead(s,'Quotation Draft')+quote(S.pos>IX.fin)},
+
+fin(){const s=STG[8];if(S.pos<8)return notYet(s);
+ if(S.pos>8)return shead(s,'Human checkpoint · completed')+humanDone('Final quote approval recorded',['Quotation RFQ-12345 approved for sending to the customer']);
+ return shead(s,'Human checkpoint · the process is paused')+`<div class="human"><div class="hh"><span>${ic('person',24)}</span><div><h3>FINAL APPROVAL</h3><p>You carry out the final review. Nothing is sent to the customer without your approval.</p></div></div>
+  <div class="acts"><button class="btn pri" data-act="finOk">${ic('check',16)}Approve quotation</button><button class="btn" style="color:var(--fg)" data-act="finBack">Return to commercial review</button></div></div>`+quote(false)},
+
+out(){const s=STG[9];if(S.pos<9)return `<div class="shead" style="--c:var(--ok)"><div class="at">${ic('check',28)}</div><div><small>Result</small><h2>Customer Quotation</h2></div></div><div class="card"><div class="cb"><p class="lead">Not reached yet. The quotation exists only after a person has given final approval.</p></div></div>`;
+ return `<div class="shead" style="--c:var(--ok)"><div class="at">${ic('check',28)}</div><div><small>Traceable. Controlled. Human-approved.</small><h2>Customer Quotation</h2></div></div>
+ <div class="card"><div class="ch">${ic('person',20)}Decisions made by people</div><div class="cb"><ul class="blist">${S.decisions.map(d=>`<li><b>${d[0]}:</b> ${d[1]}</li>`).join('')}</ul></div></div>`+quote(true)}
+};
+function quote(ok){const m=money();
+ return `<div class="card quote">${ok?'':'<div class="wm">DRAFT</div>'}
+ <div class="ch">${ic('quote',20)}Quotation ${ok?'':'Draft'}<small>RFQ-12345</small></div>
+ <section><h4>Customer and RFQ</h4>Example Customer AB · RFQ-12345 – Request for Quotation</section>
+ <section><h4>Product</h4>${S.dev==='variant'?'145 kV outdoor unit, article 145-B-4650 (variant)':'145 kV outdoor unit, article 145-A-4200'}</section>
+ <section><h4>Technical requirements</h4><ul class="blist">
+  <li>Nominal voltage 145 kV: complies</li>
+  <li>Creepage distance: ${S.dev==='variant'?'4650 mm, complies with required 4500 mm':'4200 mm. Deviation from required 4500 mm, approved for offering by engineering'}</li>
+  <li>Weight: ${S.dev==='variant'?'940':'910'} kg, complies with maximum 950 kg</li>
+  <li>Seismic qualification: ${S.miss==='test'?'qualification test included in scope':'exception, not verified, open item'}</li>
+  <li>Ambient temperature: ${S.clar==='ask'?'to be confirmed by customer, product rated −40 … +40 °C':TEMP[S.clar]+', complies'}</li></ul></section>
+ <section><h4>Commercial conditions</h4>Price ${eur(m.cost)} per unit. Quantity to be confirmed by the customer.</section>
+ <section><h4>Delivery information</h4>${m.lead} weeks after order (requested: 20 weeks).</section>
+ <section><h4>References</h4><ul class="blist"><li>${FILES.map(f=>f[0]+' '+f[1]).join(' · ')}</li><li>Requirement register REQ-001 … REQ-006</li><li>Engineering review and commercial review approved by a person</li></ul></section>
+ <div class="banner ${ok?'ok':''}">${ic(ok?'check':'warn',20)}${ok?'APPROVED BY A PERSON – READY TO SEND':'DRAFT – HUMAN APPROVAL REQUIRED'}</div></div>`}
+function viewer(k){const d=SRC[k];
+ return `<div class="ov" data-act="close"><div class="dlg" role="dialog" aria-modal="true" aria-label="${d.file}"><div class="card" style="border:0;box-shadow:none">
+  <div class="ch">${ic('link',18)}${d.file}<small><button class="btn" data-act="close" id="closeSrc">Close</button></small></div>
+  <div class="page"><div class="loc">${d.loc} · original stored in SharePoint</div>${d.lines.map(l=>/^\*/.test(l)?`<p><mark>${l.replace(/\*/g,'')}</mark></p>`:`<p>${l}</p>`).join('')}</div></div></div></div>`}
+
+/* ---------- actions ---------- */
+function advance(){S.pos++;const c=cur();S.phase=c.kind==='human'?'review':c.kind==='out'?'done':'ready'}
+function runAgent(){const c=cur();if(c.kind!=='agent'||S.phase!=='ready')return;
+ S.phase='running';S.run=0;S.view=c.id;log('Dispatched project to '+c.name);render();
+ const fast=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ timer=setInterval(()=>{S.run++;
+  if(S.run>=c.run.length){clearInterval(timer);timer=null;finish(c)}
+  render()},fast?120:520)}
+function finish(c){
+ if(c.id==='a1'){S.phase='clarify';log('A1 extracted 6 requirements, 1 unclear, 1 item missing');log('Process paused: human review required')}
+ else{ const msg={a2:'A2 organized the project and created the requirement register',a3:'A3 found '+cmp().filter(r=>r[4]==='ok').length+' matches, 1 deviation and '+cmp().filter(r=>r[4]==='miss').length+' missing data',a4:'A4 compiled Commercial Decision Support',a5:'A5 prepared the quotation draft'}[c.id];
+  log(msg);advance();if(cur().kind==='human')log('Process paused: '+cur().label.toLowerCase()+' required')}}
+const ACT={
+ reset(){if(timer){clearInterval(timer);timer=null}S=fresh()},
+ view(v){S.view=v},
+ create(){log('Project RFQ-12345 created from 1 email and 4 documents');log('Original documents stored in SharePoint');S.pos=1;S.phase='ready'},
+ run(){runAgent();return false},
+ src(v){S.src=v},
+ close(){S.src=null},
+ filter(v){S.filter=v},
+ clar(v){S.clar=v;S.decisions.push(['Requirement clarification','Ambient temperature range: '+TEMP[v]]);log('Person answered: ambient temperature '+TEMP[v]);advance()},
+ dev(v){S.dev=v},miss(v){S.miss=v},
+ engOk(){if(!(S.dev&&S.miss))return;S.decisions.push(['Engineering approval',DEVT[S.dev]+'. '+MIST[S.miss]+'.']);log('Engineering data approved by a person');advance()},
+ comOk(){S.decisions.push(['Commercial approval','Price basis '+eur(money().cost)+', lead time '+money().lead+' weeks.']);log('Commercial basis approved by a person');advance()},
+ finOk(){S.decisions.push(['Final quote approval','Quotation approved for sending to the customer.']);log('Quotation approved by a person');advance();S.view='out'},
+ finBack(){log('Quotation returned to commercial review by a person');S.decisions=S.decisions.filter(d=>d[0]!=='Commercial approval');S.pos=IX.com;S.phase='review';S.view='com'},
+ stop(){S.stopped=true;log('Project stopped by a person at '+cur().label.toLowerCase())}
+};
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+ if(b.dataset.act==='close'&&b.classList.contains('ov')&&e.target!==b)return;
+ const act=b.dataset.act,keep=window.scrollY;
+ if(ACT[act](b.dataset.v)===false)return;
+ render();
+ if(act==='src'){const c=$('closeSrc');c&&c.focus()}
+ else if(act==='view'||act==='create'||/Ok$|clar|finBack/.test(act)){const m=$('main');if(m.getBoundingClientRect().top<0||innerWidth<=860)m.scrollIntoView({block:'start'})}
+ else window.scrollTo(0,keep);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.src){S.src=null;render()}});
+S=fresh();render();
+})();
+</script>
+</body>
+</html>
