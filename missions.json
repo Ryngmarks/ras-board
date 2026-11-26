@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T23:27:31.122Z",
+  "generated_at": "2026-11-26T23:39:12.456Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-26T23:27:31.063Z",
+      "updated": "2026-11-26T23:39:12.390Z",
       "work_orders": [
         {
           "id": "F0",
@@ -839,17 +839,20 @@
         {
           "id": "HF-3",
           "title": "Alla lager mätta på inspelning, tre varianter för blindtest",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-26T23:39:12.390Z",
           "after": "HF-2"
         },
         {
           "id": "A1-fix",
           "title": "Attacken ska ritas i samma bildruta som knapptrycket",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-26T23:27:30.947Z",
-          "after": "HF-2"
+          "done": "2026-11-26T23:39:12.301Z",
+          "after": "HF-2",
+          "result": "Orsaken som projektledaren angav höll inte: ett test motbevisade den. Ingen ändring. Felsökningen fortsätter i HF-3"
         }
       ]
     },
