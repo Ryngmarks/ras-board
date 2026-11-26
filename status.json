@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T20:55:25Z",
+    "updated":  "2026-11-26T20:56:34Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -122,6 +122,16 @@
                         "state":  "working",
                         "note":  "steg 1.4 stangs",
                         "since":  "2026-11-26T20:55:25Z"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "ARCH-15: traffkansla, steg 1.5",
+                        "since":  "2026-11-26T20:56:34Z",
+                        "agent":  "arch15",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
