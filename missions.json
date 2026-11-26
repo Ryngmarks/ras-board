@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T20:56:32.065Z",
+  "generated_at": "2026-11-26T21:06:15.946Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-26T20:56:32.001Z",
+      "updated": "2026-11-26T21:06:15.884Z",
       "work_orders": [
         {
           "id": "F0",
@@ -728,10 +728,12 @@
         {
           "id": "ATK-3R",
           "title": "Granskning av klientens träff-förutsägelse",
-          "status": "working",
+          "status": "done",
           "role": "reviewer",
           "started": "2026-11-26T20:55:18.405Z",
-          "after": "ATK-3"
+          "done": "2026-11-26T21:06:15.377Z",
+          "after": "ATK-3",
+          "result": "Godkänd med småfixar: inga fel i reglerna, luckor i tester och en mätgrind skärps"
         },
         {
           "id": "ATK-4",
@@ -744,10 +746,95 @@
         {
           "id": "ARCH-15",
           "title": "Specifikation för träffkänsla (steg 1.5)",
-          "status": "working",
+          "status": "done",
           "role": "solution-architect",
           "started": "2026-11-26T20:56:32.001Z",
-          "after": "ATK-4"
+          "done": "2026-11-26T21:06:15.459Z",
+          "after": "ATK-4",
+          "result": "Klar: sju lager, frysningen blir en regel på servern, tre byggordrar"
+        },
+        {
+          "id": "Q-14",
+          "title": "Träffkänsla: dockans död, blindtest, ljud",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-26T21:06:15.571Z",
+          "after": "ARCH-15",
+          "decision": {
+            "summary": "Nästa steg är träffkänsla: ljud, partiklar, kort frysning, kameraskakning, knuff och att dockan faller. Tre val är dina. Bygget görs först med de rekommenderade svaren, och du kan ändra efteråt.",
+            "questions": [
+              {
+                "id": "A-dockan",
+                "text": "Vad gör träningsdockan när hälsan är slut?",
+                "note": "I dag tar hälsan aldrig slut: den fylls på 2 sekunder efter senaste träffen.",
+                "options": [
+                  {
+                    "label": "Viker sig, ligger, reser sig",
+                    "text": "Dockan viker sig åt det håll hugget kom från, ligger i två sekunder och reser sig med full hälsa. Den faller på tre hugg. Ger dig en första död att titta på.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Står kvar som nu",
+                    "text": "Dockan står alltid kvar och blinkar bara. Ingen död visas förrän det finns riktiga fiender."
+                  }
+                ]
+              },
+              {
+                "id": "B-blindtest",
+                "text": "Ska två modeller och du rangordna tre varianter av träffen blint?",
+                "note": "Det är provet du bad om tidigare: är Fable värd att använda som domare vid de stora kontrollpunkterna?",
+                "options": [
+                  {
+                    "label": "Ja, efter att du har provat bygget",
+                    "text": "Tre varianter (krispigare, mellan, mjukare) spelas in. Opus och Fable rangordnar var för sig utan att veta vilken som är vilken, sedan du. Du väljer samtidigt vilken träff du gillar.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Nej, stryk provet",
+                    "text": "Bara mellanvarianten byggs. Fable används då inte som domare framöver."
+                  }
+                ]
+              },
+              {
+                "id": "C-ljud",
+                "text": "Var ska de första ljuden komma ifrån?",
+                "note": "Inget laddas ner och inget tas från andra spel.",
+                "options": [
+                  {
+                    "label": "Datorn gör dem nu",
+                    "text": "Tillfälliga ljud av brus och toner, tydligt märkta som tillfälliga. En egen inspelning kan ersätta vilket som helst av dem senare genom att lägga dit en fil.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "Vänta på dina inspelningar",
+                    "text": "Spelet är tyst tills du har spelat in egna ljud, till exempel ett slag mot en kudde."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "HF-1",
+          "title": "Frysning vid träff och död, avgjort av servern",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-26T21:06:15.678Z",
+          "after": "ARCH-15"
+        },
+        {
+          "id": "HF-2",
+          "title": "Träffen du känner: ljud, partiklar, skakning, dockan faller",
+          "status": "todo",
+          "role": "implementer",
+          "after": "HF-1"
+        },
+        {
+          "id": "HF-3",
+          "title": "Alla lager mätta på inspelning, tre varianter för blindtest",
+          "status": "todo",
+          "role": "implementer",
+          "after": "HF-2"
         }
       ]
     },
