@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T21:14:33Z",
+    "updated":  "2026-11-26T21:41:37Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -102,16 +102,6 @@
                         "state":  "working",
                         "note":  "steg 1.4 stangs",
                         "since":  "2026-11-26T20:55:25Z"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "HF-1: frysning och dod i reglerna",
-                        "since":  "2026-11-26T21:06:23Z",
-                        "agent":  "hf1",
-                        "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
