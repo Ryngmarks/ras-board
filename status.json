@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-26T23:39:15Z",
+    "updated":  "2026-11-26T23:39:17Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-26T23:27:34Z",
                         "agent":  "pm",
                         "model":  "claude/claude-fable-5-2",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "HF-3: lagren i labbet, tre versioner, sena tryck",
+                        "since":  "2026-11-26T23:39:17Z",
+                        "agent":  "hf3",
+                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
