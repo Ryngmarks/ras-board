@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T02:36:50Z",
+    "updated":  "2026-11-27T02:53:23Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -120,16 +120,6 @@
                         "since":  "2026-11-27T01:41:05Z",
                         "agent":  "mov1",
                         "model":  "claude/claude-opus-5-5",
-                        "effort":  "default"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "MOV-2-fix: granskningens fynd",
-                        "since":  "2026-11-27T02:36:50Z",
-                        "agent":  "mov2fix",
-                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
