@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T03:13:13Z",
+    "updated":  "2026-11-27T03:25:29Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,16 +111,6 @@
                         "since":  "2026-11-27T01:27:57Z",
                         "agent":  "pm",
                         "for":  "owner"
-                    },
-                    {
-                        "role":  "implementer",
-                        "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "MOV-2b: Unity, radlasare, Return Cut pa bild",
-                        "since":  "2026-11-27T03:07:55Z",
-                        "agent":  "mov2b",
-                        "model":  "claude/claude-sonnet-5-5",
-                        "effort":  "default"
                     }
                 ]
 }
