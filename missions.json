@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T01:00:06.435Z",
+  "generated_at": "2026-11-27T01:27:52.993Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-27T01:00:06.363Z",
+      "updated": "2026-11-27T01:27:52.934Z",
       "work_orders": [
         {
           "id": "F0",
@@ -869,10 +869,12 @@
         {
           "id": "HF-5",
           "title": "Rätta felen domarna fann: dödsreaktion, blixtens längd, gnistor, stjärnans plats",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-27T01:00:06.363Z",
-          "after": "HF-4"
+          "done": "2026-11-27T01:27:52.864Z",
+          "after": "HF-4",
+          "result": "Klart: dockan viker sig redan i träffrutan, blixten har rätt längd, gnistorna syns, stjärnan sitter på dockans yta"
         }
       ]
     },
