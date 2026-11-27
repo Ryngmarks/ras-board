@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T02:26:30Z",
+    "updated":  "2026-11-27T02:26:33Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -120,6 +120,16 @@
                         "since":  "2026-11-27T01:41:05Z",
                         "agent":  "mov1",
                         "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "reviewer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "granskar MOV-2: regler, server, klient",
+                        "since":  "2026-11-27T02:26:33Z",
+                        "agent":  "mov2rev",
+                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
