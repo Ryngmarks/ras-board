@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T01:42:26.042Z",
+  "generated_at": "2026-11-27T03:07:51.269Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-27T01:42:25.974Z",
+      "updated": "2026-11-27T03:07:51.207Z",
       "work_orders": [
         {
           "id": "F0",
@@ -733,18 +733,22 @@
         {
           "id": "MOV-1",
           "title": "Attacker som rader i data, Return Cut och växling på Q",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-27T01:42:25.583Z",
-          "after": "Q-15"
+          "done": "2026-11-27T03:07:50.915Z",
+          "after": "Q-15",
+          "result": "Klart: attacker är rader i data, Q växlar mellan två hugg. Ingen har sett Return Cut på bild än"
         },
         {
           "id": "MOV-2",
           "title": "Regler för utfall, knuff, bedövning, väntetid och gående docka",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-27T01:42:25.680Z",
-          "after": "MOV-1"
+          "done": "2026-11-27T03:07:51.027Z",
+          "after": "MOV-1",
+          "result": "Klart, granskat och rättat: utfall, knuff, bedövning och väntetid avgörs av servern. Inte kört i Unity än"
         },
         {
           "id": "MOV-3",
@@ -759,6 +763,22 @@
           "status": "todo",
           "role": "implementer",
           "after": "MOV-3"
+        },
+        {
+          "id": "MOV-2b",
+          "title": "Foga ihop delarna i Unity och ta de första bilderna av Return Cut",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-27T03:07:51.113Z",
+          "after": "MOV-2"
+        },
+        {
+          "id": "A1-fix2",
+          "title": "Sena knapptryck: orsaken funnen i mätdata, rättas med test",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-27T03:07:51.207Z",
+          "after": "MOV-2b"
         }
       ]
     },
