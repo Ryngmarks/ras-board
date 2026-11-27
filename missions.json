@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T03:25:26.801Z",
+  "generated_at": "2026-11-27T04:54:53.476Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-27T03:25:26.735Z",
+      "updated": "2026-11-27T04:54:53.414Z",
       "work_orders": [
         {
           "id": "F0",
@@ -753,16 +753,52 @@
         {
           "id": "MOV-3",
           "title": "Lunging Thrust och Pommel Bash som rader i data",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-27T03:25:26.627Z",
-          "after": "MOV-2"
+          "done": "2026-11-27T04:54:39.185Z",
+          "after": "MOV-2",
+          "result": "Klart: E är ett utfall, W knuffar och bedövar med tio sekunders väntetid. Nära målet går klingan igenom dockan"
+        },
+        {
+          "id": "Q-16",
+          "title": "Ditt val: utfallet går igenom dockan när hjälten står nära",
+          "status": "owner",
+          "role": "project-manager",
+          "started": "2026-11-27T04:54:53.286Z",
+          "after": "MOV-3",
+          "decision": {
+            "summary": "Utfallet (E) ser fel ut när hjälten står nära målet: klingan går rakt igenom dockan och ut på andra sidan, och hjältens överkropp hamnar över dockan. På avstånd stannar klingan vid dockans yta. Projektledaren har lämnat det som det är tills du valt.",
+            "questions": [
+              {
+                "id": "utfall-nara",
+                "text": "Vad ska hända när utfallet görs nära målet?",
+                "note": "Träffen och skadan är rätt i alla tre fallen. Det gäller bara hur det ser ut, utom i val C.",
+                "options": [
+                  {
+                    "label": "A: lämna tills vidare",
+                    "text": "Inget ändras nu. Hjälten och dockan är enkla provfigurer, och frågan tas om när de riktiga modellerna finns.",
+                    "recommended": true
+                  },
+                  {
+                    "label": "B: kortare stöt nära målet",
+                    "text": "Armen sträcks mindre när målet är nära, så att spetsen stannar vid ytan. Det kräver ny kod för bilden av utfallet."
+                  },
+                  {
+                    "label": "C: utfallet stannar längre ifrån",
+                    "text": "Hjälten stannar en bit från målet. Det ändrar en regel och hur långt utfallet når, alltså även balansen."
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "MOV-4",
           "title": "De nya attackerna i inspelningsverktyget",
-          "status": "todo",
+          "status": "working",
           "role": "implementer",
+          "started": "2026-11-27T04:54:53.350Z",
           "after": "MOV-3"
         },
         {
@@ -783,7 +819,7 @@
           "started": "2026-11-27T03:07:51.207Z",
           "done": "2026-11-27T03:25:26.526Z",
           "after": "MOV-2b",
-          "result": "Felet återskapat i 24 testfall och rättat. Bekräftas i det byggda spelet i nästa arbete"
+          "result": "Rättat och bekräftat i det byggda spelet: alla 1600 mätta tryck ritas i rätt bildruta"
         }
       ]
     },
