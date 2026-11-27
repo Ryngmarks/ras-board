@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T03:25:29Z",
+    "updated":  "2026-11-27T03:25:31Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-27T01:27:57Z",
                         "agent":  "pm",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "MOV-3: utfall och Bash som rader",
+                        "since":  "2026-11-27T03:25:31Z",
+                        "agent":  "mov3",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
