@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T01:27:55Z",
+    "updated":  "2026-11-27T01:27:57Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -106,12 +106,11 @@
                     {
                         "role":  "project-manager",
                         "project":  "Copperglade",
-                        "state":  "working",
-                        "note":  "steg 1.5: bygget att prova, A1-fix pagar",
-                        "since":  "2026-11-26T23:27:34Z",
+                        "state":  "waiting",
+                        "note":  "bygget att prova: valj A, B eller C",
+                        "since":  "2026-11-27T01:27:57Z",
                         "agent":  "pm",
-                        "model":  "claude/claude-fable-5-2",
-                        "effort":  "default"
+                        "for":  "owner"
                     }
                 ]
 }
