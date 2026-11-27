@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T01:27:52.993Z",
+  "generated_at": "2026-11-27T01:29:04.339Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-27T01:27:52.934Z",
+      "updated": "2026-11-27T01:29:04.276Z",
       "work_orders": [
         {
           "id": "F0",
@@ -875,6 +875,14 @@
           "done": "2026-11-27T01:27:52.864Z",
           "after": "HF-4",
           "result": "Klart: dockan viker sig redan i träffrutan, blixten har rätt längd, gnistorna syns, stjärnan sitter på dockans yta"
+        },
+        {
+          "id": "ARCH-16",
+          "title": "Ritning för steg 1.6: två attacker till och en förmåga",
+          "status": "working",
+          "role": "solution-architect",
+          "started": "2026-11-27T01:29:04.276Z",
+          "after": "HF-5"
         }
       ]
     },
