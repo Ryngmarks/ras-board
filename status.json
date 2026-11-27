@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T04:54:40Z",
+    "updated":  "2026-11-27T04:55:53Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-27T01:27:57Z",
                         "agent":  "pm",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "MOV-4: inspelningsverktyget",
+                        "since":  "2026-11-27T04:55:53Z",
+                        "agent":  "mov4",
+                        "model":  "claude/claude-sonnet-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
