@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:52:01.166Z",
+  "generated_at": "2026-11-27T01:00:06.435Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-27T00:52:01.104Z",
+      "updated": "2026-11-27T01:00:06.363Z",
       "work_orders": [
         {
           "id": "F0",
@@ -859,10 +859,20 @@
         {
           "id": "HF-4",
           "title": "Två blinda domare rankar träffkänslan A, B och C",
-          "status": "working",
+          "status": "done",
           "role": "art-director",
           "started": "2026-11-27T00:52:01.104Z",
-          "after": "HF-3"
+          "done": "2026-11-27T01:00:06.252Z",
+          "after": "HF-3",
+          "result": "Domarna är oense om bästa version (B eller A) men ense om att C är sämst och om samma fel i alla tre"
+        },
+        {
+          "id": "HF-5",
+          "title": "Rätta felen domarna fann: dödsreaktion, blixtens längd, gnistor, stjärnans plats",
+          "status": "working",
+          "role": "implementer",
+          "started": "2026-11-27T01:00:06.363Z",
+          "after": "HF-4"
         }
       ]
     },
