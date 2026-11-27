@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T23:39:12.456Z",
+  "generated_at": "2026-11-27T00:52:01.166Z",
   "missions": [
     {
       "project": "Clicker Land",
@@ -69,7 +69,7 @@
       "id": "n01-aaa-plan",
       "name": "Plan och ryggrad för AAA-kvalitet",
       "phase": "build",
-      "updated": "2026-11-26T23:39:12.390Z",
+      "updated": "2026-11-27T00:52:01.104Z",
       "work_orders": [
         {
           "id": "F0",
@@ -839,10 +839,12 @@
         {
           "id": "HF-3",
           "title": "Alla lager mätta på inspelning, tre varianter för blindtest",
-          "status": "working",
+          "status": "done",
           "role": "implementer",
           "started": "2026-11-26T23:39:12.390Z",
-          "after": "HF-2"
+          "done": "2026-11-27T00:52:01.011Z",
+          "after": "HF-2",
+          "result": "Klart: alla träfflager startar på träffrutan i 14 hugg, två dödande. Knapptrycken ritas i rätt ruta, 1600 av 1600"
         },
         {
           "id": "A1-fix",
@@ -853,6 +855,14 @@
           "done": "2026-11-26T23:39:12.301Z",
           "after": "HF-2",
           "result": "Orsaken som projektledaren angav höll inte: ett test motbevisade den. Ingen ändring. Felsökningen fortsätter i HF-3"
+        },
+        {
+          "id": "HF-4",
+          "title": "Två blinda domare rankar träffkänslan A, B och C",
+          "status": "working",
+          "role": "art-director",
+          "started": "2026-11-27T00:52:01.104Z",
+          "after": "HF-3"
         }
       ]
     },
