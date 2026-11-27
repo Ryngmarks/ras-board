@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T01:41:05Z",
+    "updated":  "2026-11-27T01:41:07Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -119,6 +119,16 @@
                         "note":  "MOV-1: attacker som rader, Return Cut",
                         "since":  "2026-11-27T01:41:05Z",
                         "agent":  "mov1",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "MOV-2: utfall, knuff, bedovning, vantetid",
+                        "since":  "2026-11-27T01:41:07Z",
+                        "agent":  "mov2",
                         "model":  "claude/claude-opus-5-5",
                         "effort":  "default"
                     }
