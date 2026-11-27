@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T01:27:57Z",
+    "updated":  "2026-11-27T01:29:06Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-27T01:27:57Z",
                         "agent":  "pm",
                         "for":  "owner"
+                    },
+                    {
+                        "role":  "solution-architect",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "ritning for steg 1.6",
+                        "since":  "2026-11-27T01:29:06Z",
+                        "agent":  "arch16",
+                        "model":  "claude/claude-opus-5-5",
+                        "effort":  "default"
                     }
                 ]
 }
