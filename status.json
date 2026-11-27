@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T00:52:04Z",
+    "updated":  "2026-11-27T01:00:09Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -111,6 +111,16 @@
                         "since":  "2026-11-26T23:27:34Z",
                         "agent":  "pm",
                         "model":  "claude/claude-fable-5-2",
+                        "effort":  "default"
+                    },
+                    {
+                        "role":  "implementer",
+                        "project":  "Copperglade",
+                        "state":  "working",
+                        "note":  "HF-5: fyra fel mot stridsstandarden",
+                        "since":  "2026-11-27T01:00:09Z",
+                        "agent":  "hf5",
+                        "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
                     }
                 ]
