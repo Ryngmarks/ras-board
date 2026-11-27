@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-11-27T04:55:53Z",
+    "updated":  "2026-11-27T04:55:55Z",
     "projects":  [
                      "Clicker Land",
                      "Coach Helper",
@@ -104,15 +104,6 @@
                         "since":  "2026-11-26T20:55:25Z"
                     },
                     {
-                        "role":  "project-manager",
-                        "project":  "Copperglade",
-                        "state":  "waiting",
-                        "note":  "bygget att prova: valj A, B eller C",
-                        "since":  "2026-11-27T01:27:57Z",
-                        "agent":  "pm",
-                        "for":  "owner"
-                    },
-                    {
                         "role":  "implementer",
                         "project":  "Copperglade",
                         "state":  "working",
@@ -121,6 +112,17 @@
                         "agent":  "mov4",
                         "model":  "claude/claude-sonnet-5-5",
                         "effort":  "default"
+                    },
+                    {
+                        "role":  "project-manager",
+                        "project":  "Copperglade",
+                        "state":  "waiting",
+                        "note":  "Nytt bygge att prova: Q, W, E",
+                        "since":  "2026-11-27T01:27:57Z",
+                        "agent":  "pm",
+                        "model":  "claude/claude-fable-5-2",
+                        "effort":  "default",
+                        "for":  "owner"
                     }
                 ]
 }
